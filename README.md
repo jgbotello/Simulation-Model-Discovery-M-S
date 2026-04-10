@@ -7,12 +7,13 @@ The project compares:
 - Lexical retrieval methods such as BM25, TF-IDF, and query likelihood
 - Dense retrieval with local and OpenAI embedding models
 - Re-ranking pipelines using cross-encoders and an LLM
-- Three document representations: raw XMILE, JSON-LD, and JSON-LD enriched with background narratives
+- Three document representations: raw XMILE, JSON-LD, and JSON-LD enriched with simulation model descriptions.
 
 The repository is organized so that someone can reproduce the pipeline from preprocessing to evaluation, inspect the saved experiment outputs, and extend the benchmark with new retrieval strategies.
 
-## Why this repo is useful
+## Why this work is useful
 
+- It frames simulation model discovery as an information retrieval (IR) problem.
 - It keeps the original simulation-model representations alongside transformed formats.
 - It evaluates retrieval quality with graded relevance labels in [`evaluation/ground_truth.json`](evaluation/ground_truth.json).
 - It stores experiment summaries, per-query results, timing logs, and Excel exports for both lexical and dense pipelines.
@@ -49,8 +50,6 @@ At the time this README was prepared, the repository already contains:
 - 40 JSON-LD files in `Vensim_Models/JSONLD-Files`
 - 40 narrative-enriched JSON-LD files in `Vensim_Models/JSONLD-Narratives`
 - Saved lexical and dense evaluation outputs under `evaluation/`
-
-That means a new user can inspect prior results immediately, even before rerunning the full pipeline.
 
 ## Method overview
 
@@ -98,14 +97,10 @@ Then edit `.env` so it contains:
 
 ```env
 OPENAI_API_KEY=your_openai_api_key_here
-RECOMPUTE_EMBEDDINGS=false
+RECOMPUTE_EMBEDDINGS=true
 ```
 
-Notes:
-
-- `.env` is intentionally ignored by Git and should never be committed.
-- `OPENAI_API_KEY` is only required for the OpenAI embedding and LLM reranking experiments in the dense pipeline.
-- Set `RECOMPUTE_EMBEDDINGS=true` if you want to delete and rebuild existing Chroma indexes from scratch.
+- Set `RECOMPUTE_EMBEDDINGS=false` if you do not want to delete and rebuild existing Chroma indexes from scratch.
 
 ## Reproducing the full pipeline
 
@@ -168,9 +163,9 @@ python cost.py
 
 This script estimates token usage and API cost for the OpenAI-based dense-retrieval components.
 
-## Experiment design
+## Experiment Configurations
 
-### Representations
+### Data Representations
 
 - `xml`: raw XMILE files
 - `json`: compact JSON-LD converted from XMILE
@@ -195,22 +190,6 @@ This script estimates token usage and API cost for the OpenAI-based dense-retrie
   - `dense_rerank`
   - `dense_llm_rerank`
 
-## Current result snapshot
-
-The repository already includes saved benchmark outputs. A quick snapshot from the latest saved summaries:
-
-### Best lexical configuration by `ndcg@5`
-
-- `json_narratives__tfidf` with `ndcg@5 = 0.3419`
-
-### Strong dense configurations by `ndcg@5`
-
-- `json_narratives__cs800__ov300__bge_base__dense_only` with `ndcg@5 = 0.5969`
-- `json_narratives__cs2000__ov120__minilm__dense_only` with `ndcg@5 = 0.5944`
-- `json_narratives__cs4000__ov300__openai_large__dense_llm_rerank` with `ndcg@5 = 0.5923`
-
-The broad pattern in the saved outputs is that the narrative-enriched JSON-LD representation performs better than plain lexical structure alone, especially in the dense setting.
-
 
 ## Reproducibility notes
 
@@ -222,7 +201,7 @@ The broad pattern in the saved outputs is that the narrative-enriched JSON-LD re
 
 ## Citation and reuse
 
-If you build on this repository in a paper, thesis, or benchmark extension, cite the repository and clearly document:
+If you build on this repository in a paper, thesis, or benchmark extension, cite the repository and please document:
 
 - Which representation was used
 - Which retrieval pipeline was used
@@ -230,13 +209,3 @@ If you build on this repository in a paper, thesis, or benchmark extension, cite
 - Which relevance file was used for evaluation
 - Any changes to chunking, reranking, or prompt settings
 
-## Security note
-
-Never place secrets directly in the README, scripts, notebooks, or committed config files. Use `.env` for local secrets and keep only non-sensitive defaults in `.env.example`.
-
-## Suggested next improvements
-
-- Add a `LICENSE` file so reuse terms are explicit.
-- Add a small `results/figures` section with plots generated from the summary files.
-- Add a `CITATION.cff` file if this repo will support a paper submission.
-- Add a lightweight script or Makefile to run the full pipeline with one command.
