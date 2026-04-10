@@ -1,4 +1,4 @@
-# HOW CAN AI FIND MY MODEL? A MODEL-FINDING EXPERIMENTAL STUDY CONSIDERING DATA FORMATS, EMBEDDINGS AND RETRIEVAL STRATEGIES
+# HOW CAN AI FIND MY MODEL? A Model-Finding Experimental Study Considering Data Formats, Embeddings, and Retrieval Strategies
 
 This repository benchmarks how well different retrieval pipelines can discover relevant system dynamics models from multiple machine-readable representations of the same corpus.
 
@@ -14,7 +14,7 @@ The repository is organized so that someone can reproduce the pipeline from prep
 ## Why this repo is useful
 
 - It keeps the original simulation-model representations alongside transformed formats.
-- It evaluates retrieval quality with graded relevance labels in [evaluation/ground_truth.json](/Users/jhon_botello/Library/CloudStorage/OneDrive-OldDominionUniversity/VMASC/Research/M&S%20and%20AI/SD%20&%20AI/WinterSim%202026/Code/evaluation/ground_truth.json).
+- It evaluates retrieval quality with graded relevance labels in [`evaluation/ground_truth.json`](evaluation/ground_truth.json).
 - It stores experiment summaries, per-query results, timing logs, and Excel exports for both lexical and dense pipelines.
 - It provides a concrete example of how narrative augmentation changes retrieval performance.
 
@@ -50,9 +50,11 @@ At the time this README was prepared, the repository already contains:
 - 40 narrative-enriched JSON-LD files in `Vensim_Models/JSONLD-Narratives`
 - Saved lexical and dense evaluation outputs under `evaluation/`
 
+That means a new user can inspect prior results immediately, even before rerunning the full pipeline.
+
 ## Method overview
 
-The experiments follows this workflow:
+The benchmark follows this workflow:
 
 1. Start from a corpus of system dynamics models exported to XMILE.
 2. Convert XMILE files into compact JSON-LD representations.
@@ -66,8 +68,8 @@ The experiments follows this workflow:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
-cd YOUR_REPO
+git clone https://github.com/jgbotello/Simulation-Model-Discovery-M-S.git
+cd Simulation-Model-Discovery-M-S
 ```
 
 ### 2. Create a virtual environment
@@ -99,6 +101,10 @@ OPENAI_API_KEY=your_openai_api_key_here
 RECOMPUTE_EMBEDDINGS=false
 ```
 
+Notes:
+
+- `.env` is intentionally ignored by Git and should never be committed.
+- `OPENAI_API_KEY` is only required for the OpenAI embedding and LLM reranking experiments in the dense pipeline.
 - Set `RECOMPUTE_EMBEDDINGS=true` if you want to delete and rebuild existing Chroma indexes from scratch.
 
 ## Reproducing the full pipeline
@@ -117,13 +123,7 @@ This reads `.xmile` files from `Vensim_Models/XML-based-Files` and writes compac
 python narratives_append.py
 ```
 
-This reads model background information from:
-
-- [Models_Info.xlsx](/Users/jhon_botello/Library/CloudStorage/OneDrive-OldDominionUniversity/VMASC/Research/M&S%20and%20AI/SD%20&%20AI/WinterSim%202026/Code/Vensim_Models/Background_Information/Models_Info.xlsx)
-
-and writes enriched files to:
-
-- [Vensim_Models/JSONLD-Narratives](/Users/jhon_botello/Library/CloudStorage/OneDrive-OldDominionUniversity/VMASC/Research/M&S%20and%20AI/SD%20&%20AI/WinterSim%202026/Code/Vensim_Models/JSONLD-Narratives)
+This reads model background information from [`Vensim_Models/Background_Information/Models_Info.xlsx`](Vensim_Models/Background_Information/Models_Info.xlsx) and writes enriched files to [`Vensim_Models/JSONLD-Narratives`](Vensim_Models/JSONLD-Narratives).
 
 ### Step 3. Run lexical retrieval experiments
 
@@ -131,9 +131,7 @@ and writes enriched files to:
 python evaluate_lexical.py
 ```
 
-Outputs are saved under:
-
-- [evaluation/lexical](/Users/jhon_botello/Library/CloudStorage/OneDrive-OldDominionUniversity/VMASC/Research/M&S%20and%20AI/SD%20&%20AI/WinterSim%202026/Code/evaluation/lexical)
+Outputs are saved under [`evaluation/lexical`](evaluation/lexical).
 
 Key artifacts:
 
@@ -149,13 +147,9 @@ Key artifacts:
 python evaluate_dense_index.py
 ```
 
-Outputs are saved under:
+Outputs are saved under [`evaluation/dense`](evaluation/dense).
 
-- [evaluation/dense](/Users/jhon_botello/Library/CloudStorage/OneDrive-OldDominionUniversity/VMASC/Research/M&S%20and%20AI/SD%20&%20AI/WinterSim%202026/Code/evaluation/dense)
-
-Persistent vector indexes are stored under:
-
-- [embeddings](/Users/jhon_botello/Library/CloudStorage/OneDrive-OldDominionUniversity/VMASC/Research/M&S%20and%20AI/SD%20&%20AI/WinterSim%202026/Code/embeddings)
+Persistent vector indexes are stored under `embeddings/`.
 
 Key artifacts:
 
@@ -174,7 +168,7 @@ python cost.py
 
 This script estimates token usage and API cost for the OpenAI-based dense-retrieval components.
 
-## Experiment Configurations
+## Experiment design
 
 ### Representations
 
@@ -201,6 +195,21 @@ This script estimates token usage and API cost for the OpenAI-based dense-retrie
   - `dense_rerank`
   - `dense_llm_rerank`
 
+## Current result snapshot
+
+The repository already includes saved benchmark outputs. A quick snapshot from the latest saved summaries:
+
+### Best lexical configuration by `ndcg@5`
+
+- `json_narratives__tfidf` with `ndcg@5 = 0.3419`
+
+### Strong dense configurations by `ndcg@5`
+
+- `json_narratives__cs800__ov300__bge_base__dense_only` with `ndcg@5 = 0.5969`
+- `json_narratives__cs2000__ov120__minilm__dense_only` with `ndcg@5 = 0.5944`
+- `json_narratives__cs4000__ov300__openai_large__dense_llm_rerank` with `ndcg@5 = 0.5923`
+
+The broad pattern in the saved outputs is that the narrative-enriched JSON-LD representation performs better than plain lexical structure alone, especially in the dense setting.
 
 ## Reproducibility notes
 
@@ -219,3 +228,14 @@ If you build on this repository in a paper, thesis, or benchmark extension, cite
 - Whether embeddings were rebuilt
 - Which relevance file was used for evaluation
 - Any changes to chunking, reranking, or prompt settings
+
+## Security note
+
+Never place secrets directly in the README, scripts, notebooks, or committed config files. Use `.env` for local secrets and keep only non-sensitive defaults in `.env.example`.
+
+## Suggested next improvements
+
+- Add a `LICENSE` file so reuse terms are explicit.
+- Add a small `results/figures` section with plots generated from the summary files.
+- Add a `CITATION.cff` file if this repo will support a paper submission.
+- Add a lightweight script or Makefile to run the full pipeline with one command.
