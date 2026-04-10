@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Second">
+		<start> 0</start>
+		<stop> 30</stop>
+		<dt> 0.0625</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="intermediary">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					1
+					</eqn>
+					<inflow>
+					rxn 1
+					</inflow>
+					<outflow>
+					rxn 2
+					</outflow>
+			</stock>
+			<stock name="product">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					rxn 2
+					</inflow>
+			</stock>
+			<stock name="reactant">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					1000
+					</eqn>
+					<outflow>
+					rxn 1
+					</outflow>
+			</stock>
+			<aux name="rxn_1">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	k1*reactant*intermediary					</eqn>
+			</aux>
+			<aux name="rxn_2">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	k2*intermediary					</eqn>
+			</aux>
+			<aux name="k1">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.005					</eqn>
+			</aux>
+			<aux name="k2">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.05					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

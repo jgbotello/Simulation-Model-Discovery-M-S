@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Month">
+		<start> 0</start>
+		<stop> 72</stop>
+		<dt> 0.125</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="freshmen">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					matriculation
+					</inflow>
+					<outflow>
+					promotion
+					</outflow>
+			</stock>
+			<stock name="sophmores">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					promotion
+					</inflow>
+					<outflow>
+					graduation
+					</outflow>
+			</stock>
+			<aux name="Class_Density">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	sophmores/Classrooms					</eqn>
+			</aux>
+			<aux name="content_mastered">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	content_per_day/classes_per_day					</eqn>
+			</aux>
+			<aux name="graduation">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	success_rate*sophmores					</eqn>
+			</aux>
+			<aux name="length_of_class">
+				<units></units>
+				<doc>dose interval is 24 hours divided by the number of administrations per day</doc>
+					<eqn>
+	24/classes_per_day					</eqn>
+			</aux>
+			<aux name="matriculation">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	content_mastered*PULSE_TRAIN(summer_vacation, lab_time ,length_of_class ,FINAL_TIME )					</eqn>
+			</aux>
+			<aux name="promotion">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	learning_rate*freshmen					</eqn>
+			</aux>
+			<aux name="success_rate">
+				<units></units>
+				<doc>.693 is logn of 2.  This is used for connversion purposes.</doc>
+					<eqn>
+	0.693/Time_Devoted_to_Classes					</eqn>
+			</aux>
+			<aux name="classes_per_day">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	6					</eqn>
+			</aux>
+			<aux name="Classrooms">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	70					</eqn>
+			</aux>
+			<aux name="content_per_day">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	6000					</eqn>
+			</aux>
+			<aux name="lab_time">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.25					</eqn>
+			</aux>
+			<aux name="learning_rate">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.25					</eqn>
+			</aux>
+			<aux name="Mastery_level">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	15					</eqn>
+			</aux>
+			<aux name="Minimal_level">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	7					</eqn>
+			</aux>
+			<aux name="summer_vacation">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	4					</eqn>
+			</aux>
+			<aux name="Time_Devoted_to_Classes">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	4					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

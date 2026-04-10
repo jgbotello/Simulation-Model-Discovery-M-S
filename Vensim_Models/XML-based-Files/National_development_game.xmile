@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Year">
+		<start> 2010</start>
+		<stop> 2060</stop>
+		<dt> 0.0625</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="capital_per_capita">
+				<units>dmnl</units>
+				<doc></doc>
+					<eqn>
+					initial_capital_per_capita
+					</eqn>
+					<inflow>
+					capital investment
+					</inflow>
+					<outflow>
+					capital depreciation
+					</outflow>
+			</stock>
+			<stock name="debt_per_capita">
+				<units>$</units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					borrowing
+					</inflow>
+					<outflow>
+					paying back
+					</outflow>
+			</stock>
+			<stock name="education_relative_to_optimum">
+				<units>dmnl</units>
+				<doc></doc>
+					<eqn>
+					0.3
+					</eqn>
+					<inflow>
+					change in education
+					</inflow>
+			</stock>
+			<stock name="health_relative_to_optimum">
+				<units>dmnl</units>
+				<doc></doc>
+					<eqn>
+					0.3
+					</eqn>
+					<inflow>
+					change in health
+					</inflow>
+			</stock>
+			<stock name="roads_relative_to_optimum">
+				<units>dmnl</units>
+				<doc></doc>
+					<eqn>
+					0.3
+					</eqn>
+					<inflow>
+					change in roads
+					</inflow>
+			</stock>
+			<aux name="borrowing">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	if_then_else(surplus_or_deficit&lt;0, -surplus_or_deficit,0)					</eqn>
+			</aux>
+			<aux name="capital_depreciation">
+				<units>dmnl/Year</units>
+				<doc></doc>
+					<eqn>
+	capital_per_capita/capital_depreciation_time					</eqn>
+			</aux>
+			<aux name="capital_investment">
+				<units>dmnl/Year</units>
+				<doc></doc>
+					<eqn>
+	per_capita_savings*effect_of_investment_environment_on_capital_investment*cost_effectiveness_of_capital_investment					</eqn>
+			</aux>
+			<aux name="change_in_education">
+				<units>dmnl/Year</units>
+				<doc></doc>
+					<eqn>
+	(target_education-education_relative_to_optimum)/education_investment_delay					</eqn>
+			</aux>
+			<aux name="change_in_health">
+				<units>dmnl/Year</units>
+				<doc></doc>
+					<eqn>
+	(target_health-health_relative_to_optimum)/health_investment_delay					</eqn>
+			</aux>
+			<aux name="change_in_roads">
+				<units>dmnl/Year</units>
+				<doc></doc>
+					<eqn>
+	(target_roads-roads_relative_to_optimum)/roads_investment_delay					</eqn>
+			</aux>
+			<aux name="debt_over_gdp_ratio">
+				<units>Year</units>
+				<doc></doc>
+					<eqn>
+	debt_per_capita/per_capita_income					</eqn>
+			</aux>
+			<aux name="desired_budget_for_education">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn> GAME (
+	30)					</eqn>
+			</aux>
+			<aux name="desired_budget_for_health">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn> GAME (
+	30)					</eqn>
+			</aux>
+			<aux name="desired_budget_for_roads">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn> GAME (
+	30)					</eqn>
+			</aux>
+			<aux name="effect_of_education_on_investment_environment">
+				<units>dmnl</units>
+				<doc></doc>
+					<eqn>
+	resources_effect_table(education_relative_to_optimum)					</eqn>
+			</aux>
+			<aux name="effect_of_health_on_investment_environment">
+				<units>dmnl</units>
+				<doc></doc>
+					<eqn>
+	resources_effect_table(health_relative_to_optimum)					</eqn>
+			</aux>
+			<aux name="effect_of_investment_environment_on_capital_investment">
+				<units>dmnl</units>
+				<doc></doc>
+					<eqn>
+	relative_investment_environment^elasticity_of_investment_to_environment					</eqn>
+			</aux>
+			<aux name="effect_of_roads_on_investment_environment">
+				<units>dmnl</units>
+				<doc></doc>
+					<eqn>
+	resources_effect_table(roads_relative_to_optimum)					</eqn>
+			</aux>
+			<aux name="government_development_budget_per_capita">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	per_capita_income*tax_rate-interest_payment_on_debt					</eqn>
+			</aux>
+			<aux name="interest_payment_on_debt">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	debt_per_capita*interest_rate					</eqn>
+			</aux>
+			<aux name="interest_rate">
+				<units>dmnl/Year</units>
+				<doc></doc>
+					<eqn>
+	interest_rate_table(debt_over_gdp_ratio)					</eqn>
+			</aux>
+			<aux name="investment_environment">
+				<units>dmnl</units>
+				<doc></doc>
+					<eqn>
+	(effect_of_education_on_investment_environment+effect_of_health_on_investment_environment+effect_of_roads_on_investment_environment)/3					</eqn>
+			</aux>
+			<aux name="paying_back">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	if_then_else(surplus_or_deficit&gt;0 :AND: debt_per_capita&gt;0, surplus_or_deficit,0)					</eqn>
+			</aux>
+			<aux name="pc_income_corrected_for_interest_payments">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	per_capita_income-interest_payment_on_debt					</eqn>
+			</aux>
+			<aux name="per_capita_income">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	INITIAL_pc_income*capital_per_capita^elasticity_of_income_to_capital*total_factor_productivity					</eqn>
+			</aux>
+			<aux name="per_capita_savings">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	per_capita_income*propensity_to_save					</eqn>
+			</aux>
+			<aux name="relative_investment_environment">
+				<units>dmnl</units>
+				<doc></doc>
+					<eqn>
+	investment_environment/initial_investment_environment					</eqn>
+			</aux>
+			<aux name="show_reset_button">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	min(if_then_else(Time = FINAL_TIME, 1, 0 ) + if_then_else(state = 7, 1, 0 ) , 1)					</eqn>
+			</aux>
+			<aux name="state">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	if_then_else( pc_income_corrected_for_interest_payments &gt; state_0,  
+	if_then_else( pc_income_corrected_for_interest_payments &gt; state_1, 
+	if_then_else( pc_income_corrected_for_interest_payments &gt; state_2,
+	if_then_else( pc_income_corrected_for_interest_payments &gt; state_3,
+	if_then_else( pc_income_corrected_for_interest_payments &gt; state_4,
+	if_then_else( pc_income_corrected_for_interest_payments &gt; state_5,  
+	if_then_else( pc_income_corrected_for_interest_payments &gt; state_6,  
+	if_then_else( pc_income_corrected_for_interest_payments &gt; state_7, 7, 7), 6), 5), 4), 3), 2), 1), 0)					</eqn>
+			</aux>
+			<aux name="surplus_or_deficit">
+				<units>$/Year</units>
+				<doc>IF THEN ELSE(Time&lt;10+TIME STEP, BUD D 0, 0)+
+IF THEN ELSE(Time&gt;10 :AND: Time&lt;20+TIME STEP, BUD D 10,0)+
+IF THEN ELSE(Time&gt;20 :AND: Time&lt;30+TIME STEP, BUD D 20,0)+
+IF THEN ELSE(Time&gt;30 :AND: Time&lt;40+TIME STEP, BUD D 30,0)+
+IF THEN ELSE(Time&gt;40 , BUD D 40,0)</doc>
+					<eqn>
+	government_development_budget_per_capita-total_desired_budget_per_capita					</eqn>
+			</aux>
+			<aux name="target_education">
+				<units>dmnl</units>
+				<doc></doc>
+					<eqn>
+	desired_budget_for_education*cost_effectiveness_of_resource_investments					</eqn>
+			</aux>
+			<aux name="target_health">
+				<units>dmnl</units>
+				<doc></doc>
+					<eqn>
+	desired_budget_for_health*cost_effectiveness_of_resource_investments					</eqn>
+			</aux>
+			<aux name="target_roads">
+				<units>dmnl</units>
+				<doc></doc>
+					<eqn>
+	desired_budget_for_roads*cost_effectiveness_of_resource_investments					</eqn>
+			</aux>
+			<aux name="total_desired_budget_per_capita">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	desired_budget_for_education+desired_budget_for_health+desired_budget_for_roads					</eqn>
+			</aux>
+			<aux name="total_factor_productivity">
+				<units>dmnl</units>
+				<doc></doc>
+					<eqn>
+	education_relative_to_optimum^elasticity_of_productivity_to_education*health_relative_to_optimum^elasticity_of_productivity_to_health*roads_relative_to_optimum^elasticity_of_productivity_to_roads					</eqn>
+			</aux>
+			<aux name="interest_rate_table">
+				<units>dmnl/Year</units>
+				<doc></doc>
+<gf>
+<xpts>0.000000,0.500000,1.000000,2.000000,3.000000,4.000000</xpts>
+<ypts>0.010000,0.010000,0.025000,0.085000,0.125000,0.150000</ypts>
+</gf>
+			</aux>
+			<aux name="resources_effect_table">
+				<units>dmnl</units>
+				<doc></doc>
+<gf>
+<xpts>0.150000,0.300000,0.330000,0.360000,0.400000,0.449541,0.501529,0.565749,0.629969,0.685015,0.749235,1.000000</xpts>
+<ypts>0.000000,0.600000,0.700000,0.750000,0.800000,0.842105,0.885965,0.921053,0.947368,0.964912,0.978070,1.000000</ypts>
+</gf>
+			</aux>
+			<aux name="capital_depreciation_time">
+				<units>Year</units>
+				<doc></doc>
+					<eqn>
+	25					</eqn>
+			</aux>
+			<aux name="cost_effectiveness_of_capital_investment">
+				<units>dmnl/$</units>
+				<doc></doc>
+					<eqn>
+	0.001					</eqn>
+			</aux>
+			<aux name="cost_effectiveness_of_resource_investments">
+				<units>Year/$</units>
+				<doc></doc>
+					<eqn>
+	0.01					</eqn>
+			</aux>
+			<aux name="education_investment_delay">
+				<units>Year</units>
+				<doc></doc>
+					<eqn>
+	15					</eqn>
+			</aux>
+			<aux name="elasticity_of_income_to_capital">
+				<units>dmnl</units>
+				<doc></doc>
+					<eqn>
+	0.3					</eqn>
+			</aux>
+			<aux name="elasticity_of_investment_to_environment">
+				<units>dmnl</units>
+				<doc></doc>
+					<eqn>
+	3					</eqn>
+			</aux>
+			<aux name="elasticity_of_productivity_to_education">
+				<units>dmnl</units>
+				<doc></doc>
+					<eqn>
+	0.275					</eqn>
+			</aux>
+			<aux name="elasticity_of_productivity_to_health">
+				<units>dmnl</units>
+				<doc></doc>
+					<eqn>
+	0.225					</eqn>
+			</aux>
+			<aux name="elasticity_of_productivity_to_roads">
+				<units>dmnl</units>
+				<doc></doc>
+					<eqn>
+	0.2					</eqn>
+			</aux>
+			<aux name="health_investment_delay">
+				<units>Year</units>
+				<doc></doc>
+					<eqn>
+	7					</eqn>
+			</aux>
+			<aux name="initial_capital_per_capita">
+				<units>dmnl</units>
+				<doc></doc>
+					<eqn>
+	0.3					</eqn>
+			</aux>
+			<aux name="INITIAL_pc_income">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	1000					</eqn>
+			</aux>
+			<aux name="propensity_to_save">
+				<units>dmnl</units>
+				<doc></doc>
+					<eqn>
+	0.04					</eqn>
+			</aux>
+			<aux name="roads_investment_delay">
+				<units>Year</units>
+				<doc></doc>
+					<eqn>
+	3					</eqn>
+			</aux>
+			<aux name="state_0">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	-300					</eqn>
+			</aux>
+			<aux name="state_1">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	-100					</eqn>
+			</aux>
+			<aux name="state_2">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	100					</eqn>
+			</aux>
+			<aux name="state_3">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	299					</eqn>
+			</aux>
+			<aux name="state_4">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	380					</eqn>
+			</aux>
+			<aux name="state_5">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	500					</eqn>
+			</aux>
+			<aux name="state_6">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	700					</eqn>
+			</aux>
+			<aux name="state_7">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1000					</eqn>
+			</aux>
+			<aux name="tax_rate">
+				<units>dmnl</units>
+				<doc></doc>
+					<eqn>
+	0.3					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

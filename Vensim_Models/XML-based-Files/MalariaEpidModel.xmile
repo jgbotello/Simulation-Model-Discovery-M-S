@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Month">
+		<start> 0</start>
+		<stop> 100</stop>
+		<dt> 1</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="Healthy_Mosquitos">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					1000
+					</eqn>
+					<inflow>
+					Mosquito Births
+					</inflow>
+					<outflow>
+					Mosquito Dies
+					</outflow>
+					<outflow>
+					Mosquito Infection
+					</outflow>
+			</stock>
+			<stock name="Healthy_Villagers">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					100
+					</eqn>
+					<inflow>
+					Births
+					</inflow>
+					<inflow>
+					Recover
+					</inflow>
+					<outflow>
+					Healthy Dies
+					</outflow>
+					<outflow>
+					Infected
+					</outflow>
+			</stock>
+			<stock name="Infected_Mosquitos">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					10
+					</eqn>
+					<inflow>
+					Mosquito Infection
+					</inflow>
+					<outflow>
+					Infected Mosquito Dies
+					</outflow>
+			</stock>
+			<stock name="Sick_Villagers">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Infected
+					</inflow>
+					<outflow>
+					Recover
+					</outflow>
+					<outflow>
+					Sick Dies
+					</outflow>
+			</stock>
+			<aux name="Births">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Birth_Rate*Humans					</eqn>
+			</aux>
+			<aux name="Healthy_Dies">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Healthy_Villagers*Death_Rate					</eqn>
+			</aux>
+			<aux name="Humans">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Healthy_Villagers+Sick_Villagers					</eqn>
+			</aux>
+			<aux name="Infected">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Bite_Rate*Healthy_Villagers*Infections_Transmission_Proability*(Infected_Mosquitos/Mosquitos)					</eqn>
+			</aux>
+			<aux name="Infected_Mosquito_Dies">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Infected_Mosquitos*Mosquito_Death_Rate					</eqn>
+			</aux>
+			<aux name="Mosquito_Births">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Mosquitos*Mosquito_Birth_Rate					</eqn>
+			</aux>
+			<aux name="Mosquito_Dies">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Healthy_Mosquitos*Mosquito_Death_Rate					</eqn>
+			</aux>
+			<aux name="Mosquito_Infection">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	(Sick_Villagers/(Humans+1))*Healthy_Mosquitos*Bite_Rate					</eqn>
+			</aux>
+			<aux name="Mosquitos">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Healthy_Mosquitos+Infected_Mosquitos					</eqn>
+			</aux>
+			<aux name="Recover">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Sick_Villagers*Recovery_Rate					</eqn>
+			</aux>
+			<aux name="Sick_Dies">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	(Malaria_Death_Rate+Death_Rate)*Sick_Villagers					</eqn>
+			</aux>
+			<aux name="Birth_Rate">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.05					</eqn>
+			</aux>
+			<aux name="Bite_Rate">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.6					</eqn>
+			</aux>
+			<aux name="Death_Rate">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.02					</eqn>
+			</aux>
+			<aux name="Infections_Transmission_Proability">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.9					</eqn>
+			</aux>
+			<aux name="Malaria_Death_Rate">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.5					</eqn>
+			</aux>
+			<aux name="Mosquito_Birth_Rate">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.202					</eqn>
+			</aux>
+			<aux name="Mosquito_Death_Rate">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.2					</eqn>
+			</aux>
+			<aux name="Recovery_Rate">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.25					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

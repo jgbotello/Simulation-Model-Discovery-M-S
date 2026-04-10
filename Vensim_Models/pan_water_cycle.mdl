@@ -1,0 +1,170 @@
+{UTF-8}
+water on cover= INTEG (
+	condensation-precipitation,
+		0)
+	~	
+	~		|
+
+water in air= INTEG (
+	evaporation-condensation-water vapor leak,
+		0)
+	~	
+	~		|
+
+water vapor leak=
+	0
+	~	 [0,1,0.1]
+	~		|
+
+k 1=
+	0.5
+	~	 [0,1,0.1]
+	~		|
+
+condensation=
+	k 1*water in air
+	~	
+	~		|
+
+precipitation=
+	k 2*water on cover
+	~	
+	~		|
+
+k 2=
+	0.5
+	~	 [0,1,0.1]
+	~		|
+
+amount of evaporation per degree=
+	0.05
+	~	 [0,0.2,0.01]
+	~		|
+
+evaporation=
+	water temperature*amount of evaporation per degree
+	~	
+	~		|
+
+total water=
+	water in air+water in pan+water on cover
+	~	
+	~		|
+
+water in pan= INTEG (
+	precipitation-evaporation,
+		100)
+	~	
+	~		|
+
+water temperature=
+	100
+	~	 [0,100,1]
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 10
+	~	Minute
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Minute
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Minute [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 1
+	~	Minute [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Comic Sans MS|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,water in air,191,228,40,20,3,3,0,33,0,3,0,0,255-0-0,0-0-0,Comic Sans MS|12||0-0-0
+10,2,water on cover,394,131,40,20,3,3,0,33,0,3,0,0,0-128-0,0-0-0,Comic Sans MS|12||0-0-0
+10,3,water in pan,395,342,40,20,3,3,0,33,0,3,0,0,0-0-255,0-0-0,Comic Sans MS|12||0-0-0
+1,4,6,2,4,0,0,22,0,0,0,-1--1--1,,1|(275,127)|
+1,5,6,1,100,0,0,22,0,0,0,-1--1--1,,1|(191,171)|
+11,6,316,191,127,6,8,34,3,0,0,1,0,0,0
+10,7,condensation,191,148,48,13,40,3,0,32,-1,0,0,0,0-0-0,0-0-0,Comic Sans MS|12||0-0-0
+1,8,10,3,4,0,0,22,0,0,0,-1--1--1,,1|(394,282)|
+1,9,10,2,100,0,0,22,0,0,0,-1--1--1,,1|(394,190)|
+11,10,156,394,236,8,6,33,3,0,0,4,0,0,0
+10,11,precipitation,452,236,50,13,40,3,0,32,-1,0,0,0,0-0-0,0-0-0,Comic Sans MS|12||0-0-0
+1,12,14,1,4,0,0,22,0,0,0,-1--1--1,,1|(192,291)|
+1,13,14,3,100,0,0,22,0,0,0,-1--1--1,,1|(276,342)|
+11,14,172,192,342,6,8,34,3,0,0,1,0,0,0
+10,15,evaporation,192,363,45,13,40,3,0,32,-1,0,0,0,0-0-0,0-0-0,Comic Sans MS|12||0-0-0
+10,16,total water,311,237,32,32,2,131,0,33,0,3,0,0,128-128-128,0-0-0,Comic Sans MS|12||0-0-0
+1,17,1,6,1,0,0,0,0,64,0,-1--1--1,,1|(150,146)|
+1,18,2,10,1,0,0,0,0,64,0,-1--1--1,,1|(436,184)|
+1,19,1,16,0,0,0,0,0,64,0,-1--1--1,,1|(248,232)|
+1,20,2,16,0,0,0,0,0,64,0,-1--1--1,,1|(358,175)|
+1,21,3,16,0,0,0,0,0,64,0,-1--1--1,,1|(358,296)|
+10,22,water temperature,128,395,12,12,2,131,0,1,1,2,0,0,64-64-0,0-0-0,|12||0-0-0
+10,23,amount of evaporation per degree,304,428,13,13,2,131,0,1,1,2,0,0,64-64-0,0-0-0,|12||0-0-0
+1,24,22,14,0,0,0,0,0,64,0,-1--1--1,,1|(156,371)|
+1,25,23,14,0,0,0,0,0,64,0,-1--1--1,,1|(250,387)|
+12,26,0,746,278,222,177,3,188,0,32,1,0,0,0,0-0-0,0-0-0,Comic Sans MS|12||0-0-0
+graph
+12,27,0,563,21,152,32,8,132,0,10,-1,0,0,0,0-0-0,0-0-0,|20||255-0-0
+PAN WATER CYCLE
+10,28,k 1,160,65,15,15,2,131,0,1,0,2,0,0,255-128-0,0-0-0,|12||0-0-0
+10,29,k 2,475,289,15,15,2,131,0,1,0,2,0,0,255-128-0,0-0-0,|12||0-0-0
+1,30,28,7,0,0,0,0,0,64,0,-1--1--1,,1|(173,100)|
+1,31,29,10,0,0,0,0,0,64,0,-1--1--1,,1|(438,264)|
+12,32,0,393,11,2,13,0,3,0,0,-1,0,0,0
+12,33,48,325,-17,10,8,0,3,0,0,-1,0,0,0
+12,34,48,55,196,10,8,0,3,0,0,-1,0,0,0
+1,35,37,34,4,0,0,22,0,0,0,-1--1--1,,1|(55,242)|
+1,36,37,1,100,0,0,22,0,0,0,-1--1--1,,1|(120,242)|
+11,37,48,84,242,6,8,34,3,0,0,1,0,0,0
+10,38,water vapor leak,84,262,68,12,40,131,0,0,-1,0,0,0
+///---\\\
+:GRAPH GRAPH
+:TITLE PAN-COVER-AIR Content over time
+:SCALE
+:VAR water in pan
+:Y-MIN 0
+:Y-MAX 100
+:LINE-WIDTH 3
+:SCALE
+:VAR water in air
+:Y-MIN 0
+:Y-MAX 100
+:LINE-WIDTH 3
+:SCALE
+:VAR water on cover
+:Y-MIN 0
+:Y-MAX 100
+:LINE-WIDTH 3
+:SCALE
+:VAR total water
+:Y-MIN 0
+:Y-MAX 100
+:LINE-WIDTH 3
+:L<%^E!@
+9:Current
+23:0
+15:0,0,0,0,0,0
+19:100,0
+27:2,
+34:0,
+4:Time
+5:water on cover
+24:0
+25:10
+26:10

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Year">
+		<start> 0</start>
+		<stop> 20</stop>
+		<dt> 0.5</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="Goats">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					Initial_Goats
+					</eqn>
+					<inflow>
+					Goat Births
+					</inflow>
+					<outflow>
+					Goats Deaths
+					</outflow>
+			</stock>
+			<stock name="Grass">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					Initial_Grass
+					</eqn>
+					<inflow>
+					Grass Growth
+					</inflow>
+					<outflow>
+					Grass Deaths
+					</outflow>
+			</stock>
+			<aux name="Average_Goat_Lifespan">
+				<units></units>
+				<doc></doc>
+					<eqn> GAME (
+	10)					</eqn>
+			</aux>
+			<aux name="Goat_Births">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Grass/Grass_per_Goat_Birth					</eqn>
+			</aux>
+			<aux name="Goats_Deaths">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Max(Goats/Average_Goat_Lifespan, (Goats - Grass/Grass_Eaten_per_Goat)/2)					</eqn>
+			</aux>
+			<aux name="Grass_Deaths">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Min(Goats*Grass_Eaten_per_Goat + Grass_per_Goat_Birth*Goat_Births,Grass)					</eqn>
+			</aux>
+			<aux name="Grass_Eaten_per_Goat">
+				<units></units>
+				<doc></doc>
+					<eqn> GAME (
+	100)					</eqn>
+			</aux>
+			<aux name="Grass_Growth">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Grass*Grass_Growth_Rate					</eqn>
+			</aux>
+			<aux name="Grass_Growth_Rate">
+				<units></units>
+				<doc></doc>
+					<eqn> GAME (
+	0.1)					</eqn>
+			</aux>
+			<aux name="Grass_per_Goat_Birth">
+				<units></units>
+				<doc></doc>
+					<eqn> GAME (
+	15000)					</eqn>
+			</aux>
+			<aux name="Initial_Goats">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	100					</eqn>
+			</aux>
+			<aux name="Initial_Grass">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	100000					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

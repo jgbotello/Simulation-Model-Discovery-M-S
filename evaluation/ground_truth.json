@@ -1,0 +1,155 @@
+[
+  {
+    "query_type": "direct",
+    "query": "Which simulation models represent ecological population dynamics using explicit stock variables and flows such as births, deaths, growth, or competition to analyze population behavior under resource or environmental constraints?",
+    "relevant": ["Predator-Prey", "Goats_and_grass", "nutria"],
+    "graded_relevance": {
+      "Predator-Prey": 3,
+      "Goats_and_grass": 2,
+      "nutria": 1
+    }
+  },
+  {
+    "query_type": "direct",
+    "query": "Which simulation models represent infectious disease spread using explicit stock–flow structures (e.g., susceptible, infected, recovered, or interacting populations) to model transmission dynamics?",
+    "relevant": ["AdvancedSIR", "MalariaEpidModel"],
+    "graded_relevance": {
+      "AdvancedSIR": 3,
+      "MalariaEpidModel": 2
+    }
+  },
+  {
+    "query_type": "direct",
+    "query": "Which simulation models represent financial system dynamics using explicit stock–flow structures (e.g., capital, financial assets, debt, or accounts) to model flows such as cash flow, investment, borrowing, or depreciation?",
+    "relevant": ["Saving_a_Bank", "FINANC02", "Accounting_dynamics"],
+    "graded_relevance": {
+      "Saving_a_Bank": 3,
+      "FINANC02": 2,
+      "Accounting_dynamics": 1
+    }
+  },
+  {
+    "query_type": "direct",
+    "query": "Which simulation models represent population or resource dynamics using explicit stock–flow structures with processes such as growth, depletion, consumption, harvesting, or competition?",
+    "relevant": ["Fish_bank", "Goats_and_grass", "nutria"],
+    "graded_relevance": {
+      "Fish_bank": 3,
+      "Goats_and_grass": 2,
+      "nutria": 1
+    }
+  },
+  {
+    "query_type": "direct",
+    "query": "Which simulation models represent urban energy dynamics using explicit stock–flow structures for energy production and consumption across buildings, transportation, and electricity sources such as oil, solar, or wind?",
+    "relevant": ["Boston_energy"],
+    "graded_relevance": {
+      "Boston_energy": 3
+    }
+  },
+  {
+    "query_type": "abstract",
+    "query": "Which simulation models represent systems that adjust their behavior under resource or environmental constraints through feedback-driven interactions?",
+    "relevant": ["Predator-Prey", "Fish_bank", "Goats_and_grass", "Boston_energy"],
+    "graded_relevance": {
+      "Predator-Prey": 3,
+      "Fish_bank": 3,
+      "Goats_and_grass": 2,
+      "Boston_energy": 1
+    }
+  },
+  {
+    "query_type": "abstract",
+    "query": "Which simulation models represent systems in which interventions or management decisions can produce delayed, indirect, or unintended effects through feedback interactions?",
+    "relevant": ["Saving_a_Bank", "Balanced_scorecard", "Pharma"],
+    "graded_relevance": {
+      "Saving_a_Bank": 3,
+      "Balanced_scorecard": 2,
+      "Pharma": 1
+    }
+  },
+  {
+    "query_type": "abstract",
+    "query": "Which simulation models represent systems in which growth is constrained by competition, predation, carrying capacity, or resource limits, leading to self-limiting or stabilizing behavior?",
+    "relevant": ["Goats_and_grass", "nutria", "Fish_bank", "Predator-Prey"],
+    "graded_relevance": {
+      "Goats_and_grass": 3,
+      "nutria": 2,
+      "Fish_bank": 2,
+      "Predator-Prey": 1
+    }
+  },
+  {
+    "query_type": "abstract",
+    "query": "Which simulation models capture interactions between multiple populations to explain system-level or aggregate behavior?",
+    "relevant": ["Predator-Prey", "MalariaEpidModel", "Goats_and_grass"],
+    "graded_relevance": {
+      "Predator-Prey": 3,
+      "MalariaEpidModel": 2,
+      "Goats_and_grass": 2
+    }
+  },
+  {
+    "query_type": "abstract",
+    "query": "Which simulation models represent systems in which behavioral, decision, or response rules shape system-level outcomes over time?",
+    "relevant": ["Balanced_scorecard", "Pharma", "sociology101"],
+    "graded_relevance": {
+      "Balanced_scorecard": 3,
+      "Pharma": 2,
+      "sociology101": 1
+    }
+  },
+  {
+    "query_type": "ambiguous",
+    "query": "Which models can be used to examine how dynamic systems respond to pressure, disruption, or adverse conditions over time?",
+    "relevant": ["Saving_a_Bank", "Fish_bank", "Boston_energy", "FINANC02"],
+    "graded_relevance": {
+      "Saving_a_Bank": 3,
+      "Fish_bank": 2,
+      "Boston_energy": 2,
+      "FINANC02": 1
+    }
+  },
+  {
+    "query_type": "ambiguous",
+    "query": "Which simulation models are suitable for exploring how system behavior evolves over time in response to interacting dynamic processes?",
+    "relevant": ["Predator-Prey", "AdvancedSIR", "Fish_bank", "Pharma"],
+    "graded_relevance": {
+      "Predator-Prey": 3,
+      "AdvancedSIR": 2,
+      "Fish_bank": 2,
+      "Pharma": 1
+    }
+  },
+  {
+    "query_type": "ambiguous",
+    "query": "Which models can be used to explore how systems evolve over time through interacting feedback loops?",
+    "relevant": ["Predator-Prey", "Goats_and_grass", "Balanced_scorecard", "Boston_energy"],
+    "graded_relevance": {
+      "Predator-Prey": 3,
+      "Goats_and_grass": 2,
+      "Balanced_scorecard": 2,
+      "Boston_energy": 1
+    }
+  },
+  {
+    "query_type": "ambiguous",
+    "query": "Which simulation models can support decision-making in systems characterized by evolving conditions and dynamic dependencies?",
+    "relevant": ["Saving_a_Bank", "Pharma", "Balanced_scorecard"],
+    "graded_relevance": {
+      "Saving_a_Bank": 3,
+      "Pharma": 2,
+      "Balanced_scorecard": 2
+    }
+  },
+  {
+    "query_type": "ambiguous",
+    "query": "Which models represent systems where interactions among variables produce non-linear and potentially emergent behavior over time?",
+    "relevant": ["Predator-Prey", "Fish_bank", "Goats_and_grass", "AdvancedSIR"],
+    "graded_relevance": {
+      "Predator-Prey": 3,
+      "Fish_bank": 2,
+      "Goats_and_grass": 2,
+      "AdvancedSIR": 1
+    }
+  }
+]

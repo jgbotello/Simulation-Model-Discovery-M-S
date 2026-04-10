@@ -1,0 +1,116 @@
+{UTF-8}
+birth fraction=
+	0.5
+	~	 [0,1,0.01]
+	~		|
+
+change in nutria per time=
+	birth fraction*nutria
+	~	
+	~		|
+
+competition factor=
+	0
+	~	 [0,0.001,0.0001]
+	~		|
+
+death from competition=
+	competition factor*nutria*(nutria-1)/2
+	~	
+	~		|
+
+nutria= INTEG (
+	change in nutria per time-death from competition,
+		10)
+	~	
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 24
+	~	Month
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Month
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP 
+	~	Month [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 0.25
+	~	Month [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|72,72,100,0
+10,1,nutria,304,92,41,32,3,131,0,0,0,0,0,0
+12,2,48,32,90,10,8,0,3,0,0,-1,0,0,0
+1,4,6,1,4,0,0,22,0,0,0,-1--1--1,,1|(211,89)|
+1,5,6,2,100,0,0,22,0,0,0,-1--1--1,,1|(94,89)|
+11,6,0,153,89,6,8,34,3,0,0,1,0,0,0
+10,7,change in nutria per time,153,111,41,14,40,3,0,0,-1,0,0,0
+10,8,birth fraction,66,184,34,8,8,3,0,0,0,0,0,0
+1,9,8,7,1,0,0,0,0,64,0,-1--1--1,,1|(94,134)|
+1,10,1,7,1,0,0,0,0,64,0,-1--1--1,,1|(232,135)|
+12,11,0,323,347,150,150,3,44,0,0,1,0,0,0
+nutria_population
+12,13,0,921,47,64,21,8,7,0,0,-1,0,0,0
+This is a model of nutria that I used as an example for a class.
+12,14,48,604,92,10,8,0,3,0,0,-1,0,0,0
+1,16,18,14,4,0,0,22,0,0,0,-1--1--1,,1|(534,92)|
+1,17,18,1,100,0,0,22,0,0,0,-1--1--1,,1|(404,92)|
+11,18,0,469,92,6,8,34,3,0,0,1,0,0,0
+10,19,death from competition,469,108,59,8,40,3,0,0,-1,0,0,0
+10,20,competition factor,589,165,46,8,8,3,0,0,0,0,0,0
+1,21,20,19,1,0,0,0,0,64,0,-1--1--1,,1|(523,154)|
+1,22,1,19,1,0,0,0,0,64,0,-1--1--1,,1|(397,136)|
+///---\\\
+:GRAPH nutria_population
+:TITLE nutria population
+:X-AXIS Time
+:SCALE
+:VAR nutria
+:Y-MIN 0
+:Y-MAX 10000
+:LINE-WIDTH 2
+:L<%^E!@
+1:/Applications/Current.vdf
+9:Current
+22:$,Dollar,Dollars,$s
+22:Hour,Hours
+22:Month,Months
+22:Person,People,Persons
+22:Unit,Units
+22:Week,Weeks
+22:Year,Years
+22:Day,Days
+23:0
+15:0,0,0,0,0,0
+19:100,0
+27:2,
+34:0,
+4:Time
+5:death from competition
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:2
+41:0
+24:0
+25:24
+26:24

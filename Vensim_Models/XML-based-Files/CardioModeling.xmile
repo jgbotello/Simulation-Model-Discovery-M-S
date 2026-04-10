@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Second">
+		<start> 0</start>
+		<stop> 50</stop>
+		<dt> 0.25</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="Aorta">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					100
+					</eqn>
+			</stock>
+			<stock name="Body_Tissues">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					5000
+					</eqn>
+					<inflow>
+					Arterial Flow
+					</inflow>
+					<outflow>
+					Venous Flow
+					</outflow>
+			</stock>
+			<stock name="Heart_Ventricle">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					60
+					</eqn>
+			</stock>
+			<aux name="Arterial_Flow">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	(Mean_Arterial_Pressure*3.14*Arterial_Radius^4)/(8*Arterial_Length*Viscosity)					</eqn>
+			</aux>
+			<aux name="Cardiac_Output">
+				<units>Second</units>
+				<doc></doc>
+					<eqn>
+	PULSE_TRAIN(Heartrate,TIME_STEP , Heartrate ,1000)*Stroke_Volume/(TIME_STEP)					</eqn>
+			</aux>
+			<aux name="Mean_Arterial_Pressure">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Diastolic_Pressure+(Systolic_Pressure-Diastolic_Pressure)/3					</eqn>
+			</aux>
+			<aux name="Venous_Flow">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	(Venus_Pressure*3.14*Venus_Radius^4)/(8*Venous_Length*Viscosity)					</eqn>
+			</aux>
+			<aux name="Arterial_Length">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1000					</eqn>
+			</aux>
+			<aux name="Arterial_Radius">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	6.2					</eqn>
+			</aux>
+			<aux name="Diastolic_Pressure">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	80					</eqn>
+			</aux>
+			<aux name="Heartrate">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	5					</eqn>
+			</aux>
+			<aux name="Stroke_Volume">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	70					</eqn>
+			</aux>
+			<aux name="Systolic_Pressure">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	120					</eqn>
+			</aux>
+			<aux name="Venous_Length">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	10					</eqn>
+			</aux>
+			<aux name="Venus_Pressure">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	10					</eqn>
+			</aux>
+			<aux name="Venus_Radius">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	3.45					</eqn>
+			</aux>
+			<aux name="Viscosity">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	4					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

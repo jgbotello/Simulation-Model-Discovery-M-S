@@ -1,0 +1,742 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="week">
+		<start> 0</start>
+		<stop> 120</stop>
+		<dt> 0.125</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="Counter_for_Change_Product_Performance">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					realistic_product_performance_in_number_of_features
+					</eqn>
+					<inflow>
+					change product performance
+					</inflow>
+			</stock>
+			<stock name="Customers_with_Fulfilled_Orders_(CFO)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					"sales rate (sr)"
+					</inflow>
+			</stock>
+			<stock name="Customers_with_Unfulfilled_Orders_(CUO)">
+				<units>customer</units>
+				<doc>0.0033</doc>
+					<eqn>
+					initial_CUO
+					</eqn>
+					<inflow>
+					"customer order rate (cor)"
+					</inflow>
+					<outflow>
+					"lost sales rate (lsr)"
+					</outflow>
+					<outflow>
+					"sales rate (sr)"
+					</outflow>
+			</stock>
+			<stock name="delay_change_in_discovery">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					delay_change_in_discovery=
+
+	DELAY_FIXED(change_in_discovery,TIME_STEP,0)
+					</eqn>
+			</stock>
+			<stock name="Discovery_of_Unrealistic_Due_Date">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					change in discovery
+					</inflow>
+			</stock>
+			<stock name="Expected_Development_Costs_(EDC)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					("development_costs_(DC)"/MAX(1,Time))*"Feasible_Development_Time_(FDT)"
+					</eqn>
+					<inflow>
+					change PDC
+					</inflow>
+			</stock>
+			<stock name="Expected_Development_Time_(EDT)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					"Feasible_Development_Time_(FDT)"
+					</eqn>
+					<inflow>
+					calculate EDT
+					</inflow>
+			</stock>
+			<stock name="Experienced_Engineers_(EE)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					MAX(0,"planned_Team_Size_(pTS)"-initial_shortage_of_team)
+					</eqn>
+					<inflow>
+					"assimilation rate (ar)"
+					</inflow>
+					<outflow>
+					end of project for experienced team
+					</outflow>
+			</stock>
+			<stock name="Feasible_Development_Time_(FDT)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					"Project_Tasks_in_Execution_(TE)"/("norm_productivity_experienced_person_(npe)"*"planned_Team_Size_(pTS)")
+					</eqn>
+					<inflow>
+					"development time adjustment rate (dtar)"
+					</inflow>
+			</stock>
+			<stock name="Lost_Customers_(LC)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					"lost sales rate (lsr)"
+					</inflow>
+			</stock>
+			<stock name="Potential_Customers_(PC)">
+				<units>customers</units>
+				<doc></doc>
+					<eqn>
+					initial_potential_customers
+					</eqn>
+					<inflow>
+					add potential customers
+					</inflow>
+					<outflow>
+					"customer order rate (cor)"
+					</outflow>
+			</stock>
+			<stock name="Project_Tasks_Finished_(TF)">
+				<units>tasks</units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					"task finish rate (tfr)"
+					</inflow>
+			</stock>
+			<stock name="Project_Tasks_in_Execution_(TE)">
+				<units>tasks</units>
+				<doc></doc>
+					<eqn>
+					project_tasks_to_be_executed*(1-"project_newness_(pn)")
+					</eqn>
+					<inflow>
+					new tasks for higher product advantage
+					</inflow>
+					<inflow>
+					"task definition rate (tdr)"
+					</inflow>
+					<outflow>
+					"task finish rate (tfr)"
+					</outflow>
+			</stock>
+			<stock name="project_tasks_to_be_executed">
+				<units>tasks</units>
+				<doc></doc>
+					<eqn>
+					initial_project_tasks_to_be_executed
+					</eqn>
+					<inflow>
+					add new tasks
+					</inflow>
+			</stock>
+			<stock name="Rookie_Engineers_(RE)">
+				<units>persons</units>
+				<doc>11.45</doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					"hiring rate (hr)"
+					</inflow>
+					<outflow>
+					"assimilation rate (ar)"
+					</outflow>
+					<outflow>
+					end of project for rookies
+					</outflow>
+			</stock>
+			<stock name="Sales_Benefits_(SB)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					"weekly sales benefits (sb)"
+					</inflow>
+			</stock>
+			<stock name="Total_Experienced_Person-Weeks_(TEPW)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					"Experienced_Engineers_(EE)"
+					</eqn>
+					<inflow>
+					"experienced person-weeks (epw)"
+					</inflow>
+			</stock>
+			<stock name="Total_Rookie_Person-Weeks_(TRPW)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					"Rookie_Engineers_(RE)"
+					</eqn>
+					<inflow>
+					"rookie person-weeks (rpw)"
+					</inflow>
+			</stock>
+			<stock name="Undiscovered_Project_Tasks_(UT)">
+				<units>tasks</units>
+				<doc></doc>
+					<eqn>
+					project_tasks_to_be_executed*"project_newness_(pn)"
+					</eqn>
+					<inflow>
+					new undiscovered tasks for higher product advantage
+					</inflow>
+					<outflow>
+					"task definition rate (tdr)"
+					</outflow>
+			</stock>
+			<aux name="add_new_tasks">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	new_tasks_for_higher_product_advantage+new_undiscovered_tasks_for_higher_product_advantage					</eqn>
+			</aux>
+			<aux name="add_potential_customers">
+				<units></units>
+				<doc>IF(delay_change_in_discovery&gt;0 OR change_PP&lt;&gt;0)
+THEN(((product_performance_PP/normal_product_performance_npp)-1)*initial_potential_customers/dt) ELSE(0)</doc>
+					<eqn>
+	IF_THEN_ELSE(delay_change_in_discovery&gt;0:OR:change_product_performance&lt;&gt;0,potential_customers_per_feature*change_product_performance,0)					</eqn>
+			</aux>
+			<aux name="assimilation_rate_(ar)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	"Rookie_Engineers_(RE)"/"assimilation_delay_(ad)"					</eqn>
+			</aux>
+			<aux name="average_actual_productivity_per_person_(aapp)">
+				<units>task/(person*week)</units>
+				<doc></doc>
+					<eqn>
+	"average_productivity_per_person_(app)"*(1-0*"efficiency_loss_(el)"-"new_efficiency_loss_(nel)")					</eqn>
+			</aux>
+			<aux name="average_productivity_per_person_(app)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	("Rookie_Engineers_(RE)"*"norm_productivity_rookie_(npr)"+"norm_productivity_experienced_person_(npe)"*("Experienced_Engineers_(EE)"-"supervision_time_per_rookie_(st)"*"Rookie_Engineers_(RE)"))/("Rookie_Engineers_(RE)"+"Experienced_Engineers_(EE)")					</eqn>
+			</aux>
+			<aux name="calculate_EDT">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	IF_THEN_ELSE ("project_completeness_(pc)"&lt;0.991,(MAX(Time,"Feasible_Development_Time_(FDT)")-"Expected_Development_Time_(EDT)")/1,0)					</eqn>
+			</aux>
+			<aux name="change_in_discovery">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	IF_THEN_ELSE (Discovery_of_Unrealistic_Due_Date=0 :AND:"pressure_to_intervene_(pi)"
+	&gt;"intervention_threshold_(it)",1/TIME_STEP,0)					</eqn>
+			</aux>
+			<aux name="change_PDC">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	IF_THEN_ELSE("project_completeness_(pc)"&lt;0.991,(-"Expected_Development_Costs_(EDC)"+("development_costs_(DC)"/MAX(1,Time))*"Feasible_Development_Time_(FDT)")/"development_time_adjustment_delay_(dtad)",0)					</eqn>
+			</aux>
+			<aux name="change_product_performance">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	(-Counter_for_Change_Product_Performance+0*product_performance_in_number_of_features+realistic_product_performance_in_number_of_features)/TIME_STEP					</eqn>
+			</aux>
+			<aux name="current_time">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Time					</eqn>
+			</aux>
+			<aux name="customer_order_rate_(cor)">
+				<units>customers/week</units>
+				<doc></doc>
+					<eqn>
+	("Total_Market_(TM)"-"Potential_Customers_(PC)")*"potential_customer_concentration_(pcc)"*"word-of-mouth_factor_(wom)"					</eqn>
+			</aux>
+			<aux name="desired_sales_rate_(sr*)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	"Customers_with_Unfulfilled_Orders_(CUO)"/"expected_delivery_time_(edt)"					</eqn>
+			</aux>
+			<aux name="desired_team_size">
+				<units></units>
+				<doc></doc>
+					<eqn> GAME (
+	10)					</eqn>
+			</aux>
+			<aux name="desired_Team_Size_(TS*)">
+				<units>persons</units>
+				<doc></doc>
+					<eqn>
+	"perceived_personweeks_remaining_(ppwr)"/"time_remaining_(tr)"					</eqn>
+			</aux>
+			<aux name="development_costs_(DC)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	"labor_costs_rookie_engineers_(lcRE)"*"Total_Rookie_Person-Weeks_(TRPW)"+"labor_costs_experienced_engineers_(lcEE)"*"Total_Experienced_Person-Weeks_(TEPW)"					</eqn>
+			</aux>
+			<aux name="development_time_adjustment_rate_(dtar)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	IF_THEN_ELSE("project_completeness_(pc)"&lt;0.991,((Time+"development_weeks_still_to_go_(wtg)")-"Feasible_Development_Time_(FDT)"
+	)/"development_time_adjustment_delay_(dtad)",0)					</eqn>
+			</aux>
+			<aux name="development_weeks_still_to_go_(wtg)">
+				<units>weeks</units>
+				<doc></doc>
+					<eqn>
+	"perceived_personweeks_remaining_(ppwr)"/MAX("planned_Team_Size_(pTS)","team_size_(TS)")					</eqn>
+			</aux>
+			<aux name="efficiency_loss_(el)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.0004758*"team_size_(TS)"*"team_size_(TS)"					</eqn>
+			</aux>
+			<aux name="end_of_project_for_experienced_team">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	IF_THEN_ELSE("project_completeness_(pc)"&gt;0.991,"Experienced_Engineers_(EE)"/reallocation_delay,0)					</eqn>
+			</aux>
+			<aux name="end_of_project_for_rookies">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	IF_THEN_ELSE("project_completeness_(pc)"&gt;0.991,"Rookie_Engineers_(RE)"/reallocation_delay,0)					</eqn>
+			</aux>
+			<aux name="end_profit">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	IF_THEN_ELSE(Time = 200,"Profit_(P)", 0)					</eqn>
+			</aux>
+			<aux name="Expected_Profit_(EP)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	"Expected_Sales_Benefits_(ESB)"-"Expected_Development_Costs_(EDC)"					</eqn>
+			</aux>
+			<aux name="Expected_Sales_Benefits_(ESB)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	("Total_Market_(TM)"-"Lost_Customers_(LC)")*"sales_price_(sp)"					</eqn>
+			</aux>
+			<aux name="experienced_person-weeks_(epw)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	IF_THEN_ELSE("project_completeness_(pc)"&gt;1.99,0,"Experienced_Engineers_(EE)")					</eqn>
+			</aux>
+			<aux name="hiring_rate_(hr)">
+				<units>persons/week</units>
+				<doc></doc>
+					<eqn>
+	IF_THEN_ELSE("project_completeness_(pc)"&gt;0.991,0,(1-switch_to_game)*(MAX(0,(MIN("maximum_Team_Size_(TSmax)","desired_Team_Size_(TS*)")-"team_size_(TS)"))/"hiring_delay_(hd)")+switch_to_game*("maximum_Team_Size_(TSmax)"-"team_size_(TS)")/"hiring_delay_(hd)")					</eqn>
+			</aux>
+			<aux name="initial_potential_customers">
+				<units></units>
+				<doc>14500</doc>
+					<eqn>
+	10000*normal_product_performance					</eqn>
+			</aux>
+			<aux name="initial_project_tasks_to_be_executed">
+				<units></units>
+				<doc>122.33</doc>
+					<eqn>
+	"nominal_tasks_to_be_executed_(T)"*normal_product_performance					</eqn>
+			</aux>
+			<aux name="lost_sales_rate_(lsr)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	IF_THEN_ELSE("project_completeness_(pc)"&lt;0.991,"desired_sales_rate_(sr*)",0)					</eqn>
+			</aux>
+			<aux name="maximum_Team_Size_(TSmax)">
+				<units>persons</units>
+				<doc></doc>
+					<eqn>
+	(1-switch_to_game)*"planned_Team_Size_(pTS)"+switch_to_extra_hiring*IF_THEN_ELSE(Discovery_of_Unrealistic_Due_Date&gt;0,increase_team
+	,0)+switch_to_game*(realistic_team_size)					</eqn>
+			</aux>
+			<aux name="new_efficiency_loss_(nel)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	efficience_loss_constant("team_size_(TS)")*"team_size_(TS)"*"team_size_(TS)"					</eqn>
+			</aux>
+			<aux name="new_tasks_for_higher_product_advantage">
+				<units></units>
+				<doc>IF(delay_change_in_discovery&gt;0 OR change_PP&lt;&gt;0)
+THEN(change_PP*task_per_feature*(1-project_newness_pn))
+ELSE(0)</doc>
+					<eqn>
+	IF_THEN_ELSE(delay_change_in_discovery&gt;0:OR:change_product_performance&lt;&gt;0,change_product_performance*task_per_feature*(1-"project_newness_(pn)"),0)					</eqn>
+			</aux>
+			<aux name="new_undiscovered_tasks_for_higher_product_advantage">
+				<units></units>
+				<doc>IF (delay_change_in_discovery&gt;0 OR change_PP &lt;&gt;0) THEN(change_PP*task_per_feature*project_newness_pn) ELSE(0)</doc>
+					<eqn>
+	IF_THEN_ELSE(delay_change_in_discovery&gt;0 :OR:change_product_performance&lt;&gt;0,change_product_performance*task_per_feature*"project_newness_(pn)",0)					</eqn>
+			</aux>
+			<aux name="norm_productivity_experienced_person_(npe)">
+				<units></units>
+				<doc>0.2397</doc>
+					<eqn>
+	1/("nominal_time_per_task_(tt)"+(0.21*"project_newness_(pn)"))					</eqn>
+			</aux>
+			<aux name="norm_productivity_rookie_(npr)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	(1/("nominal_time_per_task_(tt)"+(0.21*"project_newness_(pn)")))*"rookie_productivity_fraction_(rpf)"					</eqn>
+			</aux>
+			<aux name="perceived_personweeks_remaining_(ppwr)">
+				<units>persons*week</units>
+				<doc></doc>
+					<eqn>
+	IF_THEN_ELSE("Project_Tasks_in_Execution_(TE)"&lt;0.1,0,"Project_Tasks_in_Execution_(TE)"/"norm_productivity_experienced_person_(npe)")					</eqn>
+			</aux>
+			<aux name="potential_customer_concentration_(pcc)">
+				<units>dmnl</units>
+				<doc></doc>
+					<eqn>
+	"Potential_Customers_(PC)"/"Total_Market_(TM)"					</eqn>
+			</aux>
+			<aux name="potential_customers_per_feature">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	initial_potential_customers/(normal_product_performance/product_performance_per_feature)					</eqn>
+			</aux>
+			<aux name="pressure_to_intervene_(pi)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	"Feasible_Development_Time_(FDT)"/"Scheduled_Development_Time_(SDT)"					</eqn>
+			</aux>
+			<aux name="product_performance_(pp)">
+				<units>dmnl</units>
+				<doc>(1-switch_to_game)*((1-switch_to_change_product_performance)*normal_product_performance_npp+switch_to_change_product_performance*(IF(Discovery_of_Being_Behind_Schedule&gt;0)THEN(product_performance_in_number_of_features*PP_per_feature)ELSE(normal_product_performance_npp)))+switch_to_game*(product_performance_in_number_of_features*PP_per_feature)</doc>
+					<eqn>
+	(1-switch_to_game)*((1-switch_to_change_product_performance)*normal_product_performance+switch_to_change_product_performance
+	*IF_THEN_ELSE(Discovery_of_Unrealistic_Due_Date&gt;0,product_performance_in_number_of_features*product_performance_per_feature
+	,normal_product_performance))+switch_to_game*realistic_product_performance_in_number_of_features*product_performance_per_feature					</eqn>
+			</aux>
+			<aux name="product_performance_in_number_of_features">
+				<units></units>
+				<doc></doc>
+					<eqn> GAME (
+	10)					</eqn>
+			</aux>
+			<aux name="product_performance_per_feature">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	normal_product_performance/10					</eqn>
+			</aux>
+			<aux name="Profit_(P)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	"Sales_Benefits_(SB)"-"development_costs_(DC)"					</eqn>
+			</aux>
+			<aux name="project_completeness_(pc)">
+				<units>dmnl</units>
+				<doc></doc>
+					<eqn>
+	MIN(0.999,"Project_Tasks_Finished_(TF)"/project_tasks_to_be_executed)					</eqn>
+			</aux>
+			<aux name="project_newness_(pn)">
+				<units>dmnl</units>
+				<doc>0.32 = base case</doc>
+					<eqn>
+	0.22*"product_performance_(pp)"					</eqn>
+			</aux>
+			<aux name="realistic_product_performance_in_number_of_features">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	MIN(15,MAX(5,product_performance_in_number_of_features))					</eqn>
+			</aux>
+			<aux name="realistic_team_size">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	MIN(13,MAX(7,desired_team_size))					</eqn>
+			</aux>
+			<aux name="rookie_person-weeks_(rpw)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	IF_THEN_ELSE ("project_completeness_(pc)"&gt;1.99,0,"Rookie_Engineers_(RE)")					</eqn>
+			</aux>
+			<aux name="sales_price_(sp)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	"nominal_sales_price_(nsp)"*(normal_product_performance+("product_performance_(pp)"-normal_product_performance)/effect_adv_on_price)					</eqn>
+			</aux>
+			<aux name="sales_rate_(sr)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	IF_THEN_ELSE("project_completeness_(pc)"&lt;0.991,0,"desired_sales_rate_(sr*)")					</eqn>
+			</aux>
+			<aux name="task_definition_rate_(tdr)">
+				<units>tasks/week</units>
+				<doc></doc>
+					<eqn>
+	"Undiscovered_Project_Tasks_(UT)"/"discovery_delay_of_new_tasks_(ddt)"					</eqn>
+			</aux>
+			<aux name="task_finish_rate_(tfr)">
+				<units>tasks/week</units>
+				<doc></doc>
+					<eqn>
+	MIN("Project_Tasks_in_Execution_(TE)","team_size_(TS)"*"average_actual_productivity_per_person_(aapp)")					</eqn>
+			</aux>
+			<aux name="task_per_feature">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	initial_project_tasks_to_be_executed/(normal_product_performance/product_performance_per_feature)					</eqn>
+			</aux>
+			<aux name="team_size_(TS)">
+				<units>persons</units>
+				<doc></doc>
+					<eqn>
+	"Rookie_Engineers_(RE)"+"Experienced_Engineers_(EE)"					</eqn>
+			</aux>
+			<aux name="time_remaining_(tr)">
+				<units>weeks</units>
+				<doc></doc>
+					<eqn>
+	MAX(1,"Scheduled_Development_Time_(SDT)"-Time)					</eqn>
+			</aux>
+			<aux name="Total_Market_(TM)">
+				<units>customers</units>
+				<doc></doc>
+					<eqn>
+	"Potential_Customers_(PC)"+"Customers_with_Unfulfilled_Orders_(CUO)"+"Customers_with_Fulfilled_Orders_(CFO)"+"Lost_Customers_(LC)"					</eqn>
+			</aux>
+			<aux name="weekly_sales_benefits_(sb)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	"sales_rate_(sr)"*"sales_price_(sp)"					</eqn>
+			</aux>
+			<aux name="word-of-mouth_factor_(wom)">
+				<units>dmnl/week</units>
+				<doc>0.23-(0.23-0.1933)*(product newness factor/0.5)       0.197</doc>
+					<eqn>
+	-0.1657*"project_newness_(pn)"+0.2468					</eqn>
+			</aux>
+			<aux name="efficience_loss_constant">
+				<units></units>
+				<doc></doc>
+<gf>
+<xpts>1.000000,5.000000,10.000000,11.000000,12.000000,13.000000,14.862400,16.391400,18.104000,20.000000</xpts>
+<ypts>0.000476,0.000476,0.000476,0.000476,0.000476,0.000500,0.000623,0.000749,0.000794,0.000800</ypts>
+</gf>
+			</aux>
+			<aux name="assimilation_delay_(ad)">
+				<units>weeks</units>
+				<doc></doc>
+					<eqn>
+	20					</eqn>
+			</aux>
+			<aux name="development_time_adjustment_delay_(dtad)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	4					</eqn>
+			</aux>
+			<aux name="discovery_delay_of_new_tasks_(ddt)">
+				<units>week</units>
+				<doc></doc>
+					<eqn>
+	12					</eqn>
+			</aux>
+			<aux name="effect_adv_on_price">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="expected_delivery_time_(edt)">
+				<units>week</units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="hiring_delay_(hd)">
+				<units>weeks</units>
+				<doc></doc>
+					<eqn>
+	12					</eqn>
+			</aux>
+			<aux name="increase_team">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="initial_CUO">
+				<units></units>
+				<doc>0.0033</doc>
+					<eqn>
+	0.00337655					</eqn>
+			</aux>
+			<aux name="initial_shortage_of_team">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	3.5					</eqn>
+			</aux>
+			<aux name="intervention_threshold_(it)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1e+09					</eqn>
+			</aux>
+			<aux name="labor_costs_experienced_engineers_(lcEE)">
+				<units></units>
+				<doc>950</doc>
+					<eqn>
+	950					</eqn>
+			</aux>
+			<aux name="labor_costs_rookie_engineers_(lcRE)">
+				<units></units>
+				<doc>750</doc>
+					<eqn>
+	750					</eqn>
+			</aux>
+			<aux name="nominal_sales_price_(nsp)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	41.7203					</eqn>
+			</aux>
+			<aux name="nominal_tasks_to_be_executed_(T)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	100					</eqn>
+			</aux>
+			<aux name="nominal_time_per_task_(tt)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	4.10468					</eqn>
+			</aux>
+			<aux name="normal_product_performance">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1.45					</eqn>
+			</aux>
+			<aux name="planned_Team_Size_(pTS)">
+				<units></units>
+				<doc>1.2233</doc>
+					<eqn>
+	10					</eqn>
+			</aux>
+			<aux name="reallocation_delay">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="rookie_productivity_fraction_(rpf)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.6					</eqn>
+			</aux>
+			<aux name="Scheduled_Development_Time_(SDT)">
+				<units>weeks</units>
+				<doc>54 moet 't zijn voor de Base Case van 100 taken en 1 advantage, 66 in calibratie case</doc>
+					<eqn>
+	60.49					</eqn>
+			</aux>
+			<aux name="supervision_time_per_rookie_(st)">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.2					</eqn>
+			</aux>
+			<aux name="switch_to_change_product_performance">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="switch_to_extra_hiring">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="switch_to_game">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

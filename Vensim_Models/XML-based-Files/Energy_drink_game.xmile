@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Month">
+		<start> 0</start>
+		<stop> 120</stop>
+		<dt> 1</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="Potential_Sales_Opportunities">
+				<units>Selling_acts</units>
+				<doc></doc>
+					<eqn>
+					INI
+					</eqn>
+					<inflow>
+					new opportunity due to innovation
+					</inflow>
+					<outflow>
+					premature outflow
+					</outflow>
+					<outflow>
+					sales
+					</outflow>
+			</stock>
+			<stock name="Total_Profit">
+				<units>Euro</units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					profit per period
+					</inflow>
+			</stock>
+			<stock name="Total_Sales">
+				<units>Selling_acts</units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					sales
+					</inflow>
+			</stock>
+			<aux name="ALPHA">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+	0.001-ButtonGrowth*STEP(0.0005, 30)+ButtonGrowth*STEP(0.0005, 54)					</eqn>
+			</aux>
+			<aux name="BETA">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+	0.04+ShortTermFix*STEP(0.01, 61)-ShortTermFix*STEP(0.01, 90)					</eqn>
+			</aux>
+			<aux name="new_opportunity_due_to_innovation">
+				<units>Selling_acts/Month</units>
+				<doc></doc>
+					<eqn>
+	IF_THEN_ELSE(LongTermFix :AND: Time&gt;102, INNOVATION_BOOST, 0)					</eqn>
+			</aux>
+			<aux name="premature_outflow">
+				<units>Selling_acts/Month</units>
+				<doc></doc>
+					<eqn>
+	ButtonMaturity*STEP(MIN(ISSUEOUTFLOW,Potential_Sales_Opportunities), 60)+ButtonDecline*STEP(MIN(ISSUEOUTFLOW,Potential_Sales_Opportunities), 90)					</eqn>
+			</aux>
+			<aux name="profit_per_period">
+				<units>Euro/Month</units>
+				<doc></doc>
+					<eqn>
+	sales*PRODUCT_PRICE-IF_THEN_ELSE(Time&gt;=60 :AND: Time&lt;=90, ShortTermFix*CostShortTermFix, 0)-IF_THEN_ELSE(Time&gt;=90, LongTermFix*CostLongTermFix, 0)					</eqn>
+			</aux>
+			<aux name="sales">
+				<units>Selling_acts/Month</units>
+				<doc></doc>
+					<eqn>
+	(ALPHA*Potential_Sales_Opportunities+(BETA/INI)*Potential_Sales_Opportunities*Total_Sales)*REPORTING_TIME					</eqn>
+			</aux>
+			<aux name="ButtonDecline">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="ButtonGrowth">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="ButtonMaturity">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="CostLongTermFix">
+				<units>Euro</units>
+				<doc></doc>
+					<eqn>
+	42					</eqn>
+			</aux>
+			<aux name="CostShortTermFix">
+				<units>Euro</units>
+				<doc></doc>
+					<eqn>
+	32					</eqn>
+			</aux>
+			<aux name="INI">
+				<units>Selling_acts</units>
+				<doc></doc>
+					<eqn>
+	1000					</eqn>
+			</aux>
+			<aux name="INNOVATION_BOOST">
+				<units>Selling_acts/Month</units>
+				<doc></doc>
+					<eqn>
+	20					</eqn>
+			</aux>
+			<aux name="ISSUEOUTFLOW">
+				<units>Selling_acts/Month</units>
+				<doc></doc>
+					<eqn>
+	3					</eqn>
+			</aux>
+			<aux name="LongTermFix">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="PRODUCT_PRICE">
+				<units>Euro/Selling_acts</units>
+				<doc></doc>
+					<eqn>
+	10					</eqn>
+			</aux>
+			<aux name="REPORTING_TIME">
+				<units>1/Month</units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="ShortTermFix">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

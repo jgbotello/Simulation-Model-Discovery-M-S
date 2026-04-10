@@ -1,0 +1,299 @@
+{UTF-8}
+Potential Sales Opportunities= INTEG (
+	new opportunity due to innovation-premature outflow-sales,
+		INI)
+	~	Selling acts
+	~		|
+
+BETA=
+	0.04+ShortTermFix*STEP(0.01, 61)-ShortTermFix*STEP(0.01, 90)
+	~	Dmnl
+	~		|
+
+ISSUEOUTFLOW=
+	3
+	~	Selling acts/Month
+	~		|
+
+premature outflow=
+	ButtonMaturity*STEP(MIN(ISSUEOUTFLOW,Potential Sales Opportunities), 60)+ButtonDecline\
+		*STEP(MIN(ISSUEOUTFLOW,Potential Sales Opportunities), 90)
+	~	Selling acts/Month
+	~		|
+
+profit per period=
+	sales*PRODUCT PRICE-IF THEN ELSE(Time>=60 :AND: Time<=90, ShortTermFix*CostShortTermFix\
+		, 0)-IF THEN ELSE(Time>=90, LongTermFix*CostLongTermFix, 0)
+	~	Euro/Month
+	~		|
+
+new opportunity due to innovation=
+	IF THEN ELSE(LongTermFix :AND: Time>102, INNOVATION BOOST, 0)
+	~	Selling acts/Month
+	~		|
+
+ALPHA=
+	0.001-ButtonGrowth*STEP(0.0005, 30)+ButtonGrowth*STEP(0.0005, 54)
+	~	Dmnl
+	~		|
+
+ButtonDecline=
+	0
+	~	Dmnl
+	~		|
+
+ButtonGrowth=
+	0
+	~	Dmnl
+	~		|
+
+ButtonMaturity=
+	0
+	~	Dmnl
+	~		|
+
+CostLongTermFix=
+	42
+	~	Euro
+	~		|
+
+CostShortTermFix=
+	32
+	~	Euro
+	~		|
+
+ShortTermFix=
+	0
+	~	Dmnl
+	~		|
+
+INNOVATION BOOST=
+	20
+	~	Selling acts/Month
+	~		|
+
+LongTermFix=
+	0
+	~	Dmnl
+	~		|
+
+PRODUCT PRICE=
+	10
+	~	Euro/Selling acts
+	~		|
+
+REPORTING TIME=
+	1
+	~	1/Month
+	~		|
+
+sales=
+	(ALPHA*Potential Sales Opportunities+(BETA/INI)*Potential Sales Opportunities*Total Sales\
+		)*REPORTING TIME
+	~	Selling acts/Month
+	~		|
+
+Total Profit= INTEG (
+	profit per period,
+		0)
+	~	Euro
+	~		~	:SUPPLEMENTARY 
+	|
+
+INI=
+	1000
+	~	Selling acts
+	~		|
+
+Total Sales= INTEG (
+	sales,
+		0)
+	~	Selling acts
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Paramaters
+	|
+
+FINAL TIME  = 120
+	~	Month
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Month
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Month
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 1
+	~	Month
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,5,0
+10,1,Potential Sales Opportunities,510,242,45,32,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Total Sales,860,244,53,32,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,3,5,2,4,0,0,22,2,0,0,-1--1--1,|||0-0-0,1|(737,242)|
+1,4,5,1,100,0,0,22,2,128,0,-1--1--1,|||0-0-0,1|(607,242)|
+11,5,572,664,242,4,6,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,6,sales,664,280,75,30,32,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,7,2,6,1,0,0,0,0,64,0,-1--1--1,,1|(793,334)|
+1,8,1,6,1,0,0,0,0,64,0,-1--1--1,,1|(581,342)|
+10,9,ALPHA,587,163,28,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,10,BETA,740,162,22,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,11,9,5,1,0,0,0,0,64,0,-1--1--1,,1|(638,190)|
+1,12,10,5,1,0,0,0,0,64,0,-1--1--1,,1|(693,190)|
+10,13,INI,511,383,13,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,14,13,6,1,0,0,0,0,64,0,-1--1--1,,1|(635,357)|
+12,15,0,1245,159,142,149,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Sales
+10,16,ButtonGrowth,730,91,45,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,17,ButtonMaturity,477,90,48,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,18,ButtonDecline,266,89,45,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,19,16,9,1,0,0,0,0,64,0,-1--1--1,,1|(619,116)|
+1,20,17,63,1,0,0,0,0,64,0,-1--1--1,,1|(357,130)|
+1,21,18,63,1,0,0,0,0,64,0,-1--1--1,,1|(276,146)|
+10,22,REPORTING TIME,716,369,46,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,23,22,6,1,0,0,0,0,64,0,-1--1--1,,1|(685,323)|
+12,24,0,735,61,80,20,3,60,0,0,0,0,0,0,0,0,0,0,0,0
+ButtonGrowth,0,1,1
+12,25,0,485,59,80,20,3,60,0,0,0,0,0,0,0,0,0,0,0,0
+ButtonMaturity,0,1,1
+12,26,0,255,56,80,20,3,60,0,0,0,0,0,0,0,0,0,0,0,0
+ButtonDecline,0,1,1
+10,27,Total Profit,864,451,52,33,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,28,48,644,448,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,29,31,27,4,0,0,22,0,0,0,-1--1--1,,1|(766,448)|
+1,30,31,28,100,0,0,22,0,0,0,-1--1--1,,1|(681,448)|
+11,31,48,715,448,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,32,profit per period,715,467,52,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,33,6,31,1,0,0,0,0,64,0,-1--1--1,,1|(650,400)|
+10,34,PRODUCT PRICE,661,523,39,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,35,34,32,1,0,0,0,0,64,0,-1--1--1,,1|(711,497)|
+12,36,0,276,503,150,150,3,44,0,0,1,0,0,0,0,0,0,0,0,0
+Profit
+10,37,ShortTermFix,1176,404,44,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,38,LongTermFix,1171,480,43,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,39,CostShortTermFix,932,353,59,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,40,CostLongTermFix,920,562,58,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,41,39,31,1,0,0,0,0,64,0,-1--1--1,,1|(803,376)|
+1,42,37,31,1,0,0,0,0,64,0,-1--1--1,,1|(857,390)|
+1,43,38,32,1,0,0,0,0,64,0,-1--1--1,,1|(921,509)|
+1,44,40,32,1,0,0,0,0,64,0,-1--1--1,,1|(785,522)|
+12,45,0,1233,372,80,20,3,60,0,0,0,0,0,0,0,0,0,0,0,0
+ShortTermFix,0,1,1
+12,46,0,1233,448,80,20,3,60,0,0,0,0,0,0,0,0,0,0,0,0
+LongTermFix,0,1,1
+1,47,37,10,1,0,0,0,0,64,0,-1--1--1,,1|(929,213)|
+12,48,48,492,591,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,49,51,1,4,0,0,22,0,0,0,-1--1--1,,1|(492,348)|
+1,50,51,48,100,0,0,22,0,0,0,-1--1--1,,1|(492,509)|
+11,51,48,492,429,8,6,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,52,new opportunity due to innovation,566,429,66,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,53,38,52,1,0,0,0,0,64,0,-1--1--1,,1|(663,592)|
+10,54,INNOVATION BOOST,570,581,54,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,55,54,52,1,0,0,0,0,64,0,-1--1--1,,1|(531,479)|
+10,56,Time,455,363,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,57,56,51,1,0,0,0,0,64,0,-1--1--1,,1|(468,407)|
+10,58,Time,733,567,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,59,58,32,1,0,0,0,0,64,0,-1--1--1,,1|(728,518)|
+12,60,48,219,242,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,61,63,60,4,0,0,22,0,0,0,-1--1--1,,1|(285,242)|
+1,62,63,1,100,0,0,22,0,0,0,-1--1--1,,1|(409,242)|
+11,63,48,347,242,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,64,premature outflow,347,261,57,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,65,ISSUEOUTFLOW,219,151,40,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,66,65,63,1,0,0,0,0,64,0,-1--1--1,,1|(261,199)|
+1,67,13,1,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+1,68,1,64,1,0,0,0,0,64,0,-1--1--1,,1|(419,289)|
+///---\\\
+:GRAPH Sales
+:TITLE Sales
+:SCALE
+:VAR sales
+:DATASET 
+:VAR sales
+:DATASET *2
+:VAR sales
+:DATASET *3
+:VAR sales
+:DATASET *4
+:VAR sales
+:DATASET *5
+:VAR sales
+:DATASET *6
+
+:GRAPH Profit
+:TITLE Profit
+:SCALE
+:VAR Total Profit
+:DATASET 
+:VAR Total Profit
+:DATASET *2
+:VAR Total Profit
+:DATASET *3
+:VAR Total Profit
+:DATASET *4
+:VAR Total Profit
+:DATASET *5
+:VAR Total Profit
+:DATASET *6
+:L<%^E!@
+4:Time
+5:Total Profit
+9:DeclineIssue-withBoth
+19:5,0
+24:0
+25:120
+26:120
+22:$,Dollar,Dollars,$s
+22:Hour,Hours
+22:Month,Months
+22:Person,People,Persons
+22:Unit,Units
+22:Week,Weeks
+22:Year,Years
+22:Day,Days
+12:ProductLifeCycleForFixesThatFail.vpd
+23:0
+15:0,0,0,0,0,0
+27:2,
+34:0,
+42:0
+72:0
+73:0
+35:Date
+36:YYYY
+37:2010
+38:1
+39:1
+40:2
+41:0
+95:0
+96:0
+97:0
+77:0
+78:0
+102:1
+93:0
+94:0
+92:0
+91:0
+90:0
+87:0
+75:
+43:
+103:8,8,8,3,8
+105:0,0,0,0,0,0,0,0,0,0
+104:Courier|12||0-0-0|0-0-0|-1--1--1|0-0-255|192-192-192|-1--1--1

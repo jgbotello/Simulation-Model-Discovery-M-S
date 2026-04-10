@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Month">
+		<start> 0</start>
+		<stop> 10</stop>
+		<dt> 0.125</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="Aggressive">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					100
+					</eqn>
+					<inflow>
+					feralization
+					</inflow>
+					<outflow>
+					pacification
+					</outflow>
+			</stock>
+			<stock name="Passive">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					100
+					</eqn>
+					<inflow>
+					pacification
+					</inflow>
+					<outflow>
+					feralization
+					</outflow>
+			</stock>
+			<aux name="calming_influence">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	RANDOM_NORMAL( outlook-0.05 {min} , outlook+0.05{max} , outlook {mean} , 0.005{stdev} , 1011{seed} )					</eqn>
+			</aux>
+			<aux name="feralization">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	provocation*(Aggressive*Passive) + stewing*Passive					</eqn>
+			</aux>
+			<aux name="pacification">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	calming_influence*(Aggressive*Passive) + coping_factor*Aggressive					</eqn>
+			</aux>
+			<aux name="coping_factor">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="outlook">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="provocation">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="stewing">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

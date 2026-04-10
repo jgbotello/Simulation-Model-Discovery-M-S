@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Day">
+		<start> 0</start>
+		<stop> 3600</stop>
+		<dt> 0.25</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="Heavily_infected_population">
+				<units>people</units>
+				<doc></doc>
+					<eqn>
+					50
+					</eqn>
+					<inflow>
+					heavily infected
+					</inflow>
+					<outflow>
+					Cholera deaths
+					</outflow>
+					<outflow>
+					recovered from heavy infection
+					</outflow>
+			</stock>
+			<stock name="Mildly_infected_population">
+				<units>people</units>
+				<doc></doc>
+					<eqn>
+					950
+					</eqn>
+					<inflow>
+					mildly infected
+					</inflow>
+					<outflow>
+					recovered from mild infection
+					</outflow>
+			</stock>
+			<stock name="Recently_infected_population">
+				<units>people</units>
+				<doc></doc>
+					<eqn>
+					1000
+					</eqn>
+					<inflow>
+					cholera infections
+					</inflow>
+					<outflow>
+					heavily infected
+					</outflow>
+					<outflow>
+					mildly infected
+					</outflow>
+			</stock>
+			<stock name="Recovered_temporarily_immune_population">
+				<units>people</units>
+				<doc></doc>
+					<eqn>
+					1.0226e+07
+					</eqn>
+					<inflow>
+					recovered from mild infection
+					</inflow>
+					<outflow>
+					lost of immunity
+					</outflow>
+			</stock>
+			<stock name="Susceptible_population">
+				<units>people</units>
+				<doc></doc>
+					<eqn>
+					3e+06
+					</eqn>
+					<inflow>
+					lost of immunity
+					</inflow>
+					<outflow>
+					cholera infections
+					</outflow>
+			</stock>
+			<aux name="average_immunity_period">
+				<units>Day</units>
+				<doc></doc>
+					<eqn>
+	(365*6)					</eqn>
+			</aux>
+			<aux name="Cholera_deaths">
+				<units>people/Day</units>
+				<doc></doc>
+					<eqn>
+	(Heavily_infected_population*effect_of_the_average_state_of_health_services_on_the_fraction_of_cholera_deaths)/average_duration_of_the_illness					</eqn>
+			</aux>
+			<aux name="cholera_infections">
+				<units>people/Day</units>
+				<doc></doc>
+					<eqn>
+	(Susceptible_population*indirect_infection_rate)					</eqn>
+			</aux>
+			<aux name="effect_of_prevention_and_sanitation_on_the_indirect_degree_of_infection">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn> WITH LOOKUP (
+	MAX(level_of_prevention, state_of_the_sanitary_infrastructure),
+		([(0,0)-(1,1)],(0,1),(0.25,0.9),(0.5,0.5),(0.75,0.1),(1,0) ))					</eqn>
+			</aux>
+			<aux name="effect_of_the_average_state_of_health_services_on_the_fraction_of_cholera_deaths">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn> WITH LOOKUP (
+	average_state_of_health_services,
+		([(0,0)-(1,1)],(0,1),(0.25,0.5),(0.5,0.2),(0.75,0.05),(1,0) ))					</eqn>
+			</aux>
+			<aux name="effect_of_the_fraction_of_infected_on_the_fraction_of_contaminated_water">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn> WITH LOOKUP (
+	fraction_of_infected,
+		([(0,0)-(1,1)],(0,0),(0.125,0.5),(0.25,0.75),(0.5,0.9),(0.75,0.99),(1,1) ))					</eqn>
+			</aux>
+			<aux name="fraction_of_infected">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+	(Heavily_infected_population+Mildly_infected_population+Recently_infected_population)/(Heavily_infected_population+Mildly_infected_population+Recently_infected_population+Recovered_temporarily_immune_population)					</eqn>
+			</aux>
+			<aux name="heavily_infected">
+				<units>people/Month</units>
+				<doc></doc>
+					<eqn>
+	(Recently_infected_population*(1-average_health_condition))/average_incubation_time					</eqn>
+			</aux>
+			<aux name="indirect_infection_rate">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+	connectedness_of_aquifiers*effect_of_prevention_and_sanitation_on_the_indirect_degree_of_infection*smoothed_fraction_of_contaminated_water					</eqn>
+			</aux>
+			<aux name="lost_of_immunity">
+				<units>people/Day</units>
+				<doc></doc>
+					<eqn>
+	Recovered_temporarily_immune_population/average_immunity_period					</eqn>
+			</aux>
+			<aux name="mildly_infected">
+				<units>people/Day</units>
+				<doc></doc>
+					<eqn>
+	(Recently_infected_population*average_health_condition)/average_incubation_time					</eqn>
+			</aux>
+			<aux name="recovered_from_heavy_infection">
+				<units>people/Day</units>
+				<doc></doc>
+					<eqn>
+	(Heavily_infected_population*effect_of_the_average_state_of_health_services_on_the_fraction_of_cholera_deaths)/average_duration_of_the_illness					</eqn>
+			</aux>
+			<aux name="recovered_from_mild_infection">
+				<units>people/Day</units>
+				<doc></doc>
+					<eqn>
+	Mildly_infected_population/average_duration_of_the_illness					</eqn>
+			</aux>
+			<aux name="smoothed_fraction_of_contaminated_water">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+	DELAY3I(effect_of_the_fraction_of_infected_on_the_fraction_of_contaminated_water, delay_variable, 0.0004)					</eqn>
+			</aux>
+			<aux name="average_duration_of_the_illness">
+				<units>Day</units>
+				<doc></doc>
+					<eqn>
+	10					</eqn>
+			</aux>
+			<aux name="average_health_condition">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+	0.95					</eqn>
+			</aux>
+			<aux name="average_incubation_time">
+				<units>Day</units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="average_state_of_health_services">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+	0.15					</eqn>
+			</aux>
+			<aux name="connectedness_of_aquifiers">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+	0.28					</eqn>
+			</aux>
+			<aux name="delay_variable">
+				<units>Day</units>
+				<doc></doc>
+					<eqn>
+	14					</eqn>
+			</aux>
+			<aux name="level_of_prevention">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+	0.1					</eqn>
+			</aux>
+			<aux name="state_of_the_sanitary_infrastructure">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+	0.3					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

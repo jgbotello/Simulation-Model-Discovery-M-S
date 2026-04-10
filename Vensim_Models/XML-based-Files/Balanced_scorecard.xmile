@@ -1,0 +1,1414 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Year">
+		<start> 2000</start>
+		<stop> 2005</stop>
+		<dt> 0.015625</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="Deel_van_Werkpakket_voor_Intake">
+				<units>Dmnl</units>
+				<doc>De relatieve werklast voor Intake (t.o.v. de totale hoeveelheid werklast voor Intake en Afhandeling).</doc>
+					<eqn>
+					InitiÃ«el_deel_werkpakket_intake
+					</eqn>
+					<inflow>
+					Verandering Deel Werkpakket Intake
+					</inflow>
+			</stock>
+			<stock name="Dossiers_In_Behandeling">
+				<units>Dossiers</units>
+				<doc>Het aantal Dossiers dat op een bepaald tijdstip in Behandeling is.</doc>
+					<eqn>
+					InitiÃ«le_Dossiers_in_Behandeling
+					</eqn>
+					<inflow>
+					Intake
+					</inflow>
+					<outflow>
+					Afleggen
+					</outflow>
+					<outflow>
+					Dossiers Uitbesteden
+					</outflow>
+			</stock>
+			<stock name="Ervaren_Medewerkers">
+				<units>Medewerkers</units>
+				<doc>Het aantal Ervaren Medewerkers dat op een bepaald tijdstip in dienst is.</doc>
+					<eqn>
+					InitiÃ«le_Aantal_Ervaren_Medewerkers
+					</eqn>
+					<inflow>
+					Inhuur Ervaren Medewerkers
+					</inflow>
+					<inflow>
+					Doorstroom Medewerkers
+					</inflow>
+					<outflow>
+					Verloop Ervaren Medewerkers
+					</outflow>
+			</stock>
+			<stock name="Gepercipieerde_Werkdruk">
+				<units>Dmnl</units>
+				<doc>De werkdruk die medewerkers waarnemen.</doc>
+					<eqn>
+					Normale_Werkdruk
+					</eqn>
+					<inflow>
+					Verandering in Perceptie Werkdruk
+					</inflow>
+			</stock>
+			<stock name="Klanttevredenheid">
+				<units>Dmnl</units>
+				<doc>De mate waarin klanten tevreden zijn met de door SRB geleverde diensten.</doc>
+					<eqn>
+					Normale_Klanttevredenheid
+					</eqn>
+					<inflow>
+					Verandering in Klanttevredenheid
+					</inflow>
+			</stock>
+			<stock name="Medewerkertevredenheid">
+				<units>Dimensionless</units>
+				<doc>De mate waarin medewerkers tevreden zijn met hun werk bij SRB.</doc>
+					<eqn>
+					Normale_Medewerker_tevredenheid
+					</eqn>
+					<inflow>
+					Verandering Medewerker tevredenheid
+					</inflow>
+			</stock>
+			<stock name="Meldingen">
+				<units>Dossiers</units>
+				<doc>Het aantal Meldingen dat op een bepaald tijdstip op voorraad ligt.</doc>
+					<eqn>
+					InitiÃ«le_Nieuwe_Meldingen
+					</eqn>
+					<inflow>
+					Nieuwe Meldingen
+					</inflow>
+					<outflow>
+					Intake
+					</outflow>
+					<outflow>
+					Meldingen afgewezen
+					</outflow>
+			</stock>
+			<stock name="Nieuwe_Medewerkers">
+				<units>Medewerkers</units>
+				<doc>Aantal Nieuwe Medewerkers dat op een bepaald tijdstip in dienst is.</doc>
+					<eqn>
+					InitiÃ«le_Aantal_Nieuwe_Medewerkers
+					</eqn>
+					<inflow>
+					Inhuur Nieuwe Medewerkers
+					</inflow>
+					<outflow>
+					Verloop Nieuwe Medewerkers
+					</outflow>
+					<outflow>
+					Doorstroom Medewerkers
+					</outflow>
+			</stock>
+			<stock name="Pink_Noise">
+				<units>Dimensionless</units>
+				<doc>Pink Noise is first-order autocorrelated noise.  Pink noise provides a realistic noise input to
+        models in which the next random shock depends in part on the previous shocks.  The user
+        can specify the correlation time.  The mean is 0 and the standard deviation is specified
+         by the user.</doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Change in Pink Noise
+					</inflow>
+			</stock>
+			<stock name="Totale_Expertise_Ervaren_Medewerkers">
+				<units>Medewerker*Werkjaar</units>
+				<doc>De totale expertise in aantal menswerkjaren voor de gehele populatie nieuwe medewerkers.</doc>
+					<eqn>
+					InitiÃ«le_Totale_Expertise_Ervaren_Medewerkers
+					</eqn>
+					<inflow>
+					Toename Expertise door Ervaren Inhuur
+					</inflow>
+					<inflow>
+					Toename Expertise door Dossierervaring Ervaren Medewerkers
+					</inflow>
+					<inflow>
+					Toename Expertise door Doorstroom
+					</inflow>
+					<outflow>
+					Verlies van Expertise Ervaren Medewerkers door Verloop
+					</outflow>
+					<outflow>
+					Verouderingssnelheid Expertise Ervaren Medewerkers
+					</outflow>
+			</stock>
+			<stock name="Totale_Expertise_Nieuwe_Medewerkers">
+				<units>Medewerker*Werkjaar</units>
+				<doc>De totale expertise in aantal menswerkjaren voor de gehele populatie nieuwe medewerkers</doc>
+					<eqn>
+					InitiÃ«le_Totale_Expertise_Nieuwe_Medewerkers
+					</eqn>
+					<inflow>
+					Toename Expertise door Inhuur
+					</inflow>
+					<inflow>
+					Toename Expertise door Dossierervaring
+					</inflow>
+					<outflow>
+					Verlies van Expertise Nieuwe Medewerkers door Verloop
+					</outflow>
+					<outflow>
+					Verouderingssnelheid Expertise Nieuwe Medewerkers
+					</outflow>
+					<outflow>
+					Verlies van Expertise door Doorstroom
+					</outflow>
+			</stock>
+			<stock name="Verloopperc_Ervaren_Medewerkers">
+				<units>1/Jaar</units>
+				<doc>Het verlooppercentage van Ervaren Medewerkers wordt bepaald door het Normale Verlooppercentage maar ook door de impact van medewerkertevredenheid</doc>
+					<eqn>
+					Normaal_Verloopperc_Ervaren_Medewerkers
+					</eqn>
+					<inflow>
+					Verandering Verloopperc Ervaren Medewerkers
+					</inflow>
+			</stock>
+			<stock name="Verloopperc_Nieuwe_Medewerkers">
+				<units>1/Jaar</units>
+				<doc>Het verlooppercentage van Nieuwe Medewerkers wordt bepaald door het Normale Verlooppercentage maar ook door de impact van medewerkertevredenheid</doc>
+					<eqn>
+					Normaal_Verloopperc_Nieuwe_Medewerkers
+					</eqn>
+					<inflow>
+					Verandering Verloopperc Nieuwe Medewerkers
+					</inflow>
+			</stock>
+			<aux name="Aantal_Nieuwe_Medewerkers_per_Ervaren_Medewerkers">
+				<units>Dmnl</units>
+				<doc>Een verhoudingsgetal dat aangeeft hoeveel nieuwe medewerkers ingewerkt moeten worden door één ervaren medewerker.</doc>
+					<eqn>
+	Nieuwe_Medewerkers/Ervaren_Medewerkers					</eqn>
+			</aux>
+			<aux name="Actueel_Percentage_Ervaren_Medewerkers_met_Verloopplannen">
+				<units>1/Jaar</units>
+				<doc>Het percentage van Ervaren Medewerkers met verloopplannen wordt bepaald door een normaal verlooppercentage en door de tevredenheid.</doc>
+					<eqn>
+	Normaal_Verloopperc_Ervaren_Medewerkers*Effect_van_Tevredenheid_op_Verloop					</eqn>
+			</aux>
+			<aux name="Actueel_Percentage_Nieuwe_Medewerkers_met_Verloopplannen">
+				<units>1/Jaar</units>
+				<doc>Het percentage van Nieuwe Medewerkers met verloopplannen wordt bepaald door een normaal verlooppercentage en door de tevredenheid.</doc>
+					<eqn>
+	Normaal_Verloopperc_Nieuwe_Medewerkers*Effect_van_Tevredenheid_op_Verloop					</eqn>
+			</aux>
+			<aux name="Actuele_Doorlooptijd_Afhandeling">
+				<units>Weken</units>
+				<doc>De actuele verblijftijd van dossiers in behandeling, gemiddeld gezien.</doc>
+					<eqn>
+	(Dossiers_In_Behandeling/(Afleggen+Dossiers_Uitbesteden))*Aantal_weken_per_jaar					</eqn>
+			</aux>
+			<aux name="Actuele_Doorlooptijd_Intake">
+				<units>Weken</units>
+				<doc>De actuele verblijftijd van dossiers inintake, gemiddeld gezien.</doc>
+					<eqn>
+	(Meldingen/Intake)*Aantal_weken_per_jaar					</eqn>
+			</aux>
+			<aux name="Actuele_Klanttevredenheid">
+				<units>Dmnl</units>
+				<doc>De mate van Klanttevredenheid die bepaald wordt door een exogene variabele, de doorlooptijd en de expertise van medewerkers.</doc>
+					<eqn>
+	Gewicht_Exogene_Variabele*Bijdrage_Exogene_Variabele_in_Klanttevredenheid+Gewicht_Doorlooptijd*Bijdrage_Doorlooptijd_in_Klanttevredenheid+Gewicht_Expertise*Bijdrage_Expertise_in_Klanttevredenheid					</eqn>
+			</aux>
+			<aux name="Actuele_Medewerker_tevredenheid">
+				<units>Dmnl</units>
+				<doc>De mate van Medewerkertevredenheid die bepaald wordt door de gepercipieerde werkdruk en de fit tussen (inhoud) dossiers en interesses van medewerkers.</doc>
+					<eqn>
+	Gewicht_van_Werkdruk_op_Tevredenheid*Effect_van_Werkdruk_op_Tevredenheid+Gewicht_van_Fit_Dossiers_op_Tevredenheid*Effect_van_Fit_Dossiers_op_Tevredenheid+Gewicht_van_Opleidingen_op_Tevredenheid*Effect_van_Opleidingen_op_Tevredenheid					</eqn>
+			</aux>
+			<aux name="Afleggen">
+				<units>Dossiers/Jaar</units>
+				<doc>Het aantal Dossiers dat per jaar afgelegd wordt.</doc>
+					<eqn>
+	Min((Dossiers_In_Behandeling/Minimale_Afhandelingstijd),Beschikbare_Capaciteit_voor_Afhandeling_in_Dossiers)					</eqn>
+			</aux>
+			<aux name="Beschikbaarheidspercentage_Ervaren_Medewerkers">
+				<units>Dmnl</units>
+				<doc>Het percentage dat aangeeft hoeveel netto tijd ervaren medewerkers beschikbaar zijn om aan dossiers te werken.</doc>
+					<eqn>
+	MAX(0,(Beschikbaarheidspercentage_Exclusief_Vakantie_en_Normaal_Ziekteverzuim-Opleidingen_en_Zittingen_Ervaren_Medewerkers
+-Effect_Werkdruk_op_Ziekteverzuim))					</eqn>
+			</aux>
+			<aux name="Beschikbaarheidspercentage_Nieuwe_Medewerkers">
+				<units>Dmnl</units>
+				<doc>Het percentage dat aangeeft hoeveel netto tijd nieuwe medewerkers beschikbaar zijn om aan dossiers te werken.</doc>
+					<eqn>
+	MAX(0,(Beschikbaarheidspercentage_Exclusief_Vakantie_en_Normaal_Ziekteverzuim-Effect_Werkdruk_op_Ziekteverzuim-Opleidingen_en_Zittingen_Nieuwe_Medewerkers))					</eqn>
+			</aux>
+			<aux name="Beschikbare_Cap_Ervaren_Medewerkers_voor_Afhandeling">
+				<units>FTE/Jaar</units>
+				<doc>Aantal Ervaren Medewerkers (in FTE's per jaar) dat zich bezighoudt met Afhandeling.</doc>
+					<eqn>
+	Beschikbare_Capaciteit_Ervaren_Medewerkers*(1-Per_Cap_Toewijzing_Intake_Ervaren_Medewerkers)					</eqn>
+			</aux>
+			<aux name="Beschikbare_Cap_Ervaren_Medewerkers_voor_Intake">
+				<units>FTE/Jaar</units>
+				<doc>Aantal Ervaren Medewerkers (in FTE's per jaar) dat zich bezighoudt met Intake.</doc>
+					<eqn>
+	Min(Beschikbare_Capaciteit_Ervaren_Medewerkers,(Deel_van_Werkpakket_voor_Intake*(Beschikbare_Capaciteit_Nieuwe_Medewerkers+Beschikbare_Capaciteit_Ervaren_Medewerkers)*Nadruk_Ervaren_Medewerkers_voor_Intake))					</eqn>
+			</aux>
+			<aux name="Beschikbare_Cap_Nieuwe_Medewerkers_voor_Afhandeling">
+				<units>FTE/Jaar</units>
+				<doc>Aantal Nieuwe Medewerkers (in FTE's per jaar) dat zich bezighoudt met Afhandeling.</doc>
+					<eqn>
+	Beschikbare_Capaciteit_Nieuwe_Medewerkers*(1-Per_Cap_Toewijzing_Intake_Nieuwe_Medewerkers)					</eqn>
+			</aux>
+			<aux name="Beschikbare_Cap_Nieuwe_Medewerkers_voor_Intake">
+				<units>FTE/Jaar</units>
+				<doc>Aantal Nieuwe Medewerkers (in FTE's per jaar) dat zich bezighoudt met Intake.</doc>
+					<eqn>
+	Min(Beschikbare_Capaciteit_Nieuwe_Medewerkers,(Deel_van_Werkpakket_voor_Intake*(Beschikbare_Capaciteit_Nieuwe_Medewerkers+Beschikbare_Capaciteit_Ervaren_Medewerkers)*(1-Nadruk_Ervaren_Medewerkers_voor_Intake)))					</eqn>
+			</aux>
+			<aux name="Beschikbare_Capaciteit_Ervaren_Medewerkers">
+				<units>FTE/Jaar</units>
+				<doc>Netto Beschikbare Capaciteit Ervaren Medewerkers (exclusief vergadertijd, ziekte, vakantie, opleiding e.d.).</doc>
+					<eqn>
+	Totale_capaciteit_Ervaren_Medewerkers*Beschikbaarheidspercentage_Ervaren_Medewerkers					</eqn>
+			</aux>
+			<aux name="Beschikbare_Capaciteit_Nieuwe_Medewerkers">
+				<units>FTE/Jaar</units>
+				<doc>Netto Beschikbare Capaciteit Nieuwe Medewerkers (exclusief vergadertijd, ziekte, vakantie, opleiding e.d.).</doc>
+					<eqn>
+	Totale_Capaciteit_Nieuwe_Medewerkers*Beschikbaarheidspercentage_Nieuwe_Medewerkers					</eqn>
+			</aux>
+			<aux name="Beschikbare_Capaciteit_voor_Afhandeling_in_Dossiers">
+				<units>Dossiers/Jaar</units>
+				<doc>Aantal Dossiers in Afhandeling die Nieuwe en Ervaren Medewerkers per jaar kunnen verwerken op basis van hun Beschikbare Capaciteit.</doc>
+					<eqn>
+	Beschikbare_Capaciteit_voor_Afhandeling_in_Tijdseenheden/(Gemiddelde_Werkinhoud_Dossier/Omrekenfactor_van_Week_naar_FTE)					</eqn>
+			</aux>
+			<aux name="Beschikbare_Capaciteit_voor_Afhandeling_in_Tijdseenheden">
+				<units>FTE/Jaar</units>
+				<doc>Totale capaciteit van zowel Nieuwe als Ervaren Medewerkers (in FTE's per jaar) die beschikbaar is voor Afhandeling.</doc>
+					<eqn>
+	Beschikbare_Cap_Ervaren_Medewerkers_voor_Afhandeling+Beschikbare_Cap_Nieuwe_Medewerkers_voor_Afhandeling					</eqn>
+			</aux>
+			<aux name="Beschikbare_Capaciteit_voor_Intake_in_Dossiers">
+				<units>Dossiers/Jaar</units>
+				<doc>Aantal Dossiers in Intake die Nieuwe en Ervaren Medewerkers per jaar kunnen verwerken op basis van hun Beschikbare Capaciteit.</doc>
+					<eqn>
+	Beschikbare_Capaciteit_voor_Intake_in_Tijdseenheden/(Gemiddelde_Werkinhoud_Intake/Omrekenfactor_van_Week_naar_FTE)					</eqn>
+			</aux>
+			<aux name="Beschikbare_Capaciteit_voor_Intake_in_Tijdseenheden">
+				<units>FTE/Jaar</units>
+				<doc>Totale capaciteit van zowel Nieuwe als Ervaren Medewerkers (in FTE's per jaar) die beschikbaar is voor Intake.</doc>
+					<eqn>
+	Beschikbare_Cap_Ervaren_Medewerkers_voor_Intake+Beschikbare_Cap_Nieuwe_Medewerkers_voor_Intake					</eqn>
+			</aux>
+			<aux name="Bijdrage_Doorlooptijd_in_Klanttevredenheid">
+				<units>Dmnl</units>
+				<doc>Het verschil tussen de totale actuele doorlooptijd en de referentiedoorlooptijd van de klant als percentage van de referentiedoorlooptijd van de klant.</doc>
+					<eqn>
+	MAX(0, Min(((Referentiedoorlooptijd_van_Klant-Totale_Actuele_Doorlooptijd)/Referentiedoorlooptijd_van_Klant), 1))					</eqn>
+			</aux>
+			<aux name="Bijdrage_Expertise_in_Klanttevredenheid">
+				<units>Dmnl</units>
+				<doc>De gemiddelde expertise van medewerkers die door klanten opgemerkt wordt t.o.v. de gemiddelde expertise van ervaren medewerkers die klanten graag zouden willen hebben.</doc>
+					<eqn>
+	MAX(0, Min(((Gemiddelde_Expertise-Referentie_Expertise_van_Klant)/Referentie_Expertise_van_Klant), 1))					</eqn>
+			</aux>
+			<aux name="Change_in_Pink_Noise">
+				<units>1/Jaar</units>
+				<doc>Change in the pink noise value; Pink noise is a first order exponential smoothing delay of the white
+         noise input.</doc>
+					<eqn> (White_Noise - Pink_Noise)/Noise_Correlation_Time					</eqn>
+			</aux>
+			<aux name="Doorstroom_Medewerkers">
+				<units>Medewerkers/Jaar</units>
+				<doc>Het aantal Nieuwe Medewerkers dat per jaar doorstroomt naar Ervaren Medewerkers.</doc>
+					<eqn>
+	Nieuwe_Medewerkers/Groeitijd_tot_Ervaren_Medewerker					</eqn>
+			</aux>
+			<aux name="Dossiers_door_Ervaren_Medewerkers">
+				<units>Dossiers/Jaar</units>
+				<doc>Het aantal Dossiers dat per jaar door Ervaren Medewerkers wordt afgelegd.</doc>
+					<eqn>
+	(1-Perc_van_Afhandelcap_door_Nieuwe_Medewerkers)*Afleggen					</eqn>
+			</aux>
+			<aux name="Dossiers_door_Nieuwe_Medewerkers">
+				<units>Dossiers/Jaar</units>
+				<doc>Het aantal Dossiers dat per jaar door Nieuwe Medewerkers wordt afgelegd.</doc>
+					<eqn>
+	Afleggen*Perc_van_Afhandelcap_door_Nieuwe_Medewerkers					</eqn>
+			</aux>
+			<aux name="Dossiers_Uitbesteden">
+				<units>Dossiers/Jaar</units>
+				<doc>Het aantal Dossiers dat per jaar in weggewerkt wordt.</doc>
+					<eqn>
+	MAX(0, (Dossiers_In_Behandeling*Aantal_weken_per_jaar/Grens_voor_Uitbesteding)-Afleggen)					</eqn>
+			</aux>
+			<aux name="Druk_op_Aannamebeleid">
+				<units>Dimensionless</units>
+				<doc>De druk om mensen aan te nemen wordt groter naarmate de gepercipieerde werkdruk groter is dan de managementnorm.</doc>
+					<eqn>
+	Gepercipieerde_Werkdruk/Managementnorm_Werkdruk					</eqn>
+			</aux>
+			<aux name="Effect_van_Fit_Dossiers_op_Tevredenheid">
+				<units>Dmnl</units>
+				<doc>Het percentage van de intakecapaciteit dat door Ervaren Medewerkers wordt ingevuld en dus het percentage van de Intake waarvoor een juiste fit wordt gevonden.</doc>
+					<eqn>
+	1-Perc_van_Intakecap_door_Nieuwe_Medewerkers					</eqn>
+			</aux>
+			<aux name="Effect_van_Opleidingen_op_Tevredenheid">
+				<units>Dmnl</units>
+				<doc>Het gemiddelde percentage van de totale beschikbare capaciteit dat medewerkers aan opleidingen en zittingen mogen besteden.</doc>
+					<eqn>
+	Tabel_voor_Effect_van_Opleidingen_op_Tevredenheid((Opleidingen_en_Zittingen_Ervaren_Medewerkers+Opleidingen_en_Zittingen_Nieuwe_Medewerkers
+)/2)					</eqn>
+			</aux>
+			<aux name="Effect_van_Tevredenheid_op_Verloop">
+				<units>Dimensionless</units>
+				<doc>Het Verloop is een functie van het quotient van de Medewerkertevredenheid en de Normale Medewerkertevredenheid.</doc>
+					<eqn>
+	Tabel_voor_Effect_van_Tevredenheid_op_Verloop(Medewerkertevredenheid/Normale_Medewerker_tevredenheid)					</eqn>
+			</aux>
+			<aux name="Effect_van_Werkdruk_op_Gewenst_Medewerkerniveau">
+				<units>1/Jaar</units>
+				<doc>Bij een reactief aannamebeleid is het effect van werkdruk op gewenst medewerkerniveau een nonlineaire functie van de werkdruk.</doc>
+					<eqn>
+	Switch_voor_Reactief_Aannamebeleid*Tabel_voor_Effect_van_Werkdruk_op_Aannamebeleid(Druk_op_Aannamebeleid) + (1-Switch_voor_Reactief_Aannamebeleid
+	)*Exogene_Druk_op_Personeelsgroei					</eqn>
+			</aux>
+			<aux name="Effect_van_Werkdruk_op_Tevredenheid">
+				<units>Dmnl</units>
+				<doc>De Medewerkertevredenheid is een functie van het quotient van de gepercipieerde werkdruk en de gewenste werkdruk.</doc>
+					<eqn>
+	Tabel_voor_Effect_van_Werkdruk_op_Tevredenheid(Gepercipieerde_Werkdruk/Gewenste_Werkdruk_Medewerker)					</eqn>
+			</aux>
+			<aux name="Effect_Werkdruk_op_Ziekteverzuim">
+				<units>Dmnl</units>
+				<doc>Het percentage ziekteverzuim, dat veroorzaakt wordt door de gepercipieerde werkdruk.</doc>
+					<eqn>
+	Tabel_voor_Effect_Werkdruk_op_Ziekteverzuim(Gepercipieerde_Werkdruk)					</eqn>
+			</aux>
+			<aux name="Exogene_Druk_op_Personeelsgroei">
+				<units>1/Jaar</units>
+				<doc>Exogene druk op personeelsgroei is gebaseerd op het BU Plan en kan eventueel als test aangepast worden met een bepaalde grootte (pulse).</doc>
+					<eqn>
+	Groei_volgens_BU_Plan(Time-2000)*(1+Pulse_Inhuur)					</eqn>
+			</aux>
+			<aux name="Exogene_Expertise_Inhuur_Ervaren_Medewerkers">
+				<units>Werkjaar</units>
+				<doc>Mogeljkheid om test inputs lost te laten op het model, zoals step, pulse, sine wave, en random noise.</doc>
+					<eqn>
+	 Expertise_Inhuur_Nieuwe_Medewerkers*Input					</eqn>
+			</aux>
+			<aux name="Exponent_Leercurve">
+				<units>Dimensionless</units>
+				<doc>De exponent in de leercurve. Berekend op basis van de sterkte van de leercurve.</doc>
+					<eqn>
+	LN(1+Sterkte_Leercurve)/LN(2)					</eqn>
+			</aux>
+			<aux name="Exponent_Leercurve_Ervaren">
+				<units>Dimensionless</units>
+				<doc>De exponent in de leercurve. Berekend op basis van de sterkte van de leercurve.</doc>
+					<eqn>
+	LN(1+Sterkte_Leercurve_Ervaren)/LN(2)					</eqn>
+			</aux>
+			<aux name="Gemiddelde_Doorlooptijd_Afhandeling">
+				<units>Jaar</units>
+				<doc>Gemiddelde Doorlooptijd Afhandeling die bepaald wordt door de Beschikbare Capaciteit voor Afhandeling en het aantal Dossiers in Behandeling.</doc>
+					<eqn>
+	MAX(Minimale_Afhandelingstijd,Dossiers_In_Behandeling/Beschikbare_Capaciteit_voor_Afhandeling_in_Dossiers)					</eqn>
+			</aux>
+			<aux name="Gemiddelde_Doorlooptijd_Intake">
+				<units>Jaar</units>
+				<doc>Gemiddelde Doorlooptijd Intake die bepaald wordt door de Beschikbare Capaciteit voor Intake en het aantal Meldingen dat op voorraad ligt.</doc>
+					<eqn>
+	MAX(Minimale_Intaketijd,Meldingen/Beschikbare_Capaciteit_voor_Intake_in_Dossiers)					</eqn>
+			</aux>
+			<aux name="Gemiddelde_Expertise">
+				<units>Werkjaar</units>
+				<doc>Gemiddelde Expertise van alle medewerkers (zowel nieuw als ervaren).</doc>
+					<eqn>
+	(Nieuwe_Medewerkers*Gemiddelde_Expertise_Nieuwe_Medewerkers+Ervaren_Medewerkers*Gemiddelde_Expertise_Ervaren_Medewerkers)/(Nieuwe_Medewerkers+Ervaren_Medewerkers)					</eqn>
+			</aux>
+			<aux name="Gemiddelde_Expertise_Ervaren_Inhuur">
+				<units>Werkjaar</units>
+				<doc>hoeveel expertise ervaren medewerkers met zich meebrengen, exogeen bepaald</doc>
+					<eqn>
+	Exogene_Expertise_Inhuur_Ervaren_Medewerkers					</eqn>
+			</aux>
+			<aux name="Gemiddelde_Expertise_Ervaren_Medewerkers">
+				<units>Werkjaar</units>
+				<doc>De gemiddelde expertise van ervaren medewerkers</doc>
+					<eqn>
+	Totale_Expertise_Ervaren_Medewerkers/Ervaren_Medewerkers					</eqn>
+			</aux>
+			<aux name="Gemiddelde_Expertise_Nieuwe_Inhuur">
+				<units>Werkjaar</units>
+				<doc>De hoeveelheid expertise die nieuwe medewerkers met zich meebrengen, exogeen bepaald.</doc>
+					<eqn>
+	Exogene_Expertise_Inhuur_Ervaren_Medewerkers					</eqn>
+			</aux>
+			<aux name="Gemiddelde_Expertise_Nieuwe_Medewerkers">
+				<units>Werkjaar</units>
+				<doc>De gemiddelde expertise van nieuwe medewerkers</doc>
+					<eqn>
+	Totale_Expertise_Nieuwe_Medewerkers/Nieuwe_Medewerkers					</eqn>
+			</aux>
+			<aux name="Gemiddelde_verblijftijd_Ervaren_Medewerkers">
+				<units>Jaar</units>
+				<doc>De gemiddelde verblijftijd van Ervaren Medewerkers (deze tijd wordt beeindigd of door verloop).</doc>
+					<eqn>
+	Ervaren_Medewerkers/Verloop_Ervaren_Medewerkers					</eqn>
+			</aux>
+			<aux name="Gemiddelde_verblijftijd_Nieuwe_Medewerkers">
+				<units>Jaar</units>
+				<doc>De gemiddelde verblijftijd van Nieuwe Medewerkers (deze tijd wordt beeindigd of door doorstroom naar Ervaren Medewerkers of door verloop).</doc>
+					<eqn>
+	Nieuwe_Medewerkers/(Doorstroom_Medewerkers+Verloop_Nieuwe_Medewerkers)					</eqn>
+			</aux>
+			<aux name="Gewenst_Aantal_Medewerkers">
+				<units>Medewerkers/Jaar</units>
+				<doc>Het Gewenst Aantal Medewerkers is gebaseerd op het actuele aantal medewerkers en naar boven of beneden aangepast op basis van de druk op aannamebeleid.</doc>
+					<eqn>
+	Totaal_Actueel_Aantal_Medewerkers*Effect_van_Werkdruk_op_Gewenst_Medewerkerniveau+(Verloop_Ervaren_Medewerkers+Verloop_Nieuwe_Medewerkers
+	)*(1-Switch_voor_Reactief_Aannamebeleid)					</eqn>
+			</aux>
+			<aux name="Groei_Dossiers">
+				<units>1/Jaar</units>
+				<doc>Groei Dossiers komt overeen met gegevens uit het BU Plan maar kan ook bepaald worden door een Exogene Groeivoet vanaf een bepaalde Starttijd.</doc>
+					<eqn>
+	STEP(Exogene_Groeivoet,Starttijd_Groei)+Groei_volgens_BU_Plan(Time-2000)					</eqn>
+			</aux>
+			<aux name="Inhuur_Ervaren_Medewerkers">
+				<units>Medewerkers/Jaar</units>
+				<doc>Het aantal Ervaren Medewerkers dat per jaar aangenomen wordt.</doc>
+					<eqn>
+	MAX(0,DELAY3(Verloop_Ervaren_Medewerkers-Doorstroom_Medewerkers,Inhuurtijd_Ervaren_Medewerkers))					</eqn>
+			</aux>
+			<aux name="Inhuur_Nieuwe_Medewerkers">
+				<units>Medewerkers/Jaar</units>
+				<doc>Het aantal Nieuwe Medewerkers dat per jaar in dienst treedt.</doc>
+					<eqn>
+	MAX(0,DELAY3((Gewenst_Aantal_Medewerkers-(Totaal_Actueel_Aantal_Medewerkers/dimensie_variabele)) , Inhuurtijd_Nieuwe_Medewerkers))					</eqn>
+			</aux>
+			<aux name="InitiÃ«le_Aantal_Ervaren_Medewerkers">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Initiële_Totale_Aantal_Medewerkers*(1-Perc_Initiële_Aantal_Nieuwe_Medewerkers)					</eqn>
+			</aux>
+			<aux name="InitiÃ«le_Aantal_Nieuwe_Medewerkers">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Initiële_Totale_Aantal_Medewerkers*Perc_Initiële_Aantal_Nieuwe_Medewerkers					</eqn>
+			</aux>
+			<aux name="InitiÃ«le_Dossiers_in_Behandeling">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	(Groei_Dossiers*(Basisaanbod_Dossiers/2)*Referentiedoorlooptijd_Afhandeling/Aantal_weken_per_jaar)					</eqn>
+			</aux>
+			<aux name="InitiÃ«le_Nieuwe_Meldingen">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	(Groei_Dossiers*Basisaanbod_Dossiers*Referentiedoorlooptijd_Intake/Aantal_weken_per_jaar)*0+Initiële_Dossiers_in_Behandeling*1					</eqn>
+			</aux>
+			<aux name="Input">
+				<units>Dimensionless</units>
+				<doc>Input is een dimensieloze variabele die verschillende input-patronen kan testen, zoals een step, pulse, sine wave, en random noise.</doc>
+					<eqn>
+	1+STEP(Step_Height,Step_Time)+
+	(Pulse_Quantity/TIME_STEP)*PULSE(Pulse_Time,TIME_STEP)+
+	RAMP(Ramp_Slope,Ramp_Start_Time,Ramp_End_Time)+(STEP(1, Exponential_Growth_Time)*(exp(Exponential_Growth_Rate*(Time - Exponential_Growth_Time))-1))+
+	Sine_Amplitude*SIN(2*3.14159*Time/Sine_Period)+
+	  	STEP(1,Noise_Start_Time)*Pink_Noise					</eqn>
+			</aux>
+			<aux name="Intake">
+				<units>Dossiers/Jaar</units>
+				<doc>Het aantal Dossiers dat per jaar in Behandeling wordt genomen.</doc>
+					<eqn>
+	MAX(0,Min(Meldingen/Minimale_Intaketijd,Beschikbare_Capaciteit_voor_Intake_in_Dossiers))					</eqn>
+			</aux>
+			<aux name="Intake_door_Ervaren_Medewerkers">
+				<units>Dossiers/Jaar</units>
+				<doc>Het aantal Meldingen dat per jaar door Ervaren Medewerkers wordt verwerkt (Intake).</doc>
+					<eqn>
+	Intake*(1-Perc_van_Intakecap_door_Nieuwe_Medewerkers)					</eqn>
+			</aux>
+			<aux name="Intake_door_Nieuwe_Medewerkers">
+				<units>Dossiers/Jaar</units>
+				<doc>Het aantal Meldingen dat per jaar door Nieuwe Medewerkers wordt verwerkt (Intake).</doc>
+					<eqn>
+	Intake*Perc_van_Intakecap_door_Nieuwe_Medewerkers					</eqn>
+			</aux>
+			<aux name="Nieuwe_Meldingen">
+				<units>Dossiers/Jaar</units>
+				<doc>Aantal Nieuwe Meldingen dat per jaar binnen komt.</doc>
+					<eqn>
+	Basisaanbod_Dossiers*Groei_Dossiers					</eqn>
+			</aux>
+			<aux name="Normale_Snelheid_van_Leren_Ervaren_Medewerkers">
+				<units>Dmnl</units>
+				<doc>De normale snelheid waarmee medewerkers leren heeft een constante waarde van 100 en kan worden verhoogd als zij opleidingen volgen en kan worden verlaagd als zij heel veel nieuwe medewerkers moeten inwerken/coachen.</doc>
+					<eqn>
+	100*(1-(1-Tabel_voor_Effect_Coaching_op_Leersnelheid_Ervaren_Medewerkers(Aantal_Nieuwe_Medewerkers_per_Ervaren_Medewerkers
+	))+0.5*(Opleidingen_en_Zittingen_Ervaren_Medewerkers))					</eqn>
+			</aux>
+			<aux name="Normale_Snelheid_van_Leren_Nieuwe_Medewerkers">
+				<units>Dmnl</units>
+				<doc>De normale snelheid waarmee medewerkers leren heeft een constante waarde van 100 en kan worden verhoogd als zij opleidingen volgen en als zij door veel ervaren medewerkers ingewerkt/gecoacht kunnen worden.</doc>
+					<eqn>
+	100*(1+0.5*Opleidingen_en_Zittingen_Nieuwe_Medewerkers+Tabel_voor_Effect_Coaching_op_Leersnelheid_Nieuwe_Medewerkers(Aantal_Nieuwe_Medewerkers_per_Ervaren_Medewerkers))					</eqn>
+			</aux>
+			<aux name="Onderhanden_Dossiers_(exclusief_Meldingen)_per_Medewerker">
+				<units>Dossiers/Medewerker</units>
+				<doc>Het gemiddelde aantal dossiers (alleen Dossiers in Behandeling) dat elke medewerker onderhanden heeft.</doc>
+					<eqn>
+	Dossiers_In_Behandeling/Totaal_Actueel_Aantal_Medewerkers					</eqn>
+			</aux>
+			<aux name="Onderhanden_Dossiers_per_Medewerker">
+				<units>Dossiers/Medewerker</units>
+				<doc>Het gemiddelde aantal dossiers (zowel Meldingen als Dossiers in Behandeling) dat elke medewerker onderhanden heeft.</doc>
+					<eqn>
+	(Dossiers_In_Behandeling+Meldingen)/Totaal_Actueel_Aantal_Medewerkers					</eqn>
+			</aux>
+			<aux name="Output_per_Medewerker">
+				<units>Dossiers/(Jaar*Medewerker)</units>
+				<doc>De output die per medewerker gerealiseerd wordt.</doc>
+					<eqn>
+	Afleggen/Totaal_Actueel_Aantal_Medewerkers					</eqn>
+			</aux>
+			<aux name="Per_Cap_Toewijzing_Intake_Ervaren_Medewerkers">
+				<units>Dimensionless</units>
+				<doc>Het Percentage van de totale capaciteit van Ervaren Medewerkers dat besteed mag worden aan Intake.</doc>
+					<eqn>
+	Beschikbare_Cap_Ervaren_Medewerkers_voor_Intake/Beschikbare_Capaciteit_Ervaren_Medewerkers					</eqn>
+			</aux>
+			<aux name="Per_Cap_Toewijzing_Intake_Nieuwe_Medewerkers">
+				<units>Dimensionless</units>
+				<doc>Het Percentage van de totale capaciteit van Nieuwe Medewerkers dat besteed mag worden aan Intake.</doc>
+					<eqn>
+	Beschikbare_Cap_Nieuwe_Medewerkers_voor_Intake/Beschikbare_Capaciteit_Nieuwe_Medewerkers					</eqn>
+			</aux>
+			<aux name="Perc_Uitbesteding">
+				<units>1/Jaar</units>
+				<doc>Het percentage van de Dossiers in Behandeling dat per jaar uitbesteed wordt.</doc>
+					<eqn>
+	Dossiers_Uitbesteden/Dossiers_In_Behandeling					</eqn>
+			</aux>
+			<aux name="Perc_van_Afhandelcap_door_Nieuwe_Medewerkers">
+				<units>Dimensionless</units>
+				<doc>Het Percentage van de totale Afhandelcapaciteit dat door Nieuwe Medewerkers wordt ingevuld.</doc>
+					<eqn>
+	Beschikbare_Cap_Nieuwe_Medewerkers_voor_Afhandeling/Beschikbare_Capaciteit_voor_Afhandeling_in_Tijdseenheden					</eqn>
+			</aux>
+			<aux name="Perc_van_Intakecap_door_Nieuwe_Medewerkers">
+				<units>Dimensionless</units>
+				<doc>Het Percentage van de totale Intakecapaciteit dat door Nieuwe Medewerkers wordt ingevuld.</doc>
+					<eqn>
+	Beschikbare_Cap_Nieuwe_Medewerkers_voor_Intake/Beschikbare_Capaciteit_voor_Intake_in_Tijdseenheden					</eqn>
+			</aux>
+			<aux name="Productiviteit_Ervaren_Medewerkers">
+				<units>Dossiers/(Jaar*Medewerker)</units>
+				<doc>Productiviteit wordt bepaald door een standaard leercurve die doorlopen wordt via een cumulatieve hoeveelheid werkervaring.</doc>
+					<eqn>
+	Referentieproductiviteit_Ervaren_Medewerkers*(Gemiddelde_Expertise_Ervaren_Medewerkers/"Referentie-Expertise_Ervaren_medewerkers")^Exponent_Leercurve_Ervaren					</eqn>
+			</aux>
+			<aux name="Productiviteit_Nieuwe_Medewerkers">
+				<units>Dossiers/(Jaar*Medewerker)</units>
+				<doc>Productiviteit wordt bepaald door een standaard leercurve die doorlopen wordt via een cumulatieve hoeveelheid werkervaring.</doc>
+					<eqn>
+	Referentieproductiviteit_Nieuwe_Medewerkers*(Gemiddelde_Expertise_Nieuwe_Medewerkers/"Referentie-Expertise_Nieuwe_Medewerkers")^Exponent_Leercurve					</eqn>
+			</aux>
+			<aux name="Pulse_Inhuur">
+				<units>Dmnl</units>
+				<doc>Met Pulse Inhuur kan getest worden wat er met het systeem gebeurt als een bepaald aantal Medewerkers tegelijkertijd aangenomen wordt op een zeker tijdstip.</doc>
+					<eqn>
+	Pulse_Inhuur_Omvang*PULSE( Pulse_Inhuur_Starttijd,TIME_STEP)					</eqn>
+			</aux>
+			<aux name="Referentie-Expertise_Ervaren_medewerkers">
+				<units>Werkjaar</units>
+				<doc>Het referentieniveau van Expertise dat past bij de Referentieproductiviteit.</doc>
+					<eqn>
+	Initiële_Totale_Expertise_Ervaren_Medewerkers/Initiële_Aantal_Ervaren_Medewerkers					</eqn>
+			</aux>
+			<aux name="Referentieproductiviteit_Ervaren_Medewerkers">
+				<units>Dossiers/(Jaar*Medewerker)</units>
+				<doc>De Productiviteit die bereikt is als de Gemiddelde Expertise het referentienivo bereikt.</doc>
+					<eqn>
+	Tabel_voor_Effect_Medewerkertevredenheid_op_Referentieproductiviteit_Ervaren_Medewerkers(Medewerkertevredenheid)					</eqn>
+			</aux>
+			<aux name="Referentieproductiviteit_Nieuwe_Medewerkers">
+				<units>Dossiers/(Jaar*Medewerker)</units>
+				<doc>De Productiviteit die bereikt is als de Gemiddelde Expertise het referentienivo bereikt.</doc>
+					<eqn>
+	Tabel_voor_Effect_Medewerkertevredenheid_op_Referentieproductiviteit(Medewerkertevredenheid)					</eqn>
+			</aux>
+			<aux name="Relatieve_Verouderingssnelheid_Expertise_Ervaren_Medewerkers">
+				<units>1/Jaar</units>
+				<doc>Bestaande kennis veroudert of wordt vergeten.</doc>
+					<eqn>
+	Normale_Veroudering_Expertise_Ervaren_Medewerkers + STEP(Verandering_Veroudering_Expertise_Ervaren_Medewerkers,Verouderingstijd_Expertise_Ervaren_Medewerkers)					</eqn>
+			</aux>
+			<aux name="Relatieve_Verouderingssnelheid_Expertise_Nieuwe_Medewerkers">
+				<units>1/Jaar</units>
+				<doc>Bestaande kennis veroudert of wordt vergeten.</doc>
+					<eqn>
+	Normale_Veroudering_Expertise_Nieuwe_Medewerkers + STEP(Verandering_Veroudering_Expertise_Nieuwe_Medewerkers,Verouderingstijd_Expertise_Nieuwe_Medewerkers)					</eqn>
+			</aux>
+			<aux name="Sterkte_Leercurve">
+				<units>Dimensionless</units>
+				<doc>De fractionele toename in productiviteit als expertise verdubbelt.</doc>
+					<eqn>
+	0.25-(((Normale_Snelheid_van_Leren_Nieuwe_Medewerkers-Snelheid_van_Leren_door_Nieuwe_Medewerkers)/Normale_Snelheid_van_Leren_Nieuwe_Medewerkers
+	)*0.25)					</eqn>
+			</aux>
+			<aux name="Sterkte_Leercurve_Ervaren">
+				<units>Dimensionless</units>
+				<doc>De fractionele toename in productiviteit als expertise verdubbelt.</doc>
+					<eqn>
+	0.25-(((Normale_Snelheid_van_Leren_Ervaren_Medewerkers-Snelheid_van_Leren_door_Ervaren_Medewerkers)/Normale_Snelheid_van_Leren_Ervaren_Medewerkers)*0.25)					</eqn>
+			</aux>
+			<aux name="Toename_Expertise_door_Doorstroom">
+				<units>Medewerker*Werkjaar/Jaar</units>
+				<doc>De expertise van ervaren medewerkers neemt toe doordat nieuwe medewerkers doorstromen en ervaren worden en hun expertise meenemen.</doc>
+					<eqn>
+	Doorstroom_Medewerkers*Gemiddelde_Expertise_Nieuwe_Medewerkers*1.5					</eqn>
+			</aux>
+			<aux name="Toename_Expertise_door_Dossierervaring">
+				<units>Medewerker*Werkjaar/Jaar</units>
+				<doc>Expertise groeit na inhuur vooral door ervaring in het afhandelen van dossiers.</doc>
+					<eqn>
+	Werkjaren_gewerkt_aan_dossiers_Nieuwe_Medewerkers+Werkjaren_gewerkt_aan_Intake_Nieuwe_Medewerkers					</eqn>
+			</aux>
+			<aux name="Toename_Expertise_door_Dossierervaring_Ervaren_Medewerkers">
+				<units>Medewerker*Werkjaar/Jaar</units>
+				<doc>Expertise groeit na inhuur vooral door ervaring in het afhandelen van dossiers.</doc>
+					<eqn>
+	Werkjaren_gewerkt_aan_dossiers_Ervaren_Medewerkers+Werkjaren_gewerkt_aan_Intake_Ervaren_Medewerkers					</eqn>
+			</aux>
+			<aux name="Toename_Expertise_door_Ervaren_Inhuur">
+				<units>Medewerker*Werkjaar/Jaar</units>
+				<doc>De snelheid waarmee ervaren medewerkers expertise toevoegen aan de pool van expertise</doc>
+					<eqn>
+	Inhuur_Ervaren_Medewerkers*Gemiddelde_Expertise_Ervaren_Inhuur					</eqn>
+			</aux>
+			<aux name="Toename_Expertise_door_Inhuur">
+				<units>Medewerker*Werkjaar/Jaar</units>
+				<doc>De snelheid waarmee nieuwe medewerkers expertise toevoegen aan de pool van Totale Expertise</doc>
+					<eqn>
+	Inhuur_Nieuwe_Medewerkers*Gemiddelde_Expertise_Nieuwe_Inhuur					</eqn>
+			</aux>
+			<aux name="Totaal_Actueel_Aantal_Medewerkers">
+				<units>Medewerkers</units>
+				<doc></doc>
+					<eqn>
+	Nieuwe_Medewerkers+Ervaren_Medewerkers					</eqn>
+			</aux>
+			<aux name="Totale_Actuele_Doorlooptijd">
+				<units>Weken</units>
+				<doc>Tijd die nodig is om een dossier geheel af te handelen (som van doorlooptijd Intake en doorlooptijd Afhandeling).</doc>
+					<eqn>
+	Actuele_Doorlooptijd_Afhandeling+Actuele_Doorlooptijd_Intake					</eqn>
+			</aux>
+			<aux name="Totale_capaciteit_Ervaren_Medewerkers">
+				<units>FTE/Jaar</units>
+				<doc>Totale Capaciteit van Ervaren Medewerkers uitgedrukt in FTE's per jaar.</doc>
+					<eqn>
+	Productiviteit_Ervaren_Medewerkers*Ervaren_Medewerkers*((Basiswerkinhoud_Dossiers)/Omrekenfactor_van_Week_naar_FTE
+	)					</eqn>
+			</aux>
+			<aux name="Totale_Capaciteit_Nieuwe_Medewerkers">
+				<units>FTE/Jaar</units>
+				<doc>Totale Capaciteit van Nieuwe Medewerkers uitgedrukt in FTE's per jaar.</doc>
+					<eqn>
+	Productiviteit_Nieuwe_Medewerkers*Nieuwe_Medewerkers*((Basiswerkinhoud_Dossiers)/Omrekenfactor_van_Week_naar_FTE)					</eqn>
+			</aux>
+			<aux name="Totale_Referentiedoorlooptijd">
+				<units>Weken</units>
+				<doc>Hoelang een dossier normaal gesproken in intake EN behandeling zou mogen zijn, gemiddeld.</doc>
+					<eqn>
+	Referentiedoorlooptijd_Afhandeling+Referentiedoorlooptijd_Intake					</eqn>
+			</aux>
+			<aux name="Verandering_Deel_Werkpakket_Intake">
+				<units>1/Jaar</units>
+				<doc>De verandering van de relatieve werklast voor Intake (t.o.v. de totale hoeveelheid werklast voor Intake en Afhandeling).</doc>
+					<eqn>
+	(Werkpakket_Intake/(Werkpakket_Intake+Werkpakket_Afhandeling)-Deel_van_Werkpakket_voor_Intake)/Aanpassingtijd_Capaciteitsinzet_Intake					</eqn>
+			</aux>
+			<aux name="Verandering_in_Klanttevredenheid">
+				<units>1/Jaar</units>
+				<doc>De mate waarin de klanttevredenheid verandert per jaar.</doc>
+					<eqn>
+	(Actuele_Klanttevredenheid-Klanttevredenheid)/Aanpassingstijd_Klanttevredenheid					</eqn>
+			</aux>
+			<aux name="Verandering_in_Perceptie_Werkdruk">
+				<units>1/Jaar</units>
+				<doc>Verandering van de werkdruk die waargenomen wordt door medewerkers.</doc>
+					<eqn>
+	((Werkdrukindicator/Normale_Werkdruk)-Gepercipieerde_Werkdruk)/Perceptieinterval_Werkdruk					</eqn>
+			</aux>
+			<aux name="Verandering_Medewerker_tevredenheid">
+				<units>1/Jaar</units>
+				<doc>De mate waarin de medewerkertevredenheid verandert per jaar.</doc>
+					<eqn>
+	(Actuele_Medewerker_tevredenheid-Medewerkertevredenheid)/Aanpassingstijd_Medewerker_tevredenheid					</eqn>
+			</aux>
+			<aux name="Verandering_Verloopperc_Ervaren_Medewerkers">
+				<units>1/(Jaar*Jaar)</units>
+				<doc>De verandering van het verlooppercentage van ervaren medewerkers per jaar.</doc>
+					<eqn>
+	(Actueel_Percentage_Ervaren_Medewerkers_met_Verloopplannen-Verloopperc_Ervaren_Medewerkers)/Aanpassingstijd_Verloopperc					</eqn>
+			</aux>
+			<aux name="Verandering_Verloopperc_Nieuwe_Medewerkers">
+				<units>1/(Jaar*Jaar)</units>
+				<doc>De verandering van het verlooppercentage van nieuwe medewerkers per jaar.</doc>
+					<eqn>
+	(Actueel_Percentage_Nieuwe_Medewerkers_met_Verloopplannen-Verloopperc_Nieuwe_Medewerkers)/Aanpassingstijd_Verloopperc					</eqn>
+			</aux>
+			<aux name="Verlies_van_Expertise_door_Doorstroom">
+				<units>Medewerker*Werkjaar/Jaar</units>
+				<doc>De totale expertise van nieuwe medewerkers vermindert doordat nieuwe medewerkers doorstromen en ervaren worden en hun expertise meenemen.</doc>
+					<eqn>
+	Doorstroom_Medewerkers*Gemiddelde_Expertise_Nieuwe_Medewerkers*1.5					</eqn>
+			</aux>
+			<aux name="Verlies_van_Expertise_Ervaren_Medewerkers_door_Verloop">
+				<units>Medewerker*Werkjaar/Jaar</units>
+				<doc>Medewerkers die vertrekken nemen hun expertise met zich mee.</doc>
+					<eqn>
+	Verloop_Ervaren_Medewerkers*Gemiddelde_Expertise_Ervaren_Medewerkers					</eqn>
+			</aux>
+			<aux name="Verlies_van_Expertise_Nieuwe_Medewerkers_door_Verloop">
+				<units>Medewerker*Werkjaar/Jaar</units>
+				<doc>Medewerkers die vertrekken nemen hun expertise met zich mee.</doc>
+					<eqn>
+	Verloop_Nieuwe_Medewerkers*Gemiddelde_Expertise_Nieuwe_Medewerkers					</eqn>
+			</aux>
+			<aux name="Verloop_Ervaren_Medewerkers">
+				<units>Medewerkers/Jaar</units>
+				<doc>Het aantal Ervaren Medewerkers dat per jaar verloopt.</doc>
+					<eqn>
+	Verloopperc_Ervaren_Medewerkers*Ervaren_Medewerkers					</eqn>
+			</aux>
+			<aux name="Verloop_Nieuwe_Medewerkers">
+				<units>Medewerkers/Jaar</units>
+				<doc>Het aantal Nieuwe Medewerkers dat per jaar verloopt.</doc>
+					<eqn>
+	Verloopperc_Nieuwe_Medewerkers*Nieuwe_Medewerkers					</eqn>
+			</aux>
+			<aux name="Verouderingssnelheid_Expertise_Ervaren_Medewerkers">
+				<units>Medewerker*Werkjaar/Jaar</units>
+				<doc>De hoeveelheid expertise die de populatie ervaren medewerkers kwijtraakt per periode.</doc>
+					<eqn>
+	Totale_Expertise_Ervaren_Medewerkers*Relatieve_Verouderingssnelheid_Expertise_Ervaren_Medewerkers					</eqn>
+			</aux>
+			<aux name="Verouderingssnelheid_Expertise_Nieuwe_Medewerkers">
+				<units>Medewerker*Werkjaar/Jaar</units>
+				<doc>De hoeveelheid expertise die de populatie nieuwe medewerkers kwijtraakt per periode</doc>
+					<eqn>
+	Totale_Expertise_Nieuwe_Medewerkers*Relatieve_Verouderingssnelheid_Expertise_Nieuwe_Medewerkers					</eqn>
+			</aux>
+			<aux name="Werkdrukindicator">
+				<units>Dmnl</units>
+				<doc>Hoeveel werk er is t.o.v. hoeveel capaciteit er is om het af te handelen in deze tijdsperiode</doc>
+					<eqn>
+	Totale_Actuele_Doorlooptijd/Totale_Referentiedoorlooptijd					</eqn>
+			</aux>
+			<aux name="Werkjaren_gewerkt_aan_dossiers_Ervaren_Medewerkers">
+				<units>Medewerker*Werkjaar/Jaar</units>
+				<doc>Het gemiddeld aantal werkjaren dat aan Dossiers gewerkt is door Ervaren Medewerkers per jaar.</doc>
+					<eqn>
+	Dossiers_door_Ervaren_Medewerkers*(Gemiddelde_Werkinhoud_Dossier/Omrekenfactor_van_Week_naar_Werkjaar)					</eqn>
+			</aux>
+			<aux name="Werkjaren_gewerkt_aan_dossiers_Nieuwe_Medewerkers">
+				<units>Medewerker*Werkjaar/Jaar</units>
+				<doc>Het gemiddeld aantal werkjaren dat aan Dossiers gewerkt is door Nieuwe Medewerkers per jaar.</doc>
+					<eqn>
+	Dossiers_door_Nieuwe_Medewerkers*(Gemiddelde_Werkinhoud_Dossier/Omrekenfactor_van_Week_naar_Werkjaar)					</eqn>
+			</aux>
+			<aux name="Werkjaren_gewerkt_aan_Intake_Ervaren_Medewerkers">
+				<units>Medewerker*Werkjaar/Jaar</units>
+				<doc>Het gemiddeld aantal werkjaren dat aan Intake gewerkt is door Ervaren Medewerkers per jaar.</doc>
+					<eqn>
+	Intake_door_Ervaren_Medewerkers*(Gemiddelde_Werkinhoud_Intake/Omrekenfactor_van_Week_naar_Werkjaar)					</eqn>
+			</aux>
+			<aux name="Werkjaren_gewerkt_aan_Intake_Nieuwe_Medewerkers">
+				<units>Medewerker*Werkjaar/Jaar</units>
+				<doc>Het gemiddeld aantal werkjaren dat aan Intake gewerkt is door Nieuwe Medewerkers per jaar.</doc>
+					<eqn>
+	Intake_door_Nieuwe_Medewerkers*(Gemiddelde_Werkinhoud_Intake/Omrekenfactor_van_Week_naar_Werkjaar)					</eqn>
+			</aux>
+			<aux name="Werkpakket_Afhandeling">
+				<units>Weken</units>
+				<doc>De gemiddelde hoeveelheid werk (in weken) die verzet moet worden om de voorraad Dossiers in Behandeling te verwerken.</doc>
+					<eqn>
+	Dossiers_In_Behandeling*Gemiddelde_Werkinhoud_Dossier					</eqn>
+			</aux>
+			<aux name="Werkpakket_Intake">
+				<units>Weken</units>
+				<doc>De gemiddelde hoeveelheid werk (in weken) die verzet moet worden om de voorraad Meldingen te verwerken.</doc>
+					<eqn>
+	Meldingen*Gemiddelde_Werkinhoud_Intake					</eqn>
+			</aux>
+			<aux name="White_Noise">
+				<units>Dimensionless</units>
+				<doc>White noise input to the pink noise process.</doc>
+					<eqn> Noise_Standard_Deviation*((24*Noise_Correlation_Time/TIME_STEP)^0.5*(RANDOM_0_1() - 0.5
+))					</eqn>
+			</aux>
+			<aux name="Groei_volgens_BU_Plan">
+				<units>1/Jaar</units>
+				<doc>Groei in Werkaanbod uit BU-plan (vertaald vanuit groeiplan Medewerkers).\!\!\!</doc>
+<gf>
+<xpts>0.000000,1.000000,2.000000,3.000000,4.000000,5.000000</xpts>
+<ypts>1.000000,1.180000,1.250000,1.300000,1.330000,1.350000</ypts>
+</gf>
+			</aux>
+			<aux name="Tabel_voor_Effect_Coaching_op_Leersnelheid_Ervaren_Medewerkers">
+				<units>Dmnl</units>
+				<doc>Een tabel/grafiek die aangeeft dat hoe meer Nieuwe Medewerkers ingewerkt moeten worden door één Ervaren Medewerker, hoe lager de snelheid van leren van deze Ervaren Medewerker zal zijn.\!\!</doc>
+<gf>
+<xpts>0.000000,10.000000</xpts>
+<ypts>1.000000,0.800000</ypts>
+</gf>
+			</aux>
+			<aux name="Tabel_voor_Effect_Coaching_op_Leersnelheid_Nieuwe_Medewerkers">
+				<units>Dmnl</units>
+				<doc>Een tabel/grafiek die aangeeft dat hoe minder Nieuwe Medewerkers ingewerkt moeten worden door één Ervaren Medewerker, hoe hoger de snelheid van leren van deze Nieuwe Medewerkers zal zijn.\!\!\!</doc>
+<gf>
+<xpts>0.000000,0.100000,0.733945,1.437310,2.232420,3.547400,4.892970,5.015290,6.605500,9.969420</xpts>
+<ypts>0.000000,0.293860,0.258772,0.197368,0.118421,0.070175,0.052632,0.052632,0.035088,0.004386</ypts>
+</gf>
+			</aux>
+			<aux name="Tabel_voor_Effect_Medewerkertevredenheid_op_Referentieproductiviteit">
+				<units>Dossiers/(Jaar*Medewerker)</units>
+				<doc>Een tabel/grafiek waarin de relatie tussen medewerkertevredenheid (horizontale as) en referentieproductiviteit van nieuwe medewerkers (verticale as) wordt weergegeven.\!\!\!</doc>
+<gf>
+<xpts>0.152905,1.620800,2.324160,3.088690,4.250760,5.290520,5.810400,6.238530,7.003060,7.767580,8.715600,9.938840</xpts>
+<ypts>100.000000,102.193000,104.386000,108.040000,114.693000,121.491000,125.877000,130.263000,136.404000,143.421000,147.588000,149.561000</ypts>
+</gf>
+			</aux>
+			<aux name="Tabel_voor_Effect_Medewerkertevredenheid_op_Referentieproductiviteit_Ervaren_Medewerkers">
+				<units>Dossiers/(Jaar*Medewerker)</units>
+				<doc>Een tabel/grafiek waarin de relatie tussen medewerkertevredenheid (horizontale as) en referentieproductiviteit van ervaren medewerkers (verticale as) wordt weergegeven.\!\!\!</doc>
+<gf>
+<xpts>1.000000,2.000000,3.000000,4.342510,5.107030,6.024460,6.636090,7.064220,7.706420,8.440370,9.143730,9.908260</xpts>
+<ypts>180.000000,182.000000,184.000000,189.474000,195.789000,203.509000,210.175000,217.895000,229.825000,236.491000,238.596000,240.000000</ypts>
+</gf>
+			</aux>
+			<aux name="Tabel_voor_Effect_van_Opleidingen_op_Tevredenheid">
+				<units>Dmnl</units>
+				<doc>Een tabel/grafiek waarin de relatie tussen opleidingen (horizontale as) en tevredenheid (verticale as) wordt weergegeven.\!\!</doc>
+<gf>
+<xpts>0.000000,0.113150,0.195719,0.259939,0.333333,0.418960,0.500000</xpts>
+<ypts>0.000000,0.557018,0.758772,0.877193,0.938596,0.978070,1.004390</ypts>
+</gf>
+			</aux>
+			<aux name="Tabel_voor_Effect_van_Tevredenheid_op_Verloop">
+				<units>Dimensionless</units>
+				<doc>Een tabel/grafiek waarin de relatie tussen tevredenheid (horizontale as) en verloop (verticale as) wordt weergegeven.\!\!</doc>
+<gf>
+<xpts>0.000000,0.500000,0.800000,1.000000,1.200000,1.500000,2.000000</xpts>
+<ypts>3.000000,1.500000,1.050000,1.000000,0.950000,0.500000,0.250000</ypts>
+</gf>
+			</aux>
+			<aux name="Tabel_voor_Effect_van_Werkdruk_op_Aannamebeleid">
+				<units>1/Jaar</units>
+				<doc>De tabel laat zien wat de invloed is van de Druk op Aannamebeleid op het Gewenst Medewerkerniveau. Hoe hoger de druk, hoe groter het Gewenst Medewerkerniveau, maar als de druk heel hoog wordt, vlakt dit effect af.\!\!\!</doc>
+<gf>
+<xpts>0.000000,0.500000,1.000000,1.000000,2.000000,3.000000,4.000000,5.000000</xpts>
+<ypts>0.300000,0.750000,1.000000,1.000000,1.300000,1.600000,1.900000,2.000000</ypts>
+</gf>
+			</aux>
+			<aux name="Tabel_voor_Effect_van_Werkdruk_op_Tevredenheid">
+				<units>Dimensionless</units>
+				<doc>Een tabel/grafiek waarin de relatie tussen werkdruk (horizontale as) en tevredenheid (verticale as) wordt weergegeven.\!\!</doc>
+<gf>
+<xpts>0.000000,0.500000,0.800000,1.000000,1.200000,1.500000,2.000000,3.000000,20.000000</xpts>
+<ypts>0.400000,0.600000,0.850000,0.900000,0.850000,0.600000,0.500000,0.400000,0.350000</ypts>
+</gf>
+			</aux>
+			<aux name="Tabel_voor_Effect_Werkdruk_op_Ziekteverzuim">
+				<units>Dmnl</units>
+				<doc>Een tabel/grafiek die de relatie tussen gepercipieerde werkdruk (horizontale as) en ziekteverzuim (verticale as) weergeeft.\!\!\!</doc>
+<gf>
+<xpts>0.000000,0.500000,1.000000,1.500000,2.000000,3.119270,5.290520,10.000000</xpts>
+<ypts>0.050000,0.010000,0.000000,0.010000,0.050000,0.085526,0.126096,0.148026</ypts>
+</gf>
+			</aux>
+			<aux name="Aanpassingstijd_Klanttevredenheid">
+				<units>Jaar</units>
+				<doc>Aanpassingstijd die klanten nodig hebben om een verandering in hun tevredenheid op te merken of daadwerkelijk te voelen.</doc>
+					<eqn>
+	0.25					</eqn>
+			</aux>
+			<aux name="Aanpassingstijd_Medewerker_tevredenheid">
+				<units>Jaar</units>
+				<doc>Aanpassingstijd die medewerkers nodig hebben om een verandering in hun tevredenheid op te merken of daadwerkelijk te voelen.</doc>
+					<eqn>
+	0.25					</eqn>
+			</aux>
+			<aux name="Aanpassingstijd_Verloopperc">
+				<units>Jaar</units>
+				<doc>Aanpassingstijd die nodig is om een verandering in het verlooppercentage op te merken en het verlooppercentage overeenkomstig aan te passen.</doc>
+					<eqn>
+	0.25					</eqn>
+			</aux>
+			<aux name="Aanpassingtijd_Capaciteitsinzet_Intake">
+				<units>Jaar</units>
+				<doc>Hoe lang het duurt voordat er meer of minder mensen komen bij het Intakeproces gezien de relatieve werklast daar.</doc>
+					<eqn>
+	0.1					</eqn>
+			</aux>
+			<aux name="Aantal_weken_per_jaar">
+				<units>Weken/Jaar</units>
+				<doc>Omrekenfactor: een jaar bestaat uit 50 weken.</doc>
+					<eqn>
+	50					</eqn>
+			</aux>
+			<aux name="Basisaanbod_Dossiers">
+				<units>Dossiers</units>
+				<doc></doc>
+					<eqn>
+	48000					</eqn>
+			</aux>
+			<aux name="Basiswerkinhoud_Dossiers">
+				<units>Weken/Dossier</units>
+				<doc>De gemiddelde hoeveelheid werk die gedaan moet worden om een dossier te verwerken.</doc>
+					<eqn>
+	0.5					</eqn>
+			</aux>
+			<aux name="Beschikbaarheidspercentage_Exclusief_Vakantie_en_Normaal_Ziekteverzuim">
+				<units>Dmnl</units>
+				<doc>Een gemiddeld ziekteverzuimpercentage van 5% en 40 vakantiedagen leveren 190 werkdagen per jaar op. Vergeleken met maximaal 240 werkdagen is dit een beschikbaarheidspercentage van 80%.</doc>
+					<eqn>
+	0.8					</eqn>
+			</aux>
+			<aux name="Bijdrage_Exogene_Variabele_in_Klanttevredenheid">
+				<units>Dmnl</units>
+				<doc>Een exogene variabele die een algemene mate van klant(on-)tevredenheid uitdrukt (tussen 0 en 1).</doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="dimensie_variabele">
+				<units>Jaar</units>
+				<doc>Variabele die nodig is om de units van het model kloppend te maken</doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="Exogene_Groeivoet">
+				<units>1/Jaar</units>
+				<doc>De Exogene Groeivoet in Dossiers. Default 0</doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="Expertise_Inhuur_Nieuwe_Medewerkers">
+				<units>Werkjaar</units>
+				<doc>De initiële expertise van nieuwe medewerkers</doc>
+					<eqn>
+	0.2					</eqn>
+			</aux>
+			<aux name="Exponential_Growth_Rate">
+				<units>1/Jaar</units>
+				<doc>The exogenous growth rate</doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="Exponential_Growth_Time">
+				<units>Jaar</units>
+				<doc>The time for exogenous exponential growth to start</doc>
+					<eqn>
+	5					</eqn>
+			</aux>
+			<aux name="Gemiddelde_Werkinhoud_Dossier">
+				<units>Weken/Dossier</units>
+				<doc>Het aantal weken dat gemiddeld gewerkt moet worden aan een Dossier.</doc>
+					<eqn>
+	0.25					</eqn>
+			</aux>
+			<aux name="Gemiddelde_Werkinhoud_Intake">
+				<units>Weken/Dossier</units>
+				<doc>Het aantal weken dat gemiddeld gewerkt moet worden aan een Intake.</doc>
+					<eqn>
+	0.1					</eqn>
+			</aux>
+			<aux name="Gewenste_Werkdruk_Medewerker">
+				<units>Dimensionless</units>
+				<doc>De werkdruk die medewerkers graag zouden willen waarnemen.</doc>
+					<eqn>
+	0.8					</eqn>
+			</aux>
+			<aux name="Gewicht_Doorlooptijd">
+				<units>Dmnl</units>
+				<doc>Belang van de doorlooptijd in het bepalen van de Klanttevredenheid.</doc>
+					<eqn>
+	3.33					</eqn>
+			</aux>
+			<aux name="Gewicht_Exogene_Variabele">
+				<units>Dmnl</units>
+				<doc>Belang van de exogene variabele in het bepalen van de Klanttevredenheid.</doc>
+					<eqn>
+	3.33					</eqn>
+			</aux>
+			<aux name="Gewicht_Expertise">
+				<units>Dmnl</units>
+				<doc>Belang van de expertise in het bepalen van de Klanttevredenheid.</doc>
+					<eqn>
+	3.33					</eqn>
+			</aux>
+			<aux name="Gewicht_van_Fit_Dossiers_op_Tevredenheid">
+				<units>Dmnl</units>
+				<doc>Belang van de fit tussen dossiers en medewerkers in het bepalen van de Medewerkertevredenheid.</doc>
+					<eqn>
+	3.33					</eqn>
+			</aux>
+			<aux name="Gewicht_van_Opleidingen_op_Tevredenheid">
+				<units>Dmnl</units>
+				<doc>Belang van de opleidingen van medewerkers in het bepalen van de Medewerkertevredenheid.</doc>
+					<eqn>
+	3.33					</eqn>
+			</aux>
+			<aux name="Gewicht_van_Werkdruk_op_Tevredenheid">
+				<units>Dimensionless</units>
+				<doc>Belang van de werkdruk van medewerkers in het bepalen van de Medewerkertevredenheid.</doc>
+					<eqn>
+	3.33					</eqn>
+			</aux>
+			<aux name="Grens_voor_Uitbesteding">
+				<units>Weken</units>
+				<doc>Als de doorlooptijd langer wordt dan deze grens, dan gaat er uitbesteed worden.</doc>
+					<eqn>
+	1000					</eqn>
+			</aux>
+			<aux name="Groeitijd_tot_Ervaren_Medewerker">
+				<units>Jaar</units>
+				<doc>Het aantal dienstjaren dat nodig is om Ervaren te worden.</doc>
+					<eqn>
+	3					</eqn>
+			</aux>
+			<aux name="Inhuurtijd_Ervaren_Medewerkers">
+				<units>Jaar</units>
+				<doc>De tijd die het kost om ervaren  medewerkers te vinden. Initieel gezet op 6 maanden, of een half jaar</doc>
+					<eqn>
+	0.5					</eqn>
+			</aux>
+			<aux name="Inhuurtijd_Nieuwe_Medewerkers">
+				<units>Jaar</units>
+				<doc>De tijd die het kost om nieuwe medewerkers te vinden. Initieel gezet op 3 maanden, of een kwart jaar</doc>
+					<eqn>
+	0.25					</eqn>
+			</aux>
+			<aux name="InitiÃ«el_deel_werkpakket_intake">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.25					</eqn>
+			</aux>
+			<aux name="InitiÃ«le_Totale_Aantal_Medewerkers">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	207					</eqn>
+			</aux>
+			<aux name="InitiÃ«le_Totale_Expertise_Ervaren_Medewerkers">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	700					</eqn>
+			</aux>
+			<aux name="InitiÃ«le_Totale_Expertise_Nieuwe_Medewerkers">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	175					</eqn>
+			</aux>
+			<aux name="Jaarlijkse_doorstroom">
+				<units>Medewerkers/Jaar</units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="Managementnorm_Werkdruk">
+				<units>Dmnl</units>
+				<doc>Wat het MT vindt dat een goede werkdruk is</doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="Meldingen_afgewezen">
+				<units>Dossiers/Jaar</units>
+				<doc>Aantal Meldingen dat per jaar wordt afgewezen.</doc>
+					<eqn>
+	500					</eqn>
+			</aux>
+			<aux name="Minimale_Afhandelingstijd">
+				<units>Jaar</units>
+				<doc>Tijd die minimaal nodig is voor Afhandeling ongeacht de Beschikbare Capaciteit die er voor Afhandeling is. Hier gezet op twee weken</doc>
+					<eqn>
+	0.04					</eqn>
+			</aux>
+			<aux name="Minimale_Intaketijd">
+				<units>Jaar</units>
+				<doc>Tijd die minimaal nodig is voor de Intake, ongeacht de Beschikbare Capaciteit die er voor de Intake is. Is dus twee werkdagen</doc>
+					<eqn>
+	0.01					</eqn>
+			</aux>
+			<aux name="Nadruk_Ervaren_Medewerkers_voor_Intake">
+				<units>Dmnl</units>
+				<doc>Het percentage van het Werkpakket Intake dat door Ervaren Medewerkers wordt uitgevoerd (indien er voldoende ervaren medewerkers beschikbaar zijn). Default = 0.5</doc>
+					<eqn>
+	0.5					</eqn>
+			</aux>
+			<aux name="Noise_Correlation_Time">
+				<units>Jaar</units>
+				<doc>The correlation time constant for Pink Noise.</doc>
+					<eqn> 4					</eqn>
+			</aux>
+			<aux name="Noise_Standard_Deviation">
+				<units>Dimensionless</units>
+				<doc>The standard deviation of the pink noise process.</doc>
+					<eqn> 0					</eqn>
+			</aux>
+			<aux name="Noise_Start_Time">
+				<units>Jaar</units>
+				<doc>Start time for the random input.</doc>
+					<eqn> 5					</eqn>
+			</aux>
+			<aux name="Normaal_Verloopperc_Ervaren_Medewerkers">
+				<units>1/Jaar</units>
+				<doc>Het normale verlooppercentage van Ervaren Medewerkers.</doc>
+					<eqn>
+	0.12					</eqn>
+			</aux>
+			<aux name="Normaal_Verloopperc_Nieuwe_Medewerkers">
+				<units>1/Jaar</units>
+				<doc>Het normale verlooppercentage van Nieuwe Medewerkers.</doc>
+					<eqn>
+	0.1					</eqn>
+			</aux>
+			<aux name="Normale_Klanttevredenheid">
+				<units>Dimensionless</units>
+				<doc>De Klanttevredenheid die als uitgangspunt wordt genomen, op tijdstip 0 (als de simulatie begint).</doc>
+					<eqn>
+	5					</eqn>
+			</aux>
+			<aux name="Normale_Medewerker_tevredenheid">
+				<units>Dimensionless</units>
+				<doc>De medewerkertevredenheid die als uitgangspunt wordt genomen, op tijdstip 0 (als de simulatie begint).</doc>
+					<eqn>
+	6.6					</eqn>
+			</aux>
+			<aux name="Normale_Veroudering_Expertise_Ervaren_Medewerkers">
+				<units>1/Jaar</units>
+				<doc>Het normale percentage waarmee de expertise van ervaren medewerkers per jaar veroudert.</doc>
+					<eqn>
+	0.1					</eqn>
+			</aux>
+			<aux name="Normale_Veroudering_Expertise_Nieuwe_Medewerkers">
+				<units>1/Jaar</units>
+				<doc>Het normale percentage waarmee de expertise van nieuwe medewerkers per jaar veroudert.</doc>
+					<eqn>
+	0.1					</eqn>
+			</aux>
+			<aux name="Normale_Werkdruk">
+				<units>Dmnl</units>
+				<doc>De werkdruk die als uitgangspunt wordt genomen, op tijdstip 0 (als de simulatie begint).</doc>
+					<eqn>
+	0.8					</eqn>
+			</aux>
+			<aux name="Omrekenfactor_van_Week_naar_FTE">
+				<units>Weken/FTE</units>
+				<doc>1 FTE bestaat uit 50 (werk)weken.</doc>
+					<eqn>
+	50					</eqn>
+			</aux>
+			<aux name="Omrekenfactor_van_Week_naar_Werkjaar">
+				<units>Week/(Medewerker*Werkjaar)</units>
+				<doc>Een medewerker-werkjaar bestaat uit 50 weken.</doc>
+					<eqn>
+	50					</eqn>
+			</aux>
+			<aux name="Opleidingen_en_Zittingen_Ervaren_Medewerkers">
+				<units>Dmnl</units>
+				<doc>Het beschikbaarheidspercentage wordt verminderd doordat werknemers opleidingen volgen en zittingen bijwonen.</doc>
+					<eqn>
+	0.1					</eqn>
+			</aux>
+			<aux name="Opleidingen_en_Zittingen_Nieuwe_Medewerkers">
+				<units>Dmnl</units>
+				<doc>Het beschikbaarheidspercentage wordt verminderd doordat werknemers opleidingen volgen en zittingen bijwonen.</doc>
+					<eqn>
+	0.1					</eqn>
+			</aux>
+			<aux name="Perc_InitiÃ«le_Aantal_Nieuwe_Medewerkers">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.565					</eqn>
+			</aux>
+			<aux name="Perceptieinterval_Werkdruk">
+				<units>Jaar</units>
+				<doc>Hoe lang het duurt voordat medewerkers merken dat het echt drukker of rustiger wordt</doc>
+					<eqn>
+	0.125					</eqn>
+			</aux>
+			<aux name="Pulse_Inhuur_Omvang">
+				<units>Dmnl</units>
+				<doc>Een percentage waarmee de Inhuur toe- of afneemt op een bepaalde starttijd.</doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="Pulse_Inhuur_Starttijd">
+				<units>Jaar</units>
+				<doc>Het tijdstip waarop de Pulse plaatsvindt.</doc>
+					<eqn>
+	2001					</eqn>
+			</aux>
+			<aux name="Pulse_Quantity">
+				<units>Jaar*Dimensionless</units>
+				<doc>The quantity to be injected to customer orders, as a fraction of the base value of Input. 
+        For example, to pulse in a quantity equal to 50% of the current value of input, set to
+         .50.</doc>
+					<eqn>0					</eqn>
+			</aux>
+			<aux name="Pulse_Time">
+				<units>Jaar</units>
+				<doc>Time at which the pulse in Input occurs.</doc>
+					<eqn>5					</eqn>
+			</aux>
+			<aux name="Ramp_End_Time">
+				<units>Jaar</units>
+				<doc>End time for the ramp input.</doc>
+					<eqn>1e+09					</eqn>
+			</aux>
+			<aux name="Ramp_Slope">
+				<units>1/Jaar</units>
+				<doc>Slope of the ramp input, as a fraction of the base value (per week).</doc>
+					<eqn>0					</eqn>
+			</aux>
+			<aux name="Ramp_Start_Time">
+				<units>Jaar</units>
+				<doc>Start time for the ramp input.</doc>
+					<eqn>5					</eqn>
+			</aux>
+			<aux name="Referentie_Expertise_van_Klant">
+				<units>Werkjaar</units>
+				<doc>De klant gaat er van uit dat medewerkers gemiddeld drie jaar ervaring hebben.</doc>
+					<eqn>
+	3					</eqn>
+			</aux>
+			<aux name="Referentie-Expertise_Nieuwe_Medewerkers">
+				<units>Werkjaar</units>
+				<doc>Het referentieniveau van Expertise dat past bij de Referentieproductiviteit.</doc>
+					<eqn>
+	0.2					</eqn>
+			</aux>
+			<aux name="Referentiedoorlooptijd_Afhandeling">
+				<units>Week</units>
+				<doc>Hoelang een dossier normaal gesproken in behandeling zou mogen zijn, gemiddeld. Dit gemiddelde kan heel wel betekenen dat sommige dossiers een jaar in behandeling zijn, andere maar een dag (bv Pareto of 80-20 verdeling).</doc>
+					<eqn>
+	25					</eqn>
+			</aux>
+			<aux name="Referentiedoorlooptijd_Intake">
+				<units>Week</units>
+				<doc>Hoelang een dossier normaal gesproken in intake zou mogen zijn, gemiddeld. Hier dus 1 week. Dit gemiddelde kan heel wel betekenen dat sommige dossiers langer in intake zijn, andere maar een dag (bv Pareto of 80-20 verdeling).</doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+			<aux name="Referentiedoorlooptijd_van_Klant">
+				<units>Weken</units>
+				<doc>De doorlooptijd waar een klant op rekent.</doc>
+					<eqn>
+	30					</eqn>
+			</aux>
+			<aux name="Sine_Amplitude">
+				<units>Dimensionless</units>
+				<doc>Amplitude of sine wave in customer orders (fraction of mean).</doc>
+					<eqn>0					</eqn>
+			</aux>
+			<aux name="Sine_Period">
+				<units>Jaar</units>
+				<doc>Period of sine wave in customer demand.  Set initially to 50 weeks (1 Jaar).</doc>
+					<eqn>50					</eqn>
+			</aux>
+			<aux name="Snelheid_van_Leren_door_Ervaren_Medewerkers">
+				<units>Dmnl</units>
+				<doc>De snelheid waarmee ervaren medewerkers leren. Dit kan een andere snelheid zijn dan de normale snelheid.</doc>
+					<eqn>
+	120					</eqn>
+			</aux>
+			<aux name="Snelheid_van_Leren_door_Nieuwe_Medewerkers">
+				<units>Dmnl</units>
+				<doc>De snelheid waarmee nieuwe medewerkers leren. Dit kan een andere snelheid zijn dan de normale snelheid.</doc>
+					<eqn>
+	90					</eqn>
+			</aux>
+			<aux name="Starttijd_Groei">
+				<units>Jaar</units>
+				<doc>Het moment waarop de Exogene Groei begint.</doc>
+					<eqn>
+	0.25					</eqn>
+			</aux>
+			<aux name="Step_Height">
+				<units>Dimensionless</units>
+				<doc>Height of step input to customer orders, as fraction of initial value.</doc>
+					<eqn>0					</eqn>
+			</aux>
+			<aux name="Step_Time">
+				<units>Jaar</units>
+				<doc>Time for the step input.</doc>
+					<eqn>5					</eqn>
+			</aux>
+			<aux name="Switch_voor_Reactief_Aannamebeleid">
+				<units>Dimensionless</units>
+				<doc>1 = Aannamebeleid wordt endogeen bepaald op basis van werkdruk. 0 = Aannamebeleid wordt ook exogeen bepaald op basis van BU Plan.</doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="Verandering_Veroudering_Expertise_Ervaren_Medewerkers">
+				<units>1/Jaar</units>
+				<doc>Een exogene verandering in de mate waarin de expertise van ervaren medewerkers per jaar veroudert.</doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="Verandering_Veroudering_Expertise_Nieuwe_Medewerkers">
+				<units>1/Jaar</units>
+				<doc>Een exogene verandering in de mate waarin de expertise van nieuwe medewerkers per jaar veroudert.</doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="Verouderingstijd_Expertise_Ervaren_Medewerkers">
+				<units>Jaar</units>
+				<doc>Het tijdstip waarop de normale veroudering van expertise verandert (door een exogene input).</doc>
+					<eqn>
+	0.25					</eqn>
+			</aux>
+			<aux name="Verouderingstijd_Expertise_Nieuwe_Medewerkers">
+				<units>Jaar</units>
+				<doc>Het tijdstip waarop de normale veroudering van expertise verandert (door een exogene input).</doc>
+					<eqn>
+	0.25					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

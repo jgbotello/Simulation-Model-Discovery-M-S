@@ -1,0 +1,83 @@
+[
+  {
+    "experiment_name": "xml__bm25",
+    "experiment_group": "lexical",
+    "representation": "xml",
+    "lexical_method": "bm25",
+    "n_queries": 15,
+    "elapsed_seconds": 0.04756139998789877,
+    "seconds_per_query": 0.003170759999193251
+  },
+  {
+    "experiment_name": "xml__tfidf",
+    "experiment_group": "lexical",
+    "representation": "xml",
+    "lexical_method": "tfidf",
+    "n_queries": 15,
+    "elapsed_seconds": 0.04534609999973327,
+    "seconds_per_query": 0.003023073333315551
+  },
+  {
+    "experiment_name": "xml__query_likelihood",
+    "experiment_group": "lexical",
+    "representation": "xml",
+    "lexical_method": "query_likelihood",
+    "n_queries": 15,
+    "elapsed_seconds": 0.03877619991544634,
+    "seconds_per_query": 0.0025850799943630894
+  },
+  {
+    "experiment_name": "json__bm25",
+    "experiment_group": "lexical",
+    "representation": "json",
+    "lexical_method": "bm25",
+    "n_queries": 15,
+    "elapsed_seconds": 0.03476780001074076,
+    "seconds_per_query": 0.002317853334049384
+  },
+  {
+    "experiment_name": "json__tfidf",
+    "experiment_group": "lexical",
+    "representation": "json",
+    "lexical_method": "tfidf",
+    "n_queries": 15,
+    "elapsed_seconds": 0.02647919999435544,
+    "seconds_per_query": 0.001765279999623696
+  },
+  {
+    "experiment_name": "json__query_likelihood",
+    "experiment_group": "lexical",
+    "representation": "json",
+    "lexical_method": "query_likelihood",
+    "n_queries": 15,
+    "elapsed_seconds": 0.02135719999205321,
+    "seconds_per_query": 0.0014238133328035474
+  },
+  {
+    "experiment_name": "json_narratives__bm25",
+    "experiment_group": "lexical",
+    "representation": "json_narratives",
+    "lexical_method": "bm25",
+    "n_queries": 15,
+    "elapsed_seconds": 0.04226720007136464,
+    "seconds_per_query": 0.002817813338090976
+  },
+  {
+    "experiment_name": "json_narratives__tfidf",
+    "experiment_group": "lexical",
+    "representation": "json_narratives",
+    "lexical_method": "tfidf",
+    "n_queries": 15,
+    "elapsed_seconds": 0.033845300087705255,
+    "seconds_per_query": 0.0022563533391803505
+  },
+  {
+    "experiment_name": "json_narratives__query_likelihood",
+    "experiment_group": "lexical",
+    "representation": "json_narratives",
+    "lexical_method": "query_likelihood",
+    "n_queries": 15,
+    "elapsed_seconds": 0.027817799942567945,
+    "seconds_per_query": 0.0018545199961711963
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "total_experiments": 243,
+  "total_queries": 15,
+  "total_elapsed_seconds": 10633.495280100033,
+  "average_seconds_per_experiment": 43.7592398358026,
+  "average_seconds_per_query_overall": 2.9172826557201734,
+  "total_index_build_seconds": 0.0,
+  "total_indexes_built_or_loaded": 81,
+  "recompute_embeddings": false,
+  "embeddings_dir": "embeddings"
+}

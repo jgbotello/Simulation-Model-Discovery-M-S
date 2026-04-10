@@ -1,0 +1,142 @@
+{UTF-8}
+poisoned=
+	witch density*Princesses
+	~	
+	~		|
+
+Princesses= INTEG (
+	+kissed by a prince-poisoned,
+		10)
+	~	
+	~		|
+
+kissed by a prince=
+	RANDOM UNIFORM(0, 0.02, 111)*Sleeping Beauties*princes
+	~	
+	~		|
+
+witch density=
+	0.3
+	~	 [0,0.5,0.01]
+	~		|
+
+Sleeping Beauties= INTEG (
+	poisoned-kissed by a prince,
+		5)
+	~	
+	~		|
+
+princes= INTEG (
+	kissed by a princess-whacked,
+		10)
+	~	
+	~		|
+
+frogs= INTEG (
+	+whacked-kissed by a princess,
+		5)
+	~	
+	~		|
+
+kissed by a princess=
+	RANDOM UNIFORM(0, 0.1 , 101)*Princesses*frogs
+	~	
+	~		|
+
+whacked=
+	RANDOM UNIFORM(0, 0.3 , 121 )*witch density*princes
+	~	
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 100
+	~	Month
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Month
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Month [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 1
+	~	Month [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,5,0
+10,1,princes,384,179,40,20,3,3,0,0,0,0,0,0
+10,2,frogs,170,192,40,20,3,3,0,0,0,0,0,0
+1,3,5,2,4,0,0,22,0,0,0,-1--1--1,,1|(170,120)|
+1,4,5,1,100,0,0,22,0,0,0,-1--1--1,,1|(384,120)|
+11,5,268,277,120,6,8,34,3,0,0,1,0,0,0
+10,6,whacked,277,138,33,10,40,131,0,0,-1,0,0,0
+1,7,9,1,4,0,0,22,0,0,0,-1--1--1,,1|(384,238)|
+1,8,9,2,100,0,0,22,0,0,0,-1--1--1,,1|(170,238)|
+11,9,252,283,238,6,8,34,3,0,0,1,0,0,0
+10,10,kissed by a princess,283,256,66,10,40,131,0,0,-1,0,0,0
+10,11,Princesses,406,512,40,20,3,3,0,0,0,0,0,0
+10,12,Sleeping Beauties,177,521,40,20,3,3,0,0,0,0,0,0
+1,13,15,11,4,0,0,22,0,0,0,-1--1--1,,1|(406,588)|
+1,14,15,12,100,0,0,22,0,0,0,-1--1--1,,1|(177,588)|
+11,15,204,283,588,6,8,34,3,0,0,1,0,0,0
+10,16,kissed by a prince,283,606,66,10,40,131,0,0,-1,0,0,0
+1,17,19,12,4,0,0,22,0,0,0,-1--1--1,,1|(177,455)|
+1,18,19,11,100,0,0,22,0,0,0,-1--1--1,,1|(406,455)|
+11,19,188,281,455,6,8,34,3,0,0,1,0,0,0
+10,20,poisoned,281,475,47,12,40,131,0,0,-1,0,0,0
+1,21,11,10,1,0,0,0,0,64,0,-1--1--1,,1|(432,336)|
+1,22,1,16,1,0,0,0,0,64,0,-1--1--1,,1|(575,418)|
+10,23,witch density,180,355,49,12,8,131,0,0,0,0,0,0
+1,24,23,6,1,0,0,0,0,64,0,-1--1--1,,1|(101,136)|
+1,25,23,19,1,0,0,0,0,64,0,-1--1--1,,1|(281,369)|
+1,26,11,20,1,0,0,0,0,64,0,-1--1--1,,1|(290,502)|
+1,27,1,6,1,0,0,0,0,64,0,-1--1--1,,1|(296,175)|
+1,28,12,15,1,0,0,0,0,64,0,-1--1--1,,1|(278,552)|
+1,29,2,9,1,0,0,0,0,64,0,-1--1--1,,1|(272,207)|
+12,30,0,730,192,150,150,3,44,0,0,1,0,0,0
+Far_Far_Away
+///---\\\
+:GRAPH Far_Far_Away
+:TITLE Far Far Away
+:X-AXIS Time
+:SCALE
+:VAR princes
+:Y-MIN 0
+:Y-MAX 30
+:LINE-WIDTH 2
+:VAR Princesses
+:Y-MIN 0
+:Y-MAX 30
+:LINE-WIDTH 2
+:VAR frogs
+:LINE-WIDTH 2
+:VAR Sleeping Beauties
+:LINE-WIDTH 2
+:L<%^E!@
+1:Current.vdf
+9:Current
+23:0
+15:0,0,0,0,0,0
+19:5,0
+27:2,
+34:0,
+4:Time
+5:whacked
+24:0
+25:100
+26:100

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Minute">
+		<start> 0</start>
+		<stop> 10</stop>
+		<dt> 1</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="water_in_air">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					evaporation
+					</inflow>
+					<outflow>
+					condensation
+					</outflow>
+					<outflow>
+					water vapor leak
+					</outflow>
+			</stock>
+			<stock name="water_in_pan">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					100
+					</eqn>
+					<inflow>
+					precipitation
+					</inflow>
+					<outflow>
+					evaporation
+					</outflow>
+			</stock>
+			<stock name="water_on_cover">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					condensation
+					</inflow>
+					<outflow>
+					precipitation
+					</outflow>
+			</stock>
+			<aux name="condensation">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	k_1*water_in_air					</eqn>
+			</aux>
+			<aux name="evaporation">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	water_temperature*amount_of_evaporation_per_degree					</eqn>
+			</aux>
+			<aux name="precipitation">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	k_2*water_on_cover					</eqn>
+			</aux>
+			<aux name="total_water">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	water_in_air+water_in_pan+water_on_cover					</eqn>
+			</aux>
+			<aux name="amount_of_evaporation_per_degree">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.05					</eqn>
+			</aux>
+			<aux name="k_1">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.5					</eqn>
+			</aux>
+			<aux name="k_2">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.5					</eqn>
+			</aux>
+			<aux name="water_temperature">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	100					</eqn>
+			</aux>
+			<aux name="water_vapor_leak">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

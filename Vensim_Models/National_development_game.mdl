@@ -1,0 +1,632 @@
+{UTF-8}
+state=
+	if then else( pc income corrected for interest payments > state 0,  
+	if then else( pc income corrected for interest payments > state 1, 
+	if then else( pc income corrected for interest payments > state 2,
+	if then else( pc income corrected for interest payments > state 3,
+	if then else( pc income corrected for interest payments > state 4,
+	if then else( pc income corrected for interest payments > state 5,  
+	if then else( pc income corrected for interest payments > state 6,  
+	if then else( pc income corrected for interest payments > state 7, 7, 7), 6), 5), 4)\
+		, 3), 2), 1), 0)
+	~	
+	~		|
+
+state 0=
+	-300
+	~	
+	~		|
+
+state 1=
+	-100
+	~	
+	~		|
+
+state 2=
+	100
+	~	
+	~		|
+
+state 3=
+	299
+	~	
+	~		|
+
+change in education=
+	(target education-education relative to optimum)/education investment delay
+	~	dmnl/Year
+	~		|
+
+state 5=
+	500
+	~	
+	~		|
+
+state 6=
+	700
+	~	
+	~		|
+
+state 7=
+	1000
+	~	
+	~		|
+
+state 4=
+	380
+	~	
+	~		|
+
+show reset button=
+	min(if then else(Time = FINAL TIME, 1, 0 ) + if then else(state = 7, 1, 0 ) , 1)
+	~	
+	~		|
+
+change in health=
+	(target health-health relative to optimum)/health investment delay
+	~	dmnl/Year
+	~		|
+
+roads relative to optimum= INTEG (
+	change in roads,
+		0.3)
+	~	dmnl
+	~		|
+
+education relative to optimum= INTEG (
+	change in education,
+		0.3)
+	~	dmnl
+	~		|
+
+change in roads=
+	(target roads-roads relative to optimum)/roads investment delay
+	~	dmnl/Year
+	~		|
+
+health relative to optimum= INTEG (
+	change in health,
+		0.3)
+	~	dmnl
+	~		|
+
+capital investment=
+	per capita savings*effect of investment environment on capital investment*cost effectiveness of capital investment
+	~	dmnl/Year
+	~		|
+
+effect of roads on investment environment=
+	resources effect table(roads relative to optimum)
+	~	dmnl
+	~		|
+
+pc income corrected for interest payments=
+	per capita income-interest payment on debt
+	~	$/Year
+	~		~	:SUPPLEMENTARY 
+	|
+
+interest payment on debt=
+	debt per capita*interest rate
+	~	$/Year
+	~		|
+
+interest rate=
+	interest rate table(debt over gdp ratio)
+	~	dmnl/Year
+	~		|
+
+effect of health on investment environment=
+	resources effect table(health relative to optimum)
+	~	dmnl
+	~		|
+
+effect of investment environment on capital investment=
+	relative investment environment^elasticity of investment to environment
+	~	dmnl
+	~		|
+
+investment environment=
+	(effect of education on investment environment+effect of health on investment environment\
+		+effect of roads on investment environment)/3
+	~	dmnl
+	~		|
+
+target roads=
+	desired budget for roads*cost effectiveness of resource investments
+	~	dmnl
+	~		|
+
+per capita income=
+	INITIAL pc income*capital per capita^elasticity of income to capital*total factor productivity
+	~	$/Year
+	~		|
+
+total desired budget per capita=
+	desired budget for education+desired budget for health+desired budget for roads
+	~	$/Year
+	~		|
+
+relative investment environment=
+	investment environment/initial investment environment
+	~	dmnl
+	~		|
+
+surplus or deficit=
+	government development budget per capita-total desired budget per capita
+	~	$/Year
+	~	IF THEN ELSE(Time<10+TIME STEP, BUD D 0, 0)+
+		IF THEN ELSE(Time>10 :AND: Time<20+TIME STEP, BUD D 10,0)+
+		IF THEN ELSE(Time>20 :AND: Time<30+TIME STEP, BUD D 20,0)+
+		IF THEN ELSE(Time>30 :AND: Time<40+TIME STEP, BUD D 30,0)+
+		IF THEN ELSE(Time>40 , BUD D 40,0)
+	|
+
+target education=
+	desired budget for education*cost effectiveness of resource investments
+	~	dmnl
+	~		|
+
+target health=
+	desired budget for health*cost effectiveness of resource investments
+	~	dmnl
+	~		|
+
+effect of education on investment environment=
+	resources effect table(education relative to optimum)
+	~	dmnl
+	~		|
+
+per capita savings=
+	per capita income*propensity to save
+	~	$/Year
+	~		|
+
+total factor productivity=
+	education relative to optimum^elasticity of productivity to education*health relative to optimum\
+		^elasticity of productivity to health*roads relative to optimum^elasticity of productivity to roads
+	~	dmnl
+	~		|
+
+desired budget for roads= GAME (
+	30)
+	~	$/Year
+	~		|
+
+desired budget for health= GAME (
+	30)
+	~	$/Year
+	~		|
+
+desired budget for education= GAME (
+	30)
+	~	$/Year
+	~		|
+
+borrowing=
+	if then else(surplus or deficit<0, -surplus or deficit,0)
+	~	$/Year
+	~		|
+
+cost effectiveness of capital investment=
+	0.001
+	~	dmnl/$
+	~		|
+
+cost effectiveness of resource investments=
+	0.01
+	~	Year/$
+	~		|
+
+debt per capita= INTEG (
+	borrowing-paying back,
+		0)
+	~	$
+	~		|
+
+debt over gdp ratio=
+	debt per capita/per capita income
+	~	Year
+	~		|
+
+elasticity of productivity to education=
+	0.275
+	~	dmnl
+	~		|
+
+education investment delay=
+	15
+	~	Year
+	~		|
+
+elasticity of investment to environment=
+	3
+	~	dmnl
+	~		|
+
+government development budget per capita=
+	per capita income*tax rate-interest payment on debt
+	~	$/Year
+	~		|
+
+elasticity of productivity to health=
+	0.225
+	~	dmnl
+	~		|
+
+health investment delay=
+	7
+	~	Year
+	~		|
+
+initial investment environment= INITIAL(
+	investment environment)
+	~	dmnl
+	~		|
+
+initial capital per capita=
+	0.3
+	~	dmnl
+	~		|
+
+INITIAL pc income=
+	1000
+	~	$/Year
+	~		|
+
+interest rate table(
+	[(0,0)-(5,0.3)],(0,0.01),(0.5,0.01),(1,0.025),(2,0.085),(3,0.125),(4,0.15))
+	~	dmnl/Year
+	~		|
+
+capital per capita= INTEG (
+	capital investment-capital depreciation,
+		initial capital per capita)
+	~	dmnl
+	~		|
+
+capital depreciation=
+	capital per capita/capital depreciation time
+	~	dmnl/Year
+	~		|
+
+capital depreciation time=
+	25
+	~	Year
+	~		|
+
+elasticity of income to capital=
+	0.3
+	~	dmnl
+	~		|
+
+paying back=
+	if then else(surplus or deficit>0 :AND: debt per capita>0, surplus or deficit,0)
+	~	$/Year
+	~		|
+
+propensity to save=
+	0.04
+	~	dmnl
+	~		|
+
+elasticity of productivity to roads=
+	0.2
+	~	dmnl
+	~		|
+
+roads investment delay=
+	3
+	~	Year
+	~		|
+
+resources effect table(
+	[(0,0)-(1,1)],(0.15,0),(0.3,0.6),(0.33,0.7),(0.36,0.75),(0.4,0.8),(0.449541,0.842105\
+		),(0.501529,0.885965),(0.565749,0.921053),(0.629969,0.947368),(0.685015,0.964912),(\
+		0.749235,0.97807),(1,1))
+	~	dmnl
+	~		|
+
+tax rate=
+	0.3
+	~	dmnl
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 2060
+	~	Year
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 2010
+	~	Year
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 1
+	~	Year [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 0.0625
+	~	Year [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,88,0
+10,1,capital per capita,579,-124,40,20,3,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+10,2,education relative to optimum,579,37,40,25,3,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+10,3,health relative to optimum,579,177,38,26,3,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+10,4,roads relative to optimum,579,321,39,24,3,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+10,5,debt per capita,579,458,40,20,3,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+12,6,48,356,-123,10,8,0,3,0,32,-1,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,7,9,1,4,0,0,22,0,0,0,-1--1--1,,1|(494,-123)|
+1,8,9,6,100,0,0,22,0,0,0,-1--1--1,,1|(402,-123)|
+11,9,48,444,-123,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,10,capital investment,444,-97,49,18,40,3,0,32,-1,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+12,11,48,813,-124,10,8,0,3,0,32,-1,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,12,14,11,4,0,0,22,0,0,0,-1--1--1,,1|(756,-124)|
+1,13,14,1,100,0,0,22,0,0,0,-1--1--1,,1|(658,-124)|
+11,14,48,703,-124,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,15,capital depreciation,703,-98,54,18,40,3,0,32,-1,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+12,16,48,350,462,10,8,0,3,0,32,-1,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,17,19,5,4,0,0,22,0,0,0,-1--1--1,,1|(499,462)|
+1,18,19,16,100,0,0,22,0,0,0,-1--1--1,,1|(404,462)|
+11,19,48,454,462,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,20,borrowing,454,480,42,10,40,3,0,32,-1,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+12,21,48,792,457,10,8,0,3,0,32,-1,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,22,24,21,4,0,0,22,0,0,0,-1--1--1,,1|(746,457)|
+1,23,24,5,100,0,0,22,0,0,0,-1--1--1,,1|(659,457)|
+11,24,48,705,457,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,25,paying back,705,475,50,10,40,3,0,32,-1,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+10,26,per capita income,1078,170,44,18,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+10,27,government development budget per capita,1057,315,89,27,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+10,28,tax rate,986,395,36,10,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,29,26,27,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,30,28,27,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,31,surplus or deficit,781,411,43,18,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,32,31,20,1,0,0,0,0,64,0,-1--1--1,,1|(560,426)|
+1,33,31,25,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,34,cost effectiveness of resource investments,367,334,80,27,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+10,35,education investment delay,724,4,75,18,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+10,36,health investment delay,773,130,75,18,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+10,37,roads investment delay,736,315,75,18,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+10,38,desired budget for education,809,53,65,18,8,3,0,34,0,0,0,0,0-0-0,0-0-0,Verdana|||255-128-0,0,0,0,0,0,0
+10,39,desired budget for health,834,207,65,18,8,3,0,34,0,0,0,0,0-0-0,0-0-0,Verdana|||255-128-0,0,0,0,0,0,0
+10,40,desired budget for roads,724,351,65,18,8,3,0,34,0,0,0,0,0-0-0,0-0-0,Verdana|||255-128-0,0,0,0,0,0,0
+1,41,38,63,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,42,39,64,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,43,40,82,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,44,propensity to save,897,-128,58,18,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,45,1,15,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,46,5,25,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,47,investment environment,137,99,55,18,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,48,44,114,1,0,0,0,0,64,0,-1--1--1,,1|(874,-90)|
+1,49,26,114,1,0,0,0,0,64,0,-1--1--1,,1|(994,-1)|
+10,50,capital depreciation time,738,-172,76,18,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,51,50,15,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,52,elasticity of investment to environment,220,-139,62,27,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,53,52,115,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,54,2,113,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,55,3,113,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,56,elasticity of income to capital,1157,109,75,18,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+10,57,elasticity of productivity to education,870,-14,64,27,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+10,58,elasticity of productivity to health,1003,91,64,27,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,59,56,26,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,60,57,113,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,61,58,113,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,62,1,26,1,0,0,0,0,64,0,-1--1--1,,1|(844,-221)|
+10,63,target education,501,112,43,18,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+10,64,target health,498,230,58,10,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+10,65,interest payment on debt,1063,544,52,27,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+10,66,debt over gdp ratio,767,533,42,18,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,67,5,66,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,68,26,66,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,69,interest rate table,765,623,57,18,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,70,69,119,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,71,66,119,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,72,5,65,1,0,0,0,0,64,0,-1--1--1,,1|(675,632)|
+10,73,resources effect table,381,192,51,18,8,3,0,32,-1,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+10,74,initial investment environment,263,31,55,27,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,75,47,74,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+10,76,initial capital per capita,499,-199,55,18,8,3,0,32,-1,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,77,76,1,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+1,78,4,113,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,79,elasticity of productivity to roads,963,29,64,27,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,80,79,113,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,81,36,141,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,82,target roads,525,392,55,10,8,131,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,83,37,146,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,84,82,146,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,85,34,63,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,86,34,64,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,87,34,82,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,88,27,31,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,89,40,111,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,90,39,111,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,91,38,111,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,92,INITIAL pc income,1173,259,47,18,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,93,92,26,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,94,cost effectiveness of capital investment,346,-197,80,27,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,95,94,10,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,96,effect of education on investment environment,407,41,83,27,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+10,97,effect of health on investment environment,305,120,82,27,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+10,98,effect of roads on investment environment,321,252,79,27,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,99,73,96,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,100,2,96,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,101,73,97,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,102,3,97,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,103,73,98,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,104,96,47,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,105,97,47,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,106,98,47,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,107,relative investment environment,185,-44,55,27,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,108,74,107,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,109,47,107,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,110,107,115,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,111,total desired budget per capita,934,259,77,18,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,112,111,31,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,113,total factor productivity,905,136,52,18,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+10,114,per capita savings,846,-57,44,18,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+10,115,effect of investment environment on capital investment,409,-38,99,27,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,116,115,10,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,117,114,10,1,0,0,0,0,64,0,-1--1--1,,1|(660,-48)|
+1,118,113,26,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,119,interest rate,884,566,56,10,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,120,119,65,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,121,pc income corrected for interest payments,1154,415,80,27,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,122,26,121,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,123,65,121,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,124,4,98,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+12,125,0,158,189,150,150,3,44,0,32,1,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+PC_INCOME
+12,126,0,1245,-144,150,150,3,44,0,32,1,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+RESOURCES
+12,127,0,1266,165,150,150,3,44,0,32,1,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+DEVELOPMENT_BUDGET
+12,128,0,1245,483,150,150,3,44,0,32,1,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+DEBT_OVER_GDP
+12,129,48,579,-45,10,8,0,3,0,32,-1,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,130,132,2,4,0,0,22,0,0,0,-1--1--1,,1|(579,1)|
+1,131,132,129,100,0,0,22,0,0,0,-1--1--1,,1|(579,-29)|
+11,132,48,579,-16,8,6,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,133,change in education,630,-16,43,18,40,3,0,32,-1,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,134,2,133,1,0,0,0,0,64,0,-1--1--1,,1|(632,9)|
+1,135,63,133,1,0,0,0,0,64,0,-1--1--1,,1|(502,1)|
+1,136,35,133,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+12,137,48,579,86,10,8,0,3,0,32,-1,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,138,140,3,4,0,0,22,0,0,0,-1--1--1,,1|(579,138)|
+1,139,140,137,100,0,0,22,0,0,0,-1--1--1,,1|(579,103)|
+11,140,48,579,119,8,6,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,141,change in health,629,119,42,18,40,3,0,32,-1,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+12,142,48,579,244,10,8,0,3,0,32,-1,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,143,145,4,4,0,0,22,0,0,0,-1--1--1,,1|(579,286)|
+1,144,145,142,100,0,0,22,0,0,0,-1--1--1,,1|(579,257)|
+11,145,48,579,269,8,6,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,146,change in roads,629,269,42,18,40,3,0,32,-1,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,147,3,141,1,0,0,0,0,64,0,-1--1--1,,1|(598,148)|
+1,148,64,141,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,149,4,146,1,0,0,0,0,64,0,-1--1--1,,1|(602,291)|
+1,150,65,27,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,151,show reset button,153,447,49,18,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+10,152,FINAL TIME,227,503,34,18,8,2,0,35,-1,0,0,0,128-128-128,0-0-0,Verdana|||128-128-128,0,0,0,0,0,0
+1,153,152,151,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,154,Time,92,510,35,10,8,2,0,35,-1,0,0,0,128-128-128,0-0-0,Verdana|||128-128-128,0,0,0,0,0,0
+1,155,154,151,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,156,state,255,595,25,10,8,3,0,32,0,0,0,0,0-0-0,0-0-0,Verdana|||0-0-0,0,0,0,0,0,0
+1,157,121,156,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,158,state 0,278,679,24,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,159,state 1,261,721,24,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,160,state 2,386,707,24,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,161,state 3,385,659,24,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,162,state 4,472,728,24,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,163,state 5,453,681,24,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,164,state 6,468,636,24,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,165,state 7,601,695,24,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,166,160,156,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,167,161,156,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,168,162,156,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,169,159,156,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,170,163,156,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,171,164,156,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,172,165,156,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,173,156,151,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,174,158,156,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+///---\\\
+:GRAPH RESOURCES
+:TITLE resources
+:X-DIV 5
+:X-MIN 2010
+:X-MAX 2060
+:SCALE
+:VAR Education Relative To Optimum
+:Y-MIN 0
+:Y-MAX 1
+:DATASET 
+:VAR Health Relative To Optimum
+:DATASET 
+:VAR Roads Relative To Optimum
+:DATASET 
+
+:GRAPH DEVELOPMENT_BUDGET
+:TITLE development budget
+:SCALE
+:VAR budget for e
+:Y-MIN 0
+:DATASET 
+:VAR budget for h
+:DATASET 
+:VAR budget for r
+:DATASET 
+
+:GRAPH DEBT_OVER_GDP
+:TITLE debt over gdp
+:X-DIV 5
+:X-MIN 2010
+:X-MAX 2060
+:SCALE
+:VAR debt over gdp ratio
+:Y-MIN 0
+:Y-MAX 5
+:DATASET 
+
+:GRAPH PC_INCOME
+:TITLE pc income
+:X-DIV 5
+:X-MIN 2010
+:X-MAX 2060
+:SCALE
+:VAR per capita income
+:Y-MIN 0
+:Y-MAX 1200
+:DATASET 
+:L<%^E!@
+4:Time
+5:show reset button
+9:test
+19:88,0
+24:2010
+25:2060
+26:2060
+22:$,Dollar,Dollars,$s
+22:Hour,Hours
+22:Month,Months
+22:Person,People,Persons
+22:Unit,Units
+22:Week,Weeks
+22:Year,Years
+22:Day,Days
+11:BELND-Really-Simple-4.voc
+12:BELND-Really-Simple.vpd
+23:0
+15:0,0,0,0,0,0
+27:0,
+34:0,
+42:0
+72:0
+73:0
+95:0
+96:0
+97:0
+77:0
+78:0
+102:1
+93:0
+94:0
+92:0
+91:0
+90:0
+87:0
+75:
+43:
+103:8,8,8,3,8
+105:0,0,0,0,0,0,0,0,0,0
+104:Courier|12||0-0-0|0-0-0|-1--1--1|0-0-255|192-192-192|-1--1--1

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Year">
+		<start> 0</start>
+		<stop> 50</stop>
+		<dt> 0.015625</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="Infecteds">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					1
+					</eqn>
+					<inflow>
+					infection
+					</inflow>
+					<outflow>
+					infecteds die
+					</outflow>
+					<outflow>
+					recovery
+					</outflow>
+			</stock>
+			<stock name="Recovereds">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					recovery
+					</inflow>
+					<outflow>
+					lose immunity
+					</outflow>
+					<outflow>
+					recovereds die
+					</outflow>
+			</stock>
+			<stock name="Susceptibles">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					999
+					</eqn>
+					<inflow>
+					births
+					</inflow>
+					<inflow>
+					lose immunity
+					</inflow>
+					<outflow>
+					infection
+					</outflow>
+					<outflow>
+					susceptibles die
+					</outflow>
+			</stock>
+			<aux name="births">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	birth_rate*Susceptibles					</eqn>
+			</aux>
+			<aux name="infecteds_die">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	death_rate*Infecteds					</eqn>
+			</aux>
+			<aux name="infection">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	infection_probability*(Susceptibles*Infecteds)					</eqn>
+			</aux>
+			<aux name="lose_immunity">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	LoI_fraction*Recovereds					</eqn>
+			</aux>
+			<aux name="recovereds_die">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	(0.5*death_rate)*Recovereds					</eqn>
+			</aux>
+			<aux name="recovery">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	recovery_rate*Infecteds					</eqn>
+			</aux>
+			<aux name="susceptibles_die">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	(0.25*death_rate)*Susceptibles					</eqn>
+			</aux>
+			<aux name="Total_Population">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Infecteds+Recovereds+Susceptibles					</eqn>
+			</aux>
+			<aux name="birth_rate">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.159					</eqn>
+			</aux>
+			<aux name="death_rate">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.086					</eqn>
+			</aux>
+			<aux name="infection_probability">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.002					</eqn>
+			</aux>
+			<aux name="LoI_fraction">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="recovery_rate">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.1					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

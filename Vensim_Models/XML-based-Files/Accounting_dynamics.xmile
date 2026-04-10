@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Year">
+		<start> 0</start>
+		<stop> 35</stop>
+		<dt> 0.03125</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="Accum_Capital_Productivity">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					5972
+					</eqn>
+					<inflow>
+					incr accum capital productivity
+					</inflow>
+					<outflow>
+					decr accum capital productivity
+					</outflow>
+			</stock>
+			<stock name="av_sales">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					sales
+					</eqn>
+			</stock>
+			<stock name="cume_Investment">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					initial_cume_Investment
+					</eqn>
+					<inflow>
+					depreciable asset starts
+					</inflow>
+			</stock>
+			<stock name="Cume_RD">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					rd depreciation
+					</inflow>
+			</stock>
+			<stock name="Depreciable_Assets_Completed">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					813
+					</eqn>
+					<inflow>
+					depreciable asset completion
+					</inflow>
+					<outflow>
+					depreciation
+					</outflow>
+			</stock>
+			<stock name="Depreciable_Assets_in_Process">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					initial_depreciable_assets_in_process
+					</eqn>
+					<inflow>
+					depreciable asset starts
+					</inflow>
+					<outflow>
+					depreciable asset completion
+					</outflow>
+			</stock>
+			<stock name="Financial_Assets">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					incr financial assets
+					</inflow>
+					<outflow>
+					decr financial assets
+					</outflow>
+			</stock>
+			<stock name="Potential_Capital_Improvement">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					Depreciable_Assets_Completed*initial_potential_capital_improvement*capital_productivity
+					</eqn>
+					<inflow>
+					incr capital improvement
+					</inflow>
+					<outflow>
+					decr potential capital improvement
+					</outflow>
+			</stock>
+			<stock name="RD_Capital">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					initial_RD_capital
+					</eqn>
+					<inflow>
+					incr RD capital
+					</inflow>
+					<outflow>
+					rd depreciation
+					</outflow>
+			</stock>
+			<stock name="RD_in_Process">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					initial_rd_pipeline
+					</eqn>
+					<inflow>
+					RD starts
+					</inflow>
+					<outflow>
+					incr RD capital
+					</outflow>
+			</stock>
+			<aux name="av_capital_productivity">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Accum_Capital_Productivity/Depreciable_Assets_Completed					</eqn>
+			</aux>
+			<aux name="av_potential_improvement">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	zidz(Potential_Capital_Improvement,Depreciable_Assets_Completed)					</eqn>
+			</aux>
+			<aux name="capital_productivity">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	av_capital_productivity+effect_rgdp_growth					</eqn>
+			</aux>
+			<aux name="cash_flow">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	gross_cash_flow-depreciable_asset_completion-RD					</eqn>
+			</aux>
+			<aux name="decr_accum_capital_productivity">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	depreciation*av_capital_productivity					</eqn>
+			</aux>
+			<aux name="decr_fa_dividends">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	gross_cash_flow*frac_cf_to_dividend					</eqn>
+			</aux>
+			<aux name="decr_fa_from_stock_repurchase">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	gross_cash_flow*frac_cf_to_stock_repurch					</eqn>
+			</aux>
+			<aux name="decr_financial_assets">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	depreciable_asset_starts+decr_fa_dividends+decr_fa_from_stock_repurchase					</eqn>
+			</aux>
+			<aux name="decr_potential_capital_improvement">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	depreciation*av_potential_improvement+Accum_Capital_Productivity*av_potential_improvement*capital_productivity_adjust					</eqn>
+			</aux>
+			<aux name="depletion_effect">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	(cume_Investment/initial_cume_Investment)^depletion_effect_exponent					</eqn>
+			</aux>
+			<aux name="depreciable_asset_completion">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Depreciable_Assets_in_Process/investment_completion_time					</eqn>
+			</aux>
+			<aux name="depreciable_asset_starts">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	(max(gross_cash_flow,0)*ploughback_fraction)*effect_cap_prod_plough_back					</eqn>
+			</aux>
+			<aux name="depreciable_assets">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Depreciable_Assets_Completed					</eqn>
+			</aux>
+			<aux name="depreciation">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	DELAY3I(depreciable_asset_completion, av_life_asset, Depreciable_Assets_Completed/av_life_asset )					</eqn>
+			</aux>
+			<aux name="effect_cap_prod_plough_back">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	2*exp(100*(expected_return-0.1)*ploughback_exponent)/(1+exp(100*(expected_return-0.1)*ploughback_exponent))					</eqn>
+			</aux>
+			<aux name="effect_RD_capital_productivity">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	(RD_Capital/initial_RD_capital)^rd_exponent					</eqn>
+			</aux>
+			<aux name="effect_rgdp_growth">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	if_then_else(Time > 25,0,smooth(rdgp_exponent*(0),rgdp_smooth_time))					</eqn>
+			</aux>
+			<aux name="expected_capital_productivity">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	marginal_capital_productivity					</eqn>
+			</aux>
+			<aux name="expected_cash_flow">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	expected_capital_productivity*(1-expected_cogs-expected_sga_pct)					</eqn>
+			</aux>
+			<aux name="expected_cogs">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	cogs_pct					</eqn>
+			</aux>
+			<aux name="expected_return">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	smooth3I(expected_cash_flow-1/av_life_asset,expected_ROI_smooth_time,0.11)					</eqn>
+			</aux>
+			<aux name="expected_reurn_scaled">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	expected_return*100					</eqn>
+			</aux>
+			<aux name="expected_sga_pct">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	sga_pct					</eqn>
+			</aux>
+			<aux name="gross_cash_flow">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	operating_profit-rental_expense					</eqn>
+			</aux>
+			<aux name="gross_profit">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	sales*(1-cogs_pct)					</eqn>
+			</aux>
+			<aux name="incr_accum_capital_productivity">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	depreciable_asset_completion*marginal_capital_productivity+Accum_Capital_Productivity
+	*av_potential_improvement*capital_productivity_adjust					</eqn>
+			</aux>
+			<aux name="incr_capital_improvement">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	depreciable_asset_completion*potential_improvement_per_unit*marginal_capital_productivity					</eqn>
+			</aux>
+			<aux name="incr_financial_assets">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	gross_cash_flow+incr_fa_from_stock_sales+incr_fa_from_new_debt					</eqn>
+			</aux>
+			<aux name="incr_RD_capital">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	DELAY3(RD_starts, RD_completion_time)					</eqn>
+			</aux>
+			<aux name="investment_coverage">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	depreciable_asset_completion/baseline_investment_coverage					</eqn>
+			</aux>
+			<aux name="marginal_capital_productivity">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	(base_capital_productivity*effect_RD_capital_productivity*depletion_effect*exp(investment_coverage
+	*capital_productivity_exponent))					</eqn>
+			</aux>
+			<aux name="net_cash_flow">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	incr_financial_assets-decr_financial_assets					</eqn>
+			</aux>
+			<aux name="operating_profit">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	gross_profit-sga					</eqn>
+			</aux>
+			<aux name="RD">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	gross_cash_flow*rd_pct					</eqn>
+			</aux>
+			<aux name="rd_depreciation">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	DELAY3(incr_RD_capital, rd_life)					</eqn>
+			</aux>
+			<aux name="RD_starts">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	RD					</eqn>
+			</aux>
+			<aux name="rental_expense">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	sales*rental_expense_pct					</eqn>
+			</aux>
+			<aux name="sales">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Depreciable_Assets_Completed*capital_productivity					</eqn>
+			</aux>
+			<aux name="sales_growth">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	(sales-av_sales)/av_sales					</eqn>
+			</aux>
+			<aux name="sales_growth_smoothed">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	smooth(sales_growth,5)					</eqn>
+			</aux>
+			<aux name="sga">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	sales*sga_pct					</eqn>
+			</aux>
+			<aux name="Accum_Capital_Productivity_driving">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	2000					</eqn>
+			</aux>
+			<aux name="av_life_asset">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	9					</eqn>
+			</aux>
+			<aux name="base_capital_productivity">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1.186					</eqn>
+			</aux>
+			<aux name="baseline_investment_coverage">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1000					</eqn>
+			</aux>
+			<aux name="capital_productivity_adjust">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.2					</eqn>
+			</aux>
+			<aux name="capital_productivity_exponent">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	-1.176					</eqn>
+			</aux>
+			<aux name="cogs_pct">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.34					</eqn>
+			</aux>
+			<aux name="depletion_effect_exponent">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	-7.479					</eqn>
+			</aux>
+			<aux name="Depreciable_Assets_Completed_driving">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	2000					</eqn>
+			</aux>
+			<aux name="Depreciable_Assets_in_Process_driving">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	2000					</eqn>
+			</aux>
+			<aux name="expected_ROI_smooth_time">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+			<aux name="frac_cf_to_dividend">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.2					</eqn>
+			</aux>
+			<aux name="frac_cf_to_stock_repurch">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.2					</eqn>
+			</aux>
+			<aux name="incr_fa_from_new_debt">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="incr_fa_from_stock_sales">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="initial_cume_Investment">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	30000					</eqn>
+			</aux>
+			<aux name="initial_depreciable_assets_in_process">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	2036					</eqn>
+			</aux>
+			<aux name="initial_potential_capital_improvement">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.413					</eqn>
+			</aux>
+			<aux name="initial_potential_investment2">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	5					</eqn>
+			</aux>
+			<aux name="initial_RD_capital">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	217					</eqn>
+			</aux>
+			<aux name="initial_rd_pipeline">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1447					</eqn>
+			</aux>
+			<aux name="investment_completion_time">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	9					</eqn>
+			</aux>
+			<aux name="ploughback_exponent">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="ploughback_fraction">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.039					</eqn>
+			</aux>
+			<aux name="Potential_Capital_driving">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	2000					</eqn>
+			</aux>
+			<aux name="potential_improvement_per_unit">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	12.92					</eqn>
+			</aux>
+			<aux name="potential_investment_driving">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1000					</eqn>
+			</aux>
+			<aux name="RD_completion_time">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	3.638					</eqn>
+			</aux>
+			<aux name="RD_driving">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.3					</eqn>
+			</aux>
+			<aux name="rd_exponent">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.4706					</eqn>
+			</aux>
+			<aux name="rd_life">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	14					</eqn>
+			</aux>
+			<aux name="rd_pct">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.2698					</eqn>
+			</aux>
+			<aux name="rdgp_exponent">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="rental_expense_pct">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.0241					</eqn>
+			</aux>
+			<aux name="rgdp_smooth_time">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="sga_pct">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.3697					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

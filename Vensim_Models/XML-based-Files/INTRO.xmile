@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Month">
+		<start> 0</start>
+		<stop> 100</stop>
+		<dt> 0.125</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="Average_Worker_Hours">
+				<units>Hour/Month</units>
+				<doc>   The average number of hours worked per week</doc>
+					<eqn>
+					normal_workweek
+					</eqn>
+					<inflow>
+					change in hours worked
+					</inflow>
+			</stock>
+			<stock name="Workforce">
+				<units>Person</units>
+				<doc>   The number of workers</doc>
+					<eqn>
+					target_production/normal_productivity
+					</eqn>
+					<inflow>
+					net hires
+					</inflow>
+			</stock>
+			<aux name="change_in_hours_worked">
+				<units>Hour/(Month*Month)</units>
+				<doc></doc>
+					<eqn>
+	(required_worker_hours-Average_Worker_Hours) / delay_in_adding_or_removing_overtime_hours					</eqn>
+			</aux>
+			<aux name="desired_workforce">
+				<units>Person</units>
+				<doc>   The desired number of workers.</doc>
+					<eqn>
+	ZIDZ( target_production, productivity)					</eqn>
+			</aux>
+			<aux name="morale">
+				<units>Dmnl</units>
+				<doc>   Morale - 1 is normal.</doc>
+					<eqn>
+	 morale_lookup(Average_Worker_Hours/normal_workweek)					</eqn>
+			</aux>
+			<aux name="net_hires">
+				<units>Person/Month</units>
+				<doc>   The net number of people hired (laid off if negative).</doc>
+					<eqn>
+	 (desired_workforce-Workforce)/time_to_hire_or_layoff					</eqn>
+			</aux>
+			<aux name="production">
+				<units>Widget/Month</units>
+				<doc>   Total amount produced.</doc>
+					<eqn>
+	 Workforce * required_worker_hours * productivity / normal_workweek					</eqn>
+			</aux>
+			<aux name="productivity">
+				<units>Widget/(Month*Person)</units>
+				<doc>   The amount each peson can produce given morale effects.</doc>
+					<eqn> normal_productivity*effect_of_morale_on_productivity_lookup(morale)					</eqn>
+			</aux>
+			<aux name="required_worker_hours">
+				<units>Hour/Month</units>
+				<doc>   The amount relative to normal that people have to work to
+         produce enough.</doc>
+					<eqn>
+	ZIDZ(target_production, Workforce*productivity) * normal_workweek					</eqn>
+			</aux>
+			<aux name="sales">
+				<units>Widget/Month</units>
+				<doc>   The total amount sold.</doc>
+					<eqn> IF_THEN_ELSE(Time > 20,120,100)					</eqn>
+			</aux>
+			<aux name="target_production">
+				<units>Widget/Month</units>
+				<doc>   The target amount produced.</doc>
+					<eqn> sales					</eqn>
+			</aux>
+			<aux name="effect_of_morale_on_productivity_lookup">
+				<units>Dmnl</units>
+				<doc>   The effect that morale has on the ability to produce\!\!\!</doc>
+<gf>
+<xpts>0.000000,1.000000,2.000000,2.634440,3.299090,3.975830</xpts>
+<ypts>0.000000,1.000000,2.000000,2.368420,2.526320,2.578950</ypts>
+</gf>
+			</aux>
+			<aux name="morale_lookup">
+				<units>Dmnl</units>
+				<doc>   Lookup relating the average level of overtime to morale.\!\!\!</doc>
+<gf>
+<xpts>0.000000,0.326284,0.495468,0.682779,0.839879,1.000000,1.148040,1.371600,1.667670,2.000000</xpts>
+<ypts>1.500000,1.438600,1.403510,1.320180,1.184210,1.000000,0.833333,0.640351,0.526316,0.500000</ypts>
+</gf>
+			</aux>
+			<aux name="delay_in_adding_or_removing_overtime_hours">
+				<units>Month</units>
+				<doc></doc>
+					<eqn>
+	3					</eqn>
+			</aux>
+			<aux name="normal_productivity">
+				<units>Widget/(Month*Person)</units>
+				<doc>   The normal amount produced in the absence of morale effects.</doc>
+					<eqn> 1					</eqn>
+			</aux>
+			<aux name="normal_workweek">
+				<units>Hour/Month</units>
+				<doc></doc>
+					<eqn>
+	40					</eqn>
+			</aux>
+			<aux name="time_to_hire_or_layoff">
+				<units>Month</units>
+				<doc></doc>
+					<eqn>
+	6					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

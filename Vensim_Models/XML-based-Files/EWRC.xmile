@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Day">
+		<start> 0</start>
+		<stop> 365</stop>
+		<dt> 1</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="Continental_Relief_Item_Storage">
+				<units>tent</units>
+				<doc>The stock of emergency tents stored in a warehouse. This is typically Dubai, for the region of Africa being considered</doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Stockpile Supply
+					</inflow>
+					<outflow>
+					Continental Relief Item Rate
+					</outflow>
+			</stock>
+			<stock name="Counter">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Counter Rate
+					</inflow>
+			</stock>
+			<stock name="Credibility_In_Early_Warning_System">
+				<units>credibility</units>
+				<doc>A credibility of early warning measured by the number of donating countries (or donors).</doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Credibility Rate
+					</inflow>
+			</stock>
+			<stock name="Decision_to_act_Counter">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Decision Rate
+					</inflow>
+			</stock>
+			<stock name="Event_Generator">
+				<units>Dmnl</units>
+				<doc>This is whether an event occurs are not</doc>
+					<eqn>
+					1
+					</eqn>
+					<outflow>
+					Event
+					</outflow>
+			</stock>
+			<stock name="Event_Occured">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Event
+					</inflow>
+			</stock>
+			<stock name="Flooded_Households">
+				<units>house</units>
+				<doc>The number of physical houses that are damaged</doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Flooding
+					</inflow>
+					<outflow>
+					House Refurbishment
+					</outflow>
+			</stock>
+			<stock name="Forecast_Lead_Time">
+				<units>Day</units>
+				<doc>This needs to be revised to be a step function with three values</doc>
+					<eqn>
+					60
+					</eqn>
+					<outflow>
+					Countdown to Event
+					</outflow>
+			</stock>
+			<stock name="House_Refurbishment">
+				<units>house/Day</units>
+				<doc>This is the rate at which houses recover from the flooding</doc>
+					<eqn>
+					House_Refurbishment=
+
+	DELAY_FIXED( Flooded_Households/Time_to_Dry, Time_to_Dry, 0)
+					</eqn>
+			</stock>
+			<stock name="Households_at_Risk">
+				<units>house</units>
+				<doc>The number of houses being considered. Both the physical (households) and people are being considered.</doc>
+					<eqn>
+					People_at_Risk/HH_Size
+					</eqn>
+					<outflow>
+					Flooding
+					</outflow>
+					<outflow>
+					House Refurbishment
+					</outflow>
+			</stock>
+			<stock name="HQ_Budget">
+				<units>$</units>
+				<doc>A large sum of money allocated for providing tent stockpiles.</doc>
+					<eqn>
+					300000
+					</eqn>
+					<inflow>
+					Funding Rate
+					</inflow>
+					<outflow>
+					Operating Expense
+					</outflow>
+					<outflow>
+					Relief Item Acquisition
+					</outflow>
+			</stock>
+			<stock name="Local_Relief_Items">
+				<units>tent</units>
+				<doc>The number of tents locally available for workers to mount.</doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Local Relief Item Rate
+					</inflow>
+					<outflow>
+					Item Provision Rate
+					</outflow>
+			</stock>
+			<stock name="People_at_Risk">
+				<units>people</units>
+				<doc>The number of people that area at risk. This is the product of the number of houses times the average household size</doc>
+					<eqn>
+					10000
+					</eqn>
+					<inflow>
+					People Returning
+					</inflow>
+					<outflow>
+					Event Displacing People
+					</outflow>
+			</stock>
+			<stock name="People_Needing_Relief_Items">
+				<units>people</units>
+				<doc>This is the number of people who need tent housing</doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Event Displacing People
+					</inflow>
+					<outflow>
+					Illness
+					</outflow>
+					<outflow>
+					People Item Supply
+					</outflow>
+			</stock>
+			<stock name="People_Receiving_Items">
+				<units>people</units>
+				<doc>The number of people housed in tents</doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					People Item Supply
+					</inflow>
+					<outflow>
+					People Returning
+					</outflow>
+			</stock>
+			<stock name="Regional_Relief_Item_Storage">
+				<units>tent</units>
+				<doc>The number of tents stored in a regional warehouse</doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Continental Relief Item Rate
+					</inflow>
+					<outflow>
+					Local Relief Item Rate
+					</outflow>
+			</stock>
+			<stock name="Relief_Items_Available">
+				<units>tent</units>
+				<doc>The number of tents that can be prepared in advance</doc>
+					<eqn>
+					1
+					</eqn>
+					<inflow>
+					Early Warning Relief Items
+					</inflow>
+					<inflow>
+					Item Provision Rate
+					</inflow>
+			</stock>
+			<stock name="Sick_People">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Illness
+					</inflow>
+			</stock>
+			<aux name="Change_in_probability_due_to_unusual_conditions">
+				<units>Dmnl</units>
+				<doc>A situation that would occur unexpectedly.</doc>
+					<eqn>
+	RANDOM_NORMAL( 0.8, 1 , 0.9, 0.1, 0.6) * 10 / Forecast_Lead_Time					</eqn>
+			</aux>
+			<aux name="Continental_Relief_Item_Rate">
+				<units>tent/Day</units>
+				<doc>The flow rate of tents from continental warehouse to regional warehouse. Delay depends on transportation mode</doc>
+					<eqn>
+	Continental_Relief_Item_Storage/Reg_Transp_Delay					</eqn>
+			</aux>
+			<aux name="Countdown_to_Event">
+				<units>1</units>
+				<doc>This is the rate at which the stock of datas before the event occurs</doc>
+					<eqn>
+	IF_THEN_ELSE(Time &lt; 49, 1, 0)					</eqn>
+			</aux>
+			<aux name="Counter_Rate">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+	IF_THEN_ELSE(People_Item_Supply&gt;0, 1, 0)					</eqn>
+			</aux>
+			<aux name="Credibility_Rate">
+				<units>credibility</units>
+				<doc>Organizational feedback would impact credibility of early warning systems, which would ultimately affect overally credibility.</doc>
+					<eqn>
+	IF_THEN_ELSE(Decision_to_act_Counter &gt; 0, Intervention * Event_Occured , 0)					</eqn>
+			</aux>
+			<aux name="Decision_Rate">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Decision_to_Act					</eqn>
+			</aux>
+			<aux name="Decision_to_Act">
+				<units>Dmnl</units>
+				<doc>From estimated observations, 'decision to act' will kick in if forecasted magnitude and probabilities are indicating imminent disaster. This would also be influenced by credibility of organizations.</doc>
+					<eqn>
+	IF_THEN_ELSE( (Forecast_Warning = 1 :AND: (People_at_Risk * Expected_Cost_Per_Person/HQ_Budget) &lt; 1), 1,  0)					</eqn>
+			</aux>
+			<aux name="Donations">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	50*Credibility_In_Early_Warning_System					</eqn>
+			</aux>
+			<aux name="Early_Warning_Prepared_Items">
+				<units>tent/Day</units>
+				<doc>At time zero, 'Early Warning Tents' adds X number of tents/day into the rate. It is calculated by subtracting 'early Warning Tents' from 'People in Tents'</doc>
+					<eqn>
+	IF_THEN_ELSE(Relief_Items_Available- (People_Receiving_Items/People_per_Item) &gt; 0 :AND: Counter &lt; 1, Relief_Items_Available
+	/Time_early_items, 0)					</eqn>
+			</aux>
+			<aux name="Early_Warning_Relief_Items">
+				<units>tent/Day</units>
+				<doc>A rate at which tents are being mounted based on early warning system.</doc>
+					<eqn>
+	IF_THEN_ELSE( Time &lt; 60 :AND: Decision_to_Act = 1, Item_Provision, 0)					</eqn>
+			</aux>
+			<aux name="Event">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	IF_THEN_ELSE(Time = 60, 1, 0)					</eqn>
+			</aux>
+			<aux name="Event_Displacing_People">
+				<units>people/Day</units>
+				<doc></doc>
+					<eqn>
+	IF_THEN_ELSE(Time &gt; 10, Flooding*HH_Size, 0)					</eqn>
+			</aux>
+			<aux name="Flooding">
+				<units>house/Day</units>
+				<doc>If an event occurs it causes this flow to be start.</doc>
+					<eqn>
+	IF_THEN_ELSE(Event &gt; 0.5, Households_at_Risk * Event * 0.8, 0)					</eqn>
+			</aux>
+			<aux name="Forecast_Warning">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	IF_THEN_ELSE(Magnitude_Comparison = 1 :AND: Probability_Comparison = 1, 1, 0)					</eqn>
+			</aux>
+			<aux name="Forecasted_Probability">
+				<units>Dmnl</units>
+				<doc>Based on observations, forecasted probability can be induced. This is the probability for  the event (or any natural disaster).</doc>
+					<eqn>
+	Change_in_probability_due_to_unusual_conditions + Probability_on_a_normal_day					</eqn>
+			</aux>
+			<aux name="Funding_Rate">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Donations * Event_Occured					</eqn>
+			</aux>
+			<aux name="Illness">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	People_Needing_Relief_Items * 0.01					</eqn>
+			</aux>
+			<aux name="Interpretation">
+				<units>Dmnl</units>
+				<doc>An interpretation process for forecasting and its impact on the region.</doc>
+					<eqn>
+	Forecast_Magnitude ( Time)					</eqn>
+			</aux>
+			<aux name="Intervention">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	IF_THEN_ELSE((People_Receiving_Items - People_Needing_Relief_Items) &gt; 200 , 1 , -1)					</eqn>
+			</aux>
+			<aux name="Item_Provision_Rate">
+				<units>tent/Day</units>
+				<doc>A inflow rate of mounted tents. That is, How many tents are being mounted based on how many people require tents, time spent on mounting tent (time per tent), and labor capacity.</doc>
+					<eqn>
+	IF_THEN_ELSE(People_Needing_Relief_Items&gt;10 :AND: Local_Relief_Items&gt;0, Labor_Capacity / Time_per_Item_Provision,0)					</eqn>
+			</aux>
+			<aux name="Labor_Capacity">
+				<units>people</units>
+				<doc>A number of people who will be employed in mounting tents.</doc>
+					<eqn>
+	External_Labor +Local_Labor					</eqn>
+			</aux>
+			<aux name="Local_Relief_Item_Rate">
+				<units>tent/Day</units>
+				<doc>The flow rate of tents from regional tent storage to locat tents (or sites). Delay depends on transportation mode</doc>
+					<eqn>
+	Regional_Relief_Item_Storage/Local_Transp_Delay					</eqn>
+			</aux>
+			<aux name="Magnitude_Comparison">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+	IF_THEN_ELSE( Interpretation &gt; Event_Magnitude_Threshold, 1, 0)					</eqn>
+			</aux>
+			<aux name="Maintenance_Cost">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	(10*Continental_Relief_Item_Storage+9*Local_Relief_Items+8*Regional_Relief_Item_Storage+5*External_Labor+2.5*Local_Labor) * 0.001					</eqn>
+			</aux>
+			<aux name="Operating_Expense">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Maintenance_Cost					</eqn>
+			</aux>
+			<aux name="People_Item_Supply">
+				<units>people/Day</units>
+				<doc>The rate at which tents can be provided per unit time. This is influence by 'early warning tents' or 'normal supply rate'</doc>
+					<eqn>
+	IF_THEN_ELSE( People_Needing_Relief_Items &gt; 0, (Early_Warning_Prepared_Items + Item_Provision_Rate)*People_per_Item, 0)					</eqn>
+			</aux>
+			<aux name="People_Returning">
+				<units>people/Day</units>
+				<doc>This is based on the rate at which houses are drying out</doc>
+					<eqn>
+	IF_THEN_ELSE(People_Receiving_Items &gt;0, HH_Size*House_Refurbishment, 0)					</eqn>
+			</aux>
+			<aux name="Probability_Comparison">
+				<units>Dmnl</units>
+				<doc>Based on two probabilities, a comparison between acceptable threshold and forecasted probability can hint whether we should act not or later (or do nothing).</doc>
+					<eqn>
+	IF_THEN_ELSE(Forecasted_Probability &gt; Acceptable_Prob_Threshold, 1, 0)					</eqn>
+			</aux>
+			<aux name="Relief_Item_Acquisition">
+				<units>$</units>
+				<doc>Cost of providing Tents. If relief items are purchased in advance, it costs less than if they need to be purchased after an emergency</doc>
+					<eqn>
+	(Early_Warning_Relief_Items * Usual_Cost ) + ( Stockpile_Supply * Urgent_Cost)					</eqn>
+			</aux>
+			<aux name="Stockpile_Supply">
+				<units>tent/Day</units>
+				<doc>If RCHQ Budget is greater than 50000, then 1% of that budget will be spent on stockpiling tents in storage. Otherwise, it's going to be naught.</doc>
+					<eqn>
+	IF_THEN_ELSE( HQ_Budget &gt; 50000, HQ_Budget*0.01 * Event_Occured, 0)					</eqn>
+			</aux>
+			<aux name="Forecast_Magnitude">
+				<units>Dmnl</units>
+				<doc>A forecast variation for weather - this variable is created randomly.</doc>
+<gf>
+<xpts>0.000000,10.000000,20.000000,60.000000,61.000000,365.000000</xpts>
+<ypts>0.800000,0.800000,0.800000,0.800000,0.000000,0.000000</ypts>
+</gf>
+			</aux>
+			<aux name="Acceptable_Prob_Threshold">
+				<units>Dmnl</units>
+				<doc>Something that established based on experienced people's point of views (or their expertise.)</doc>
+					<eqn>
+	0.5					</eqn>
+			</aux>
+			<aux name="Event_Magnitude_Threshold">
+				<units>Dmnl</units>
+				<doc>A threshold for comparing a current forecast magnitude. This variable (or threshold) is to judge whether it is worth trigger 'decision to act.'</doc>
+					<eqn>
+	0.7					</eqn>
+			</aux>
+			<aux name="Expected_Cost_Per_Person">
+				<units>$</units>
+				<doc>depending on when the action occurs, if pre-disaster and if post-disaster</doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="External_Labor">
+				<units>people</units>
+				<doc>People from outside of the site who's going to mount tents.</doc>
+					<eqn>
+	5					</eqn>
+			</aux>
+			<aux name="HH_Size">
+				<units>people/house</units>
+				<doc>A number of household's size.</doc>
+					<eqn>
+	5					</eqn>
+			</aux>
+			<aux name="Item_Provision">
+				<units>tent</units>
+				<doc>A number of tents that will be mounted based on early warning. If a warning issued, then for one warning, 10 tents will be mounted.</doc>
+					<eqn>
+	15					</eqn>
+			</aux>
+			<aux name="Local_Labor">
+				<units>people</units>
+				<doc>Local people who will mount tents.</doc>
+					<eqn>
+	10					</eqn>
+			</aux>
+			<aux name="Local_Transp_Delay">
+				<units>Day</units>
+				<doc>A period for moving tents from regional tent storage to local sites. Assumed 7 days.</doc>
+					<eqn>
+	7					</eqn>
+			</aux>
+			<aux name="People_per_Item">
+				<units>people/tent</units>
+				<doc>The number of people that can be housed per tent</doc>
+					<eqn>
+	5					</eqn>
+			</aux>
+			<aux name="Probability_on_a_normal_day">
+				<units>Dmnl</units>
+				<doc>A regular estimated probability (or perhaps, seasonality?)</doc>
+					<eqn>
+	0.05					</eqn>
+			</aux>
+			<aux name="Reg_Transp_Delay">
+				<units>Day</units>
+				<doc>A time that takes tents to mover from continental tent storage to regional tent storage. Assumed 21 days.</doc>
+					<eqn>
+	21					</eqn>
+			</aux>
+			<aux name="Time_early_items">
+				<units>Day</units>
+				<doc>Nominal unit of time to ensure this makes sense. X number of people in tents can be added to the rate, when the are set up in advance</doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="Time_per_Item_Provision">
+				<units>Day/tent</units>
+				<doc></doc>
+					<eqn>
+	1.5					</eqn>
+			</aux>
+			<aux name="Time_to_Dry">
+				<units>Day</units>
+				<doc>An estimated time for house to dry up and functions ordinarily.</doc>
+					<eqn>
+	165					</eqn>
+			</aux>
+			<aux name="Urgent_Cost">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	15					</eqn>
+			</aux>
+			<aux name="Usual_Cost">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	5					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

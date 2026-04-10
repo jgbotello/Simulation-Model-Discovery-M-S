@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Year">
+		<start> 0</start>
+		<stop> 365</stop>
+		<dt> 1</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="Total_Car_Quality">
+				<units>Quality</units>
+				<doc></doc>
+					<eqn>
+					Normal_Quality*Initial_Cars_in_Lot
+					</eqn>
+					<inflow>
+					Increase in Car Quality
+					</inflow>
+					<outflow>
+					Decrease in Car Quality
+					</outflow>
+			</stock>
+			<stock name="Used_Cars_in_Lot">
+				<units>Cars</units>
+				<doc></doc>
+					<eqn>
+					Initial_Cars_in_Lot
+					</eqn>
+					<inflow>
+					Cars Sold to Lot
+					</inflow>
+					<outflow>
+					Car Bought from Lot
+					</outflow>
+			</stock>
+			<aux name="Average_Car_Quality">
+				<units>Quality/Car</units>
+				<doc></doc>
+					<eqn>
+	Total_Car_Quality/Used_Cars_in_Lot					</eqn>
+			</aux>
+			<aux name="Buy_Price">
+				<units>Dollars/Car</units>
+				<doc></doc>
+					<eqn> GAME (
+	Normal_Buy_Price)					</eqn>
+			</aux>
+			<aux name="Car_Bought_from_Lot">
+				<units>Cars/Year</units>
+				<doc></doc>
+					<eqn>
+	Cars_Sold					</eqn>
+			</aux>
+			<aux name="Cars_Sold">
+				<units>Cars/Year</units>
+				<doc></doc>
+					<eqn>
+	Normal_Cars_Sold*(Average_Car_Quality/Normal_Quality)*(Normal_Sell_Price/Sell_Price)					</eqn>
+			</aux>
+			<aux name="Cars_Sold_to_Lot">
+				<units>Cars/Year</units>
+				<doc></doc>
+					<eqn>
+	0.8*50					</eqn>
+			</aux>
+			<aux name="Decrease_in_Car_Quality">
+				<units>Quality/Year</units>
+				<doc></doc>
+					<eqn>
+	Average_Car_Quality*Car_Bought_from_Lot					</eqn>
+			</aux>
+			<aux name="Increase_in_Car_Quality">
+				<units>Quality/Year</units>
+				<doc></doc>
+					<eqn>
+	Cars_Sold_to_Lot*Quality_Per_Car_Sold					</eqn>
+			</aux>
+			<aux name="Normal_Cars_Sold">
+				<units>Cars/Year</units>
+				<doc></doc>
+					<eqn>
+	0.8*50					</eqn>
+			</aux>
+			<aux name="Normal_Sell_Price">
+				<units>Dollars/Car</units>
+				<doc></doc>
+					<eqn>
+	Normal_Buy_Price*1.2					</eqn>
+			</aux>
+			<aux name="Quality_Per_Car_Sold">
+				<units>Quality/Car</units>
+				<doc></doc>
+					<eqn>
+	Normal_Quality*(Buy_Price/Normal_Buy_Price)					</eqn>
+			</aux>
+			<aux name="Sell_Price">
+				<units>Dollars/Car</units>
+				<doc></doc>
+					<eqn> GAME (
+	Normal_Sell_Price)					</eqn>
+			</aux>
+			<aux name="Initial_Cars_in_Lot">
+				<units>Cars</units>
+				<doc></doc>
+					<eqn>
+	2000					</eqn>
+			</aux>
+			<aux name="Normal_Buy_Price">
+				<units>Dollars/Car</units>
+				<doc></doc>
+					<eqn>
+	15000					</eqn>
+			</aux>
+			<aux name="Normal_Quality">
+				<units>Quality/Car</units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

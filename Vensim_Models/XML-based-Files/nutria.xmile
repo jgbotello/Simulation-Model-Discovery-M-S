@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Month">
+		<start> 0</start>
+		<stop> 24</stop>
+		<dt> 0.25</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="nutria">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					10
+					</eqn>
+					<inflow>
+					change in nutria per time
+					</inflow>
+					<outflow>
+					death from competition
+					</outflow>
+			</stock>
+			<aux name="change_in_nutria_per_time">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	birth_fraction*nutria					</eqn>
+			</aux>
+			<aux name="death_from_competition">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	competition_factor*nutria*(nutria-1)/2					</eqn>
+			</aux>
+			<aux name="birth_fraction">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.5					</eqn>
+			</aux>
+			<aux name="competition_factor">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

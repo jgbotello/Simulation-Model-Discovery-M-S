@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Hour">
+		<start> 0</start>
+		<stop> 50</stop>
+		<dt> 0.015625</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="Gullibles">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					999
+					</eqn>
+					<outflow>
+					Mongerization
+					</outflow>
+			</stock>
+			<stock name="Loyalists">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Coming to Senses
+					</inflow>
+			</stock>
+			<stock name="Rumor_Mongerers">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					1
+					</eqn>
+					<inflow>
+					Mongerization
+					</inflow>
+					<outflow>
+					Coming to Senses
+					</outflow>
+			</stock>
+			<aux name="Coming_to_Senses">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Rationality_rate*Rumor_Mongerers					</eqn>
+			</aux>
+			<aux name="Mongerization">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Spreading_probability*(Gullibles*Rumor_Mongerers)					</eqn>
+			</aux>
+			<aux name="Total_Population">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Rumor_Mongerers+Loyalists+Gullibles					</eqn>
+			</aux>
+			<aux name="Rationality_rate">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.5					</eqn>
+			</aux>
+			<aux name="Spreading_probability">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.001					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

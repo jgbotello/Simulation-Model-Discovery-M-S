@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Year">
+		<start> 1900</start>
+		<stop> 2100</stop>
+		<dt> 0.25</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="Capital">
+				<units>Capital_units</units>
+				<doc>	  The capital stock.</doc>
+					<eqn>
+					             capital_initial
+					</eqn>
+					<inflow>
+					capital investment
+					</inflow>
+					<outflow>
+					capital depreciation
+					</outflow>
+			</stock>
+			<stock name="Capital_Agriculture_Fraction">
+				<units>Dimensionless</units>
+				<doc>	  The fraction of capital in agriculture.</doc>
+					<eqn>
+					             capital_agriculture_fraction_initial
+					</eqn>
+					<inflow>
+					capital agriculture fraction adjustment time
+					</inflow>
+			</stock>
+			<stock name="Natural_Resources">
+				<units>Resource_units</units>
+				<doc>	  The amount of natural resources remaining.</doc>
+					<eqn>
+					             natural_resources_initial
+					</eqn>
+					<outflow>
+					natural resource utilization
+					</outflow>
+			</stock>
+			<stock name="Pollution">
+				<units>Pollution_units</units>
+				<doc>	  The amount of non-incorporated pollution.</doc>
+					<eqn>
+					             pollution_initial
+					</eqn>
+					<inflow>
+					pollution generation
+					</inflow>
+					<outflow>
+					pollution absorption
+					</outflow>
+			</stock>
+			<stock name="Population">
+				<units>People</units>
+				<doc>	  World population.</doc>
+					<eqn>
+					             population_initial
+					</eqn>
+					<inflow>
+					births
+					</inflow>
+					<outflow>
+					deaths
+					</outflow>
+			</stock>
+			<aux name="births">
+				<units>People/Year</units>
+				<doc>The total number of births.</doc>
+					<eqn> 
+	        Population
+	             * birth_rate_normal
+	             * births_material_multiplier
+	             * births_crowding_multiplier
+	             * births_food_multiplier
+	             * births_pollution_multiplier					</eqn>
+			</aux>
+			<aux name="births_crowding_multiplier">
+				<units>Dimensionless</units>
+				<doc>	  The effect of crowding on the number of births.</doc>
+					<eqn>
+        births_crowding_mult_tab ( crowding )					</eqn>
+			</aux>
+			<aux name="births_food_multiplier">
+				<units>Dimensionless</units>
+				<doc>	  The effect of food on the number of births.</doc>
+					<eqn>
+        births_food_mult_tab ( food_ratio )					</eqn>
+			</aux>
+			<aux name="births_material_multiplier">
+				<units>Dimensionless</units>
+				<doc>	  The effect of the material standard of living on births.</doc>
+					<eqn>
+        births_material_mult_tab ( material_standard_of_living )					</eqn>
+			</aux>
+			<aux name="births_pollution_multiplier">
+				<units>Dimensionless</units>
+				<doc>	  The effect of pollution on the number of births.</doc>
+					<eqn>
+        births_pollution_mult_tab ( pollution_ratio )					</eqn>
+			</aux>
+			<aux name="capital_agriculture_fraction_indicated">
+				<units>Dimensionless</units>
+				<doc>	  The fraction of capital that should be agricultural as
+         indicated by
+         the availability of food.</doc>
+					<eqn>
+        capital_agriculture_fraction_indicated_tab ( food_ratio )					</eqn>
+			</aux>
+			<aux name="capital_depreciation">
+				<units>Capital_units/Year</units>
+				<doc>The rate at which the capital stock depreciates.</doc>
+					<eqn>
+        Capital *
+                  capital_depreciation_normal					</eqn>
+			</aux>
+			<aux name="capital_investment">
+				<units>Capital_units/Year</units>
+				<doc>The gross amount of investment in capital.</doc>
+					<eqn>
+        Population
+             * capital_investment_multiplier
+             * capital_investment_rate_normal					</eqn>
+			</aux>
+			<aux name="capital_investment_from_quality_ratio">
+				<units>Dimensionless</units>
+				<doc>	  Capital investment from quality.</doc>
+					<eqn>
+        capital_investment_quality_ratio_tab ( quality_material_multiplier
+                  / quality_food_multiplier )					</eqn>
+			</aux>
+			<aux name="capital_investment_multiplier">
+				<units>Dimensionless</units>
+				<doc>	  Multiplier for the effect of the material standard of
+         living on
+         capital investment.</doc>
+					<eqn>
+        capital_investment_mult_tab ( material_standard_of_living )					</eqn>
+			</aux>
+			<aux name="capital_investment_rate_normal">
+				<units>Capital_units/(Person*Year)</units>
+				<doc>	  The normal per capita rate of capital investment.</doc>
+					<eqn> GAME (
+	capital_investment_rate_normal_c)					</eqn>
+			</aux>
+			<aux name="capital_ratio">
+				<units>Capital_units/Person</units>
+				<doc>	  The capital investment ratio (per capita investment).</doc>
+					<eqn>
+        Capital
+             / Population					</eqn>
+			</aux>
+			<aux name="capital_ratio_agriculture">
+				<units>Capital_units/Person</units>
+				<doc>	  The capital investment ratio in agriculure.</doc>
+					<eqn>
+        capital_ratio
+             * Capital_Agriculture_Fraction
+             / capital_agriculture_fraction_normal					</eqn>
+			</aux>
+			<aux name="crowding">
+				<units>Dimensionless</units>
+				<doc>	  The ratio oioulation to normally supportable population
+         used as a
+         measure of crowding.</doc>
+					<eqn>
+        Population
+             / ( land_area
+                  * population_density_normal )					</eqn>
+			</aux>
+			<aux name="deaths">
+				<units>People/Year</units>
+				<doc>The worldwide number of deaths occurring.</doc>
+					<eqn>
+        Population
+             * death_rate_normal
+             * deaths_material_multiplier
+             * deaths_pollution_multiplier
+             * deaths_food_multiplier
+             * deaths_crowding_multiplier					</eqn>
+			</aux>
+			<aux name="deaths_crowding_multiplier">
+				<units>Dimensionless</units>
+				<doc>	  The effect of crowding on the number of deaths.</doc>
+					<eqn>
+        deaths_crowding_mult_tab ( crowding )					</eqn>
+			</aux>
+			<aux name="deaths_food_multiplier">
+				<units>Dimensionless</units>
+				<doc>	  The effect of food on the number of deaths.</doc>
+					<eqn>
+        deaths_food_mult_tab ( food_ratio )					</eqn>
+			</aux>
+			<aux name="deaths_material_multiplier">
+				<units>Dimensionless</units>
+				<doc>	  The effect of the material standard of living on deaths.</doc>
+					<eqn>
+        deaths_material_mult_tab ( material_standard_of_living )					</eqn>
+			</aux>
+			<aux name="deaths_pollution_multiplier">
+				<units>Dimensionless</units>
+				<doc>	  The effect of pollution on the number of deaths.</doc>
+					<eqn>
+        deaths_pollution_mult_tab ( pollution_ratio )					</eqn>
+			</aux>
+			<aux name="effective_capital_ratio">
+				<units>Capital_units/Person</units>
+				<doc>	  The effective ratio between capital and investment.</doc>
+					<eqn>
+        capital_ratio
+             * natural_resource_extraction_multiplier
+             * ( 1
+                  - Capital_Agriculture_Fraction )
+             / ( 1
+                  - capital_agriculture_fraction_normal )					</eqn>
+			</aux>
+			<aux name="food_crowding_multiplier">
+				<units>Dimensionless</units>
+				<doc>	  The effect of crowding on the production of food.</doc>
+					<eqn>
+        food_crowding_mult_tab ( crowding )					</eqn>
+			</aux>
+			<aux name="food_per_capita_potential">
+				<units>Food_units/(Person*Year)</units>
+				<doc>	  The potential amount of food that can be grown based on
+         capital
+         investment.</doc>
+					<eqn>
+        food_per_capita_potential_tab ( capital_ratio_agriculture )					</eqn>
+			</aux>
+			<aux name="food_pollution_multiplier">
+				<units>Dimensionless</units>
+				<doc>	  The effect of pollution on the ability to grow food.</doc>
+					<eqn>
+        food_pollution_mult_tab ( pollution_ratio )					</eqn>
+			</aux>
+			<aux name="food_ratio">
+				<units>Dimensionless</units>
+				<doc>The ration of food available to required food.</doc>
+					<eqn>
+        food_per_capita_potential
+             * food_crowding_multiplier
+             * food_pollution_multiplier 
+             * food_coefficient 
+             / food_per_capita_normal					</eqn>
+			</aux>
+			<aux name="material_standard_of_living">
+				<units>Dimensionless</units>
+				<doc>	  The relative material standard of living.</doc>
+					<eqn>
+        effective_capital_ratio
+             / effective_capital_ratio_normal					</eqn>
+			</aux>
+			<aux name="nat_res_matl_multiplier">
+				<units>Dimensionless</units>
+				<doc>	  The effect of the material well being on natural resource
+         use.</doc>
+					<eqn>
+        natural_resource_material_mult_tab ( material_standard_of_living )					</eqn>
+			</aux>
+			<aux name="natural_resource_extraction_multiplier">
+				<units>Dimensionless</units>
+				<doc>	  The multiplier on effective capital investment from
+         remaining natural
+         resources.</doc>
+					<eqn>
+        natural_resource_extraction_mult_tab ( natural_resource_fraction_remaining )					</eqn>
+			</aux>
+			<aux name="natural_resource_fraction_remaining">
+				<units>Dimensionless</units>
+				<doc>	  The fraction of natural resource still remaining.</doc>
+					<eqn>
+        Natural_Resources
+             / natural_resources_initial					</eqn>
+			</aux>
+			<aux name="natural_resource_utilization">
+				<units>Resource_units/Year</units>
+				<doc>The rate of natural resource utilization.</doc>
+					<eqn>
+        Population
+             * natural_resource_utilization_normal 
+             * nat_res_matl_multiplier					</eqn>
+			</aux>
+			<aux name="natural_resource_utilization_normal">
+				<units>Resource_units/(Person*Year)</units>
+				<doc>	  The normal rate of natural resources.</doc>
+					<eqn> GAME (
+	 natural_resource_utilization_normal_c)					</eqn>
+			</aux>
+			<aux name="pollution_absorption">
+				<units>Pollution_units/Year</units>
+				<doc>	  The rate at which pollution is reincorporated into the
+         ecology.</doc>
+					<eqn>
+        Pollution
+             / pollution_absorption_time					</eqn>
+			</aux>
+			<aux name="pollution_absorption_time">
+				<units>Year</units>
+				<doc>	  The time it takes to incorporate pollution back into the
+         environment.</doc>
+					<eqn>
+        pollution_absorption_time_tab ( pollution_ratio )					</eqn>
+			</aux>
+			<aux name="pollution_capital_multiplier">
+				<units>Dimensionless</units>
+				<doc>	  The effect of capital on pollution generation.</doc>
+					<eqn>
+        pollution_capital_mult_tab ( capital_ratio )					</eqn>
+			</aux>
+			<aux name="pollution_generation">
+				<units>Pollution_units/Year</units>
+				<doc>The rate at which non-ncorporate poltion changes.</doc>
+					<eqn>
+        Population
+             * pollution_per_capita_normal 
+             * pollution_capital_multiplier					</eqn>
+			</aux>
+			<aux name="pollution_ratio">
+				<units>Dimensionless</units>
+				<doc>	  The ration of pollution to standard.</doc>
+					<eqn>
+        Pollution
+             / pollution_standard					</eqn>
+			</aux>
+			<aux name="quality_crowding_multiplier">
+				<units>Dimensionless</units>
+				<doc>	  The effect of crowding on the quality of life.</doc>
+					<eqn>
+        quality_crowding_mult_tab ( crowding )					</eqn>
+			</aux>
+			<aux name="quality_food_multiplier">
+				<units>Dimensionless</units>
+				<doc>	  The effect of food on the quality of life.</doc>
+					<eqn>
+        quality_food_mult_tab ( food_ratio )					</eqn>
+			</aux>
+			<aux name="quality_material_multiplier">
+				<units>Dimensionless</units>
+				<doc>	  The effect of the material standard of living on the
+         quality of life.</doc>
+					<eqn>
+        quality_material_mult_tab ( material_standard_of_living )					</eqn>
+			</aux>
+			<aux name="quality_of_life">
+				<units>Satisfaction_units</units>
+				<doc>	  The quality of life.</doc>
+					<eqn>
+        quality_of_life_normal
+             * quality_material_multiplier
+             * quality_crowding_multiplier
+             * quality_food_multiplier
+             * quality_pollution_multiplier					</eqn>
+			</aux>
+			<aux name="quality_pollution_multiplier">
+				<units>Dimensionless</units>
+				<doc>	  The effect of pollution on the quality of life.</doc>
+					<eqn>
+        quality_pollution_mult_tab ( pollution_ratio )					</eqn>
+			</aux>
+			<aux name="births_crowding_mult_tab">
+				<units>Dimensionless</units>
+				<doc>	  The table for the effect of crowding on the number of
+         births.</doc>
+<gf>
+<xpts>0.000000,2.000000,4.000000,1.050000,0.900000,0.600000</xpts>
+<ypts>1.000000,3.000000,5.000000,1.000000,0.700000,0.550000</ypts>
+</gf>
+			</aux>
+			<aux name="births_food_mult_tab">
+				<units>Dimensionless</units>
+				<doc>	  The table for the effect of food on the number of births.</doc>
+<gf>
+<xpts>0.000000,2.000000,4.000000,1.000000,1.900000</xpts>
+<ypts>1.000000,3.000000,0.000000,1.600000,2.000000</ypts>
+</gf>
+			</aux>
+			<aux name="births_material_mult_tab">
+				<units>Dimensionless</units>
+				<doc>	  Table for the effect of the material standard of living on
+         births.</doc>
+<gf>
+<xpts>0.000000,2.000000,4.000000,1.200000,0.850000,0.700000</xpts>
+<ypts>1.000000,3.000000,5.000000,1.000000,0.750000,0.700000</ypts>
+</gf>
+			</aux>
+			<aux name="births_pollution_mult_tab">
+				<units>Dimensionless</units>
+				<doc>	  The table for the effect of pollution on the number of
+         births.</doc>
+<gf>
+<xpts>0.000000,20.000000,40.000000,60.000000,0.900000,0.400000,0.150000</xpts>
+<ypts>10.000000,30.000000,50.000000,1.020000,0.700000,0.250000,0.100000</ypts>
+</gf>
+			</aux>
+			<aux name="capital_agriculture_fraction_indicated_tab">
+				<units>Dimensionless</units>
+				<doc>	  The fraction of capital that should be agricultural as
+         indicated by
+         the availability of food table.</doc>
+<gf>
+<xpts>0.000000,1.000000,2.000000,0.600000,0.150000</xpts>
+<ypts>0.500000,1.500000,1.000000,0.300000,0.100000</ypts>
+</gf>
+			</aux>
+			<aux name="capital_investment_mult_tab">
+				<units>Dimensionless</units>
+				<doc>	  Multiplier for the effect of the material standard of
+         living on
+         capital investment table.</doc>
+<gf>
+<xpts>0.000000,2.000000,4.000000,0.100000,1.800000,2.800000</xpts>
+<ypts>1.000000,3.000000,5.000000,1.000000,2.400000,3.000000</ypts>
+</gf>
+			</aux>
+			<aux name="capital_investment_quality_ratio_tab">
+				<units>Dimensionless</units>
+				<doc>	  Capital investment from quality table.</doc>
+<gf>
+<xpts>0.000000,1.000000,2.000000,0.800000,1.500000</xpts>
+<ypts>0.500000,1.500000,0.700000,1.000000,2.000000</ypts>
+</gf>
+			</aux>
+			<aux name="deaths_crowding_mult_tab">
+				<units>Dimensionless</units>
+				<doc>	  The table for the effect of crowding on the number of
+         deaths.</doc>
+<gf>
+<xpts>0.000000,2.000000,4.000000,0.900000,1.200000,1.900000</xpts>
+<ypts>1.000000,3.000000,5.000000,1.000000,1.500000,3.000000</ypts>
+</gf>
+			</aux>
+			<aux name="deaths_food_mult_tab">
+				<units>Dimensionless</units>
+				<doc>	  The table for the effect of food on the number of deaths.</doc>
+<gf>
+<xpts>0.000000,0.500000,1.000000,1.500000,2.000000,3.000000,1.400000,0.700000,0.500000</xpts>
+<ypts>0.250000,0.750000,1.250000,1.750000,30.000000,2.000000,1.000000,0.600000,0.500000</ypts>
+</gf>
+			</aux>
+			<aux name="deaths_material_mult_tab">
+				<units>Dimensionless</units>
+				<doc>	  Table for the effect of the material standard of living on
+         deaths.</doc>
+<gf>
+<xpts>0.000000,1.000000,2.000000,3.000000,4.000000,5.000000,1.800000,0.800000,0.600000,0.500000,0.500000</xpts>
+<ypts>0.500000,1.500000,2.500000,3.500000,4.500000,3.000000,1.000000,0.700000,0.530000,0.500000,0.500000</ypts>
+</gf>
+			</aux>
+			<aux name="deaths_pollution_mult_tab">
+				<units>Dimensionless</units>
+				<doc>	  The table for the effect of pollution on the number of
+         deaths.</doc>
+<gf>
+<xpts>0.000000,20.000000,40.000000,60.000000,1.300000,3.200000,6.800000</xpts>
+<ypts>10.000000,30.000000,50.000000,0.920000,2.000000,4.800000,9.200000</ypts>
+</gf>
+			</aux>
+			<aux name="food_crowding_mult_tab">
+				<units>Dimensionless</units>
+				<doc>	  The table for the effect of crowding on the production of
+         food.</doc>
+<gf>
+<xpts>0.000000,2.000000,4.000000,2.400000,0.600000,0.300000</xpts>
+<ypts>1.000000,3.000000,5.000000,1.000000,0.400000,0.200000</ypts>
+</gf>
+			</aux>
+			<aux name="food_per_capita_potential_tab">
+				<units>Food_units/(Person*Year)</units>
+				<doc>	  The potential amount of food that can be grown based on
+         capital
+         investment table.</doc>
+<gf>
+<xpts>0.000000,2.000000,4.000000,6.000000,1.000000,1.700000,2.050000</xpts>
+<ypts>1.000000,3.000000,5.000000,0.500000,1.400000,1.900000,2.200000</ypts>
+</gf>
+			</aux>
+			<aux name="food_pollution_mult_tab">
+				<units>Dimensionless</units>
+				<doc>	  The effect of pollution on the ability to grow food table.</doc>
+<gf>
+<xpts>0.000000,20.000000,40.000000,60.000000,0.900000,0.350000,0.100000</xpts>
+<ypts>10.000000,30.000000,50.000000,1.020000,0.650000,0.200000,0.050000</ypts>
+</gf>
+			</aux>
+			<aux name="natural_resource_extraction_mult_tab">
+				<units>Dimensionless</units>
+				<doc>	  Table for the multiplier on effective capital investment
+         from
+         remaining natural resources.</doc>
+<gf>
+<xpts>0.000000,0.500000,1.000000,0.150000,0.850000</xpts>
+<ypts>0.250000,0.750000,0.000000,0.500000,1.000000</ypts>
+</gf>
+			</aux>
+			<aux name="natural_resource_material_mult_tab">
+				<units>Dimensionless</units>
+				<doc>	  Table for the effect of the material well being on natural
+         resoure
+         use.</doc>
+<gf>
+<xpts>0.000000,2.000000,4.000000,6.000000,8.000000,10.000000,1.000000,2.400000,3.300000,3.800000,3.950000</xpts>
+<ypts>1.000000,3.000000,5.000000,7.000000,9.000000,0.000000,1.800000,2.900000,3.600000,3.900000,4.000000</ypts>
+</gf>
+			</aux>
+			<aux name="pollution_absorption_time_tab">
+				<units>Year</units>
+				<doc>	  The time it takes to incorporate pollution back into the
+         environment
+         table.</doc>
+<gf>
+<xpts>0.000000,20.000000,40.000000,60.000000,2.500000,8.000000,15.500000</xpts>
+<ypts>10.000000,30.000000,50.000000,0.600000,5.000000,11.500000,20.000000</ypts>
+</gf>
+			</aux>
+			<aux name="pollution_capital_mult_tab">
+				<units>Dimensionless</units>
+				<doc>	  The effect of capital on pollution generation table.</doc>
+<gf>
+<xpts>0.000000,2.000000,4.000000,0.050000,3.000000,7.400000</xpts>
+<ypts>1.000000,3.000000,5.000000,1.000000,5.400000,8.000000</ypts>
+</gf>
+			</aux>
+			<aux name="quality_crowding_mult_tab">
+				<units>Dimensionless</units>
+				<doc>	  The table for the effect of crowding on the quality of
+         life.</doc>
+<gf>
+<xpts>0.000000,1.000000,2.000000,3.000000,4.000000,5.000000,1.300000,0.750000,0.450000,0.300000,0.220000</xpts>
+<ypts>0.500000,1.500000,2.500000,3.500000,5.500000,2.000000,1.000000,0.550000,0.380000,0.250000,0.200000</ypts>
+</gf>
+			</aux>
+			<aux name="quality_food_mult_tab">
+				<units>Dimensionless</units>
+				<doc>	  The table for the effect of food on the quality of life.</doc>
+<gf>
+<xpts>0.000000,2.000000,4.000000,1.000000,2.400000</xpts>
+<ypts>1.000000,3.000000,0.000000,1.800000,2.700000</ypts>
+</gf>
+			</aux>
+			<aux name="quality_material_mult_tab">
+				<units>Dimensionless</units>
+				<doc>	  Table for the effect of the material standard of living on
+         quality of
+         life.</doc>
+<gf>
+<xpts>0.000000,2.000000,4.000000,0.200000,1.700000,2.700000</xpts>
+<ypts>1.000000,3.000000,5.000000,1.000000,2.300000,2.900000</ypts>
+</gf>
+			</aux>
+			<aux name="quality_pollution_mult_tab">
+				<units>Dimensionless</units>
+				<doc>	  The table for the effect of pollution on the quality of
+         life.</doc>
+<gf>
+<xpts>0.000000,20.000000,40.000000,60.000000,0.850000,0.300000,0.050000</xpts>
+<ypts>10.000000,30.000000,50.000000,1.040000,0.500000,0.150000,0.020000</ypts>
+</gf>
+			</aux>
+			<aux name="birth_rate_normal">
+				<units>1/Year</units>
+				<doc>	  The normal fractional birth rate.</doc>
+					<eqn> 0.04					</eqn>
+			</aux>
+			<aux name="capital_agriculture_fraction_adjustment_time">
+				<units>Year</units>
+				<doc>	  The time to adjust the fraction of capital in agriculture.</doc>
+					<eqn> 15					</eqn>
+			</aux>
+			<aux name="capital_agriculture_fraction_initial">
+				<units>Dimensionless</units>
+				<doc>	  The fraction of capital in agriculture initially.</doc>
+					<eqn> 0.2					</eqn>
+			</aux>
+			<aux name="capital_agriculture_fraction_normal">
+				<units>Dimensionless</units>
+				<doc>	  The fraction of capital investment devoted to agriculture.</doc>
+					<eqn> 0.3					</eqn>
+			</aux>
+			<aux name="capital_depreciation_normal">
+				<units>1/Year</units>
+				<doc>	  The fractional rate at which the capital stock degrades.</doc>
+					<eqn> 0.025					</eqn>
+			</aux>
+			<aux name="capital_initial">
+				<units>Capital_units</units>
+				<doc>	  The initial capital stock.</doc>
+					<eqn> 4e+08					</eqn>
+			</aux>
+			<aux name="capital_investment_rate_normal_c">
+				<units>Capital_units/(Person*Year)</units>
+				<doc>	  The normal per capita rate of capital investment.</doc>
+					<eqn> 0.05					</eqn>
+			</aux>
+			<aux name="death_rate_normal">
+				<units>1/Year</units>
+				<doc>	  The normal fractional rate of death.</doc>
+					<eqn> 0.028					</eqn>
+			</aux>
+			<aux name="effective_capital_ratio_normal">
+				<units>Capital_units/Person</units>
+				<doc>	  The effective ratio between capital and investment.</doc>
+					<eqn> 1					</eqn>
+			</aux>
+			<aux name="food_coefficient">
+				<units>Dimensionless</units>
+				<doc>	  Coeffecient for diddling the food supply.</doc>
+					<eqn> 1					</eqn>
+			</aux>
+			<aux name="food_per_capita_normal">
+				<units>Food_units/(Person*Year)</units>
+				<doc>	  The normal amount of food required for an individual.</doc>
+					<eqn> 1					</eqn>
+			</aux>
+			<aux name="land_area">
+				<units>Kilometer*Kilometer</units>
+				<doc>	  The total amount of habitable land.</doc>
+					<eqn> 1.35e+08					</eqn>
+			</aux>
+			<aux name="natural_resource_utilization_normal_c">
+				<units>Resource_units/(Person*Year)</units>
+				<doc>	  The normal rate of natural resources.</doc>
+					<eqn> 1					</eqn>
+			</aux>
+			<aux name="natural_resources_initial">
+				<units>Resource_units</units>
+				<doc>	  The amount of natual resource initially available.</doc>
+					<eqn> 9e+11					</eqn>
+			</aux>
+			<aux name="pollution_initial">
+				<units>Pollution_units</units>
+				<doc>	  The amount of non-incorporated pollution initially.</doc>
+					<eqn> 2e+08					</eqn>
+			</aux>
+			<aux name="pollution_per_capita_normal">
+				<units>Pollution_units/(Person*Year)</units>
+				<doc>	  The amount of pollution produced by a person in a year.</doc>
+					<eqn> 1					</eqn>
+			</aux>
+			<aux name="pollution_standard">
+				<units>Pollution_units</units>
+				<doc>	  The standard amount of non-incorporated pollution.</doc>
+					<eqn> 3.6e+09					</eqn>
+			</aux>
+			<aux name="population_density_normal">
+				<units>Person/(Kilometer*Kilometer)</units>
+				<doc>	  The normal density of population.</doc>
+					<eqn> 26.5					</eqn>
+			</aux>
+			<aux name="population_initial">
+				<units>People</units>
+				<doc>	  The world population at the beginning of the simulation.</doc>
+					<eqn> 1.65e+09					</eqn>
+			</aux>
+			<aux name="quality_of_life_normal">
+				<units>Satisfaction_units</units>
+				<doc>	  The standard quality of life.</doc>
+					<eqn> 1					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

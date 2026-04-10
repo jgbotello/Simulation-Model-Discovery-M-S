@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Year">
+		<start> 0</start>
+		<stop> 20</stop>
+		<dt> 1</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<aux name="AC">
+				<units></units>
+				<doc>ACCESO A CREDITOS: Se refiere a si el productor ha tenido en los ultimos 3 a�os acceso a un credito para la agricultura. Donde 0=no y 1 =si.</doc>
+					<eqn> WITH LOOKUP (
+	vAC,
+		([(0,0)-(5,0.1)],(0,0),(1,0.01) ))					</eqn>
+			</aux>
+			<aux name="AS">
+				<units></units>
+				<doc>PROGRAMAS DE ASISTENCIA SOCIAL: Se refiere a los programas de asistencia social que se tienen en la familia agricola.\!\!</doc>
+					<eqn> WITH LOOKUP (
+	vAS,
+		([(0,0)-(10,0.1)],(0,0.03),(1,0.02),(2,0.01),(3,0) ))					</eqn>
+			</aux>
+			<aux name="CA">
+				<units>puntos</units>
+				<doc>CONSERVACION DE AGUA: Se refiere a la cantidad de pr�cticas que realiza el productor en el agroecosistema para conservar agua, ya sea para cultivos o animales.</doc>
+					<eqn> WITH LOOKUP (
+	vCA+Efecto_de_CC,
+		([(0,0)-(5,1)],(0,0),(1,0.02),(2,0.04),(3,0.06),(4,0.08) ))					</eqn>
+			</aux>
+			<aux name="Cambio_de_responsable">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	IF_THEN_ELSE(DCH=0.05:AND:ER&gt;=80,0.05, 0 )					</eqn>
+			</aux>
+			<aux name="CC">
+				<units></units>
+				<doc>CURSOS DE CAPACITACI�N: N�mero de cursos de capacitacion a los que ha asistido el productor. Donde: 0=0cursos, 1=1curso, 2=2cursos y 3 =mas de 2 cursos.\!\!\!</doc>
+					<eqn> WITH LOOKUP (
+	vCC,
+		([(0,0)-(4,0.1)],(0,0),(1,0.01),(2,0.02),(3,0.03),(4,0.04) ))					</eqn>
+			</aux>
+			<aux name="CCFC2">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	CC+FC_2					</eqn>
+			</aux>
+			<aux name="CS">
+				<units>puntos</units>
+				<doc>CONSERVACION DE SUELO: Se refiere a la cantidad de pr�cticas que realiza el productor para la conservaci�n y recuperaci�n del suelo en el agroecosistema. Donde: 0= 0practicas realizadas, 1=1pc y 2 =2pc.</doc>
+					<eqn> WITH LOOKUP (
+	vCS+Efecto_de_CC,
+		([(0,0)-(5,0.08)],(0,0),(1,0.02),(2,0.04),(3,0.06),(4,0.08) ))					</eqn>
+			</aux>
+			<aux name="DC">
+				<units>puntos</units>
+				<doc>DIVERSIDAD DE CULTIVOS: N�mero de cultivos diferentes que se manejan dentro del agroecosistema.</doc>
+					<eqn> WITH LOOKUP (
+	vDC,
+		([(0,0)-(6,0.03)],(0,0),(1,0.01),(2,0.02),(3,0.03),(4,0.03),(5,0.03) ))					</eqn>
+			</aux>
+			<aux name="DCH">
+				<units></units>
+				<doc>DESEOS DE LOS HEREDEROS DE CONTINUAR CON LA AGRICULTURA: se refiere a los deseos de los herederos de las tierras, de continuar trabajando en el agroecosistema. Donde: 0=no y 1=si.</doc>
+					<eqn> WITH LOOKUP (
+	vDCH,
+		([(0,0)-(2,0.1)],(0,0),(1,0.05) ))					</eqn>
+			</aux>
+			<aux name="DCP">
+				<units></units>
+				<doc>DESEOS DEL PRODUCTOR DE CONTINUAR CON LA AGRICULTURA: Se refiere a si el productor tiene deseos de continnuar con la agricultura. Donde 0=no y 1=si.</doc>
+					<eqn> WITH LOOKUP (
+	vDCP,
+		([(0,0)-(2,0.1)],(0,0),(1,0.03) ))					</eqn>
+			</aux>
+			<aux name="DG">
+				<units>puntos</units>
+				<doc>DIVERSIDAD GANADERA: Se refiere a cuantas especies diferentes de ganado maneja el productor dentro del agroecosistema.</doc>
+					<eqn> WITH LOOKUP (
+	vDG,
+		([(0,0)-(6,0.03)],(0,0),(1,0.01),(2,0.02),(3,0.03),(4,0.03),(5,0.03) ))					</eqn>
+			</aux>
+			<aux name="eCA">
+				<units></units>
+				<doc>Efecto de la Conservaci�n de Agua sobre el Ingreso Agr�cola</doc>
+					<eqn>
+	CA+Efecto_de_CC					</eqn>
+			</aux>
+			<aux name="ECR">
+				<units></units>
+				<doc>EFECTO DEL CAMBIO DE RESPONSABLE: Asumiendo que pasa a ser responsable alguien m�s joven. Esta en funcion a la edad del nuevo responsable.</doc>
+					<eqn>
+	IF_THEN_ELSE(Cambio_de_responsable&gt;0.001,(Cambio_de_responsable-Ram),0)					</eqn>
+			</aux>
+			<aux name="eCS">
+				<units></units>
+				<doc>Efecto de la Conservaci�n de Suelo sobre el Ingreso Agr�cola</doc>
+					<eqn>
+	CS+Efecto_de_CC					</eqn>
+			</aux>
+			<aux name="EE">
+				<units></units>
+				<doc>EMPLEO EXTRAFINCA: Nos dice si el responsable del agroecosistema o algun otro familiar renta su mano de obra. Donde: 0=no, 1=no pero recibe divisas de algun familiar aue ya no vive con el, 2=si.</doc>
+					<eqn> WITH LOOKUP (
+	vEE,
+		([(0,0)-(3,0.1)],(0,0),(1,0.02),(2,0.04) ))					</eqn>
+			</aux>
+			<aux name="Efecto_de_CC">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	IF_THEN_ELSE(CC&gt;=0.02, RAMP(0.004,1 , 100) , 0 )					</eqn>
+			</aux>
+			<aux name="EG">
+				<units></units>
+				<doc>FAMILIARES CON ENFERMEDADES GRAVES: Se refiere a la presencia de alguna enfermedad grave en algun familiar que represente gastos elevados y permanantes para su cuidado, as� como tiempo, lo que pudiera limitar el tiempo dedicado a la atencion del agroecosistema. Donde: 0=precencia de enfermedad y 1=familiares saludables.</doc>
+					<eqn> WITH LOOKUP (
+	vEG,
+		([(0,0)-(2,0.1)],(0,0),(1,0.04) ))					</eqn>
+			</aux>
+			<aux name="EIA">
+				<units></units>
+				<doc>ESTACIONALIDAD DEL INGRESO AGRICOLA: Meses del a�o que se cuenta con ingresos econ�micos por la venta de productos del agroecosistema.</doc>
+					<eqn> WITH LOOKUP (
+	vEIA,
+		([(0,0)-(20,0.1)],(0,0),(1,0),(2,0.01),(3,0.01),(4,0.02),(5,0.02),(6,0.03),(7,0.03),(8,0.03),(9,0.04),(10,0.04),(11,0.04),(12,0.04) ))					</eqn>
+			</aux>
+			<aux name="EM">
+				<units></units>
+				<doc>ESCOLARIDAD M�XIMA EN EL AGROECOSISTEMA: Se refiere al maximo a�os de estudio en alguno de los familiares.</doc>
+					<eqn> WITH LOOKUP (
+	vEM,
+		([(0,0)-(20,0.1)],(0,0),(1,0.01),(2,0.01),(3,0.01),(4,0.01),(5,0.01),(6,0.01),(7,0.02),(8,0.02),(9,0.02),(10,0.03),(11
+		,0.03),(12,0.03),(13,0.04),(14,0.04),(15,0.04),(16,0.04),(17,0.04),(18,0.05) ))					</eqn>
+			</aux>
+			<aux name="ePC">
+				<units></units>
+				<doc>EFECTO DE PRACTICAS DE CONSERVACION SOBRE PERDIDA DE CULTIVOS</doc>
+					<eqn>
+	IF_THEN_ELSE(CA&gt;=0.02:AND:CS&gt;=0.02, RAMP(0.004,1 , 100) , 0)					</eqn>
+			</aux>
+			<aux name="ER">
+				<units></units>
+				<doc>EDAD DEL RESPONSABLE: En a�os</doc>
+					<eqn>
+	vER+"Increm._Edad"					</eqn>
+			</aux>
+			<aux name="ERV">
+				<units></units>
+				<doc></doc>
+					<eqn> WITH LOOKUP (
+	ER,
+		([(30,0)-(200,0.1)],(30,0.05),(31,0.05),(32,0.05),(33,0.05),(34,0.05),(35,0.05),(36,0.05),(37,0.05),(38,0.05),(39,0.05),(40,0.05),(41,0.04),(42,0.04),(43,0.04),(44,0.04),(45,0.04),(46,0.04),(47,0.04),(48,0.04),(49,0.04),(50,0.04),(51,0.03),(52,0.03),(53,0.03),(54,0.03),(55,0.03),(56,0.03),(57,0.03),(58,0.03),(59,0.03),(60,0.03),(61,0.02),(62,0.02),(63,0.02),(64,0.02),(65,0.02),(66,0.02),(67,0.02),(68,0.02),(69,0.02),(70,0.02),(71,0.01),(71,0.01),(72,0.01),(73,0.01),(74,0.01),(75,0.01),(76,0.01),(77,0.01),(78,0.01),(79,0.01),(80,0.01),(81,0),(82,0),(83,0),(84,0),(85,0),(86,0),(87,0),(88,0),(89,0),(90,0),(91,0),(91,0),(93,0),(94,0),(95,0),(96,0),(97,0),(98,0),(99,0),(100,0),(101,0),(102,0),(103,0),(104,0),(105,0
+		),(106,0),(107,0),(108,0),(109,0),(110,0),(111,0),(112,0),(113,0) ))					</eqn>
+			</aux>
+			<aux name="ES">
+				<units>puntos</units>
+				<doc>EROSION DE SUELO: se refiere al grado de erosion del suelo en un  ciclo agricola (2009). Donde: 0=presencia de carcabas, 1= presencia de escalones consolidados de erosion, 2=escalones incipientes de erosi�n, 3=erosion laminar y 4=Sin erosion. m�s FC</doc>
+					<eqn> WITH LOOKUP (
+	vES,
+		([(0,0)-(5,0.1)],(0,0),(1,0),(2,0.02),(3,0.03),(4,0.04) ))					</eqn>
+			</aux>
+			<aux name="ESFC">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	ES+FC					</eqn>
+			</aux>
+			<aux name="EsR">
+				<units></units>
+				<doc>ESCOLARIDAD DEL RESPONSABLE: Se refiere a los a�os de estudio del responsable del agroecosistema.\!\!</doc>
+					<eqn> WITH LOOKUP (
+	vEsR,
+		([(0,0)-(10,0.1)],(0,0),(1,0.01),(2,0.01),(3,0.01),(4,0.01),(5,0.01),(6,0.01),(7,0.02),(8,0.02),(9,0.02) ))					</eqn>
+			</aux>
+			<aux name="F">
+				<units>puntos</units>
+				<doc>USO DE FERTILIZANTES: Se refiere al tipo de fertilizante usado en el agroecosistema: quimico, organico o mixto. Donde 0=ningun fertilizante, 1=quimico, 2=organico y 3=mixta.</doc>
+					<eqn> WITH LOOKUP (
+	vF,
+		([(0,0)-(5,0.1)],(0,0),(1,0.01),(2,0.02),(3,0.03) ))					</eqn>
+			</aux>
+			<aux name="GS">
+				<units></units>
+				<doc>GRADO DE SATISFACCI�N POR TRABAJAR EN AGRICULTURA: Se refiere a si esta o no contento el productor con lo que ha logrado hacer y como ha subsistido por  trabajar sus tierras agricolas. Donde: 0=no y 1=si</doc>
+					<eqn> WITH LOOKUP (
+	vGS,
+		([(0,0)-(2,0.1)],(0,0),(1,0.03) ))					</eqn>
+			</aux>
+			<aux name="I._S._A.">
+				<units></units>
+				<doc>Indice de sustentabilidad ambiental (indice primario), dentros del indice agregado de sustentabilidad.</doc>
+					<eqn>
+	CA+CS+DC+DG+ESFC+F+P+TP+UAG					</eqn>
+			</aux>
+			<aux name="I._S._E.">
+				<units></units>
+				<doc>�ndice de Sustentabilidad Economica del Agroecosistema.</doc>
+					<eqn>
+	EE+EIA+NIA+PC+PG+RP+SAFC0					</eqn>
+			</aux>
+			<aux name="I._S._H.">
+				<units></units>
+				<doc>�ndice de Sustentabilidad Humana del Agroecosistema</doc>
+					<eqn>
+	DCH+DCP+EG+EM+ERV+EsR+GS+SB+ECR					</eqn>
+			</aux>
+			<aux name="I._S._S.">
+				<units></units>
+				<doc>�ndice de Sustentabilidad Social del Agroecosistema</doc>
+					<eqn>
+	AC+AS+CCFC2+OP+VP					</eqn>
+			</aux>
+			<aux name="IASA">
+				<units></units>
+				<doc>Indice de Sustentabilidad Agricola del Agroecosistema, que nos da el grado de suetentabilidad del agroecosistema, resultado de la adicion de los indices Ambiental, Econ�mico, Social y Humano.</doc>
+					<eqn>
+	IF_THEN_ELSE(ER&gt;=81:AND:DCH=0, 0 , "I._S._A."+"I._S._E."+"I._S._H."+"I._S._S." +ECR)					</eqn>
+			</aux>
+			<aux name="Increm._Edad">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	RAMP(1,1,100)					</eqn>
+			</aux>
+			<aux name="NIA">
+				<units></units>
+				<doc>NIVEL DE INGRESOS POR AGRICULTURA: Salarios minimos por agricultura. donde: 0=menos de 1 salario minimo, 1=1 s.m, 2=2 s.m. y 3=a mas  de 2 s.m.</doc>
+					<eqn> WITH LOOKUP (
+	vNIA+eCS+eCA,
+		([(0,0)-(5,0.1)],(0,0),(1,0.01),(2,0.02),(3,0.03) ))					</eqn>
+			</aux>
+			<aux name="OP">
+				<units></units>
+				<doc>ORGANIZACION CON OTROS PRODUCTORES: Se refiere a si el productor esta o estuvo en alguna organizacion de productores formal o informal. Donde: 0=no, 1=pertenecio pero no m�s y 2=si.</doc>
+					<eqn> WITH LOOKUP (
+	vOP,
+		([(0,0)-(5,0.1)],(0,0),(1,0.02),(2,0.04) ))					</eqn>
+			</aux>
+			<aux name="P">
+				<units>cantidad</units>
+				<doc>USO DE PLAGUICIDAS EN CULTIVOS: Se refiere a la intensidad de uso de pesticidas en cultivos, con referencia a las indicaciones del producto. Donde: 0=ninguno, 1=alto, 2=medio y 3=bajo.</doc>
+					<eqn> WITH LOOKUP (
+	vPP,
+		([(0,0)-(5,1)],(0,0),(1,0.01),(2,0.02),(3,0.03) ))					</eqn>
+			</aux>
+			<aux name="PC">
+				<units></units>
+				<doc>PERDIDAS EN CULTIVOS: Se refiere a la proporcion de la produccion de los cultivos que se estima se pierde por diferentes factores. Donde:   0=mas de 25%, 1=de 15 a 25% y 2=de 5 a 15%.\!\!</doc>
+					<eqn> WITH LOOKUP (
+	vPC+ ePC,
+		([(0,0)-(3,0.1)],(0,0),(1,0.01),(2,0.02) ))					</eqn>
+			</aux>
+			<aux name="PG">
+				<units></units>
+				<doc>PERDIDAS EN GANADERIA: Se refiere a la proporcion de la produccion ganadera que se estima se pierde por diferentes factores. Donde: 0=mas de 25%, 1=de 15 a 25% y 2=de 5 a 15%.\!\!</doc>
+					<eqn> WITH LOOKUP (
+	vPG,
+		([(0,0)-(3,0.1)],(0,0),(1,0.01),(2,0.02) ))					</eqn>
+			</aux>
+			<aux name="Ram">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	RAMP(0.001,12,100)					</eqn>
+			</aux>
+			<aux name="RP">
+				<units></units>
+				<doc>RENTA DE PASTO: Se refiere a los meses del a�o que se renta pasto para el ganado del agroecosistema.</doc>
+					<eqn> WITH LOOKUP (
+	vRP,
+		([(0,0)-(20,0.1)],(0,0.04),(1,0.03),(2,0.03),(3,0.03),(4,0.02),(5,0.02),(6,0.02),(7,0.01),(8,0.01),(9,0.01),(10,0),(11,0),(12,0) ))					</eqn>
+			</aux>
+			<aux name="SA">
+				<units>cantidad</units>
+				<doc>SEGURIDAD ALIMENTARIA: Se refiere a la proporci�n de los alimentos consumidos que se producen dentro del agroecosistema. Donde: 0=menos de 20% , 1= del 21 al 40%, 2=del 41 al 60%, 3=del 61 al 80% y 4= m�s del 80%.\!\!\!</doc>
+					<eqn> WITH LOOKUP (
+	vSA,
+		([(0,0)-(5,0.1)],(0,0),(1,0.01),(2,0.02),(3,0.03),(4,0.04) ))					</eqn>
+			</aux>
+			<aux name="SAFC0">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	SA+FC0					</eqn>
+			</aux>
+			<aux name="SB">
+				<units></units>
+				<doc>ACCESO A SERVICIOS BASICOS: Se refiere al acceso a servicios basicos para la vida digna, como salud, educacion, agua potable, seguridad, esparcimiento, libertad, etc.</doc>
+					<eqn> WITH LOOKUP (
+	vSB,
+		([(0,0)-(5,0.1)],(0,0),(1,0.01),(2,0.02),(3,0.03),(4,0.04) ))					</eqn>
+			</aux>
+			<aux name="TP">
+				<units>puntos</units>
+				<doc>TIPO DE POTREROS: Se refiere al tipo de vegetacion y cobertura de los potreros donde pastorea el ganado del agroecosistema. Donde: 0=baja cobertura de herbaceas nativas, 1=gramanativa, 2=pasto mejorado, 3=silvopastoreo, y 4=agrosilvopastoril.\!\!</doc>
+					<eqn> WITH LOOKUP (
+	vTP,
+		([(0,0)-(4,0.1)],(0,0),(1,0.01),(2,0.02),(3,0.03),(4,0.04) ))					</eqn>
+			</aux>
+			<aux name="UAG">
+				<units>puntos</units>
+				<doc>USO DE AGROQUIMICOS EN GANADERIA: Se refiere al uso de agroqu�micos diversos directamente sobre el ganado. Donde:0=alto, 1=medio y 2=bajo.</doc>
+					<eqn> WITH LOOKUP (
+	vUAG,
+		([(0,0)-(4,0.1)],(0,0),(1,0.01),(2,0.02) ))					</eqn>
+			</aux>
+			<aux name="VP">
+				<units></units>
+				<doc>VENTA DE PRODUCTOS AGRICOLAS: Se refiere a quie vende los productor del agroecosistema. Donde: 0=no vende, 1=intermediario y 2=al consumidor.</doc>
+					<eqn> WITH LOOKUP (
+	vVP,
+		([(0,0)-(5,0.1)],(0,0),(1,0.02),(2,0.03) ))					</eqn>
+			</aux>
+			<aux name="FC">
+				<units>puntos</units>
+				<doc>FACTOR DE CORRECCI�N DE EROSION DE SUELO: Donde: segun los resultados de campo, los valores de los factores de correccion de la erosion de la variable Erosion del suelo: Erosion activa: -0.01; Erosion estabilizada: 0.00; y Recuperacin de suelos: +0.01.</doc>
+					<eqn>
+	0.01					</eqn>
+			</aux>
+			<aux name="FC_2">
+				<units></units>
+				<doc>FACTOR DE CORRECCION DE CURSOS DE CAPACITACI�N: Valores de los factores de correccion de la variable Asistencia a Cursos de Capacitacion: Asistio un familiar que no toma decisiones: -0.01; Asistio un responsable; Asistio el responsable y un familiar joven +0.01</doc>
+					<eqn>
+	0.01					</eqn>
+			</aux>
+			<aux name="FC0">
+				<units></units>
+				<doc>FACTOR DE CORRECCI�N DE SEGURIDAD ALIMENTARIA: Valores de los factores de correccion de la variable Seguridad Alimentaria: Baja (relacion p/c inferior a 0.33) : -0.01; Media (relacion p/c entre 0.33 y 0.66): 0.00; y : Alta (relacion p/c mayor de 0.66): +0.01</doc>
+					<eqn>
+	0.01					</eqn>
+			</aux>
+			<aux name="vAC">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="vAS">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	3					</eqn>
+			</aux>
+			<aux name="vCA">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="vCC">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	3					</eqn>
+			</aux>
+			<aux name="vCS">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="vDC">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="vDCH">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="vDCP">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="vDG">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="vEE">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+			<aux name="vEG">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="vEIA">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	10					</eqn>
+			</aux>
+			<aux name="vEM">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	6					</eqn>
+			</aux>
+			<aux name="vER">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	75					</eqn>
+			</aux>
+			<aux name="vES">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	3					</eqn>
+			</aux>
+			<aux name="vEsR">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	5					</eqn>
+			</aux>
+			<aux name="vF">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	3					</eqn>
+			</aux>
+			<aux name="vGS">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="vNIA">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	3					</eqn>
+			</aux>
+			<aux name="vOP">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+			<aux name="vPC">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+			<aux name="vPG">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="vPP">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="vRP">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="vSA">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="vSB">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	3					</eqn>
+			</aux>
+			<aux name="vTP">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	3					</eqn>
+			</aux>
+			<aux name="vUAG">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="vVP">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

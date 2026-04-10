@@ -1,0 +1,769 @@
+{UTF-8}
+AC = WITH LOOKUP (
+	vAC,
+		([(0,0)-(5,0.1)],(0,0),(1,0.01) ))
+	~	
+	~	ACCESO A CREDITOS: Se refiere a si el productor ha tenido en los ultimos 3 \
+		años acceso a un credito para la agricultura. Donde 0=no y 1 =si.
+	|
+
+AS = WITH LOOKUP (
+	vAS,
+		([(0,0)-(10,0.1)],(0,0.03),(1,0.02),(2,0.01),(3,0) ))
+	~	 [0,0.03]
+	~	PROGRAMAS DE ASISTENCIA SOCIAL: Se refiere a los programas de asistencia \
+		social que se tienen en la familia agricola.\!\!
+	|
+
+CA = WITH LOOKUP (
+	vCA+Efecto de CC,
+		([(0,0)-(5,1)],(0,0),(1,0.02),(2,0.04),(3,0.06),(4,0.08) ))
+	~	puntos
+	~	CONSERVACION DE AGUA: Se refiere a la cantidad de prácticas que realiza el \
+		productor en el agroecosistema para conservar agua, ya sea para cultivos o \
+		animales.
+	|
+
+RP = WITH LOOKUP (
+	vRP,
+		([(0,0)-(20,0.1)],(0,0.04),(1,0.03),(2,0.03),(3,0.03),(4,0.02),(5,0.02),(6,0.02),(7\
+		,0.01),(8,0.01),(9,0.01),(10,0),(11,0),(12,0) ))
+	~	 [0,0.04]
+	~	RENTA DE PASTO: Se refiere a los meses del año que se renta pasto para el \
+		ganado del agroecosistema.
+	|
+
+CC = WITH LOOKUP (
+	vCC,
+		([(0,0)-(4,0.1)],(0,0),(1,0.01),(2,0.02),(3,0.03),(4,0.04) ))
+	~	 [0,0.03]
+	~	CURSOS DE CAPACITACIÓN: Número de cursos de capacitacion a los que ha \
+		asistido el productor. Donde: 0=0cursos, 1=1curso, 2=2cursos y 3 =mas de 2 \
+		cursos.\!\!\!
+	|
+
+CCFC2=
+	CC+FC 2
+	~	
+	~		|
+
+CS = WITH LOOKUP (
+	vCS+Efecto de CC,
+		([(0,0)-(5,0.08)],(0,0),(1,0.02),(2,0.04),(3,0.06),(4,0.08) ))
+	~	puntos
+	~	CONSERVACION DE SUELO: Se refiere a la cantidad de prácticas que realiza \
+		el productor para la conservación y recuperación del suelo en el \
+		agroecosistema. Donde: 0= 0practicas realizadas, 1=1pc y 2 =2pc.
+	|
+
+DC = WITH LOOKUP (
+	vDC,
+		([(0,0)-(6,0.03)],(0,0),(1,0.01),(2,0.02),(3,0.03),(4,0.03),(5,0.03) ))
+	~	puntos
+	~	DIVERSIDAD DE CULTIVOS: Número de cultivos diferentes que se manejan \
+		dentro del agroecosistema.
+	|
+
+DCH = WITH LOOKUP (
+	vDCH,
+		([(0,0)-(2,0.1)],(0,0),(1,0.05) ))
+	~	 [0,0.05]
+	~	DESEOS DE LOS HEREDEROS DE CONTINUAR CON LA AGRICULTURA: se refiere a los \
+		deseos de los herederos de las tierras, de continuar trabajando en el \
+		agroecosistema. Donde: 0=no y 1=si.
+	|
+
+DCP = WITH LOOKUP (
+	vDCP,
+		([(0,0)-(2,0.1)],(0,0),(1,0.03) ))
+	~	 [0,0.03]
+	~	DESEOS DEL PRODUCTOR DE CONTINUAR CON LA AGRICULTURA: Se refiere a si el \
+		productor tiene deseos de continnuar con la agricultura. Donde 0=no y 1=si.
+	|
+
+DG = WITH LOOKUP (
+	vDG,
+		([(0,0)-(6,0.03)],(0,0),(1,0.01),(2,0.02),(3,0.03),(4,0.03),(5,0.03) ))
+	~	puntos [0,3]
+	~	DIVERSIDAD GANADERA: Se refiere a cuantas especies diferentes de ganado \
+		maneja el productor dentro del agroecosistema.
+	|
+
+vCA=
+	1
+	~	
+	~		|
+
+vCC=
+	3
+	~	
+	~		|
+
+vCS=
+	1
+	~	
+	~		|
+
+EE = WITH LOOKUP (
+	vEE,
+		([(0,0)-(3,0.1)],(0,0),(1,0.02),(2,0.04) ))
+	~	 [0,0.04]
+	~	EMPLEO EXTRAFINCA: Nos dice si el responsable del agroecosistema o algun \
+		otro familiar renta su mano de obra. Donde: 0=no, 1=no pero recibe divisas \
+		de algun familiar aue ya no vive con el, 2=si.
+	|
+
+vDCH=
+	1
+	~	
+	~		|
+
+EG = WITH LOOKUP (
+	vEG,
+		([(0,0)-(2,0.1)],(0,0),(1,0.04) ))
+	~	 [0,0.04]
+	~	FAMILIARES CON ENFERMEDADES GRAVES: Se refiere a la presencia de alguna \
+		enfermedad grave en algun familiar que represente gastos elevados y \
+		permanantes para su cuidado, así como tiempo, lo que pudiera limitar el \
+		tiempo dedicado a la atencion del agroecosistema. Donde: 0=precencia de \
+		enfermedad y 1=familiares saludables.
+	|
+
+EIA = WITH LOOKUP (
+	vEIA,
+		([(0,0)-(20,0.1)],(0,0),(1,0),(2,0.01),(3,0.01),(4,0.02),(5,0.02),(6,0.03),(7,0.03)\
+		,(8,0.03),(9,0.04),(10,0.04),(11,0.04),(12,0.04) ))
+	~	
+	~	ESTACIONALIDAD DEL INGRESO AGRICOLA: Meses del año que se cuenta con \
+		ingresos económicos por la venta de productos del agroecosistema.
+	|
+
+EM = WITH LOOKUP (
+	vEM,
+		([(0,0)-(20,0.1)],(0,0),(1,0.01),(2,0.01),(3,0.01),(4,0.01),(5,0.01),(6,0.01),(7,0.02\
+		),(8,0.02),(9,0.02),(10,0.03),(11
+		,0.03),(12,0.03),(13,0.04),(14,0.04),(15,0.04),(16,0.04),(17,0.04),(18,0.05) ))
+	~	 [0,0.04]
+	~	ESCOLARIDAD MÁXIMA EN EL AGROECOSISTEMA: Se refiere al maximo años de \
+		estudio en alguno de los familiares.
+	|
+
+vEG=
+	0
+	~	
+	~		|
+
+ER=
+	vER+"Increm. Edad"
+	~	 [20,90]
+	~	EDAD DEL RESPONSABLE: En años
+	|
+
+vEM=
+	6
+	~	
+	~		|
+
+ES = WITH LOOKUP (
+	vES,
+		([(0,0)-(5,0.1)],(0,0),(1,0),(2,0.02),(3,0.03),(4,0.04) ))
+	~	puntos
+	~	EROSION DE SUELO: se refiere al grado de erosion del suelo en un  ciclo \
+		agricola (2009). Donde: 0=presencia de carcabas, 1= presencia de escalones \
+		consolidados de erosion, 2=escalones incipientes de erosión, 3=erosion \
+		laminar y 4=Sin erosion. más FC
+	|
+
+ESFC=
+	ES+FC
+	~	
+	~		|
+
+EsR = WITH LOOKUP (
+	vEsR,
+		([(0,0)-(10,0.1)],(0,0),(1,0.01),(2,0.01),(3,0.01),(4,0.01),(5,0.01),(6,0.01),(7,0.02\
+		),(8,0.02),(9,0.02) ))
+	~	 [0,0.02]
+	~	ESCOLARIDAD DEL RESPONSABLE: Se refiere a los años de estudio del \
+		responsable del agroecosistema.\!\!
+	|
+
+F = WITH LOOKUP (
+	vF,
+		([(0,0)-(5,0.1)],(0,0),(1,0.01),(2,0.02),(3,0.03) ))
+	~	puntos
+	~	USO DE FERTILIZANTES: Se refiere al tipo de fertilizante usado en el \
+		agroecosistema: quimico, organico o mixto. Donde 0=ningun fertilizante, \
+		1=quimico, 2=organico y 3=mixta.
+	|
+
+vGS=
+	1
+	~	
+	~		|
+
+vNIA=
+	3
+	~	
+	~		|
+
+vOP=
+	2
+	~	
+	~		|
+
+GS = WITH LOOKUP (
+	vGS,
+		([(0,0)-(2,0.1)],(0,0),(1,0.03) ))
+	~	 [0,0.03]
+	~	GRADO DE SATISFACCIÓN POR TRABAJAR EN AGRICULTURA: Se refiere a si esta o \
+		no contento el productor con lo que ha logrado hacer y como ha subsistido \
+		por  trabajar sus tierras agricolas. Donde: 0=no y 1=si
+	|
+
+"I. S. A."=
+	CA+CS+DC+DG+ESFC+F+P+TP+UAG
+	~	
+	~	Indice de sustentabilidad ambiental (indice primario), dentros del indice \
+		agregado de sustentabilidad.
+	|
+
+"I. S. E."=
+	EE+EIA+NIA+PC+PG+RP+SAFC0
+	~	
+	~	Índice de Sustentabilidad Economica del Agroecosistema.
+	|
+
+vPP=
+	1
+	~	
+	~		|
+
+"I. S. S."=
+	AC+AS+CCFC2+OP+VP
+	~	
+	~	Índice de Sustentabilidad Social del Agroecosistema
+	|
+
+vSA=
+	1
+	~	
+	~		|
+
+vSB=
+	3
+	~	
+	~		|
+
+NIA = WITH LOOKUP (
+	vNIA+eCS+eCA,
+		([(0,0)-(5,0.1)],(0,0),(1,0.01),(2,0.02),(3,0.03) ))
+	~	
+	~	NIVEL DE INGRESOS POR AGRICULTURA: Salarios minimos por agricultura. \
+		donde: 0=menos de 1 salario minimo, 1=1 s.m, 2=2 s.m. y 3=a mas  de 2 s.m.
+	|
+
+OP = WITH LOOKUP (
+	vOP,
+		([(0,0)-(5,0.1)],(0,0),(1,0.02),(2,0.04) ))
+	~	 [0,0.04]
+	~	ORGANIZACION CON OTROS PRODUCTORES: Se refiere a si el productor esta o \
+		estuvo en alguna organizacion de productores formal o informal. Donde: \
+		0=no, 1=pertenecio pero no más y 2=si.
+	|
+
+P = WITH LOOKUP (
+	vPP,
+		([(0,0)-(5,1)],(0,0),(1,0.01),(2,0.02),(3,0.03) ))
+	~	cantidad
+	~	USO DE PLAGUICIDAS EN CULTIVOS: Se refiere a la intensidad de uso de \
+		pesticidas en cultivos, con referencia a las indicaciones del producto. \
+		Donde: 0=ninguno, 1=alto, 2=medio y 3=bajo.
+	|
+
+PC = WITH LOOKUP (
+	vPC+ ePC,
+		([(0,0)-(3,0.1)],(0,0),(1,0.01),(2,0.02) ))
+	~	 [0,0.02]
+	~	PERDIDAS EN CULTIVOS: Se refiere a la proporcion de la produccion de los \
+		cultivos que se estima se pierde por diferentes factores. Donde:   0=mas \
+		de 25%, 1=de 15 a 25% y 2=de 5 a 15%.\!\!
+	|
+
+PG = WITH LOOKUP (
+	vPG,
+		([(0,0)-(3,0.1)],(0,0),(1,0.01),(2,0.02) ))
+	~	 [0,0.02]
+	~	PERDIDAS EN GANADERIA: Se refiere a la proporcion de la produccion \
+		ganadera que se estima se pierde por diferentes factores. Donde: 0=mas de \
+		25%, 1=de 15 a 25% y 2=de 5 a 15%.\!\!
+	|
+
+vPC=
+	2
+	~	
+	~		|
+
+vER=
+	75
+	~	
+	~		|
+
+SA = WITH LOOKUP (
+	vSA,
+		([(0,0)-(5,0.1)],(0,0),(1,0.01),(2,0.02),(3,0.03),(4,0.04) ))
+	~	cantidad [0,6]
+	~	SEGURIDAD ALIMENTARIA: Se refiere a la proporción de los alimentos \
+		consumidos que se producen dentro del agroecosistema. Donde: 0=menos de \
+		20% , 1= del 21 al 40%, 2=del 41 al 60%, 3=del 61 al 80% y 4= más del \
+		80%.\!\!\!
+	|
+
+SAFC0=
+	SA+FC0
+	~	
+	~		|
+
+SB = WITH LOOKUP (
+	vSB,
+		([(0,0)-(5,0.1)],(0,0),(1,0.01),(2,0.02),(3,0.03),(4,0.04) ))
+	~	 [0,0.04]
+	~	ACCESO A SERVICIOS BASICOS: Se refiere al acceso a servicios basicos para \
+		la vida digna, como salud, educacion, agua potable, seguridad, \
+		esparcimiento, libertad, etc.
+	|
+
+TP = WITH LOOKUP (
+	vTP,
+		([(0,0)-(4,0.1)],(0,0),(1,0.01),(2,0.02),(3,0.03),(4,0.04) ))
+	~	puntos
+	~	TIPO DE POTREROS: Se refiere al tipo de vegetacion y cobertura de los \
+		potreros donde pastorea el ganado del agroecosistema. Donde: 0=baja \
+		cobertura de herbaceas nativas, 1=gramanativa, 2=pasto mejorado, \
+		3=silvopastoreo, y 4=agrosilvopastoril.\!\!
+	|
+
+UAG = WITH LOOKUP (
+	vUAG,
+		([(0,0)-(4,0.1)],(0,0),(1,0.01),(2,0.02) ))
+	~	puntos
+	~	USO DE AGROQUIMICOS EN GANADERIA: Se refiere al uso de agroquímicos \
+		diversos directamente sobre el ganado. Donde:0=alto, 1=medio y 2=bajo.
+	|
+
+vAC=
+	1
+	~	
+	~		|
+
+vAS=
+	3
+	~	
+	~		|
+
+vEIA=
+	10
+	~	
+	~		|
+
+vPG=
+	1
+	~	
+	~		|
+
+vDG=
+	1
+	~	
+	~		|
+
+vDC=
+	0
+	~	
+	~		|
+
+vEsR=
+	5
+	~	
+	~		|
+
+vDCP=
+	1
+	~	
+	~		|
+
+vF=
+	3
+	~	
+	~		|
+
+vEE=
+	2
+	~	
+	~		|
+
+vVP=
+	2
+	~	
+	~		|
+
+VP = WITH LOOKUP (
+	vVP,
+		([(0,0)-(5,0.1)],(0,0),(1,0.02),(2,0.03) ))
+	~	 [0,0.03]
+	~	VENTA DE PRODUCTOS AGRICOLAS: Se refiere a quie vende los productor del \
+		agroecosistema. Donde: 0=no vende, 1=intermediario y 2=al consumidor.
+	|
+
+vES=
+	3
+	~	
+	~		|
+
+vRP=
+	0
+	~	
+	~		|
+
+vTP=
+	3
+	~	
+	~		|
+
+vUAG=
+	0
+	~	
+	~		|
+
+Cambio de responsable=
+	IF THEN ELSE(DCH=0.05:AND:ER>=80,0.05, 0 )
+	~	
+	~		|
+
+eCA=
+	CA+Efecto de CC
+	~	
+	~	Efecto de la Conservación de Agua sobre el Ingreso Agrícola
+	|
+
+ECR=
+	IF THEN ELSE(Cambio de responsable>0.001,(Cambio de responsable-Ram),0)
+	~	
+	~	EFECTO DEL CAMBIO DE RESPONSABLE: Asumiendo que pasa a ser responsable \
+		alguien más joven. Esta en funcion a la edad del nuevo responsable.
+	|
+
+eCS=
+	CS+Efecto de CC
+	~	
+	~	Efecto de la Conservación de Suelo sobre el Ingreso Agrícola
+	|
+
+Efecto de CC=
+	IF THEN ELSE(CC>=0.02, RAMP(0.004,1 , 100) , 0 )
+	~	
+	~		|
+
+ePC=
+	IF THEN ELSE(CA>=0.02:AND:CS>=0.02, RAMP(0.004,1 , 100) , 0)
+	~	
+	~	EFECTO DE PRACTICAS DE CONSERVACION SOBRE PERDIDA DE CULTIVOS
+	|
+
+ERV = WITH LOOKUP (
+	ER,
+		([(30,0)-(200,0.1)],(30,0.05),(31,0.05),(32,0.05),(33,0.05),(34,0.05),(35,0.05),(36\
+		,0.05),(37,0.05),(38,0.05),(39,0.05),(40,0.05),(41,0.04),(42,0.04),(43,0.04),(44,0.04\
+		),(45,0.04),(46,0.04),(47,0.04),(48,0.04),(49,0.04),(50,0.04),(51,0.03),(52,0.03),(\
+		53,0.03),(54,0.03),(55,0.03),(56,0.03),(57,0.03),(58,0.03),(59,0.03),(60,0.03),(61,\
+		0.02),(62,0.02),(63,0.02),(64,0.02),(65,0.02),(66,0.02),(67,0.02),(68,0.02),(69,0.02\
+		),(70,0.02),(71,0.01),(71,0.01),(72,0.01),(73,0.01),(74,0.01),(75,0.01),(76,0.01),(\
+		77,0.01),(78,0.01),(79,0.01),(80,0.01),(81,0),(82,0),(83,0),(84,0),(85,0),(86,0),(87\
+		,0),(88,0),(89,0),(90,0),(91,0),(91,0),(93,0),(94,0),(95,0),(96,0),(97,0),(98,0),(99\
+		,0),(100,0),(101,0),(102,0),(103,0),(104,0),(105,0
+		),(106,0),(107,0),(108,0),(109,0),(110,0),(111,0),(112,0),(113,0) ))
+	~	
+	~		|
+
+FC=
+	0.01
+	~	puntos
+	~	FACTOR DE CORRECCIÓN DE EROSION DE SUELO: Donde: segun los resultados de \
+		campo, los valores de los factores de correccion de la erosion de la \
+		variable Erosion del suelo: Erosion activa: -0.01; Erosion estabilizada: \
+		0.00; y Recuperacin de suelos: +0.01.
+	|
+
+FC 2=
+	0.01
+	~	 [0,0.01]
+	~	FACTOR DE CORRECCION DE CURSOS DE CAPACITACIÓN: Valores de los factores de \
+		correccion de la variable Asistencia a Cursos de Capacitacion: Asistio un \
+		familiar que no toma decisiones: -0.01; Asistio un responsable; Asistio el \
+		responsable y un familiar joven +0.01
+	|
+
+FC0=
+	0.01
+	~	
+	~	FACTOR DE CORRECCIÓN DE SEGURIDAD ALIMENTARIA: Valores de los factores de \
+		correccion de la variable Seguridad Alimentaria: Baja (relacion p/c \
+		inferior a 0.33) : -0.01; Media (relacion p/c entre 0.33 y 0.66): 0.00; y \
+		: Alta (relacion p/c mayor de 0.66): +0.01
+	|
+
+"I. S. H."=
+	DCH+DCP+EG+EM+ERV+EsR+GS+SB+ECR
+	~	 [0,0.3]
+	~	Índice de Sustentabilidad Humana del Agroecosistema
+	|
+
+IASA=
+	IF THEN ELSE(ER>=81:AND:DCH=0, 0 , "I. S. A."+"I. S. E."+"I. S. H."+"I. S. S." +ECR)
+	~	
+	~	Indice de Sustentabilidad Agricola del Agroecosistema, que nos da el grado \
+		de suetentabilidad del agroecosistema, resultado de la adicion de los \
+		indices Ambiental, Económico, Social y Humano.
+	|
+
+"Increm. Edad"=
+	RAMP(1,1,100)
+	~	
+	~		|
+
+Ram=
+	RAMP(0.001,12,100)
+	~	
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 20
+	~	Year
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Year
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Year [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 1
+	~	Year [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,75,0
+10,1,DC,251,-381,40,20,3,3,0,5,0,0,0,0,255-255-255,255-255-255,|||0-0-0,0,0,0,0,0,0
+10,2,DG,343,-402,40,20,3,3,0,1,0,0,0,0,255-255-255,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,3,CS,434,-391,47,26,3,131,0,1,0,0,0,0,255-255-255,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,4,CA,521,-371,44,20,3,131,0,1,0,0,0,0,255-255-255,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,5,F,169,-283,40,20,3,3,0,1,0,0,0,0,255-255-255,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,6,P,199,-331,40,20,3,3,0,1,0,0,0,0,255-255-255,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,7,UAG,187,-215,43,25,3,131,0,1,0,0,0,0,255-255-255,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,8,TP,260,-170,40,20,3,3,0,1,0,0,0,0,255-255-255,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,9,ES,264,-115,40,20,3,3,0,1,0,0,0,0,255-255-255,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,10,FC,348,-68,40,20,3,3,0,20,0,0,0,0,0-0-0,255-0-0,||B|0-0-0,0,0,0,0,0,0
+10,11,"I. S. A.",416,-264,35,35,2,131,0,28,0,0,0,0,0-0-0,0-255-255,|14|BI|0-0-0,0,0,0,0,0,0
+1,12,1,11,1,0,0,0,0,64,0,-1--1--1,,1|(330,-335)|
+1,13,2,11,1,0,0,0,0,64,0,-1--1--1,,1|(378,-348)|
+1,14,3,11,1,0,0,0,0,64,0,-1--1--1,,1|(429,-325)|
+1,15,4,11,1,0,0,0,0,64,0,-1--1--1,,1|(481,-326)|
+1,16,6,11,1,0,0,0,0,64,0,-1--1--1,,1|(297,-312)|
+1,17,5,11,1,0,0,0,0,64,0,-1--1--1,,1|(291,-277)|
+1,18,7,11,1,0,0,0,0,64,0,-1--1--1,,1|(302,-243)|
+1,19,8,11,1,0,0,0,0,64,0,-1--1--1,,1|(333,-210)|
+10,20,"I. S. E.",682,-263,36,36,2,131,0,28,0,0,0,0,0-0-0,0-255-255,|14|BI|0-0-0,0,0,0,0,0,0
+10,21,NIA,655,-385,16,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,22,EIA,738,-385,15,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,23,EE,796,-349,11,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,24,SA,813,-283,12,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,25,PC,818,-240,12,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,26,PG,788,-193,12,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,27,RP,759,-140,12,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,28,"I. S. S.",350,284,35,35,2,131,0,28,0,0,0,0,0-0-0,0-255-255,|14|BI|0-0-0,0,0,0,0,0,0
+10,29,CC,255,123,13,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,30,AS,161,278,12,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,31,OP,188,370,13,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,32,VP,326,402,12,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,33,FC 2,361,158,40,20,3,3,0,20,0,0,0,0,0-0-0,255-0-0,||B|0-0-0,0,0,0,0,0,0
+10,34,AC,185,185,13,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,35,"I. S. H.",664,234,37,37,2,131,0,28,0,0,0,0,0-0-0,0-255-255,|14|BI|0-0-0,0,0,0,0,0,0
+10,36,ER,768,32,12,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,37,EsR,831,162,15,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,38,EM,881,232,14,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,39,GS,871,298,12,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,40,DCP,808,345,18,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,41,DCH,783,402,19,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,42,SB,661,366,12,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,43,EG,560,356,12,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,44,IASA,544,8,53,53,6,131,0,29,0,0,0,0,128-0-64,128-192-0,|16|B|0-0-0,0,0,0,0,0,0
+10,45,"Increm. Edad",849,78,40,20,3,3,0,1,0,0,0,0,0-0-255,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,46,ERV,746,111,40,20,3,3,0,4,0,0,0,0,0-0-0,192-192-192,|||0-0-0,0,0,0,0,0,0
+10,47,Efecto de CC,121,-89,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,48,eCS,472,-481,40,20,3,3,0,4,0,0,0,0,0-0-0,192-192-192,|||0-0-0,0,0,0,0,0,0
+10,49,eCA,510,-434,40,20,3,3,0,4,0,0,0,0,0-0-0,192-192-192,|||0-0-0,0,0,0,0,0,0
+10,50,Cambio de responsable,532,237,44,31,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,51,Ram,476,494,40,20,3,3,0,1,0,0,0,0,0-0-255,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,52,ECR,360,553,40,20,3,3,0,4,0,0,0,0,0-0-0,192-192-192,|||0-0-0,0,0,0,0,0,0
+10,53,FC0,972,-320,40,20,3,3,0,20,0,0,0,0,0-0-0,255-0-0,||B|0-0-0,0,0,0,0,0,0
+10,54,ePC,688,-94,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,55,vDG,200,-444,30,18,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,56,vF,49,-330,23,25,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,57,vDC,129,-428,17,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,58,vPP,74,-380,15,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,59,vCS,303,-489,16,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,60,vUAG,35,-212,22,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,61,vCA,623,-504,17,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,62,vCC,142,91,17,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,63,vAC,94,164,17,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,64,vAS,74,255,16,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,65,vOP,80,372,16,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,66,vVP,235,481,16,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,67,vEG,524,432,16,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,68,vSB,654,473,15,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,69,vDCH,818,481,22,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,70,vDCP,891,414,21,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,71,vGS,958,336,16,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,72,vEM,971,246,17,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,73,vEsR,967,113,18,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,74,vER,930,12,15,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,75,vNIA,719,-486,20,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,76,vEIA,796,-468,18,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,77,vEE,882,-432,15,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,78,vSA,900,-390,16,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,79,vPC,938,-250,16,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,80,vPG,904,-170,16,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,81,vRP,858,-106,15,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,82,vTP,39,-125,15,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,83,vES,119,-15,15,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,84,SAFC0,890,-273,26,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,85,ESFC,254,-52,21,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,86,CCFC2,327,80,27,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,87,57,1,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,88,55,2,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,89,47,3,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,90,59,3,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,91,47,4,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,92,61,4,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,93,56,5,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,94,58,6,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,95,60,7,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,96,82,8,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,97,83,9,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,98,85,11,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,99,23,20,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,100,22,20,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,101,21,20,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,102,25,20,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,103,26,20,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,104,27,20,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,105,84,20,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,106,49,21,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,107,48,21,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,108,75,21,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,109,76,22,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,110,77,23,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,111,78,24,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,112,54,25,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,113,79,25,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,114,80,26,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,115,81,27,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,116,34,28,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,117,30,28,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,118,86,28,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,119,31,28,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,120,32,28,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,121,62,29,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,122,64,30,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,123,65,31,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,124,66,32,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,125,63,34,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,126,41,35,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,127,40,35,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,128,52,35,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,129,43,35,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,130,38,35,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,131,46,35,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,132,37,35,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,133,39,35,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,134,42,35,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,135,45,36,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,136,74,36,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,137,73,37,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,138,72,38,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,139,71,39,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,140,70,40,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,141,69,41,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,142,68,42,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,143,67,43,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,144,41,44,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,145,52,44,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,146,36,44,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,147,11,44,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,148,20,44,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,149,35,44,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,150,28,44,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,151,36,46,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,152,29,47,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,153,3,48,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,154,47,48,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,155,4,49,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,156,47,49,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,157,41,50,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,158,36,50,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,159,50,52,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,160,51,52,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,161,4,54,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,162,3,54,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,163,53,84,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,164,24,84,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,165,9,85,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,166,10,85,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,167,29,86,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,168,33,86,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+///---\\\
+:L<%^E!@
+4:Time
+5:FC 2
+9:Modificación 2
+19:75,0
+24:0
+25:20
+26:20
+23:0
+15:0,0,0,0,0,0
+27:2,
+34:0,
+42:0
+72:0
+73:0
+95:0
+96:0
+97:0
+77:0
+78:0
+102:1
+93:0
+94:0
+92:0
+91:0
+90:0
+87:0
+75:
+43:
+103:8,8,8,3,8
+105:0,0,0,0,0,0,0,0,0,0
+104:Courier|12||0-0-0|0-0-0|-1--1--1|0-0-255|192-192-192|-1--1--1

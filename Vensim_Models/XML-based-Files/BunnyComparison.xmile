@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Month">
+		<start> 0</start>
+		<stop> 30</stop>
+		<dt> 0.25</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="bunnies">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					2
+					</eqn>
+					<inflow>
+					bunnification
+					</inflow>
+			</stock>
+			<stock name="bunnies_0">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					2
+					</eqn>
+					<inflow>
+					bunnification 0
+					</inflow>
+			</stock>
+			<aux name="bunnification">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	birf_rate*bunnies*(1-bunnies/carrying_capacity)					</eqn>
+			</aux>
+			<aux name="bunnification_0">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	birf_rate_0*bunnies_0 - competition*bunnies_0*(bunnies_0-1)/2					</eqn>
+			</aux>
+			<aux name="birf_rate">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.5					</eqn>
+			</aux>
+			<aux name="birf_rate_0">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.5					</eqn>
+			</aux>
+			<aux name="carrying_capacity">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1000					</eqn>
+			</aux>
+			<aux name="competition">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.0002					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

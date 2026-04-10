@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Week">
+		<start> 0</start>
+		<stop> 52</stop>
+		<dt> 0.0078125</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="estimated_underlying_asset_value">
+				<units>EURO</units>
+				<doc></doc>
+					<eqn>
+					initial_estimated_underlying_asset_value
+					</eqn>
+					<inflow>
+					underlying asset increase
+					</inflow>
+					<outflow>
+					underlying asset loss
+					</outflow>
+			</stock>
+			<stock name="stock_market_value">
+				<units>EURO</units>
+				<doc></doc>
+					<eqn>
+					initial_stock_market_value
+					</eqn>
+					<inflow>
+					stock market value increase
+					</inflow>
+					<outflow>
+					stock market value loss
+					</outflow>
+			</stock>
+			<aux name="average_bank_client's_fear_and_uncertainty">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+	smoothed_market_fear_and_uncertainty					</eqn>
+			</aux>
+			<aux name="average_stickiness_of_deposits_and_loans">
+				<units>Week</units>
+				<doc></doc>
+					<eqn> GAME (
+	4)					</eqn>
+			</aux>
+			<aux name="degree_of_external_climate_of_fear">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn> GAME (
+	2)					</eqn>
+			</aux>
+			<aux name="external_shock_real_value_loss">
+				<units>1/Week</units>
+				<doc> 0.01 - STEP(0.01,11)</doc>
+					<eqn>
+	STEP(size_of_the_external_underlying_asset_shock,10) - STEP(size_of_the_external_underlying_asset_shock,11)					</eqn>
+			</aux>
+			<aux name="financial_intervention">
+				<units>EURO/Week</units>
+				<doc>IF THEN ELSE(estimated asset value&lt;initial underlying value*0.5, initial underlying value*0.2, 0)</doc>
+					<eqn>
+	MAX(0,(fraction_initial_guaranteed*initial_estimated_underlying_asset_value - estimated_underlying_asset_value)/action_delay) * policy_switch					</eqn>
+			</aux>
+			<aux name="fraction_initial_guaranteed">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn> GAME (
+	0.5)					</eqn>
+			</aux>
+			<aux name="instant_market_fear_and_uncertainty">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+	MIN(stock_market_value_loss/(stock_market_value/market_loss_delay*stock_market_fear_factor) * degree_of_external_climate_of_fear,1)					</eqn>
+			</aux>
+			<aux name="liquid_deposits_and_loans_loss_fraction">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	average_bank_client's_fear_and_uncertainty/average_stickiness_of_deposits_and_loans					</eqn>
+			</aux>
+			<aux name="perceived_overvaluation">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+	MAX((stock_market_value-estimated_underlying_asset_value)/stock_market_value,0)					</eqn>
+			</aux>
+			<aux name="perceived_undervaluation">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+	MAX((estimated_underlying_asset_value-stock_market_value)/stock_market_value,0)					</eqn>
+			</aux>
+			<aux name="policy_switch">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn> GAME (
+	0)					</eqn>
+			</aux>
+			<aux name="size_of_the_external_underlying_asset_shock">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn> GAME (
+	0.35)					</eqn>
+			</aux>
+			<aux name="smoothed_market_fear_and_uncertainty">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+	DELAY3I(instant_market_fear_and_uncertainty, uncertainty_and_fear_delay, initial_market_fear_and_uncertainty)					</eqn>
+			</aux>
+			<aux name="stock_market_fear_factor">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn> GAME (
+	0.25)					</eqn>
+			</aux>
+			<aux name="stock_market_value_increase">
+				<units>EURO/Week</units>
+				<doc></doc>
+					<eqn>
+	MAX(stock_market_value * perceived_undervaluation/market_increase_delay,0)					</eqn>
+			</aux>
+			<aux name="stock_market_value_loss">
+				<units>EURO/Week</units>
+				<doc></doc>
+					<eqn>
+	MAX(stock_market_value * (perceived_overvaluation/market_loss_delay),0)					</eqn>
+			</aux>
+			<aux name="underlying_asset_increase">
+				<units>EURO/Week</units>
+				<doc></doc>
+					<eqn>
+	average_profitability*estimated_underlying_asset_value + financial_intervention					</eqn>
+			</aux>
+			<aux name="underlying_asset_loss">
+				<units>EURO/Week</units>
+				<doc></doc>
+					<eqn>
+	MAX((liquid_deposits_and_loans_loss_fraction*fraction_of_asset_loss_to_deposit_loss+external_shock_real_value_loss)*estimated_underlying_asset_value
+	,0)					</eqn>
+			</aux>
+			<aux name="action_delay">
+				<units>Week</units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="average_profitability">
+				<units>1/Week</units>
+				<doc></doc>
+					<eqn>
+	0.002					</eqn>
+			</aux>
+			<aux name="fraction_of_asset_loss_to_deposit_loss">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="initial_estimated_underlying_asset_value">
+				<units>EURO</units>
+				<doc></doc>
+					<eqn>
+	25					</eqn>
+			</aux>
+			<aux name="initial_market_fear_and_uncertainty">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="initial_stock_market_value">
+				<units>EURO</units>
+				<doc></doc>
+					<eqn>
+	24.6					</eqn>
+			</aux>
+			<aux name="market_increase_delay">
+				<units>Week</units>
+				<doc></doc>
+					<eqn>
+	4					</eqn>
+			</aux>
+			<aux name="market_loss_delay">
+				<units>Week</units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="uncertainty_and_fear_delay">
+				<units>Week</units>
+				<doc></doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

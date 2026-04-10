@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Month">
+		<start> 0</start>
+		<stop> 100</stop>
+		<dt> 1</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="frogs">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					5
+					</eqn>
+					<inflow>
+					whacked
+					</inflow>
+					<outflow>
+					kissed by a princess
+					</outflow>
+			</stock>
+			<stock name="princes">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					10
+					</eqn>
+					<inflow>
+					kissed by a princess
+					</inflow>
+					<outflow>
+					whacked
+					</outflow>
+			</stock>
+			<stock name="Princesses">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					10
+					</eqn>
+					<inflow>
+					kissed by a prince
+					</inflow>
+					<outflow>
+					poisoned
+					</outflow>
+			</stock>
+			<stock name="Sleeping_Beauties">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					5
+					</eqn>
+					<inflow>
+					poisoned
+					</inflow>
+					<outflow>
+					kissed by a prince
+					</outflow>
+			</stock>
+			<aux name="kissed_by_a_prince">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	RANDOM_UNIFORM(0, 0.02, 111)*Sleeping_Beauties*princes					</eqn>
+			</aux>
+			<aux name="kissed_by_a_princess">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	RANDOM_UNIFORM(0, 0.1 , 101)*Princesses*frogs					</eqn>
+			</aux>
+			<aux name="poisoned">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	witch_density*Princesses					</eqn>
+			</aux>
+			<aux name="whacked">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	RANDOM_UNIFORM(0, 0.3 , 121 )*witch_density*princes					</eqn>
+			</aux>
+			<aux name="witch_density">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.3					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

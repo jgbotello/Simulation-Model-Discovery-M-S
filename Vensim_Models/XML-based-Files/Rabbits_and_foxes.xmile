@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Year">
+		<start> 0</start>
+		<stop> 50</stop>
+		<dt> 0.25</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="Estimated_Rabbit_Population">
+				<units>Rabbit</units>
+				<doc></doc>
+					<eqn>
+					initial_rabbit_population
+					</eqn>
+					<inflow>
+					rabbit births
+					</inflow>
+					<outflow>
+					rabbit deaths
+					</outflow>
+			</stock>
+			<stock name="Fox_Population">
+				<units>Fox</units>
+				<doc></doc>
+					<eqn>
+					initial_fox_population
+					</eqn>
+					<inflow>
+					fox births
+					</inflow>
+					<outflow>
+					fox deaths
+					</outflow>
+			</stock>
+			<aux name="additional_foxes">
+				<units></units>
+				<doc></doc>
+					<eqn> GAME (
+	0)					</eqn>
+			</aux>
+			<aux name="fox_births">
+				<units>Fox/Year</units>
+				<doc></doc>
+					<eqn>
+	Fox_Population * fox_birth_rate + additional_foxes					</eqn>
+			</aux>
+			<aux name="fox_consumption_of_rabbits">
+				<units>Rabbit/Year</units>
+				<doc></doc>
+					<eqn> Fox_Population * fox_food_requirements *
+                     fox_rabbit_consumption_lookup(rabbit_crowding)					</eqn>
+			</aux>
+			<aux name="fox_deaths">
+				<units>Fox/Year</units>
+				<doc></doc>
+					<eqn>
+	Fox_Population / average_fox_life * fox_mortality_lookup(fox_food_availability) + MIN(healthy_foxes_shot, Fox_Population-Fox_Population / average_fox_life * fox_mortality_lookup(fox_food_availability))					</eqn>
+			</aux>
+			<aux name="fox_food_availability">
+				<units>Dmnl</units>
+				<doc> A lookup table showing the relationship between the input (crowding) along the x 														axis and the
+         output
+         (the effect that crowding has on the death rate) along the y-axis.</doc>
+					<eqn>
+	fox_consumption_of_rabbits/(MAX(Fox_Population,1) * fox_food_requirements)					</eqn>
+			</aux>
+			<aux name="healthy_foxes_shot">
+				<units>Fox/Year</units>
+				<doc></doc>
+					<eqn> GAME (
+	0)					</eqn>
+			</aux>
+			<aux name="initial_fox_population">
+				<units>Fox</units>
+				<doc></doc>
+					<eqn> GAME (
+	0)					</eqn>
+			</aux>
+			<aux name="rabbit_births">
+				<units>Rabbit/Year</units>
+				<doc></doc>
+					<eqn>
+	 Estimated_Rabbit_Population * rabbit_birth_rate +"Up/Down_Estimated_Rabbit_Population"					</eqn>
+			</aux>
+			<aux name="rabbit_crowding">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn> Estimated_Rabbit_Population/carrying_capacity					</eqn>
+			</aux>
+			<aux name="rabbit_deaths">
+				<units>Rabbit/Year</units>
+				<doc></doc>
+					<eqn> MAX(Estimated_Rabbit_Population / average_rabbit_life *
+                   effect_of_crowding_on_deaths_lookup(rabbit_crowding),
+                   fox_consumption_of_rabbits)					</eqn>
+			</aux>
+			<aux name="Up/Down_Estimated_Rabbit_Population">
+				<units>Rabbit/Year</units>
+				<doc></doc>
+					<eqn> GAME (
+	0)					</eqn>
+			</aux>
+			<aux name="effect_of_crowding_on_deaths_lookup">
+				<units>Dmnl</units>
+				<doc></doc>
+<gf>
+<xpts>0.000000,3.000000,6.000000,8.000000,10.000000</xpts>
+<ypts>0.750000,2.500000,6.000000,11.000000,20.000000</ypts>
+</gf>
+			</aux>
+			<aux name="fox_mortality_lookup">
+				<units>Dmnl</units>
+				<doc></doc>
+<gf>
+<xpts>0.000000,0.300000,0.500000,1.000000,2.000000</xpts>
+<ypts>20.000000,5.000000,2.000000,1.000000,0.500000</ypts>
+</gf>
+			</aux>
+			<aux name="fox_rabbit_consumption_lookup">
+				<units>Dmnl</units>
+				<doc> Relating rabbits to foxes</doc>
+<gf>
+<xpts>0.000000,1.000000,2.000000,6.000000</xpts>
+<ypts>0.000000,1.000000,2.000000,2.000000</ypts>
+</gf>
+			</aux>
+			<aux name="average_fox_life">
+				<units>Year</units>
+				<doc></doc>
+					<eqn>
+	 4					</eqn>
+			</aux>
+			<aux name="average_rabbit_life">
+				<units>Year</units>
+				<doc></doc>
+					<eqn>
+	 2					</eqn>
+			</aux>
+			<aux name="carrying_capacity">
+				<units>Rabbit</units>
+				<doc></doc>
+					<eqn>
+	 500					</eqn>
+			</aux>
+			<aux name="fox_birth_rate">
+				<units>1/Year</units>
+				<doc></doc>
+					<eqn>
+	 0.25					</eqn>
+			</aux>
+			<aux name="fox_food_requirements">
+				<units>Rabbit/(Fox*Year)</units>
+				<doc></doc>
+					<eqn>
+	25					</eqn>
+			</aux>
+			<aux name="initial_rabbit_population">
+				<units>Rabbit</units>
+				<doc></doc>
+					<eqn>
+	 500					</eqn>
+			</aux>
+			<aux name="rabbit_birth_rate">
+				<units>1/Year</units>
+				<doc></doc>
+					<eqn>
+	 2					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

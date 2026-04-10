@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Second">
+		<start> 0</start>
+		<stop> 10</stop>
+		<dt> 0.25</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="p">
+				<units>kg*m/Second</units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					"dp/dt"
+					</inflow>
+			</stock>
+			<stock name="x">
+				<units>m</units>
+				<doc></doc>
+					<eqn>
+					init_h
+					</eqn>
+					<inflow>
+					"dx/dt"
+					</inflow>
+			</stock>
+			<aux name="dp/dt">
+				<units>kg*m/(Second*Second)</units>
+				<doc></doc>
+					<eqn>
+	Net_Force					</eqn>
+			</aux>
+			<aux name="dx/dt">
+				<units>m/Second</units>
+				<doc></doc>
+					<eqn>
+	p/m					</eqn>
+			</aux>
+			<aux name="Net_Force">
+				<units>kg*m/(Second*Second)</units>
+				<doc></doc>
+					<eqn>
+	m*g - drag * p/m					</eqn>
+			</aux>
+			<aux name="drag">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="g">
+				<units>m/(Second*Second)</units>
+				<doc></doc>
+					<eqn>
+	-9.8					</eqn>
+			</aux>
+			<aux name="init_h">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+			<aux name="m">
+				<units>kg</units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

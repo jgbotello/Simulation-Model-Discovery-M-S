@@ -1,0 +1,3376 @@
+{UTF-8}
+Wage Ratio=
+	Wages/Indicated Wages
+	~	Dimensionless
+	~		|
+
+Asset Income Ratiox=
+	Asset Income/Income
+	~	Dimensionless
+	~		|
+
+Ref Labor=
+	Initial Labor*Work Effort
+	~	Person*Years
+	~		|
+
+Ref Capital=
+	Initial Assets
+	~	Capital Units
+	~		|
+
+Gov Borrowing as Share of Income=
+	(Gov Borrowing/Income)*Percent
+	~	Percent
+	~		|
+
+Percent Chg in Wealth=
+	Percent*Change in Wealth
+	~	Percent/Year
+	~		|
+
+Expected Percent Chg in Returns=
+	Percent*Expected Chg in Return on Capital
+	~	Percent/Year
+	~		|
+
+Expected Percent Chg in Wealth=
+	Percent*Expected Chg in Wealth
+	~	Percent/Year
+	~		|
+
+Expected Percent Chg in WIR=
+	Percent*Expected Chg in Wages Income Ratio
+	~	Percent/Year
+	~		|
+
+Expected Percent Chg in AIR=
+	Percent*Expected Chg in Asset Income Ratio
+	~	Percent/Year
+	~		|
+
+Percent Chg in AIR=
+	Percent*Change in Asset Income Ratio
+	~	Percent/Year
+	~		|
+
+Percent Change in WIR=
+	Percent*Change in Wages Income Ratio
+	~	Percent/Year
+	~		|
+
+Percent Chg in Returns=
+	Percent*Change in Return on Capital
+	~	Percent/Year
+	~		|
+
+Money Inflation Rate=
+	Money Inflation*Percent
+	~	Percent/Year
+	~		|
+
+Expected Money Inflation Rate=
+	Expected Money Inflation*Percent
+	~	Percent/Year
+	~		|
+
+Real Return on Capital Percent=
+	Real Return on Capital*Percent
+	~	Percent/Year
+	~		|
+
+Percent=
+	100
+	~	Percent
+	~		|
+
+Return on Capital Percent=
+	Return on Capital*Percent
+	~	Percent/Year
+	~		|
+
+Normal Savings Rate=
+	Normal Savings Fraction*Percent
+	~	Percent
+	~		|
+
+Savings Rate=
+	Savings Fraction*Percent
+	~	Percent
+	~		|
+
+Money Velocity=
+	Income/Money Supply
+	~	Dimensionless/Year
+	~		|
+
+Gov Spending Share of Income=
+	(Gov Spending/Income)*Percent
+	~	Percent
+	~		|
+
+Investment per Capita=
+	Investment/Working Population
+	~	(Capital Units/Year)/Person
+	~		|
+
+Savings per Capita=
+	Savings/Working Population
+	~	($/Year)/Person
+	~		|
+
+Net Investment per Capita=
+	Net Investment/Working Population
+	~	($/Year)/Person
+	~		|
+
+Effective Savings Rate=
+	Percent*(Private Investment + Gov Investment)/Income
+	~	Percent
+	~		|
+
+Risk Free Rate=
+	0.03
+	~	Fraction/Year
+	~		|
+
+Return on Capital=
+	(Asset Earnings/Book Value of Capital Assets)
+	~	Fraction/Year
+	~		|
+
+Income per Capita=
+	Income/Working Population
+	~	($/Year)/Person
+	~		|
+
+Capital Assets per Capita=
+	Capital Assets/Working Population
+	~	Capital Units/Person
+	~		|
+
+Asset Earnings=
+	Asset Income - Capital Depreciation - Asset Taxes
+	~	$/Year
+	~		|
+
+Real Asset Taxes=
+	(Tax Rate/Percent)*Real Asset Income
+	~	Starting $/Year
+	~		|
+
+Real Total Return on Capital=
+	Real Asset Income/Real Book Value of Capital Assets
+	~	Fraction/Year
+	~		|
+
+Real Earnings=
+	Real Asset Income - Real Capital Depreciation - Real Asset Taxes
+	~	Starting $/Year
+	~		|
+
+Asset Taxes=
+	(Tax Rate/Percent)*Asset Income
+	~	$/Year
+	~		|
+
+Real Return on Capital=
+	Real Earnings/Real Book Value of Capital Assets
+	~	Fraction/Year
+	~		|
+
+Production=
+	Technology*((Applied Labor/Ref Labor)^Beta)*((Capital Assets/Ref Capital)^(1-Beta))
+	~	Goods/Year
+	~	Quantity of goods and services produced by applied labor and capital in a \
+		year.
+	|
+
+Beta=
+	0.75
+	~	Dimensionless [0,1,0.05]
+	~		|
+
+Adjust of Fract of Income Devoted to Wages=
+	(Fraction of Income Devoted to Wages - Expected Fraction of Income Devoted to Wages)\
+		/Time to Adjust Wage Income Expectations
+	~	Fraction/Year
+	~		|
+
+Time to Adjust Wage Income Expectations=
+	10
+	~	Years
+	~		|
+
+Expected Fraction of Income Devoted to Wages= INTEG (
+	Adjust of Fract of Income Devoted to Wages,
+		Initial Fraction of Income Devoted to Wages)
+	~	Fraction
+	~		|
+
+Real Book Losses=
+	0 + (Loss Rate/Percent)*Real Book Value of Capital Assets*PULSE(Time to Start Loss, \
+		Duration of Losses )
+	~	Starting $/Year
+	~		|
+
+Real Book Value of Capital Assets= INTEG (
+	Real Financial Investment-Real Capital Depreciation-Real Book Losses,
+		Initial Assets*Asset Price/Initial $)
+	~	Starting $
+	~		|
+
+Real Capital Depreciation=
+	Real Book Value of Capital Assets/Ave Life of Cap
+	~	Starting $/Year
+	~		|
+
+Real Financial Investment=
+	DELAY3((Private Investment +Gov Investment)/Asset Price Inflation,Time to Acquire Capital Assets\
+		)
+	~	Starting $/Year
+	~		|
+
+Real Asset Income=
+	Asset Income/Asset Price Inflation
+	~	Starting $/Year
+	~		|
+
+Change in Return on Capital=
+	(Perceived Return on Capital-Expected Return on Capital)/ABS(Expected Return on Capital\
+		)/Time Horizon to Assess Capital Returns
+	~	Fraction/Year
+	~		|
+
+Time Horizon to Assess Capital Returns=
+	2
+	~	Years
+	~		|
+
+Sensitivity of Return on Savings=
+	2
+	~	Years [0,20,0.5]
+	~		|
+
+Time to Adjust Expectations ROC=
+	0.5
+	~	Years
+	~		|
+
+Adjustment of Expected Return on Capital=
+	(Perceived Return on Capital - Expected Return on Capital)/Time Horizon to Assess Capital Returns
+	~	(Fraction/Year)/Year
+	~		|
+
+Perception of Return on Capital=
+	(Return on Capital - Perceived Return on Capital)/Time to Perceive Capital Returns
+	~	(Fraction/Year)/Year
+	~		|
+
+Expected Return on Capital= INTEG (
+	Adjustment of Expected Return on Capital,
+		Desired Return on Capital)
+	~	Fraction/Year
+	~		|
+
+Savings Fraction=
+	Normal Savings Fraction*Effect of Wealth on Savings*Effect of Returns on Savings
+	~	Dimensionless
+	~		|
+
+Expected Chg in Return on Capital= INTEG (
+	Expectations Adjustment Return on Capital,
+		0)
+	~	Fraction/Year
+	~		|
+
+Time to Perceive Capital Returns=
+	0.5
+	~	Years
+	~		|
+
+Fraction of Income Devoted to Wages=
+	Wage Income/Income
+	~	Fraction
+	~		|
+
+Effect of Returns on Savings=
+	2*(Max Effect of Return on Savings-1)/(1+exp((-Expected Chg in Return on Capital)*Sensitivity of Return on Savings\
+		))+(
+	2-Max Effect of Return on Savings)
+	~	Dimensionless
+	~		|
+
+Perceived Return on Capital= INTEG (
+	Perception of Return on Capital,
+		Desired Return on Capital)
+	~	Fraction/Year
+	~		|
+
+Expectations Adjustment Return on Capital=
+	(Change in Return on Capital - Expected Chg in Return on Capital)/Time to Adjust Expectations ROC
+	~	(Fraction/Year)/Year
+	~		|
+
+Max Effect of Return on Savings=
+	1.5
+	~	Dimensionless
+	~		|
+
+Desired Return on Capital=
+	0.15
+	~	Fraction/Year
+	~		|
+
+Initial Asset Income= INITIAL(
+	Desired Total Return on Capital * Book Value of Capital Assets)
+	~	$/Year
+	~		|
+
+Total Return on Capital=
+	(Asset Income/Book Value of Capital Assets)
+	~	Fraction/Year
+	~		|
+
+Depreciation Fraction=
+	1/Ave Life of Cap
+	~	Fraction/Year
+	~		|
+
+Book Losses=
+	0 +( Loss Rate/Percent)*Book Value of Capital Assets*PULSE(Time to Start Loss, Duration of Losses\
+		 )
+	~	$/Year
+	~		|
+
+Book Value of Capital Assets= INTEG (
+	Financial Investment-Capital Depreciation-Book Losses,
+		Initial Assets*Asset Price)
+	~	$
+	~		|
+
+Financial Investment=
+	DELAY3((Private Investment +Gov Investment),Time to Acquire Capital Assets)
+	~	$/Year
+	~		|
+
+Initial Fraction of Income Devoted to Wages= INITIAL(
+	Initial Wage Income/Income)
+	~	Fraction
+	~		|
+
+Asset Income=
+	Income - Wage Income
+	~	$/Year
+	~		|
+
+Desired Total Return on Capital= INITIAL(
+	Depreciation Fraction + Desired Return on Capital + Expected Money Inflation)
+	~	Fraction/Year
+	~		|
+
+Capital Depreciation=
+	Book Value of Capital Assets/Ave Life of Cap
+	~	$/Year
+	~		|
+
+Income Devoted to Wages=
+	Beta*Income
+	~	$/Year
+	~		|
+
+Initial Wage Income= INITIAL(
+	Income - Initial Asset Income)
+	~	$/Year
+	~		|
+
+Wages Income Ratio=
+	Wage Income/Income
+	~	Dimensionless
+	~		|
+
+Initial $=
+	1
+	~	$/Starting $
+	~		|
+
+Change in Wealth=
+	(Perceived Wealth-Expected Wealth)/Expected Wealth/Time Horizon to Assess Wealth
+	~	Fraction/Year
+	~		|
+
+Time Horizon to Assess Wages Income Ratio=
+	1
+	~	Years
+	~		|
+
+Adjustment for Reference Wages Income Ratio=
+	(Perceived Wages Income Ratio-Reference Wages Income Ratio)/Time Horizon to Assess Wages Income Ratio
+	~	Dimensionless/Year
+	~		|
+
+Perceived Wages Income Ratio= INTEG (
+	Wages Income Ratio Perception,
+		Wages Income Ratio)
+	~	Dimensionless
+	~		|
+
+Expectations Adjustment Wages Income Ratio=
+	(Change in Wages Income Ratio-Expected Chg in Wages Income Ratio)/Time to Adjust Expectations WIR
+	~	(Fraction/Year)/Year
+	~		|
+
+Wages Income Ratio Perception=
+	(Wages Income Ratio - Perceived Wages Income Ratio)/Time to Perceive Wages Income Ratio
+	~	Dimensionless/Year
+	~		|
+
+Reference Wages Income Ratio= INTEG (
+	Adjustment for Reference Wages Income Ratio,
+		Wages Income Ratio)
+	~	Dimensionless
+	~		|
+
+Change in Wages Income Ratio=
+	(Perceived Wages Income Ratio-Reference Wages Income Ratio)/Reference Wages Income Ratio\
+		/Time Horizon to Assess Wages Income Ratio
+	~	Fraction/Year
+	~		|
+
+Expected Chg in Wages Income Ratio= INTEG (
+	Expectations Adjustment Wages Income Ratio,
+		0)
+	~	Fraction/Year
+	~		|
+
+Real Per Capita Wealth=
+	Per Capital Nom Wealth/Asset Price Inflation
+	~	Starting $/Person
+	~		|
+
+Asset Price Inflation=
+	Initial $*Asset Price/Initial Asset Price
+	~	$/Starting $
+	~		|
+
+Real Wealth=
+	Nominal Wealth/Asset Price Inflation
+	~	Starting $
+	~		|
+
+Price Inflation=
+	Initial $*Price/Initial Price
+	~	$/Starting $
+	~		|
+
+Real Wages=
+	Wages/Price Inflation
+	~	Starting $/(Person*Year)
+	~		|
+
+Prod to Labor Ratio=
+	Production/Employed Labor
+	~	(Goods/Year)/Person
+	~		|
+
+Tax Rate=
+	20
+	~	Percent
+	~		|
+
+Current Net Investment in Capital Units=
+	((Private Investment +Gov Investment)/Asset Price)-Capital Consumption
+	~	Capital Units/Year
+	~	The amount of investment above replacement investment.
+	|
+
+Temporary Change in Money Growth Rate=
+	0
+	~	Percent/Year [-10,10,1]
+	~		|
+
+Growth In Money=
+	((Money Growth Rate/Percent) + Temporary Shift in Money Growth Rate)*Money Supply
+	~	$/Year
+	~		|
+
+Time to Start Change in Money Growth Rate=
+	3.5
+	~	Years
+	~		|
+
+Temporary Shift in Money Growth Rate=
+	(Temporary Change in Money Growth Rate/Percent)*PULSE(Time to Start Change in Money Growth Rate\
+		, Duration of Change in Money Growth Rate )
+	~	Fraction/Year
+	~		|
+
+Duration of Change in Money Growth Rate=
+	2
+	~	Years
+	~		|
+
+Reference Investment= INITIAL(
+	2.7e+06)
+	~	Capital Units
+	~		|
+
+Reference Production= INITIAL(
+	2e+09)
+	~	Goods
+	~		|
+
+Applied Labor=
+	Employed Labor*Work Effort
+	~	Person*Years
+	~	Translates people employed to person-years of labor applied.
+	|
+
+Net Investment=
+	Net Investment in Capital Units*Asset Price
+	~	$/Year
+	~	The amount of investment above replacement investment.
+	|
+
+Work Effort=
+	1
+	~	Person*Years/Person
+	~	Defines the average number of person years worked per person per year.  At \
+		this time, model does not address overtime.
+	|
+
+Time to Acquire Capital Assets=
+	2
+	~	Years
+	~		|
+
+Ref Invest Mult from Initial=
+	20
+	~	Years
+	~		|
+
+Initial Money Supply=
+	Employed Labor*Initial Per Worker Money Supply
+	~	$
+	~		|
+
+Initial Per Worker Money Supply=
+	10000
+	~	$/Person
+	~		|
+
+Savings=
+	Savings Fraction*Disposable Income
+	~	$/Year
+	~		|
+
+Sens of Asset Price to Asset Income Ratio=
+	4
+	~	Years
+	~		|
+
+Sens of Price to Wages Income Ratio=
+	4
+	~	Dimensionless/(Fraction/Year)
+	~		|
+
+Time to Adjust Expectations AIR=
+	0.5
+	~	Years
+	~		|
+
+Adjustment of Asset Income Ratio Expectations=
+	(Perceived Asset Income Ratio-Expected Asset Income Ratio)/Time Horizon to Assess Asset Income Ratio
+	~	(($/Year)/Capital Units)/Year
+	~		|
+
+Sensitivity of Wealth on Savings=
+	4
+	~	Years [0,20,0.5]
+	~		|
+
+Adjustment of Normal Savings Rate=
+	(Constrained Savings Fraction - Normal Savings Fraction)/Time to Adjust Savings Norms
+	~	Dimensionless/Year
+	~		|
+
+Consumption=
+	(1-Savings Fraction)*Disposable Income
+	~	$/Year
+	~		|
+
+Time Horizon to Assess Asset Income Ratio=
+	1
+	~	Years
+	~		|
+
+Normal Savings Fraction= INTEG (
+	Adjustment of Normal Savings Rate,
+		Initial Savings Rate/Percent)
+	~	Dimensionless
+	~		|
+
+Change in Asset Income Ratio=
+	(Perceived Asset Income Ratio - Expected Asset Income Ratio)/Expected Asset Income Ratio\
+		/Time Horizon to Assess Asset Income Ratio
+	~	Fraction/Year
+	~		|
+
+Asset Price=
+	Expected Asset Price*Effect of Asset Income Ratio on Asset Price*Effect of Money Inflation on Price\
+		*Effect of Wage Income Ratio on Price
+	~	$/Capital Unit
+	~		|
+
+Time to Perceive Asset Income Ratio=
+	0.5
+	~	Years
+	~		|
+
+Perceived Asset Income Ratio= INTEG (
+	Perception of Asset Income Ratio,
+		Asset Income Ratio)
+	~	($/Year)/Capital Units
+	~		|
+
+Effect of Wealth on Savings=
+	2*(Max Effect of Wealth on Savings-1)/(1+exp((Expected Chg in Wealth)*Sensitivity of Wealth on Savings\
+		))+(
+	2-Max Effect of Wealth on Savings)
+	~	Dimensionless
+	~	2*(Max Effect of Wealth on Savings-1)/(1+exp(-(Perceived Wealth Ratio-1)*Sensitivity \
+		of Wealth on Savings))+(
+		2-Max Effect of Wealth on Savings)
+	|
+
+Asset Income Ratio=
+	Asset Income/Capital Assets
+	~	($/Year)/Capital Units
+	~		|
+
+Perception of Asset Income Ratio=
+	(Asset Income Ratio-Perceived Asset Income Ratio)/Time to Perceive Asset Income Ratio
+	~	(($/Year)/Capital Units)/Year
+	~		|
+
+Constrained Savings Fraction=
+	MIN(Maximum Savings Fraction,Savings Fraction)
+	~	Dimensionless
+	~		|
+
+Effect of Money Inflation on Price=
+	2*(Max Inflation Eff on Price-1)/(1+exp(-(Expected Money Inflation)*Sens of Price to Inflation\
+		))+(2-Max Inflation Eff on Price)
+	~	Dimensionless
+	~	This function creates an S-curve centered on 1 with an input of 0.  The maximum \
+		effect is controlled by the Maximum Inflation Effect on Price.  The slope \
+		of the effect is controlled by the Sens of Price to Inflation.  With a Max \
+		of 1.5, a sensitivity of 5 produces a slightly lower than 1 effect.  A \
+		value of 6 produces a slightly higher than 1 effect.
+		
+		2*(Max Inflation Eff on Price-1)/(1+exp(-(Perceived Inflation)*Sens of Price to \
+		Inflation))+(2-Max Inflation Eff on Price)
+		
+		1 + Perceived Inflation
+	|
+
+Maximum Savings Fraction=
+	0.8
+	~	Dimensionless
+	~		|
+
+Expectations Adjustment Asset Inc Ratio=
+	(Change in Asset Income Ratio-Expected Chg in Asset Income Ratio)/Time to Adjust Expectations AIR
+	~	(Fraction/Year)/Year
+	~		|
+
+Time to Adjust Savings Norms=
+	2
+	~	Years
+	~		|
+
+Effect of Wage Income Ratio on Price=
+	2*(Max Wages Income Ratio Eff on Price-1)/(1+exp(-(Expected Chg in Wages Income Ratio\
+		)*Sens of Price to Wages Income Ratio))+(2-Max Wages Income Ratio Eff on Price)
+	~	Dimensionless
+	~		|
+
+Price=
+	Expected Price*Effect of Money Inflation on Price*Effect of Wage Income Ratio on Price
+	~	$/Good
+	~		|
+
+Sens of Price to Inflation=
+	2
+	~	Years
+	~		|
+
+Max Asset Inc Ratio Eff on Asset Price=
+	1.5
+	~	Dimensionless
+	~		|
+
+Max Wages Income Ratio Eff on Price=
+	1.5
+	~	Dimensionless
+	~		|
+
+Effect of Asset Income Ratio on Asset Price=
+	2*(Max Asset Inc Ratio Eff on Asset Price-1)/(1+exp(-(Expected Chg in Asset Income Ratio\
+		)*Sens of Asset Price to Asset Income Ratio))+(2-
+	Max Asset Inc Ratio Eff on Asset Price)
+	~	Dimensionless
+	~		|
+
+Expected Chg in Asset Income Ratio= INTEG (
+	Expectations Adjustment Asset Inc Ratio,
+		0)
+	~	Fraction/Year
+	~		|
+
+Max Inflation Eff on Price=
+	2
+	~	Dimensionless
+	~		|
+
+Max Effect of Wealth on Savings=
+	1.5
+	~	Dimensionless
+	~		|
+
+Time to Start Stimulus=
+	30
+	~	Years
+	~		|
+
+Duration of Stimulus=
+	2
+	~	Years
+	~		|
+
+Expected Asset Income Ratio= INTEG (
+	Adjustment of Asset Income Ratio Expectations,
+		Asset Income Ratio)
+	~	($/Year)/Capital Units
+	~		|
+
+Time to Adjust Expectations Wealth=
+	0.5
+	~	Years
+	~		|
+
+Expectations Adjustment Wealth=
+	(Change in Wealth - Expected Chg in Wealth)/Time to Adjust Expectations Wealth
+	~	(Fraction/Year)/Year
+	~		|
+
+Expected Chg in Wealth= INTEG (
+	Expectations Adjustment Wealth,
+		0)
+	~	Fraction/Year
+	~		|
+
+Reference Production for Trend= INTEG (
+	Adjustment of Production Expectations,
+		Production)
+	~	Goods/Year
+	~		|
+
+New Investment=
+	Investment
+	~	Capital Units/Year
+	~		|
+
+Money Ratio=
+	Money Supply/Production
+	~	$/(Goods/Year)
+	~		|
+
+Technology=
+	Initial Technology Productivity*Effect of Experience on Tech Pdty*Effect of Investment on Tech Pdty
+	~	Goods/Year
+	~		|
+
+Income=
+	Production*Price
+	~	$/Year
+	~	The money income generated from the exchange of goods and services \
+		produced in a year.
+	|
+
+Learning Strength from Investment=
+	0.1
+	~	Dimensionless [0,0.2,0.01]
+	~		|
+
+Production Perception=
+	(Production - Perceived Production)/Time to Perceive Production
+	~	(Goods/Year)/Year
+	~		|
+
+New Production=
+	Production
+	~	Goods/Year
+	~		|
+
+Effect of Experience on Tech Pdty=
+	1/(Cumulative Production/Reference Production)^Learning from Experience
+	~	Dimensionless
+	~		|
+
+Production per Capita=
+	Production/Working Population
+	~	(Goods/Year)/Person
+	~		|
+
+Learning Strength from Experience=
+	0.05
+	~	Dimensionless [0,0.2,0.01]
+	~		|
+
+Cumulative Production= INTEG (
+	New Production,
+		Reference Production)
+	~	Goods
+	~		|
+
+Perceived Production= INTEG (
+	Production Perception,
+		Production)
+	~	Goods/Year
+	~		|
+
+Learning from Experience=
+	ln(1 - Learning Strength from Experience)/ln(2)
+	~	Dimensionless
+	~		|
+
+Effect of Investment on Tech Pdty=
+	1/(Cumulative Investment/Reference Investment)^Learning from Investment
+	~	Dimensionless
+	~		|
+
+Cumulative Investment= INTEG (
+	New Investment,
+		Reference Investment)
+	~	Capital Units
+	~		|
+
+Learning from Investment=
+	ln(1 - Learning Strength from Investment)/ln(2)
+	~	Dimensionless
+	~		|
+
+Initial Technology Productivity=
+	2e+08
+	~	Goods/Year
+	~		|
+
+Time to Perceive Production Trend=
+	2
+	~	Years
+	~		|
+
+Production Trend=
+	(Perceived Production - Reference Production for Trend)/Reference Production for Trend\
+		/Time Horizon to Assess Production Changes
+	~	Fraction/Year
+	~		|
+
+Adjustment of Production Expectations=
+	(Perceived Production - Reference Production for Trend)/Time Horizon to Assess Production Changes
+	~	(Goods/Year)/Year
+	~		|
+
+Time to Perceive Production=
+	0.5
+	~	Years
+	~		|
+
+Expected Production Trend= INTEG (
+	Perception of Production Trend,
+		0)
+	~	Fraction/Year
+	~		|
+
+Perception of Production Trend=
+	(Production Trend - Expected Production Trend)/Time to Perceive Production Trend
+	~	(Fraction/Year)/Year
+	~		|
+
+Time Horizon to Assess Production Changes=
+	2
+	~	Years
+	~		|
+
+Perceived Wealth= INTEG (
+	Perception of Wealth,
+		Initial Wealth/Working Population)
+	~	$/Person
+	~		|
+
+Perception of Wealth=
+	(Per Capital Nom Wealth - Perceived Wealth)/Time to Perceive Wealth
+	~	($/Person)/Year
+	~		|
+
+Adjustment of Asset Price Expectations=
+	(Asset Price-Expected Asset Price)/Time to Adjust Asset Price Expectations
+	~	($/Capital Unit)/Year
+	~		|
+
+Adjustment of Expected Wealth=
+	(Perceived Wealth - Expected Wealth)/Time Horizon to Assess Wealth
+	~	($/Person)/Year
+	~		|
+
+Adjustment of Money Ratio Expectations=
+	(Perceived Money Ratio - Reference Money Ratio)/Time Horizon to Assess Inflation
+	~	$/(Goods/Year)/Year
+	~		|
+
+Nominal Wealth=
+	Asset Price*Capital Assets
+	~	$
+	~		|
+
+Per Capital Nom Wealth=
+	Nominal Wealth/Working Population
+	~	$/Person
+	~		|
+
+Chg in Gov Budget=
+	((Gov Budget Growth Rate+Switch to Include Money Growth in Gov Budget*Expected Money Inflation Rate\
+		)/Percent)*Exog Gov Budget
+	~	($/Year)/Year
+	~		|
+
+Time Horizon to Assess Wealth=
+	2
+	~	Years
+	~		|
+
+Expectations Adjustment Money Inflation=
+	(Money Inflation - Expected Money Inflation)/Time to Adjust Expectations MI
+	~	(Fraction/Year)/Year
+	~		|
+
+Money Inflation=
+	(Perceived Money Ratio - Reference Money Ratio)/Reference Money Ratio/Time Horizon to Assess Inflation
+	~	Fraction/Year
+	~		|
+
+Initial Asset Price=
+	40000
+	~	$/Capital Unit
+	~		|
+
+Reference Money Ratio= INTEG (
+	Adjustment of Money Ratio Expectations,
+		Money Ratio)
+	~	$/(Goods/Year)
+	~		|
+
+Expected Money Inflation= INTEG (
+	Expectations Adjustment Money Inflation,
+		0)
+	~	Fraction/Year
+	~		|
+
+Initial Savings Rate=
+	20
+	~	Percent
+	~		|
+
+Expected Asset Price= INTEG (
+	Adjustment of Asset Price Expectations,
+		Initial Asset Price)
+	~	$/Capital Unit
+	~		|
+
+Expected Wealth= INTEG (
+	Adjustment of Expected Wealth,
+		Initial Wealth/Working Population)
+	~	$/Person
+	~		|
+
+Initial Wealth=
+	Capital Assets*Asset Price
+	~	$
+	~		|
+
+Time Horizon to Assess Inflation=
+	2
+	~	Years
+	~		|
+
+Time to Adjust Asset Price Expectations=
+	2
+	~	Years
+	~		|
+
+Time to Adjust Expectations MI=
+	2
+	~	Years
+	~		|
+
+Switch to Include Money Growth in Gov Budget=
+	1
+	~	Dimensionless [0,1,0.5]
+	~		|
+
+Time to Perceive Wealth=
+	0.5
+	~	Years
+	~		|
+
+Time to Perceive Wages Income Ratio=
+	0.5
+	~	Years
+	~		|
+
+Money Ratio Perception=
+	(Money Ratio - Perceived Money Ratio)/Time to Perceive Money Ratio
+	~	$/(Goods/Year)/Year
+	~		|
+
+Adjustment for Desired Labor=
+	(Desired Employed Labor-Employed Labor)/Labor Adjustment Time
+	~	People/Year
+	~		|
+
+Adjustment for Vacancies=
+	(Desired Vacancies-Vacancies)/Vacancy Adjustment Time
+	~	People/Year
+	~		|
+
+Adjustment of Price Expectations=
+	(Price - Expected Price)/Time to Adjust Price Expectations
+	~	($/Good)/Years
+	~		|
+
+Adjustment of Wage Expectations=
+	(Indicated Wages - Wages)/Time to Adjust Wage Expectations
+	~	$/(Person*Year)/Year
+	~		|
+
+Attrition Rate=
+	Employed Labor/Ave Duration of Employment
+	~	People/Year
+	~		|
+
+Ave Duration of Employment=
+	5
+	~	Years
+	~		|
+
+DT=
+	TIME STEP
+	~	Year
+	~		|
+
+Magnitude of Gov Stimulus=
+	30
+	~	Percent [0,1,0.1]
+	~		|
+
+Maximum Hiring=
+	Unemployed Labor/MAX(Min Time to Hire,2*DT)
+	~	People/Year
+	~		|
+
+Min Time to Hire=
+	0.1
+	~	Year
+	~		|
+
+Money Growth Rate=
+	3
+	~	Percent/Year [-10,10,1]
+	~		|
+
+Desired Hiring=
+	Expected Attrition+Adjustment for Desired Labor
+	~	People/Year
+	~		|
+
+Desired Employed Labor=
+	Income Devoted to Wages/Wages
+	~	People
+	~		|
+
+Desired Vacancies=
+	MAX(0,Expected Time to Fill Vacancies*Desired Hiring)
+	~	People
+	~		|
+
+Desired Vacancy Creation=
+	Desired Hiring+Adjustment for Vacancies
+	~	People/Year
+	~		|
+
+Perceived Money Ratio= INTEG (
+	Money Ratio Perception,
+		Money Ratio)
+	~	$/(Goods/Year)
+	~		|
+
+Wage Income=
+	Employed Labor*Wages
+	~	$/Year
+	~		|
+
+Population Growth Rate=
+	3
+	~	Percent/Year [-5,5,1]
+	~		|
+
+Expected Attrition=
+	SMOOTH(Attrition Rate, Time to Ave Attrition )
+	~	People/Year
+	~		|
+
+Expected Price= INTEG (
+	Adjustment of Price Expectations,
+		Initial Price)
+	~	$/Good
+	~		|
+
+Expected Time to Fill Vacancies=
+	SMOOTH(Time to Fill Vacancies, Time to Adjust Hiring Expectations )
+	~	Year
+	~		|
+
+Share of Working Pop in Labor Pool=
+	60
+	~	Percent
+	~		|
+
+Employed Labor= INTEG (
+	Hiring-Attrition Rate,
+		Initial Labor)
+	~	People
+	~		|
+
+Gov Budget=
+	Switch for Endog Gov Grwth*Natural Grw Gov Budget + (1 - Switch for Endog Gov Grwth)\
+		*Exog Gov Budget +Gov Stimulus
+	~	$/Year
+	~		|
+
+Labor Pool=
+	(Share of Working Pop in Labor Pool/Percent)*Working Population
+	~	People
+	~		|
+
+Gov Consump share of Income=
+	(Gov Consumption Spending/Income)*Percent
+	~	Percent
+	~		|
+
+Pop Growth=
+	Working Population*(Population Growth Rate/Percent)
+	~	People/Year
+	~		|
+
+Gov Deficit=
+	Gov Budget - Taxes
+	~	$/Year
+	~		|
+
+Time to Adjust Price Expectations=
+	1
+	~	Year
+	~		|
+
+Time to Adjust Wage Expectations=
+	3
+	~	Years
+	~		|
+
+Time to Ave Attrition=
+	1
+	~	Years
+	~		|
+
+Gov Stimulus=
+	(Exog Gov Budget*Magnitude of Gov Stimulus/Percent)*PULSE(Time to Start Stimulus, Duration of Stimulus\
+		)
+	~	$/Year
+	~		|
+
+Hiring=
+	MIN(Maximum Hiring,Vacancies/Time to Fill Vacancies)
+	~	People/Year
+	~		|
+
+Vacancy Creation=
+	MAX(0,Desired Vacancy Creation)
+	~	People/Year
+	~		|
+
+Vacancies= INTEG (
+	Vacancy Creation-Vacancy Closure,
+		Time to Fill Vacancies*(Attrition Rate + Population Growth Rate*Employed Labor/Percent\
+		))
+	~	People
+	~		|
+
+Vacancy Adjustment Time=
+	0.5
+	~	Years
+	~		|
+
+Indicated Wages=
+	(Income*Beta)/Employed Labor
+	~	$/(Person*Year)
+	~		|
+
+Wages= INTEG (
+	Adjustment of Wage Expectations,
+		Indicated Wages)
+	~	$/(Person*Year)
+	~		|
+
+Initial Labor=
+	1e+06
+	~	People
+	~		|
+
+Initial Price=
+	200
+	~	$/Good
+	~		|
+
+Money Supply= INTEG (
+	Growth In Money,
+		Initial Money Supply)
+	~	$
+	~		|
+
+Labor Adjustment Time=
+	0.25
+	~	Years
+	~		|
+
+Time to Fill Vacancies=
+	0.5
+	~	Years
+	~		|
+
+Time to Adjust Expectations WIR=
+	0.5
+	~	Years
+	~		|
+
+Time to Adjust Hiring Expectations=
+	1
+	~	Years
+	~		|
+
+Working Population= INTEG (
+	Pop Growth,
+		Initial Labor*(1 + Min Time to Hire/Ave Duration of Employment)/(Share of Working Pop in Labor Pool\
+		/Percent))
+	~	People
+	~		|
+
+Unemployed Labor=
+	MAX(0,Labor Pool - Employed Labor)
+	~	People
+	~		|
+
+Time to Perceive Money Ratio=
+	1
+	~	Years
+	~		|
+
+Unemployment Rate=
+	Percent*Unemployed Labor/Labor Pool
+	~	Percent
+	~		|
+
+Vacancy Closure=
+	Hiring
+	~	People/Year
+	~		|
+
+Capital Assets= INTEG (
+	Investment-Capital Consumption-Loses,
+		Initial Assets)
+	~	Capital Units
+	~		|
+
+Desired Gov Share Income=
+	25
+	~	Percent [0,1,0.01]
+	~		|
+
+Disposable Income=
+	(1-(Tax Rate/Percent))*Income
+	~	$/Year
+	~	The money income available to individuals employed in the production of \
+		goods and services.
+	|
+
+Loss Rate=
+	0
+	~	Percent/Year
+	~		|
+
+Gov Borrowing=
+	Savings-Private Investment
+	~	$/Year
+	~		|
+
+Exog Gov Budget= INTEG (
+	Chg in Gov Budget,
+		Natural Grw Gov Budget)
+	~	$/Year
+	~		|
+
+Gov Budget Growth Rate=
+	3
+	~	Percent/Year [0,10,0.5]
+	~		|
+
+Gov Consumption Spending=
+	(1-(Gov Invest Share/Percent))*Gov Spending
+	~	$/Year
+	~		|
+
+Gov Invest Share=
+	20
+	~	Percent [0,1,0.01]
+	~		|
+
+Gov Investment=
+	(Gov Invest Share/Percent)*Gov Spending
+	~	$/Year
+	~		|
+
+Gov Spending=
+	Taxes+Gov Borrowing
+	~	$/Year
+	~		|
+
+Natural Grw Gov Budget=
+	(Desired Gov Share Income/Percent)*Income
+	~	$/Year
+	~		|
+
+Investment=
+	DELAY3((Private Investment +Gov Investment)/Asset Price,Time to Acquire Capital Assets\
+		)
+	~	Capital Units/Year
+	~		|
+
+Loses=
+	0 + (Loss Rate/Percent)*Capital Assets*PULSE(Time to Start Loss, Duration of Losses \
+		)
+	~	Capital Units/Year
+	~		|
+
+Net Investment in Capital Units=
+	(Investment-Capital Consumption)
+	~	Capital Units/Year
+	~	The amount of investment above replacement investment.
+	|
+
+Private Investment=
+	MAX(0,Savings-Gov Deficit)
+	~	$/Year
+	~		|
+
+Switch for Endog Gov Grwth=
+	0
+	~	Dimensionless [0,1]
+	~		|
+
+Taxes=
+	Income*(Tax Rate/Percent)
+	~	$/Year
+	~		|
+
+Duration of Losses=
+	1
+	~	Year
+	~		|
+
+Time to Start Loss=
+	3
+	~	Year
+	~		|
+
+Ave Life of Cap=
+	10
+	~	Years
+	~		|
+
+Capital Consumption=
+	Capital Assets/Ave Life of Cap
+	~	Capital Units/Year
+	~		|
+
+Initial Assets=
+	1e+06
+	~	Capital Units
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 20
+	~	Year
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Year
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Year [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 0.0078125
+	~	Year [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Capital
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,75,0
+10,1,Capital Assets,784,139,83,59,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,2,48,1175,132,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,5,1,4,0,0,22,0,0,0,-1--1--1,,1|(927,132)|
+1,4,5,2,100,0,0,22,0,0,0,-1--1--1,,1|(1098,132)|
+11,5,48,1010,132,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,6,Investment,1010,174,75,12,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,7,48,410,86,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,8,10,7,4,0,0,22,0,0,0,-1--1--1,,1|(457,86)|
+1,9,10,1,100,0,0,22,0,0,0,-1--1--1,,1|(619,86)|
+11,10,48,516,86,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,11,Capital Consumption,516,150,59,34,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+12,12,48,764,380,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,13,15,12,4,0,0,22,0,0,0,-1--1--1,,1|(764,331)|
+1,14,15,1,100,0,0,22,0,0,0,-1--1--1,,1|(764,222)|
+11,15,48,764,269,30,22,33,3,0,0,2,0,0,0,0,0,0,0,0,0
+10,16,Loses,709,269,25,12,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,17,Ave Life of Cap,309,172,66,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,18,Income,694,571,31,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,19,Savings,1147,424,33,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,20,Consumption,1317,613,54,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,21,Taxes,1063,778,26,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,22,Gov Borrowing,1370,420,65,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,23,Gov Spending,1635,704,56,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,24,Gov Consumption Spending,1927,713,65,31,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,25,Technology,448,240,62,12,8,2,0,0,0,0,0,0,0,0,0,0,0,0
+10,26,Initial Assets,292,43,54,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,27,1,11,1,0,0,0,0,64,0,-1--1--1,,1|(601,162)|
+1,28,17,11,1,0,0,0,0,64,0,-1--1--1,,1|(397,174)|
+10,29,Private Investment,1108,280,75,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,30,19,29,1,0,0,0,0,64,0,-1--1--1,,1|(1153,353)|
+1,31,29,6,1,0,0,0,0,64,0,-1--1--1,,1|(1081,224)|
+1,32,18,21,1,0,0,0,0,64,0,-1--1--1,,1|(858,742)|
+1,33,21,23,1,0,0,0,0,64,0,-1--1--1,,1|(1299,700)|
+1,34,22,23,1,0,0,0,0,64,0,-1--1--1,,1|(1440,588)|
+1,35,23,24,1,0,0,0,0,64,0,-1--1--1,,1|(1763,664)|
+10,36,Gov Investment,1658,170,64,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,37,23,36,1,0,0,0,0,64,0,-1--1--1,,1|(1751,447)|
+1,38,36,6,1,0,0,0,0,64,0,-1--1--1,,1|(1347,104)|
+1,39,26,1,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+10,40,Disposable Income,1039,539,78,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,41,18,40,1,0,0,0,0,64,0,-1--1--1,,1|(826,603)|
+1,42,40,19,1,0,0,0,0,64,0,-1--1--1,,1|(1101,487)|
+1,43,40,20,1,0,0,0,0,64,0,-1--1--1,,1|(1183,561)|
+10,44,Gov Invest Share,1933,387,81,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,45,44,36,1,0,0,0,0,64,0,-1--1--1,,1|(1869,239)|
+1,46,44,24,1,0,0,0,0,64,0,-1--1--1,,1|(1891,530)|
+10,47,Gov Deficit,1259,331,60,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,48,47,29,1,0,0,0,0,64,0,-1--1--1,,1|(1187,316)|
+1,49,19,22,1,0,0,0,0,64,0,-1--1--1,,1|(1233,376)|
+1,50,29,22,1,0,0,0,0,64,0,-1--1--1,,1|(1305,250)|
+10,51,Time to Start Loss,861,354,49,30,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,52,51,16,1,0,0,0,0,64,0,-1--1--1,,1|(760,314)|
+1,53,1,16,1,0,0,0,0,64,0,-1--1--1,,1|(705,218)|
+10,54,Loss Rate,713,424,72,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,55,54,16,1,0,0,0,0,64,0,-1--1--1,,1|(693,352)|
+10,56,Duration of Losses,857,433,45,31,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,57,56,16,1,0,0,0,0,64,0,-1--1--1,,1|(736,364)|
+10,58,Switch for Endog Gov Grwth,664,955,76,35,8,130,0,0,0,0,0,0,0,0,0,0,0,0
+10,59,Net Investment in Capital Units,762,6,85,20,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,60,10,59,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,61,5,59,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,62,Magnitude of Gov Stimulus,860,965,62,22,8,2,0,0,0,0,0,0,0,0,0,0,0,0
+10,63,Exog Gov Budget,1557,886,75,12,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,64,Price,546,612,34,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,65,64,18,1,0,0,0,0,64,0,-1--1--1,,1|(611,577)|
+10,66,Gov Consump share of Income,2050,844,66,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,67,24,66,1,0,0,0,0,64,0,-1--1--1,,1|(1969,782)|
+10,68,Money Growth Rate,1106,976,69,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,69,Gov Budget Growth Rate,1099,1059,59,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,70,Asset Price,1226,192,63,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,71,70,6,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,72,Population Growth Rate,1096,1131,59,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,73,Switch to Include Money Growth in Gov Budget,412,976,94,33,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,74,Ref Labor,302,339,42,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,75,Ref Capital,629,297,48,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,76,Production,542,408,45,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,77,1,76,1,0,0,0,0,64,0,-1--1--1,,1|(593,240)|
+1,78,25,76,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,79,75,76,1,0,0,0,0,64,0,-1--1--1,,1|(577,347)|
+1,80,74,76,1,0,0,0,0,64,0,-1--1--1,,1|(417,345)|
+1,81,76,18,1,0,0,0,0,64,0,-1--1--1,,1|(584,497)|
+10,82,Income,1815,846,42,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,83,82,66,1,0,0,0,0,64,0,-1--1--1,,1|(1894,814)|
+12,84,0,458,-294,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Capital_Assets
+12,85,0,1112,-782,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Government_Borrowing
+12,86,0,1773,-798,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Income_per_Capita
+12,87,0,2451,213,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Net_Investment_C
+12,88,0,2467,705,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Employed_Labor
+12,89,0,1125,-287,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Government_Spending
+10,90,Savings Fraction,1183,517,80,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,91,90,20,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,92,90,19,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,93,Time to Start Stimulus,647,1046,60,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,94,Duration of Stimulus,650,1112,54,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+12,95,0,3108,-275,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Wealth
+12,96,0,2447,-795,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Production_Per_Capita
+12,97,0,2454,-301,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Production
+12,98,0,3160,1183,321,239,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+Technology,Graph
+12,99,0,2465,1209,321,239,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+Production Trend,Graph
+12,100,0,1777,-291,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Income
+1,101,26,75,0,1,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,102,Applied Labor,283,399,72,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,103,102,76,1,0,0,0,0,64,0,-1--1--1,,1|(415,386)|
+10,104,Time to Acquire Capital Assets,935,248,69,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,105,104,6,1,0,0,0,0,64,0,-1--1--1,,1|(991,207)|
+10,106,Asset Price,931,-4,63,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,107,Net Investment,789,-86,68,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,108,59,107,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,109,106,107,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+12,110,0,3114,214,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Investment_Private
+12,111,0,3136,695,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Unemployment_Rate
+12,112,0,3102,-788,321,239,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+Wages,Graph
+10,113,Temporary Change in Money Growth Rate,1329,972,86,31,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,114,Current Net Investment in Capital Units,1812,5,80,34,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,115,Asset Price,1070,51,63,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,116,115,114,0,1,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,117,11,114,0,1,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,118,36,114,0,1,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,119,29,114,0,1,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,120,121,40,1,0,0,0,0,64,0,-1--1--1,,1|(968,607)|
+10,121,Tax Rate,930,668,38,12,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,122,121,21,1,0,0,0,0,64,0,-1--1--1,,1|(965,727)|
+10,123,Initial Labor,301,371,63,12,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,124,123,74,0,1,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,125,Work Effort,301,371,62,22,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,126,125,74,0,1,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,127,Beta,266,488,20,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,128,127,76,1,0,0,0,0,64,0,-1--1--1,,1|(381,427)|
+12,129,0,439,-799,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Capital_Assets_Per_Capita
+10,130,Gov Spending Share of Income,1708,936,68,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,131,23,130,1,0,0,0,0,64,0,-1--1--1,,1|(1696,791)|
+1,132,82,130,1,0,0,0,0,64,0,-1--1--1,,1|(1818,899)|
+10,133,Percent,1026,671,43,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,134,133,40,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,135,133,21,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,136,137,36,1,0,0,0,0,64,0,-1--1--1,,1|(1783,298)|
+10,137,Percent,1816,468,43,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,138,137,24,1,0,0,0,0,64,0,-1--1--1,,1|(1831,577)|
+10,139,Percent,636,371,43,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,140,139,16,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,141,Percent,1933,986,43,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,142,141,130,1,0,0,0,0,64,0,-1--1--1,,1|(1820,996)|
+1,143,141,66,1,0,0,0,0,64,0,-1--1--1,,1|(1945,924)|
+12,144,0,1605,1239,322,227,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+Gov Spending Share of Income,Graph
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Technology
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,75,0
+10,1,Initial Technology Productivity,974,904,91,23,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Technology,881,585,51,12,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,1,2,1,0,0,0,0,64,0,-1--1--1,,1|(885,746)|
+10,4,Learning from Experience,1392,829,59,22,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,5,Learning Strength from Experience,1651,895,73,22,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,6,Effect of Experience on Tech Pdty,1179,713,88,23,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,7,Cumulative Production,1612,465,60,40,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,8,48,1961,474,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,9,11,7,4,0,0,22,0,0,0,-1--1--1,,1|(1730,474)|
+1,10,11,8,100,0,0,22,0,0,0,-1--1--1,,1|(1892,474)|
+11,11,48,1811,474,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,12,New Production,1811,516,67,12,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,13,Reference Production,1488,729,54,22,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,14,13,7,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+1,15,5,4,1,0,0,0,0,64,0,-1--1--1,,1|(1540,822)|
+1,16,4,6,1,0,0,0,0,64,0,-1--1--1,,1|(1264,807)|
+1,17,7,6,1,0,0,0,0,64,0,-1--1--1,,1|(1423,639)|
+1,18,13,6,1,0,0,0,0,64,0,-1--1--1,,1|(1321,757)|
+10,19,Learning from Investment,444,911,59,22,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,20,Learning Strength from Investment,233,1065,73,22,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,21,Effect of Investment on Tech Pdty,733,830,86,30,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,22,Cumulative Investment,684,1117,60,40,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,23,48,671,1413,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,24,26,22,4,0,0,22,0,0,0,-1--1--1,,1|(680,1208)|
+1,25,26,23,100,0,0,22,0,0,0,-1--1--1,,1|(680,1354)|
+11,26,48,680,1281,30,22,33,3,0,0,2,0,0,0,0,0,0,0,0,0
+10,27,New Investment,576,1281,66,12,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,28,Reference Investment,558,1020,87,12,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,29,28,22,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+1,30,20,19,1,0,0,0,0,64,0,-1--1--1,,1|(314,939)|
+1,31,19,21,1,0,0,0,0,64,0,-1--1--1,,1|(588,893)|
+1,32,22,21,1,0,0,0,0,64,0,-1--1--1,,1|(736,970)|
+1,33,28,21,1,0,0,0,0,64,0,-1--1--1,,1|(657,935)|
+1,34,21,2,1,0,0,0,0,64,0,-1--1--1,,1|(759,685)|
+1,35,6,2,1,0,0,0,0,64,0,-1--1--1,,1|(1067,615)|
+10,36,Production,2010,617,56,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,37,36,12,1,0,0,0,0,64,0,-1--1--1,,1|(1972,545)|
+10,38,Investment,502,1383,55,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,39,38,27,1,0,0,0,0,64,0,-1--1--1,,1|(511,1332)|
+12,40,0,671,304,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Technology
+10,41,Ref Invest Mult from Initial,309,1176,65,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,42,Initial Asset Price,558,1054,89,12,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,43,Gov Invest Share,512,1144,52,22,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,44,Desired Gov Share Income,512,1144,60,22,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,45,Initial Price,512,1144,60,12,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,46,Initial Savings Rate,512,1144,66,22,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,47,Tax Rate,512,1144,49,12,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Gov Budget
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,75,0
+10,1,Natural Grw Gov Budget,878,441,54,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Gov Deficit,1112,111,49,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,3,Desired Gov Share Income,501,397,94,29,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,4,3,1,1,0,0,0,0,64,0,-1--1--1,,1|(688,431)|
+10,5,Exog Gov Budget,1049,631,60,40,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,6,48,666,642,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,7,9,5,4,0,0,22,0,0,0,-1--1--1,,1|(912,642)|
+1,8,9,6,100,0,0,22,0,0,0,-1--1--1,,1|(733,642)|
+11,9,48,813,642,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,10,Chg in Gov Budget,813,684,77,12,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,11,1,5,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+10,12,Gov Budget Growth Rate,548,715,54,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,13,12,10,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,14,5,10,1,0,0,0,0,64,0,-1--1--1,,1|(846,701)|
+10,15,Switch for Endog Gov Grwth,1530,413,75,32,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,16,Gov Stimulus,1266,498,56,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,17,Magnitude of Gov Stimulus,1258,719,75,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,18,17,16,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,19,5,16,1,0,0,0,0,64,0,-1--1--1,,1|(1180,574)|
+10,20,Income,767,538,42,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,21,20,1,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,22,Taxes,891,129,37,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,23,22,2,1,0,0,0,0,64,0,-1--1--1,,1|(993,139)|
+10,24,Gov Budget,1104,262,49,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,25,1,24,1,0,0,0,0,64,0,-1--1--1,,1|(994,374)|
+1,26,5,24,1,0,0,0,0,64,0,-1--1--1,,1|(1092,444)|
+1,27,16,24,1,0,0,0,0,64,0,-1--1--1,,1|(1210,372)|
+1,28,15,24,1,0,0,0,0,64,0,-1--1--1,,1|(1313,304)|
+1,29,24,2,1,0,0,0,0,64,0,-1--1--1,,1|(1088,190)|
+10,30,Money Growth Rate,985,1008,69,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,31,Switch to Include Money Growth in Gov Budget,702,828,94,33,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,32,32,10,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+12,33,0,2135,390,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Gov_Budget
+10,34,Time to Start Stimulus,1389,661,55,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,35,Duration of Stimulus,1560,638,84,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,36,36,16,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,37,35,16,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+12,38,0,2000,932,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Gov_Deficit
+10,39,Percent,649,761,43,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,40,40,10,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,41,Percent,1456,516,43,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,42,42,16,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,43,Percent,648,485,43,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,44,44,1,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,45,Expected Money Inflation Rate,913,830,75,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,46,46,10,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,47,Gov Borrowing,442,1224,76,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,48,Income,834,1262,42,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,49,Gov Borrowing as Share of Income,653,1149,78,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,50,48,50,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,51,49,50,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,52,Percent,615,1284,43,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,53,53,50,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Labor
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,75,0
+12,1,0,2817,-653,416,327,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Labor
+10,2,Employed Labor,1102,535,96,64,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,3,Working Population,686,-484,99,73,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,4,48,237,-477,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,5,7,3,4,0,0,22,0,0,0,-1--1--1,,1|(513,-477)|
+1,6,7,4,100,0,0,22,0,0,0,-1--1--1,,1|(321,-477)|
+11,7,48,417,-477,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,8,Pop Growth,417,-435,50,12,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,9,0,475,545,2,12,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,10,12,2,4,0,0,22,0,0,0,-1--1--1,,1|(867,522)|
+1,11,12,9,100,0,0,22,0,0,0,-1--1--1,,1|(475,522)|
+11,12,0,707,522,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,13,Hiring,707,564,28,12,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,14,Population Growth Rate,166,-393,54,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,15,3,8,1,0,0,0,0,64,0,-1--1--1,,1|(560,-398)|
+1,16,14,8,1,0,0,0,0,64,0,-1--1--1,,1|(312,-401)|
+10,17,Desired Employed Labor,1907,1173,65,34,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,18,Unemployment Rate,351,145,92,26,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,19,Initial Labor,898,441,52,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,20,19,3,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+12,21,48,1525,542,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,22,24,21,4,0,0,22,0,0,0,-1--1--1,,1|(1486,542)|
+1,23,24,2,100,0,0,22,0,0,0,-1--1--1,,1|(1305,542)|
+11,24,48,1435,542,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,25,Attrition Rate,1435,584,56,12,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,26,Ave Duration of Employment,1664,438,68,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,27,Adjustment for Desired Labor,1772,1361,87,24,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,28,Labor Adjustment Time,2046,1280,71,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,29,Desired Hiring,1270,1658,62,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,30,Desired Vacancy Creation,669,1372,71,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,31,Adjustment for Vacancies,963,1330,62,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,32,Desired Vacancies,1136,1474,77,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,33,Expected Time to Fill Vacancies,1419,1421,73,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,34,Vacancies,826,1089,60,40,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,35,48,1239,1090,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,36,38,35,4,0,0,22,0,0,0,-1--1--1,,1|(1148,1090)|
+1,37,38,34,100,0,0,22,0,0,0,-1--1--1,,1|(955,1090)|
+11,38,48,1046,1090,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,39,Vacancy Closure,1046,1132,69,12,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,40,48,484,1087,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,41,43,34,4,0,0,22,0,0,0,-1--1--1,,1|(701,1090)|
+1,42,43,40,100,0,0,22,0,0,0,-1--1--1,,1|(543,1090)|
+11,43,48,615,1090,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,44,Vacancy Creation,615,1132,72,12,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,45,2,24,1,0,0,0,0,64,0,-1--1--1,,1|(1253,453)|
+1,46,26,24,1,0,0,0,0,64,0,-1--1--1,,1|(1508,468)|
+10,47,Time to Fill Vacancies,1359,1059,50,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,48,34,13,1,0,0,0,0,64,0,-1--1--1,,1|(699,779)|
+1,49,47,13,1,0,0,0,0,64,0,-1--1--1,,1|(1090,705)|
+1,50,28,27,1,0,0,0,0,64,0,-1--1--1,,1|(1903,1299)|
+1,51,27,29,1,0,0,0,0,64,0,-1--1--1,,1|(1631,1553)|
+10,52,Expected Attrition,2232,1205,75,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,53,25,52,1,0,0,0,0,64,0,-1--1--1,,1|(2142,900)|
+1,54,52,29,1,0,0,0,0,64,0,-1--1--1,,1|(1835,1546)|
+1,55,29,32,1,0,0,0,0,64,0,-1--1--1,,1|(1161,1594)|
+1,56,33,32,1,0,0,0,0,64,0,-1--1--1,,1|(1278,1499)|
+1,57,32,31,1,0,0,0,0,64,0,-1--1--1,,1|(1101,1384)|
+1,58,34,31,1,0,0,0,0,64,0,-1--1--1,,1|(959,1187)|
+1,59,31,30,1,0,0,0,0,64,0,-1--1--1,,1|(817,1383)|
+1,60,29,30,1,0,0,0,0,64,0,-1--1--1,,1|(879,1565)|
+1,61,30,44,1,0,0,0,0,64,0,-1--1--1,,1|(563,1231)|
+10,62,Vacancy Adjustment Time,1198,1229,71,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,63,62,31,1,0,0,0,0,64,0,-1--1--1,,1|(1067,1257)|
+1,64,2,27,1,0,0,0,0,64,0,-1--1--1,,1|(1724,1087)|
+10,65,Time to Ave Attrition,2416,1065,88,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,66,65,52,1,0,0,0,0,64,0,-1--1--1,,1|(2318,1119)|
+1,67,13,38,1,0,0,0,0,64,0,-1--1--1,,1|(943,783)|
+10,68,Time to Adjust Hiring Expectations,1587,1251,83,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,69,68,33,1,0,0,0,0,64,0,-1--1--1,,1|(1492,1312)|
+1,70,47,33,1,0,0,0,0,64,0,-1--1--1,,1|(1454,1218)|
+1,71,19,2,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+1,72,25,34,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+1,73,47,34,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+1,74,17,27,1,0,0,0,0,64,0,-1--1--1,,1|(1867,1235)|
+10,75,Labor Pool,835,9,47,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,76,Wages,2164,345,40,12,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,77,Unemployed Labor,404,534,74,52,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,78,Share of Working Pop in Labor Pool,1284,-54,84,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,79,3,75,1,0,0,0,0,64,0,-1--1--1,,1|(714,-224)|
+1,80,78,75,1,0,0,0,0,64,0,-1--1--1,,1|(1024,-67)|
+1,81,2,77,1,0,0,0,0,64,0,-1--1--1,,1|(726,363)|
+1,82,75,77,1,0,0,0,0,64,0,-1--1--1,,1|(531,192)|
+10,83,Maximum Hiring,499,707,69,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,84,Min Time to Hire,276,673,72,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,85,77,83,1,0,0,0,0,64,0,-1--1--1,,1|(400,626)|
+1,86,84,83,1,0,0,0,0,64,0,-1--1--1,,1|(352,714)|
+1,87,83,13,1,0,0,0,0,64,0,-1--1--1,,1|(595,678)|
+10,88,DT,285,-834,15,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,89,TIME STEP,34,-835,62,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,90,89,88,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,91,75,18,1,0,0,0,0,64,0,-1--1--1,,1|(524,9)|
+1,92,77,18,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,93,78,3,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+10,94,Wages,2044,1018,40,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,95,94,17,1,0,0,0,0,64,0,-1--1--1,,1|(1958,1061)|
+10,96,Income,1861,803,42,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,97,Magnitude of Gov Stimulus,1968,422,62,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,98,Production per Capita,1349,-594,92,22,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,99,3,98,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,100,88,83,0,1,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,101,Production,1330,-430,56,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,102,101,98,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+12,103,0,-487,-104,321,239,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+Production per Capita,Graph
+12,104,0,-469,482,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Unemployment_Rate
+12,105,0,2459,584,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+wages_real
+12,106,0,2448,34,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Wages
+1,107,26,3,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+1,108,84,3,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+10,109,Applied Labor,1189,297,61,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,110,Work Effort,876,308,56,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,111,2,109,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,112,110,109,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,113,Prod to Labor Ratio,1487,203,81,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,114,2,113,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,115,Production,1313,122,56,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,116,115,113,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+12,117,0,-480,-610,321,239,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+Prod to Labor Ratio,Graph
+10,118,Income Devoted to Wages,1849,1011,68,22,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,119,118,17,1,0,0,0,0,64,0,-1--1--1,,1|(1894,1071)|
+1,120,96,118,1,0,0,0,0,0,0,-1--1--1,,1|(1839,892)|
+10,121,Initial Fraction of Income Devoted to Wages,2014,544,79,33,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,122,Beta,1689,838,31,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,123,122,118,1,0,0,0,0,64,0,-1--1--1,,1|(1770,899)|
+10,124,Capital Assets per Capita,1030,-710,61,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,125,3,124,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,126,Capital Assets,1042,-614,71,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,127,126,124,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,128,Income per Capita,850,-775,75,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,129,3,128,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,130,Income,876,-709,42,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,131,130,128,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,132,Savings per Capita,585,-783,82,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,133,Savings,528,-695,44,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,134,133,132,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,135,3,132,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,136,Net Investment per Capita,712,-893,94,28,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,137,Net Investment,548,-818,72,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,138,137,136,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,139,3,136,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,140,Investment per Capita,844,-957,62,22,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,141,Financial Investment,299,-941,50,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,142,3,140,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,143,Investment,657,-971,55,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,144,143,140,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,145,Percent,368,-337,43,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,146,145,8,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,147,Percent,212,213,43,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,148,147,18,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,149,Percent,1005,18,43,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,150,149,75,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,151,149,3,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+1,152,2,34,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+1,153,149,34,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+1,154,14,34,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Wages
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,75,0
+10,1,Wages,657,404,60,40,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,2,48,1039,406,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,5,1,4,0,0,22,0,0,0,-1--1--1,,1|(784,406)|
+1,4,5,2,100,0,0,22,0,0,0,-1--1--1,,1|(962,406)|
+11,5,48,873,406,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,6,Adjustment of Wage Expectations,873,458,84,22,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,Indicated Wages,571,663,68,12,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,8,Time to Adjust Wage Expectations,1053,611,80,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,9,7,6,1,0,0,0,0,64,0,-1--1--1,,1|(849,491)|
+1,10,1,6,1,0,0,0,0,64,0,-1--1--1,,1|(720,484)|
+1,11,8,6,1,0,0,0,0,64,0,-1--1--1,,1|(941,551)|
+1,12,7,1,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+10,13,Income,339,693,42,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,14,13,7,1,0,0,0,0,64,0,-1--1--1,,1|(427,672)|
+10,15,Employed Labor,336,582,52,27,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,16,15,7,1,0,0,0,0,64,0,-1--1--1,,1|(437,640)|
+12,17,0,1577,370,321,238,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Wages
+12,18,0,1165,1092,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+wages_real
+12,19,0,472,1112,321,239,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+Employed Labor,Graph
+12,20,0,1955,1585,321,239,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+Income,Graph
+12,21,0,469,1601,321,239,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+Unemployed Labor,Graph
+12,22,0,1949,1021,321,238,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+Working Population,Graph
+12,23,0,2662,1024,321,238,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+Unemployment Rate,Graph
+12,24,0,1177,1600,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Wages
+10,25,Price Inflation,792,115,59,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,26,Real Wages,547,131,50,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,27,25,26,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,28,1,26,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,29,Initial Price,1007,81,60,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,30,29,25,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,31,Price,1009,162,34,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,32,31,25,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,33,Initial $,848,204,44,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,34,33,25,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,35,Initial Fraction of Income Devoted to Wages,91,875,82,32,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,36,Beta,366,767,31,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,37,36,7,1,0,0,0,0,64,0,-1--1--1,,1|(448,707)|
+10,38,Wage Ratio,402,388,49,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,39,7,38,1,0,0,0,0,64,0,-1--1--1,,1|(547,516)|
+1,40,1,38,1,0,0,0,0,64,0,-1--1--1,,1|(528,352)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Prices
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,75,0
+10,1,Expected Price,1164,614,60,40,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,2,48,668,612,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,5,1,4,0,0,22,0,0,0,-1--1--1,,1|(955,605)|
+1,4,5,2,100,0,0,22,0,0,0,-1--1--1,,1|(720,605)|
+11,5,48,785,605,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,6,Adjustment of Price Expectations,785,657,83,22,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,Price,954,871,23,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,8,1,7,1,0,0,0,0,64,0,-1--1--1,,1|(1119,761)|
+1,9,7,6,1,0,0,0,0,64,0,-1--1--1,,1|(804,822)|
+1,10,1,6,1,0,0,0,0,64,0,-1--1--1,,1|(1007,694)|
+10,11,Time to Adjust Price Expectations,589,793,78,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,12,11,6,1,0,0,0,0,64,0,-1--1--1,,1|(688,741)|
+10,13,Initial Price,1190,511,49,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,14,13,1,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+12,15,0,638,2393,324,225,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Exchange
+10,16,Expected Money Inflation,1600,752,129,19,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,17,Effect of Money Inflation on Price,1300,847,73,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,18,Max Inflation Eff on Price,1457,674,71,22,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,19,Sens of Price to Inflation,1651,832,66,22,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,20,18,17,1,0,0,0,0,64,0,-1--1--1,,1|(1361,745)|
+1,21,19,17,1,0,0,0,0,64,0,-1--1--1,,1|(1463,807)|
+1,22,16,17,1,0,0,0,0,64,0,-1--1--1,,1|(1426,767)|
+10,23,Effect of Wage Income Ratio on Price,1019,1051,92,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,24,Max Wages Income Ratio Eff on Price,969,1208,82,22,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,25,24,23,1,0,0,0,0,64,0,-1--1--1,,1|(974,1136)|
+10,26,Sens of Price to Wages Income Ratio,1232,1116,91,22,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,27,26,23,1,0,0,0,0,64,0,-1--1--1,,1|(1118,1105)|
+1,28,23,7,1,0,0,0,0,64,0,-1--1--1,,1|(1008,959)|
+1,29,17,7,1,0,0,0,0,64,0,-1--1--1,,1|(1109,883)|
+12,30,0,724,299,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Price
+12,31,0,2853,1768,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Wage_Income
+12,32,0,1079,1800,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Demand_Supply
+12,33,0,379,1814,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Effect_of_Demand_Supply
+10,34,Expected Chg in Wages Income Ratio,1214,1252,103,28,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,35,34,23,1,0,0,0,0,64,0,-1--1--1,,1|(1086,1176)|
+12,36,0,460,1188,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Price_Effect_of_Wages_Income_Ratio
+12,37,0,1748,299,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Price_Effect_of_Money_Inflatio
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Inflation
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,75,0
+10,1,Money Ratio,1508,755,53,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Perceived Money Ratio,1023,504,60,40,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,3,48,1466,504,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,4,6,2,4,0,0,22,0,0,0,-1--1--1,,1|(1163,506)|
+1,5,6,3,100,0,0,22,0,0,0,-1--1--1,,1|(1371,506)|
+11,6,48,1265,506,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,7,Money Ratio Perception,1265,566,54,22,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,8,Time to Perceive Money Ratio,1509,590,72,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,9,8,7,1,0,0,0,0,64,0,-1--1--1,,1|(1428,620)|
+1,10,2,7,1,0,0,0,0,64,0,-1--1--1,,1|(1094,564)|
+1,11,1,7,1,0,0,0,0,64,0,-1--1--1,,1|(1332,691)|
+10,12,Reference Money Ratio,643,109,60,40,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,13,48,1077,111,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,14,16,12,4,0,0,22,0,0,0,-1--1--1,,1|(783,111)|
+1,15,16,13,100,0,0,22,0,0,0,-1--1--1,,1|(987,111)|
+11,16,48,885,111,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,17,Adjustment of Money Ratio Expectations,885,170,90,29,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,18,Time Horizon to Assess Inflation,905,316,76,31,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,19,18,17,1,0,0,0,0,64,0,-1--1--1,,1|(848,228)|
+1,20,12,17,1,0,0,0,0,64,0,-1--1--1,,1|(714,169)|
+1,21,2,17,1,0,0,0,0,64,0,-1--1--1,,1|(1031,316)|
+10,22,Expected Money Inflation,-232,266,60,40,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,23,48,202,268,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,24,26,22,4,0,0,22,0,0,0,-1--1--1,,1|(-92,268)|
+1,25,26,23,100,0,0,22,0,0,0,-1--1--1,,1|(112,268)|
+11,26,48,10,268,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,27,Expectations Adjustment Money Inflation,10,328,75,30,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,28,Time to Adjust Expectations MI,155,484,72,35,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,29,28,27,1,0,0,0,0,64,0,-1--1--1,,1|(93,450)|
+1,30,22,27,1,0,0,0,0,64,0,-1--1--1,,1|(-179,350)|
+10,31,Money Inflation,503,310,70,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,32,2,31,1,0,0,0,0,64,0,-1--1--1,,1|(789,375)|
+1,33,12,31,1,0,0,0,0,64,0,-1--1--1,,1|(531,191)|
+1,34,18,31,1,0,0,0,0,64,0,-1--1--1,,1|(703,249)|
+1,35,31,27,1,0,0,0,0,64,0,-1--1--1,,1|(258,381)|
+10,36,Production,1673,905,56,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,37,36,1,1,0,0,0,0,64,0,-1--1--1,,1|(1620,817)|
+12,38,0,52,1018,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Money_Inflation
+12,39,0,1488,1195,321,239,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+Money Supply,Graph
+12,40,0,746,1018,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Money_Ratio
+1,41,1,2,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+1,42,1,12,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+12,43,0,1986,127,321,239,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+Money Velocity,Graph
+10,44,Money Inflation Rate,500,480,85,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,45,31,44,1,0,0,0,0,64,0,-1--1--1,,1|(470,392)|
+10,46,Percent,688,551,43,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,47,46,44,1,0,0,0,0,64,0,-1--1--1,,1|(633,501)|
+10,48,Expected Money Inflation Rate,-260,72,70,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,49,22,48,1,0,0,0,0,64,0,-1--1--1,,1|(-272,168)|
+10,50,Percent,-130,133,43,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,51,50,48,1,0,0,0,0,64,0,-1--1--1,,1|(-198,125)|
+10,52,Money Supply,1508,789,70,12,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,53,Money Supply,1847,750,70,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,54,53,1,1,0,0,0,0,64,0,-1--1--1,,1|(1670,710)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Money
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,75,0
+10,1,Money Supply,1021,885,60,40,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,2,48,1487,894,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,5,1,4,0,0,22,0,0,0,-1--1--1,,1|(1150,891)|
+1,4,5,2,100,0,0,22,0,0,0,-1--1--1,,1|(1370,891)|
+11,5,48,1241,891,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,6,Growth In Money,1241,933,72,12,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,Money Growth Rate,1472,978,82,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,8,Money Ratio,664,889,53,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,9,48,622,638,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,10,7,6,1,0,0,0,0,64,0,-1--1--1,,1|(1346,997)|
+1,11,1,6,1,0,0,0,0,64,0,-1--1--1,,1|(1147,968)|
+1,12,1,8,1,0,0,0,0,64,0,-1--1--1,,1|(853,858)|
+10,13,Production,829,1039,56,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,14,13,8,1,0,0,0,0,64,0,-1--1--1,,1|(776,951)|
+12,15,0,644,1329,321,239,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+Money Supply,Graph
+10,16,Initial Money Supply,1157,695,85,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,17,Initial Per Worker Money Supply,1420,630,84,38,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,18,17,16,1,0,0,0,0,64,0,-1--1--1,,1|(1274,642)|
+10,19,Employed Labor,1452,736,79,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,20,19,16,1,0,0,0,0,64,0,-1--1--1,,1|(1317,694)|
+1,21,16,1,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+10,22,Temporary Change in Money Growth Rate,1530,1189,73,29,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,23,Time to Start Change in Money Growth Rate,1159,1227,95,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,24,Duration of Change in Money Growth Rate,1362,1231,91,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,25,Temporary Shift in Money Growth Rate,1260,1050,65,33,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,26,22,25,1,0,0,0,0,64,0,-1--1--1,,1|(1401,1088)|
+1,27,24,25,1,0,0,0,0,64,0,-1--1--1,,1|(1332,1132)|
+1,28,23,25,1,0,0,0,0,64,0,-1--1--1,,1|(1224,1138)|
+1,29,25,6,1,0,0,0,0,64,0,-1--1--1,,1|(1233,987)|
+10,30,Money Velocity,948,577,65,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,31,1,30,1,0,0,0,0,64,0,-1--1--1,,1|(902,738)|
+10,32,Income,1239,545,42,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,33,32,30,1,0,0,0,0,64,0,-1--1--1,,1|(1115,612)|
+12,34,0,1142,261,321,239,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+Money Velocity,Graph
+10,35,Percent,1092,1053,43,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,36,35,25,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,37,35,6,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Demand Supply
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,75,0
+10,1,Expected Chg in Wages Income Ratio,253,459,60,40,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,2,48,590,455,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,5,1,4,0,0,22,0,0,0,-1--1--1,,1|(380,454)|
+1,4,5,2,100,0,0,22,0,0,0,-1--1--1,,1|(535,454)|
+11,5,48,469,454,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,6,Expectations Adjustment Wages Income Ratio,469,513,96,29,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,Wages Income Ratio,1555,921,89,12,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,8,1,6,1,0,0,0,0,64,0,-1--1--1,,1|(324,540)|
+10,9,Perceived Wages Income Ratio,1188,740,60,40,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,10,48,1591,728,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,11,13,9,4,0,0,22,0,0,0,-1--1--1,,1|(1323,723)|
+1,12,13,10,100,0,0,22,0,0,0,-1--1--1,,1|(1512,723)|
+11,13,48,1421,723,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,14,Wages Income Ratio Perception,1421,782,95,29,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,15,9,14,1,0,0,0,0,64,0,-1--1--1,,1|(1294,826)|
+1,16,7,14,1,0,0,0,0,64,0,-1--1--1,,1|(1473,864)|
+10,17,Reference Wages Income Ratio,1028,496,60,40,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,18,48,1421,486,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,19,21,17,4,0,0,22,0,0,0,-1--1--1,,1|(1187,481)|
+1,20,21,18,100,0,0,22,0,0,0,-1--1--1,,1|(1370,481)|
+11,21,48,1308,481,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,22,Adjustment for Reference Wages Income Ratio,1308,538,79,33,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,23,Time Horizon to Assess Wages Income Ratio,1576,454,79,33,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,24,17,22,1,0,0,0,0,64,0,-1--1--1,,1|(1106,546)|
+1,25,23,22,1,0,0,0,0,64,0,-1--1--1,,1|(1493,534)|
+1,26,9,22,1,0,0,0,0,64,0,-1--1--1,,1|(1202,616)|
+10,27,Change in Wages Income Ratio,763,493,78,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,28,17,27,1,0,0,0,0,64,0,-1--1--1,,1|(902,445)|
+1,29,9,27,1,0,0,0,0,64,0,-1--1--1,,1|(992,583)|
+1,30,23,27,1,0,0,0,0,64,0,-1--1--1,,1|(1075,289)|
+1,31,27,6,1,0,0,0,0,64,0,-1--1--1,,1|(632,537)|
+10,32,Income,1718,1185,42,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,33,Time to Perceive Wages Income Ratio,1787,834,80,29,8,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,34,33,14,1,0,0,0,0,64,0,-1--1--1,,1|(1584,830)|
+10,35,Employed Labor,2100,1004,79,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,36,Wages,2067,914,40,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,37,Wage Income,1861,938,56,12,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,38,37,7,1,0,0,0,0,64,0,-1--1--1,,1|(1720,900)|
+1,39,35,37,1,0,0,0,0,0,0,-1--1--1,,1|(1967,994)|
+1,40,36,37,1,0,0,0,0,0,0,-1--1--1,,1|(1994,949)|
+10,41,Time to Adjust Expectations WIR,689,636,88,31,8,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,42,41,6,1,0,0,0,0,64,0,-1--1--1,,1|(552,602)|
+12,43,0,311,957,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Wages_Inc_Ratio_Per_Chg
+12,44,0,1114,1156,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Income_Wages_Ratio
+10,45,Initial Fraction of Income Devoted to Wages,1518,1183,86,35,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,46,7,9,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+1,47,7,17,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+10,48,Income,1718,1008,42,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,49,48,7,1,0,0,0,0,64,0,-1--1--1,,1|(1676,963)|
+10,50,Beta,1860,1193,31,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,51,Percent Change in WIR,656,289,82,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,52,Expected Percent Chg in WIR,217,241,96,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,53,1,52,1,0,0,0,0,64,0,-1--1--1,,1|(206,344)|
+1,54,27,51,1,0,0,0,0,64,0,-1--1--1,,1|(669,406)|
+10,55,Percent,762,392,43,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,56,55,51,1,0,0,0,0,64,0,-1--1--1,,1|(706,358)|
+10,57,Percent,354,314,43,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,58,57,52,1,0,0,0,0,64,0,-1--1--1,,1|(285,295)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Asset Prices
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,75,0
+10,1,Asset Price,968,457,52,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Expected Asset Price,1158,246,60,40,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,3,48,590,249,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,4,6,2,4,0,0,22,0,0,0,-1--1--1,,1|(984,249)|
+1,5,6,3,100,0,0,22,0,0,0,-1--1--1,,1|(713,249)|
+11,6,48,849,249,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,7,Adjustment of Asset Price Expectations,849,301,84,22,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,8,Time to Adjust Asset Price Expectations,530,363,88,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,9,2,1,1,0,0,0,0,64,0,-1--1--1,,1|(1119,379)|
+1,10,1,7,1,0,0,0,0,64,0,-1--1--1,,1|(878,397)|
+1,11,8,7,1,0,0,0,0,64,0,-1--1--1,,1|(718,378)|
+1,12,2,7,1,0,0,0,0,64,0,-1--1--1,,1|(1035,349)|
+10,13,Initial Asset Price,1155,150,78,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,14,13,2,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+10,15,Effect of Asset Income Ratio on Asset Price,1057,693,83,30,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,16,Max Asset Inc Ratio Eff on Asset Price,921,821,87,22,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,17,16,15,1,0,0,0,0,64,0,-1--1--1,,1|(954,754)|
+10,18,Sens of Asset Price to Asset Income Ratio,1389,754,91,22,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,19,18,15,1,0,0,0,0,64,0,-1--1--1,,1|(1209,751)|
+12,20,0,1949,357,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Price_Asset
+12,21,0,1126,1165,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Price_Effect_of_Wages_Income_Ratio
+12,22,0,436,1164,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Price_Asset_Effect_Asset_Income
+1,23,15,1,1,0,0,0,0,64,0,-1--1--1,,1|(1059,565)|
+10,24,Effect of Wage Income Ratio on Price,1252,593,97,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,25,24,1,1,0,0,0,0,64,0,-1--1--1,,1|(1128,496)|
+10,26,Effect of Money Inflation on Price,1294,478,79,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,27,26,1,1,0,0,0,0,64,0,-1--1--1,,1|(1103,456)|
+10,28,Expected Chg in Asset Income Ratio,1057,729,92,22,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,29,Expected Chg in Asset Income Ratio,1159,861,92,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,30,29,15,1,0,0,0,0,64,0,-1--1--1,,1|(1083,786)|
+12,31,0,1819,1170,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Price_Effect_of_Money_Inflatio
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Income Asset Ratio
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,75,0
+10,1,Expected Asset Income Ratio,1131,516,60,40,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Asset Income Ratio,1926,976,79,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,3,48,1572,525,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,4,6,1,4,0,0,22,0,0,0,-1--1--1,,1|(1272,525)|
+1,5,6,3,100,0,0,22,0,0,0,-1--1--1,,1|(1480,525)|
+11,6,48,1376,525,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,7,Adjustment of Asset Income Ratio Expectations,1376,588,108,33,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,8,Time Horizon to Assess Asset Income Ratio,1689,532,63,43,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,9,8,7,1,0,0,0,0,64,0,-1--1--1,,1|(1576,588)|
+1,10,1,7,1,0,0,0,0,64,0,-1--1--1,,1|(1204,593)|
+10,11,Change in Asset Income Ratio,851,506,70,33,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,12,1,11,1,0,0,0,0,64,0,-1--1--1,,1|(986,541)|
+10,13,Perceived Asset Income Ratio,1566,778,60,40,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,14,48,2013,781,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,15,17,13,4,0,0,22,0,0,0,-1--1--1,,1|(1710,781)|
+1,16,17,14,100,0,0,22,0,0,0,-1--1--1,,1|(1921,781)|
+11,17,48,1817,781,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,18,Perception of Asset Income Ratio,1817,833,81,22,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,19,Time to Perceive Asset Income Ratio,2208,875,75,34,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,20,19,18,1,0,0,0,0,64,0,-1--1--1,,1|(2000,887)|
+1,21,13,18,1,0,0,0,0,64,0,-1--1--1,,1|(1642,855)|
+1,22,2,18,1,0,0,0,0,64,0,-1--1--1,,1|(1848,920)|
+1,23,13,7,1,0,0,0,0,64,0,-1--1--1,,1|(1422,698)|
+1,24,13,11,1,0,0,0,0,64,0,-1--1--1,,1|(1172,706)|
+10,25,Expected Chg in Asset Income Ratio,597,280,60,40,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,26,48,605,573,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,27,29,25,4,0,0,22,0,0,0,-1--1--1,,1|(600,359)|
+1,28,29,26,100,0,0,22,0,0,0,-1--1--1,,1|(600,504)|
+11,29,48,600,421,30,22,33,3,0,0,2,0,0,0,0,0,0,0,0,0
+10,30,Expectations Adjustment Asset Inc Ratio,480,421,90,33,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,31,Time to Adjust Expectations AIR,397,615,92,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,32,31,30,1,0,0,0,0,64,0,-1--1--1,,1|(477,534)|
+1,33,25,30,1,0,0,0,0,64,0,-1--1--1,,1|(492,315)|
+1,34,11,29,1,0,0,0,0,64,0,-1--1--1,,1|(731,432)|
+10,35,Capital Assets,2002,1101,71,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,36,35,2,1,0,0,0,0,64,0,-1--1--1,,1|(1993,1033)|
+1,37,2,13,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+1,38,2,1,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+1,39,8,11,1,0,0,0,0,64,0,-1--1--1,,1|(1268,360)|
+12,40,0,496,1019,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Income_Asset_Ratio
+12,41,0,1234,1087,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Income_Asset_Ratio
+10,42,Asset Income,2140,1055,66,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,43,42,2,1,0,0,0,0,64,0,-1--1--1,,1|(2081,996)|
+10,44,Percent Chg in AIR,853,279,79,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,45,Expected Percent Chg in AIR,572,121,72,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,46,25,45,1,0,0,0,0,64,0,-1--1--1,,1|(561,199)|
+1,47,11,44,1,0,0,0,0,64,0,-1--1--1,,1|(825,388)|
+10,48,Percent,929,376,43,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,49,48,44,1,0,0,0,0,64,0,-1--1--1,,1|(877,333)|
+10,50,Percent,672,188,43,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,51,50,45,1,0,0,0,0,64,0,-1--1--1,,1|(614,169)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Savings Fraction
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,75,0
+10,1,Initial Savings Rate,1415,203,60,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Money Growth Rate,2044,299,69,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,3,Savings Fraction,1381,618,69,12,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,4,Normal Savings Fraction,1532,342,60,40,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,5,48,987,348,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,6,8,4,4,0,0,22,0,0,0,-1--1--1,,1|(1364,348)|
+1,7,8,5,100,0,0,22,0,0,0,-1--1--1,,1|(1104,348)|
+11,8,48,1234,348,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,9,Adjustment of Normal Savings Rate,1234,400,89,22,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,10,Time to Adjust Savings Norms,909,481,64,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,11,4,3,1,0,0,0,0,64,0,-1--1--1,,1|(1520,508)|
+1,12,4,9,1,0,0,0,0,64,0,-1--1--1,,1|(1425,421)|
+1,13,10,9,1,0,0,0,0,64,0,-1--1--1,,1|(1069,471)|
+10,14,Effect of Wealth on Savings,1717,593,68,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,15,14,3,1,0,0,0,0,64,0,-1--1--1,,1|(1565,588)|
+10,16,Max Effect of Wealth on Savings,1924,465,78,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,17,Sensitivity of Wealth on Savings,2032,637,78,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,18,16,14,1,0,0,0,0,64,0,-1--1--1,,1|(1809,511)|
+1,19,17,14,1,0,0,0,0,64,0,-1--1--1,,1|(1885,593)|
+10,20,Maximum Savings Fraction,1153,652,70,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,21,Constrained Savings Fraction,1219,511,70,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,22,3,21,1,0,0,0,0,64,0,-1--1--1,,1|(1294,595)|
+1,23,20,21,1,0,0,0,0,64,0,-1--1--1,,1|(1194,592)|
+1,24,21,9,1,0,0,0,0,64,0,-1--1--1,,1|(1207,459)|
+10,25,Expected Chg in Wealth,2112,542,82,32,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,26,25,14,1,0,0,0,0,64,0,-1--1--1,,1|(1903,538)|
+12,27,0,975,1200,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Savings_Fraction
+12,28,0,2577,486,321,239,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+Expected Chg in Wealth,Graph
+1,29,1,4,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+12,30,0,1714,1207,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Savings_Effect_of_Wealth
+10,31,Effect of Returns on Savings,1609,741,68,29,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,32,Max Effect of Return on Savings,1841,758,85,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,33,Sensitivity of Return on Savings,1483,870,85,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,34,32,31,1,0,0,0,0,64,0,-1--1--1,,1|(1713,773)|
+1,35,33,31,1,0,0,0,0,64,0,-1--1--1,,1|(1578,800)|
+10,36,Expected Chg in Return on Capital,1738,881,90,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,37,36,31,1,0,0,0,0,64,0,-1--1--1,,1|(1651,796)|
+1,38,31,3,1,0,0,0,0,64,0,-1--1--1,,1|(1528,650)|
+12,39,0,2507,1144,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Savings_Effect_of_Returns
+10,40,Effective Savings Rate,592,164,55,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,41,Gov Investment,494,276,75,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,42,41,40,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,43,Income,657,274,42,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,44,43,40,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,45,Private Investment,844,191,86,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,46,45,40,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+12,47,0,402,703,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Savings_Fraction_Effective
+10,48,Savings Rate,1166,780,54,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,49,3,48,1,0,0,0,0,64,0,-1--1--1,,1|(1252,670)|
+10,50,Normal Savings Rate,1662,196,86,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,51,Percent,1941,145,32,12,8,3,1,0,0,0,0,0,0,0,0,0,0,0
+1,52,51,50,0,1,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,53,4,50,1,0,0,0,0,64,0,-1--1--1,,1|(1621,265)|
+1,54,51,48,0,1,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,55,51,40,0,1,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,56,51,4,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Wealth
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,75,0
+10,1,Nominal Wealth,1805,474,62,23,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Expected Wealth,600,698,60,40,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,3,48,910,680,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,4,6,2,4,0,0,22,0,0,0,-1--1--1,,1|(709,680)|
+1,5,6,3,100,0,0,22,0,0,0,-1--1--1,,1|(851,680)|
+11,6,48,780,680,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,7,Adjustment of Expected Wealth,780,732,71,22,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,8,Time Horizon to Assess Wealth,575,883,85,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,9,8,7,1,0,0,0,0,64,0,-1--1--1,,1|(716,849)|
+1,10,2,7,1,0,0,0,0,64,0,-1--1--1,,1|(660,761)|
+10,11,Initial Wealth,955,1003,56,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,12,11,2,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+10,13,Change in Wealth,646,302,77,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,14,2,13,1,0,0,0,0,64,0,-1--1--1,,1|(553,495)|
+10,15,Perceived Wealth,1086,449,60,40,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,16,48,1396,431,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,17,19,15,4,0,0,22,0,0,0,-1--1--1,,1|(1195,431)|
+1,18,19,16,100,0,0,22,0,0,0,-1--1--1,,1|(1337,431)|
+11,19,48,1266,431,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,20,Perception of Wealth,1266,483,71,22,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,21,Time to Perceive Wealth,1414,593,72,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,22,21,20,1,0,0,0,0,64,0,-1--1--1,,1|(1288,502)|
+1,23,15,20,1,0,0,0,0,64,0,-1--1--1,,1|(1146,512)|
+1,24,11,15,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+1,25,15,7,1,0,0,0,0,64,0,-1--1--1,,1|(1011,652)|
+1,26,15,13,1,0,0,0,0,64,0,-1--1--1,,1|(847,456)|
+10,27,Asset Price,2091,513,63,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,28,27,1,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,29,Capital Assets,2081,395,71,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,30,29,1,1,0,0,0,0,64,0,-1--1--1,,1|(1945,424)|
+10,31,Perceived Money Ratio,2442,1138,60,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,32,Per Capital Nom Wealth,1555,462,70,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,33,1,32,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,34,Working Population,1758,341,51,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,35,34,32,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,36,32,20,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,37,34,15,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+1,38,34,2,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+10,39,Money Growth Rate,2470,586,69,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,40,Expected Chg in Wealth,127,167,60,40,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,41,48,437,149,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,42,44,40,4,0,0,22,0,0,0,-1--1--1,,1|(236,149)|
+1,43,44,41,100,0,0,22,0,0,0,-1--1--1,,1|(378,149)|
+11,44,48,307,149,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,45,Expectations Adjustment Wealth,307,201,79,22,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,46,Time to Adjust Expectations Wealth,423,337,74,36,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,47,46,45,1,0,0,0,0,64,0,-1--1--1,,1|(373,251)|
+1,48,40,45,1,0,0,0,0,64,0,-1--1--1,,1|(187,230)|
+1,49,13,45,1,0,0,0,0,64,0,-1--1--1,,1|(502,232)|
+12,50,0,443,-170,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Wealth_Perc_Chg
+12,51,0,1118,-166,321,239,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+Change in Wealth,Graph
+12,52,0,1809,-150,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Wealth_Per_Capita
+12,53,0,2484,-150,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Wealth
+12,54,0,1083,-731,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Wealth_per_capita_vs_real
+12,55,0,1808,-701,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Wealth_Real_Per_Capita
+12,56,0,2505,-688,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Wealth_Real
+10,57,Asset Price,829,1177,63,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,58,57,11,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,59,Capital Assets,1042,1124,71,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,60,59,11,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,61,Asset Price Inflation,1807,1157,98,19,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,62,Real Wealth,1690,1016,59,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,63,Real Per Capita Wealth,1421,1033,67,22,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,64,Asset Price,1932,1277,63,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,65,64,61,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,66,Initial Asset Price,2032,1226,89,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,67,66,61,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,68,61,62,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,69,61,63,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,70,Per Capital Nom Wealth,1489,765,76,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,71,Nominal Wealth,1723,880,78,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,72,70,63,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,73,71,62,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,74,8,13,1,0,0,0,0,64,0,-1--1--1,,1|(454,582)|
+10,75,Initial $,1605,1286,33,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,76,75,61,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,77,Percent Chg in Wealth,643,153,61,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,78,Expected Percent Chg in Wealth,28,26,72,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,79,13,77,1,0,0,0,0,64,0,-1--1--1,,1|(613,231)|
+1,80,40,78,1,0,0,0,0,64,0,-1--1--1,,1|(33,98)|
+10,81,Percent,793,244,43,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,82,81,77,1,0,0,0,0,64,0,-1--1--1,,1|(703,213)|
+10,83,Percent,114,86,43,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,84,83,78,1,0,0,0,0,64,0,-1--1--1,,1|(61,66)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Return on Capital
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,75,0
+10,1,Expected Return on Capital,865,991,60,40,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,2,48,1175,973,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,5,1,4,0,0,22,0,0,0,-1--1--1,,1|(974,973)|
+1,4,5,2,100,0,0,22,0,0,0,-1--1--1,,1|(1116,973)|
+11,5,48,1045,973,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,6,Adjustment of Expected Return on Capital,1045,1035,92,32,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,Time Horizon to Assess Capital Returns,844,1184,97,30,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,8,7,6,1,0,0,0,0,64,0,-1--1--1,,1|(981,1142)|
+1,9,1,6,1,0,0,0,0,64,0,-1--1--1,,1|(925,1054)|
+10,10,Change in Return on Capital,912,606,80,23,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,11,1,10,1,0,0,0,0,64,0,-1--1--1,,1|(818,788)|
+10,12,Perceived Return on Capital,1351,742,60,40,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,13,48,1661,724,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,14,16,12,4,0,0,22,0,0,0,-1--1--1,,1|(1460,724)|
+1,15,16,13,100,0,0,22,0,0,0,-1--1--1,,1|(1602,724)|
+11,16,48,1531,724,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,17,Perception of Return on Capital,1531,776,79,22,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,18,12,17,1,0,0,0,0,64,0,-1--1--1,,1|(1411,805)|
+1,19,12,6,1,0,0,0,0,64,0,-1--1--1,,1|(1276,945)|
+1,20,12,10,1,0,0,0,0,64,0,-1--1--1,,1|(1112,749)|
+10,21,Expected Chg in Return on Capital,392,460,60,40,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,22,48,702,442,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,23,25,21,4,0,0,22,0,0,0,-1--1--1,,1|(501,442)|
+1,24,25,22,100,0,0,22,0,0,0,-1--1--1,,1|(643,442)|
+11,25,48,572,442,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,26,Expectations Adjustment Return on Capital,572,504,94,32,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,27,Time to Adjust Expectations ROC,663,638,82,34,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,28,27,26,1,0,0,0,0,64,0,-1--1--1,,1|(625,550)|
+1,29,21,26,1,0,0,0,0,64,0,-1--1--1,,1|(432,535)|
+1,30,10,26,1,0,0,0,0,64,0,-1--1--1,,1|(767,525)|
+1,31,7,10,1,0,0,0,0,64,0,-1--1--1,,1|(719,875)|
+10,32,Time to Perceive Capital Returns,1691,949,72,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,33,32,17,1,0,0,0,0,64,0,-1--1--1,,1|(1637,857)|
+10,34,Return on Capital,1878,805,72,12,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,35,34,17,1,0,0,0,0,64,0,-1--1--1,,1|(1713,760)|
+10,36,Desired Return on Capital,1385,968,69,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,37,36,12,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+1,38,36,1,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+12,39,0,1489,338,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Capital_Returns_vs_Perc_Ret
+10,40,Total Return on Capital,1715,1159,65,22,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,41,Asset Income,2057,1119,55,12,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,42,41,40,1,0,0,0,0,0,0,-1--1--1,,1|(1817,1095)|
+10,43,Book Value of Capital Assets,1872,1015,67,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,44,43,40,1,0,0,0,0,0,0,-1--1--1,,1|(1789,1041)|
+10,45,Income,2165,1261,42,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,46,45,41,1,0,0,0,0,0,0,-1--1--1,,1|(2074,1200)|
+10,47,Wage Income,1977,1277,67,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,48,47,41,1,0,0,0,0,0,0,-1--1--1,,1|(1983,1200)|
+10,49,Asset Earnings,2126,974,61,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,50,41,49,1,0,0,0,0,64,0,-1--1--1,,1|(2126,1060)|
+10,51,Capital Depreciation,2357,1025,60,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,52,51,49,1,0,0,0,0,64,0,-1--1--1,,1|(2260,964)|
+1,53,43,34,1,0,0,0,0,64,0,-1--1--1,,1|(1844,909)|
+1,54,49,34,1,0,0,0,0,64,0,-1--1--1,,1|(1986,902)|
+10,55,Asset Taxes,2245,1064,50,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,56,41,55,1,0,0,0,0,64,0,-1--1--1,,1|(2161,1113)|
+1,57,55,49,1,0,0,0,0,64,0,-1--1--1,,1|(2234,1022)|
+10,58,Tax Rate,2327,1152,49,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,59,58,55,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,60,Risk Free Rate,2229,822,61,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,61,Expected Money Inflation,2154,691,79,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,62,Return on Capital Percent,1904,611,73,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,63,Percent,2007,709,43,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,64,63,62,1,0,0,0,0,64,0,-1--1--1,,1|(1935,679)|
+1,65,34,62,1,0,0,0,0,64,0,-1--1--1,,1|(1859,710)|
+10,66,Percent,2230,1160,43,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,67,66,55,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,68,Percent Chg in Returns,928,438,61,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,69,Expected Percent Chg in Returns,325,246,72,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,70,21,69,1,0,0,0,0,64,0,-1--1--1,,1|(323,351)|
+1,71,10,68,1,0,0,0,0,64,0,-1--1--1,,1|(895,525)|
+10,72,Percent,1032,533,43,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,73,72,68,1,0,0,0,0,64,0,-1--1--1,,1|(958,502)|
+10,74,Percent,480,313,43,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,75,74,69,1,0,0,0,0,64,0,-1--1--1,,1|(400,306)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Book Value of Capital
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,75,0
+10,1,Desired Return on Capital,536,-89,64,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Depreciation Fraction,979,246,89,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,3,Ave Life of Cap,695,272,77,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,4,3,2,1,0,0,0,0,64,0,-1--1--1,,1|(823,284)|
+10,5,Desired Total Return on Capital,487,-2,65,32,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,6,1,5,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+1,7,2,5,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+10,8,Book Value of Capital Assets,1143,643,83,59,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,9,48,1534,640,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,10,12,8,4,0,0,22,0,0,0,-1--1--1,,1|(1286,636)|
+1,11,12,9,100,0,0,22,0,0,0,-1--1--1,,1|(1457,636)|
+11,12,48,1369,636,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,13,Financial Investment,1369,687,57,21,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+12,14,48,769,589,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,15,17,14,4,0,0,22,0,0,0,-1--1--1,,1|(816,590)|
+1,16,17,8,100,0,0,22,0,0,0,-1--1--1,,1|(978,590)|
+11,17,48,875,590,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,18,Capital Depreciation,875,654,62,22,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+12,19,48,1114,884,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,20,22,19,4,0,0,22,0,0,0,-1--1--1,,1|(1123,835)|
+1,21,22,8,100,0,0,22,0,0,0,-1--1--1,,1|(1123,726)|
+11,22,48,1123,773,30,22,33,3,0,0,2,0,0,0,0,0,0,0,0,0
+10,23,Book Losses,1052,773,41,22,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,24,8,18,1,0,0,0,0,64,0,-1--1--1,,1|(1001,677)|
+1,25,8,23,1,0,0,0,0,64,0,-1--1--1,,1|(1044,716)|
+10,26,Asset Price,1196,726,59,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,27,26,8,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+10,28,Initial Assets,1211,763,65,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,29,28,8,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+10,30,Ave Life of Cap,621,698,77,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,31,30,18,1,0,0,0,0,64,0,-1--1--1,,1|(753,716)|
+10,32,Gov Investment,1284,848,75,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,33,32,13,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,34,Private Investment,1411,804,86,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,35,34,13,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,36,Time to Acquire Capital Assets,1612,712,74,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,37,36,13,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,38,Duration of Losses,740,825,88,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,39,38,23,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,40,Loss Rate,1007,923,83,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,41,40,23,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,42,Time to Start Loss,844,910,86,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,43,42,23,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,44,Initial Asset Income,397,91,76,26,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,45,5,44,1,0,0,0,0,64,1,-1--1--1,,1|(458,42)|
+1,46,8,44,1,0,0,0,0,64,1,-1--1--1,,1|(853,186)|
+10,47,Initial Wage Income,223,109,82,32,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,48,44,47,1,0,0,0,0,64,1,-1--1--1,,1|(309,105)|
+10,49,Income,474,382,42,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,50,49,47,1,0,0,0,0,64,1,-1--1--1,,1|(225,148)|
+10,51,Initial Fraction of Income Devoted to Wages,224,-110,85,35,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,52,47,51,1,0,0,0,0,64,1,-1--1--1,,1|(196,-25)|
+1,53,49,51,1,0,0,0,0,64,1,-1--1--1,,1|(35,143)|
+10,54,Asset Income,757,391,55,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,55,49,54,1,0,0,0,0,64,0,-1--1--1,,1|(605,359)|
+10,56,Wage Income,502,473,67,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,57,56,54,1,0,0,0,0,64,0,-1--1--1,,1|(601,396)|
+10,58,Total Return on Capital,1156,404,79,28,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,59,54,58,1,0,0,0,0,64,0,-1--1--1,,1|(939,448)|
+1,60,8,58,1,0,0,0,0,64,0,-1--1--1,,1|(1180,511)|
+10,61,Return on Capital,1331,255,72,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,62,Expected Money Inflation,1605,251,79,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,63,Expected Money Inflation,1033,40,79,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,64,63,5,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+12,65,0,2100,-53,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Capital_Returns_Real
+12,66,0,2123,486,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Capital_Returns
+12,67,0,2081,1034,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Capital_Book_Vs_Nom
+10,68,Fraction of Income Devoted to Wages,225,334,79,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,69,49,68,1,0,0,0,0,64,0,-1--1--1,,1|(368,383)|
+1,70,56,68,1,0,0,0,0,64,0,-1--1--1,,1|(356,430)|
+12,71,0,1270,-272,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Income_Wage_Fraction
+10,72,Real Book Value of Capital Assets,1333,1615,83,59,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,73,48,1724,1612,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,74,76,72,4,0,0,22,0,0,0,-1--1--1,,1|(1476,1608)|
+1,75,76,73,100,0,0,22,0,0,0,-1--1--1,,1|(1647,1608)|
+11,76,48,1559,1608,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,77,Real Financial Investment,1559,1668,64,30,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+12,78,48,959,1561,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,79,81,78,4,0,0,22,0,0,0,-1--1--1,,1|(1006,1562)|
+1,80,81,72,100,0,0,22,0,0,0,-1--1--1,,1|(1168,1562)|
+11,81,48,1065,1562,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,82,Real Capital Depreciation,1065,1626,62,22,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,83,84,72,100,0,0,22,0,0,0,-1--1--1,,1|(1310,1708)|
+11,84,1212,1310,1764,30,22,33,3,0,0,2,0,0,0,0,0,0,0,0,0
+10,85,Real Book Losses,1226,1764,54,23,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,86,72,82,1,0,0,0,0,64,0,-1--1--1,,1|(1191,1649)|
+1,87,72,85,1,0,0,0,0,64,0,-1--1--1,,1|(1225,1699)|
+10,88,Asset Price,1393,1696,59,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,89,88,72,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+10,90,Initial Assets,1402,1724,65,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,91,90,72,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+10,92,Asset Price Inflation,1850,1669,54,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,93,92,77,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,94,Gov Investment,1666,1799,75,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,95,94,77,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,96,Private Investment,1520,1830,86,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,97,96,77,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,98,Time to Acquire Capital Assets,1934,1776,74,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,99,98,77,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,100,Ave Life of Cap,909,1710,77,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,101,100,82,1,0,0,0,0,64,0,-1--1--1,,1|(991,1684)|
+10,102,Duration of Losses,1177,1924,88,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,103,102,85,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,104,Loss Rate,1046,1883,83,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,105,104,85,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,106,Time to Start Loss,1044,1779,86,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,107,106,85,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,108,Real Asset Income,909,1378,76,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,109,Real Return on Capital,1452,1187,62,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,110,Real Total Return on Capital,1273,1434,74,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,111,Asset Price Inflation,652,1426,54,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,112,111,108,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,113,108,110,1,0,0,0,0,64,0,-1--1--1,,1|(1082,1450)|
+1,114,72,110,1,0,0,0,0,64,0,-1--1--1,,1|(1316,1507)|
+12,115,0,562,-378,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Capital_Returns_vs_Real_returns
+12,116,0,270,755,321,239,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Capital_Book_vs_Real_Book
+10,117,Depreciation Fraction,1645,1318,60,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,118,Asset Income,788,1503,66,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,119,118,108,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,120,Expected Fraction of Income Devoted to Wages,-240,170,60,40,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,121,48,108,178,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,122,124,120,4,0,0,22,0,0,0,-1--1--1,,1|(-121,178)|
+1,123,124,121,100,0,0,22,0,0,0,-1--1--1,,1|(39,178)|
+11,124,48,-41,178,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,125,Adjust of Fract of Income Devoted to Wages,-41,241,79,33,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,126,Time to Adjust Wage Income Expectations,-234,396,89,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,127,126,125,1,0,0,0,0,64,0,-1--1--1,,1|(-118,344)|
+1,128,68,125,1,0,0,0,0,64,0,-1--1--1,,1|(126,268)|
+1,129,51,120,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+1,130,120,125,1,0,0,0,0,64,0,-1--1--1,,1|(-194,237)|
+10,131,Asset Earnings,1424,369,72,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,132,131,61,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,133,8,61,1,0,0,0,0,64,0,-1--1--1,,1|(1285,456)|
+10,134,Real Earnings,1171,1304,58,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,135,108,134,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,136,81,134,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,137,134,109,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,138,72,109,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,139,Real Asset Taxes,904,1286,71,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,140,108,139,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,141,139,134,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,142,Tax Rate,713,1300,49,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,143,142,139,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,144,Risk Free Rate,1207,335,72,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,145,Expected Money Inflation,1536,333,79,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,146,Real Return on Capital Percent,1557,1031,65,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,147,Percent,1611,1162,43,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,148,147,146,1,0,0,0,0,64,0,-1--1--1,,1|(1568,1114)|
+1,149,109,146,1,0,0,0,0,64,0,-1--1--1,,1|(1515,1118)|
+10,150,Percent,782,1339,43,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,151,150,139,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,152,Initial $,1346,1860,44,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,153,152,72,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+10,154,Percent,1111,946,43,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,155,154,23,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,156,Percent,1262,1857,43,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,157,156,85,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,158,Asset Income Ratiox,479,222,84,12,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,159,49,158,1,0,0,0,0,64,0,-1--1--1,,1|(506,305)|
+1,160,54,158,1,0,0,0,0,64,0,-1--1--1,,1|(608,310)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Production Growth
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,75,0
+10,1,Perceived Production,1373,588,60,40,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,2,48,1816,588,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,5,1,4,0,0,22,0,0,0,-1--1--1,,1|(1513,590)|
+1,4,5,2,100,0,0,22,0,0,0,-1--1--1,,1|(1721,590)|
+11,5,48,1615,590,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,6,Production Perception,1615,650,54,22,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,Time to Perceive Production,1859,674,72,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,8,7,6,1,0,0,0,0,64,0,-1--1--1,,1|(1778,704)|
+1,9,1,6,1,0,0,0,0,64,0,-1--1--1,,1|(1444,648)|
+10,10,Reference Production for Trend,993,193,60,40,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,11,48,1427,195,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,12,14,10,4,0,0,22,0,0,0,-1--1--1,,1|(1133,195)|
+1,13,14,11,100,0,0,22,0,0,0,-1--1--1,,1|(1337,195)|
+11,14,48,1235,195,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,15,Adjustment of Production Expectations,1235,263,110,38,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,16,Time Horizon to Assess Production Changes,1259,417,78,39,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,17,16,15,1,0,0,0,0,64,0,-1--1--1,,1|(1198,312)|
+1,18,10,15,1,0,0,0,0,64,0,-1--1--1,,1|(1064,253)|
+1,19,1,15,1,0,0,0,0,64,0,-1--1--1,,1|(1381,400)|
+10,20,Expected Production Trend,118,350,60,40,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,21,48,552,352,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,22,24,20,4,0,0,22,0,0,0,-1--1--1,,1|(259,356)|
+1,23,24,21,100,0,0,22,0,0,0,-1--1--1,,1|(463,356)|
+11,24,48,363,356,22,30,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,25,Perception of Production Trend,363,421,67,35,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,26,Time to Perceive Production Trend,505,568,72,22,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,27,26,25,1,0,0,0,0,64,0,-1--1--1,,1|(443,532)|
+1,28,20,25,1,0,0,0,0,64,0,-1--1--1,,1|(173,434)|
+10,29,Production Trend,861,413,71,31,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,30,1,29,1,0,0,0,0,64,0,-1--1--1,,1|(1139,459)|
+1,31,10,29,1,0,0,0,0,64,0,-1--1--1,,1|(881,275)|
+1,32,16,29,1,0,0,0,0,64,0,-1--1--1,,1|(1053,333)|
+1,33,29,25,1,0,0,0,0,64,0,-1--1--1,,1|(613,453)|
+10,34,Production,1688,823,56,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,35,34,6,1,0,0,0,0,64,0,-1--1--1,,1|(1670,745)|
+1,36,34,1,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+1,37,34,10,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+12,38,0,395,856,321,239,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+Expected Production Trend,Graph
+///---\\\
+:GRAPH Capital_Assets
+:TITLE Capital Assets
+:SCALE
+:VAR Capital Assets
+:Y-MIN 0
+:Y-MAX 3e+06
+:DATASET 
+:VAR Capital Assets
+:DATASET *2
+:VAR Capital Assets
+:DATASET *3
+
+:GRAPH Capital_Assets_Per_Capita
+:TITLE Per Capita Capital Assets
+:SCALE
+:VAR Capital Assets per Capita
+:DATASET 
+:VAR Capital Assets per Capita
+:DATASET *2
+:VAR Capital Assets per Capita
+:DATASET *3
+
+:GRAPH Capital_Book_Vs_Nom
+:TITLE Book Vs Nom Wealth
+:SCALE
+:VAR Nominal Wealth
+:DATASET 
+:VAR Book Value of Capital Assets
+:DATASET 
+:VAR Real Book Value of Capital Assets
+:DATASET 
+
+:GRAPH Capital_Book_vs_Real_Book
+:TITLE Real vs Book Value
+:SCALE
+:VAR Book Value of Capital Assets
+:DATASET 
+:VAR Real Book Value of Capital Assets
+:DATASET 
+
+:GRAPH Capital_Returns
+:TITLE Return on Capital
+:SCALE
+:VAR Return on Capital
+:Y-MIN 0
+:Y-MAX 0.2
+:DATASET 
+:VAR Return on Capital
+:DATASET *2
+:VAR Return on Capital
+:DATASET *3
+
+:GRAPH Capital_Returns_Real
+:TITLE Real Return on Capital
+:SCALE
+:VAR Real Return on Capital
+:Y-MIN 0
+:Y-MAX 0.2
+:DATASET 
+:VAR Real Return on Capital
+:DATASET *2
+:VAR Real Return on Capital
+:DATASET *3
+
+:GRAPH Capital_Returns_vs_Real_returns
+:TITLE Capital Returns: Nominal vs Real
+:SCALE
+:VAR Return on Capital
+:DATASET 
+:VAR Real Return on Capital
+:DATASET 
+
+:GRAPH Capital_Returns_vs_Perc_Ret
+:TITLE Expected vs perceived Return
+:SCALE
+:VAR Expected Return on Capital
+:DATASET 
+:VAR Perceived Return on Capital
+:DATASET 
+
+:GRAPH Demand_Supply
+:TITLE Demand Supply
+:SCALE
+:VAR Demand Supply Ratio
+:Y-MIN 0.8
+:Y-MAX 1.2
+:DATASET 
+:VAR Demand Supply Ratio
+:DATASET *2
+
+:GRAPH Employed_Labor
+:TITLE Employed Labor
+:SCALE
+:VAR Employed Labor
+:Y-MIN 0
+:Y-MAX 2e+06
+:DATASET 
+:VAR Employed Labor
+:DATASET *2
+:VAR Employed Labor
+:DATASET *3
+
+:GRAPH Government
+:TITLE Government
+:SCALE
+:VAR Gov Spending
+:DATASET 
+:VAR Taxes
+:DATASET 
+:VAR Gov Borrowing
+:DATASET 
+
+:GRAPH Government_Borrowing
+:TITLE Government Borrowing
+:SCALE
+:VAR Gov Borrowing
+:DATASET 
+:VAR Gov Borrowing
+:DATASET *2
+:VAR Gov Borrowing
+:DATASET *3
+
+:GRAPH Gov_Budget
+:TITLE Goverment Budget
+:SCALE
+:VAR Gov Budget
+:Y-MIN 0
+:Y-MAX 8e+09
+:DATASET 
+:VAR Gov Budget
+:DATASET *2
+:VAR Gov Budget
+:DATASET *3
+
+:GRAPH Gov_Deficit
+:TITLE Government Deficit
+:SCALE
+:VAR Gov Deficit
+:Y-MIN -2e+09
+:Y-MAX 6e+09
+:DATASET 
+:VAR Gov Deficit
+:DATASET *2
+:VAR Gov Deficit
+:DATASET *3
+
+:GRAPH Government_Spending
+:TITLE Government Spending
+:SCALE
+:VAR Gov Spending
+:Y-MIN 0
+:DATASET 
+:VAR Gov Spending
+:DATASET *2
+:VAR Gov Spending
+:DATASET *3
+
+:GRAPH Income
+:TITLE Income
+:SCALE
+:VAR Income
+:Y-MIN 0
+:Y-MAX 2e+10
+:DATASET 
+:VAR Income
+:DATASET *2
+:VAR Income
+:DATASET *3
+
+:GRAPH Income_per_Capita
+:TITLE Per Capita Income
+:SCALE
+:VAR Income per Capita
+:Y-MIN 4000
+:Y-MAX 8000
+:DATASET 
+:VAR Income per Capita
+:DATASET *2
+:VAR Income per Capita
+:DATASET *3
+
+:GRAPH Income_Distrib
+:TITLE Income
+:SCALE
+:VAR Income
+:Y-MIN 0
+:Y-MAX 2e+10
+:DATASET 
+:VAR Private Investment
+:DATASET 
+:VAR Consumption
+:DATASET 
+
+:GRAPH Income_Ratio
+:TITLE Income Ratio
+:SCALE
+:VAR Income
+:DATASET 
+:VAR Indicated Income
+:DATASET 
+
+:GRAPH Income_Asset_Ratio
+:TITLE Asset Income Ratio
+:SCALE
+:VAR Asset Income Ratio
+:DATASET 
+:VAR Asset Income Ratio
+:DATASET *2
+:VAR Asset Income Ratio
+:DATASET *3
+
+:GRAPH Income_Asset_Ratio_Perc
+:TITLE Income Asset Ratio
+:SCALE
+:VAR Perceived Change in Asset Income Ratio
+:Y-MIN -0.2
+:Y-MAX 0.2
+:DATASET 
+:VAR Perceived Change in Asset Income Ratio
+:DATASET *2
+:VAR Perceived Change in Asset Income Ratio
+:DATASET *3
+
+:GRAPH Income_Wage_Fraction
+:TITLE Fraction of Income Allocated to Wages
+:SCALE
+:VAR Fraction of Income Devoted to Wages
+:Y-MIN 0.6
+:Y-MAX 1
+:DATASET 
+:VAR Fraction of Income Devoted to Wages
+:DATASET *2
+:VAR Fraction of Income Devoted to Wages
+:DATASET *3
+
+:GRAPH Income_Wages_Ratio
+:TITLE Wage Income Ratio
+:SCALE
+:VAR Wages Income Ratio
+:Y-MIN 0.65
+:Y-MAX 0.85
+:DATASET 
+:VAR Wages Income Ratio
+:DATASET *2
+:VAR Wages Income Ratio
+:DATASET *3
+
+:GRAPH Investment
+:TITLE Investment
+:SCALE
+:VAR Investment
+:DATASET 
+:VAR Private Investment
+:DATASET 
+:VAR Gov Investment
+:DATASET 
+
+:GRAPH Investment_Private
+:TITLE Private Investment
+:SCALE
+:VAR Private Investment
+:Y-MIN 0
+:DATASET 
+:VAR Private Investment
+:DATASET *2
+:VAR Private Investment
+:DATASET *3
+
+:GRAPH Labor
+:TITLE Labor
+:SCALE
+:VAR Employed Labor
+:DATASET 
+:VAR Unemployed Labor
+:DATASET 
+:VAR Working Population
+:DATASET 
+
+:GRAPH Money_Inflation
+:TITLE Money Inflation
+:SCALE
+:VAR Perceived Money Inflation
+:Y-MIN -0.05
+:Y-MAX 0.05
+:DATASET 
+:VAR Perceived Money Inflation
+:DATASET *2
+:VAR Perceived Money Inflation
+:DATASET *3
+
+:GRAPH Money_Ratio
+:TITLE Money Ratio
+:SCALE
+:VAR Money Ratio
+:Y-MIN 0.5
+:Y-MAX 1.5
+:DATASET 
+:VAR Money Ratio
+:DATASET *2
+:VAR Money Ratio
+:DATASET *3
+
+:GRAPH Net_Investment
+:TITLE Net Investment
+:SCALE
+:VAR Net Investment
+:Y-MIN -2e+08
+:Y-MAX 1e+09
+:DATASET 
+:VAR Net Investment
+:DATASET *2
+:VAR Net Investment
+:DATASET *3
+
+:GRAPH Net_Investment_C
+:TITLE Net Investment, Capital Units
+:SCALE
+:VAR Net Investment in Capital Units
+:Y-MIN -50000
+:Y-MAX 250000
+:DATASET 
+:VAR Net Investment in Capital Units
+:DATASET *2
+:VAR Net Investment in Capital Units
+:DATASET *3
+
+:GRAPH Price
+:TITLE Price
+:SCALE
+:VAR Price
+:Y-MIN 50
+:Y-MAX 150
+:DATASET 
+:VAR Price
+:DATASET *2
+:VAR Price
+:DATASET *3
+
+:GRAPH Price_Effect_of_Money_Inflatio
+:TITLE Effect of Money Inflation on Price
+:SCALE
+:VAR Effect of Money Inflation on Price
+:Y-MIN 0.95
+:Y-MAX 1.05
+:DATASET 
+:VAR Effect of Money Inflation on Price
+:DATASET *2
+:VAR Effect of Money Inflation on Price
+:DATASET *3
+
+:GRAPH Price_Effect_of_Wages_Income_Ratio
+:TITLE Effect of Wages Income Ratio on Price
+:SCALE
+:VAR Effect of Wage Income Ratio on Price
+:Y-MIN 0.95
+:Y-MAX 1.05
+:DATASET 
+:VAR Effect of Wage Income Ratio on Price
+:DATASET *2
+:VAR Effect of Wage Income Ratio on Price
+:DATASET *3
+
+:GRAPH Price_Asset
+:TITLE Asset Price
+:SCALE
+:VAR Asset Price
+:Y-MIN 5000
+:Y-MAX 15000
+:DATASET 
+:VAR Asset Price
+:DATASET *2
+:VAR Asset Price
+:DATASET *3
+
+:GRAPH Price_Asset_Effect_Asset_Income
+:TITLE Effect Asset Income Ratio on Asset Price
+:SCALE
+:VAR Effect of Asset Income Ratio on Asset Price
+:Y-MIN 0.95
+:Y-MAX 1.05
+:DATASET 
+:VAR Effect of Asset Income Ratio on Asset Price
+:DATASET *2
+:VAR Effect of Asset Income Ratio on Asset Price
+:DATASET *3
+
+:GRAPH Production
+:TITLE Production
+:WIP
+:SCALE
+:VAR Production
+:Y-MIN 0
+:Y-MAX 3e+08
+:DATASET 
+:VAR Production
+:DATASET *2
+:VAR Production
+:DATASET *3
+
+:GRAPH Production_Per_Capita
+:TITLE Per Capita Production
+:SCALE
+:VAR Production per Capita
+:Y-MIN 40
+:Y-MAX 100
+:DATASET 
+:VAR Production per Capita
+:DATASET *2
+:VAR Production per Capita
+:DATASET *3
+
+:GRAPH Savings_Fraction
+:TITLE Fraction of Income Saved
+:SCALE
+:VAR Savings Fraction
+:Y-MIN 0.1
+:Y-MAX 0.3
+:DATASET 
+:VAR Savings Fraction
+:DATASET *2
+:VAR Savings Fraction
+:DATASET *3
+
+:GRAPH Savings_Fraction_Effective
+:TITLE Effective Fraction of Income Saved
+:SCALE
+:VAR Effective Savings Rate
+:Y-MIN 0.05
+:Y-MAX 0.25
+:DATASET 
+:VAR Effective Savings Rate
+:DATASET *2
+:VAR Effective Savings Rate
+:DATASET *3
+
+:GRAPH Savings_Fraction_Vs_Norm
+:TITLE Savings Fraction
+:SCALE
+:VAR Savings Fraction
+:Y-MIN 0.1
+:Y-MAX 0.3
+:DATASET 
+:VAR Normal Savings Fraction
+:DATASET 
+
+:GRAPH Savings_Effect_of_Wealth
+:TITLE Effect of Wealth on Savings
+:SCALE
+:VAR Effect of Wealth on Savings
+:Y-MIN 0.9
+:Y-MAX 1.1
+:DATASET 
+:VAR Effect of Wealth on Savings
+:DATASET *2
+:VAR Effect of Wealth on Savings
+:DATASET *3
+
+:GRAPH Savings_Effect_of_Returns
+:TITLE Effect of Returns on Savings
+:SCALE
+:VAR Effect of Returns on Savings
+:Y-MIN 0.9
+:Y-MAX 1.1
+:DATASET 
+:VAR Effect of Returns on Savings
+:DATASET *2
+:VAR Effect of Returns on Savings
+:DATASET *3
+
+:GRAPH Technology
+:TITLE Technology Productivity
+:SCALE
+:VAR Technology
+:Y-MIN 1e+08
+:Y-MAX 1.4e+08
+:DATASET 
+:VAR Technology
+:DATASET *2
+:VAR Technology
+:DATASET *3
+
+:GRAPH Unemployment_Rate
+:TITLE Unemployment Rate
+:SCALE
+:VAR Unemployment Rate
+:Y-MIN 0
+:DATASET 
+:VAR Unemployment Rate
+:DATASET *2
+:VAR Unemployment Rate
+:DATASET *3
+
+:GRAPH Wages
+:TITLE Wages
+:SCALE
+:VAR wages
+:Y-MIN 5000
+:Y-MAX 15000
+:DATASET 
+:VAR Wages
+:DATASET *2
+:VAR Wages
+:DATASET *3
+
+:GRAPH wages_real
+:TITLE Real Wages
+:SCALE
+:VAR Real Wages
+:Y-MIN 5000
+:Y-MAX 15000
+:DATASET 
+:VAR Real Wages
+:DATASET *2
+:VAR Real Wages
+:DATASET *3
+
+:GRAPH wages_vs_real_wages
+:TITLE Real Wages
+:SCALE
+:VAR Wages
+:DATASET 
+:VAR Real Wages
+:DATASET 
+
+:GRAPH Wages_vs_Indicated
+:TITLE Wages
+:SCALE
+:VAR wages
+:DATASET 
+:VAR Indicated Wages
+:DATASET 
+
+:GRAPH Wage_Inc_vs_Perc
+:TITLE Wage Income
+:SCALE
+:VAR Wage Income
+:DATASET 
+:VAR Perceived Income
+:DATASET 
+
+:GRAPH Wages_Inc_Ratio_Per_Chg
+:TITLE Perceived Chg in Wages Income Ratio
+:SCALE
+:VAR Perceived Change in Wages Income Ratio
+:Y-MIN -0.1
+:Y-MAX 0.1
+:DATASET 
+:VAR Perceived Change in Wages Income Ratio
+:DATASET *2
+:VAR Perceived Change in Wages Income Ratio
+:DATASET *3
+
+:GRAPH Wealth
+:TITLE Wealth
+:SCALE
+:VAR Nominal Wealth
+:Y-MIN 0
+:Y-MAX 4e+10
+:DATASET 
+:VAR Nominal Wealth
+:DATASET *2
+:VAR Nominal Wealth
+:DATASET *3
+
+:GRAPH Wealth_Per_Capita
+:TITLE Per Capita Wealth
+:SCALE
+:VAR Per Capital Nom Wealth
+:Y-MIN 2000
+:Y-MAX 14000
+:DATASET 
+:VAR Per Capital Nom Wealth
+:DATASET *2
+:VAR Per Capital Nom Wealth
+:DATASET *3
+
+:GRAPH Wealth_Real
+:TITLE Real Wealth
+:SCALE
+:VAR Real Wealth
+:Y-MIN 0
+:Y-MAX 4e+10
+:DATASET 
+:VAR Real Wealth
+:DATASET *2
+:VAR Real Wealth
+:DATASET *3
+
+:GRAPH Wealth_Real_Per_Capita
+:TITLE Real Per Capita Wealth
+:SCALE
+:VAR Real Per Capita Wealth
+:Y-MIN 2000
+:Y-MAX 14000
+:DATASET 
+:VAR Real Per Capita Wealth
+:DATASET *2
+:VAR Real Per Capita Wealth
+:DATASET *3
+
+:GRAPH Wealth_vs_Real_Wealth
+:TITLE Real vs Nominal Wealth
+:SCALE
+:VAR Nominal Wealth
+:DATASET 
+:VAR Real Wealth
+:DATASET 
+
+:GRAPH Wealth_per_capita_vs_real
+:TITLE Real Vs Per Capita Wealth
+:SCALE
+:VAR Real Per Capita Wealth
+:Y-MIN 0
+:Y-MAX 15000
+:DATASET 
+:VAR Per Capital Nom Wealth
+:DATASET 
+
+:GRAPH Wealth_Perc_Chg
+:TITLE Perceived Chg Wealth
+:SCALE
+:VAR Perceived Changes in Wealth
+:Y-MIN -0.1
+:Y-MAX 0.1
+:DATASET 
+:VAR Perceived Changes in Wealth
+:DATASET *2
+:L<%^E!@
+4:Time
+5:Vacancies
+9:Forio Test 2
+19:75,0
+24:0
+25:20
+26:20
+22:$,Dollar,Dollars
+22:Capital Unit,Capital Units
+22:Day,Days
+22:Fraction,Dimensionless
+22:Good,Goods
+22:Hour,Hours
+22:Month,Months
+22:Person,People,Persons
+22:Starting $
+22:Unit,Units
+22:Week,Weeks
+22:Year,Years
+23:0
+15:0,0,0,0,0,0
+27:2,
+34:0,
+42:0
+72:0
+73:0
+95:0
+96:0
+97:0
+77:0
+78:0
+102:1
+93:0
+94:0
+92:0
+91:0
+90:0
+87:0
+75:
+43:
+103:8,8,8,3,8
+105:0,0,0,0,0,0,0,0,0,0
+104:Courier|12||0-0-0|0-0-0|-1--1--1|0-0-255|192-192-192|-1--1--1

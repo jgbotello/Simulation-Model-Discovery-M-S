@@ -1,0 +1,2830 @@
+{UTF-8}
+Basiswerkinhoud Dossiers=
+	0.5
+	~	Weken/Dossier
+	~	De gemiddelde hoeveelheid werk die gedaan moet worden om een dossier te \
+		verwerken.
+	|
+
+Intake door Ervaren Medewerkers=
+	Intake*(1-Perc van Intakecap door Nieuwe Medewerkers)
+	~	Dossiers/Jaar
+	~	Het aantal Meldingen dat per jaar door Ervaren Medewerkers wordt verwerkt \
+		(Intake).
+	|
+
+Intake door Nieuwe Medewerkers=
+	Intake*Perc van Intakecap door Nieuwe Medewerkers
+	~	Dossiers/Jaar
+	~	Het aantal Meldingen dat per jaar door Nieuwe Medewerkers wordt verwerkt \
+		(Intake).
+	|
+
+Werkjaren gewerkt aan Intake Ervaren Medewerkers=
+	Intake door Ervaren Medewerkers*(Gemiddelde Werkinhoud Intake/Omrekenfactor van Week naar Werkjaar\
+		)
+	~	Medewerker*Werkjaar/Jaar
+	~	Het gemiddeld aantal werkjaren dat aan Intake gewerkt is door Ervaren \
+		Medewerkers per jaar.
+	|
+
+Grens voor Uitbesteding=
+	1000
+	~	Weken
+	~	Als de doorlooptijd langer wordt dan deze grens, dan gaat er uitbesteed \
+		worden.
+	|
+
+Werkjaren gewerkt aan Intake Nieuwe Medewerkers=
+	Intake door Nieuwe Medewerkers*(Gemiddelde Werkinhoud Intake/Omrekenfactor van Week naar Werkjaar\
+		)
+	~	Medewerker*Werkjaar/Jaar
+	~	Het gemiddeld aantal werkjaren dat aan Intake gewerkt is door Nieuwe \
+		Medewerkers per jaar.
+	|
+
+Gemiddelde Werkinhoud Intake=
+	0.1
+	~	Weken/Dossier
+	~	Het aantal weken dat gemiddeld gewerkt moet worden aan een Intake.
+	|
+
+Aantal Nieuwe Medewerkers per Ervaren Medewerkers=
+	Nieuwe Medewerkers/Ervaren Medewerkers
+	~	Dmnl
+	~	Een verhoudingsgetal dat aangeeft hoeveel nieuwe medewerkers ingewerkt \
+		moeten worden door één ervaren medewerker.
+	|
+
+Tabel voor Effect Coaching op Leersnelheid Nieuwe Medewerkers(
+	[(0,0)-(10,1)],(0,0),(0.1,0.29386),(0.733945,0.258772),(1.43731,0.197368),(2.23242,0.118421\
+		),(3.5474,0.0701754),(4.89297,0.0526316),(5.01529,0.0526316),(6.6055,0.0350877),(9.96942\
+		,0.00438596))
+	~	Dmnl
+	~	Een tabel/grafiek die aangeeft dat hoe minder Nieuwe Medewerkers ingewerkt \
+		moeten worden door één Ervaren Medewerker, hoe hoger de snelheid van \
+		leren van deze Nieuwe Medewerkers zal zijn.\!\!\!
+	|
+
+Normale Snelheid van Leren Nieuwe Medewerkers=
+	100*(1+0.5*Opleidingen en Zittingen Nieuwe Medewerkers+Tabel voor Effect Coaching op Leersnelheid Nieuwe Medewerkers\
+		(Aantal Nieuwe Medewerkers per Ervaren Medewerkers))
+	~	Dmnl
+	~	De normale snelheid waarmee medewerkers leren heeft een constante waarde \
+		van 100 en kan worden verhoogd als zij opleidingen volgen en als zij door \
+		veel ervaren medewerkers ingewerkt/gecoacht kunnen worden.
+	|
+
+Toename Expertise door Doorstroom=
+	Doorstroom Medewerkers*Gemiddelde Expertise Nieuwe Medewerkers*1.5
+	~	Medewerker*Werkjaar/Jaar
+	~	De expertise van ervaren medewerkers neemt toe doordat nieuwe medewerkers \
+		doorstromen en ervaren worden en hun expertise meenemen.
+	|
+
+Verlies van Expertise door Doorstroom=
+	Doorstroom Medewerkers*Gemiddelde Expertise Nieuwe Medewerkers*1.5
+	~	Medewerker*Werkjaar/Jaar
+	~	De totale expertise van nieuwe medewerkers vermindert doordat nieuwe \
+		medewerkers doorstromen en ervaren worden en hun expertise meenemen.
+	|
+
+Tabel voor Effect Coaching op Leersnelheid Ervaren Medewerkers(
+	[(0,0)-(10,1)],(0,1),(10,0.8))
+	~	Dmnl
+	~	Een tabel/grafiek die aangeeft dat hoe meer Nieuwe Medewerkers ingewerkt \
+		moeten worden door één Ervaren Medewerker, hoe lager de snelheid van \
+		leren van deze Ervaren Medewerker zal zijn.\!\!
+	|
+
+Output per Medewerker=
+	Afleggen/Totaal Actueel Aantal Medewerkers
+	~	Dossiers/(Jaar*Medewerker)
+	~	De output die per medewerker gerealiseerd wordt.
+	|
+
+Referentie Expertise van Klant=
+	3
+	~	Werkjaar
+	~	De klant gaat er van uit dat medewerkers gemiddeld drie jaar ervaring \
+		hebben.
+	|
+
+Gewicht van Opleidingen op Tevredenheid=
+	3.33
+	~	Dmnl
+	~	Belang van de opleidingen van medewerkers in het bepalen van de \
+		Medewerkertevredenheid.
+	|
+
+Tabel voor Effect van Opleidingen op Tevredenheid(
+	[(0,0)-(1,1)],(0,0),(0.11315,0.557018),(0.195719,0.758772),(0.259939,0.877193),(0.333333\
+		,0.938596),(0.41896,0.97807),(0.5,1.00439))
+	~	Dmnl
+	~	Een tabel/grafiek waarin de relatie tussen opleidingen (horizontale as) en \
+		tevredenheid (verticale as) wordt weergegeven.\!\!
+	|
+
+********************************************************
+	.Mdl
+********************************************************~
+		Business Balanced Scorecard Strategie Validatie-Model voor Stichting \
+		Rechtsbijstand Interpolis. Minase, december 2001
+	|
+
+Totale Capaciteit Nieuwe Medewerkers=
+	Productiviteit Nieuwe Medewerkers*Nieuwe Medewerkers*((Basiswerkinhoud Dossiers)/Omrekenfactor van Week naar FTE\
+		)
+	~	FTE/Jaar
+	~	Totale Capaciteit van Nieuwe Medewerkers uitgedrukt in FTE's per jaar.
+	|
+
+Totale capaciteit Ervaren Medewerkers=
+	Productiviteit Ervaren Medewerkers*Ervaren Medewerkers*((Basiswerkinhoud Dossiers)/Omrekenfactor van Week naar FTE
+	)
+	~	FTE/Jaar
+	~	Totale Capaciteit van Ervaren Medewerkers uitgedrukt in FTE's per jaar.
+	|
+
+Dossiers Uitbesteden=
+	MAX(0, (Dossiers In Behandeling*Aantal weken per jaar/Grens voor Uitbesteding)-Afleggen\
+		)
+	~	Dossiers/Jaar
+	~	Het aantal Dossiers dat per jaar in weggewerkt wordt.
+	|
+
+Actuele Doorlooptijd Afhandeling=
+	(Dossiers In Behandeling/(Afleggen+Dossiers Uitbesteden))*Aantal weken per jaar
+	~	Weken
+	~	De actuele verblijftijd van dossiers in behandeling, gemiddeld gezien.
+	|
+
+Toename Expertise door Dossierervaring=
+	Werkjaren gewerkt aan dossiers Nieuwe Medewerkers+Werkjaren gewerkt aan Intake Nieuwe Medewerkers
+	~	Werkjaar*Medewerker/Jaar
+	~	Expertise groeit na inhuur vooral door ervaring in het afhandelen van \
+		dossiers.
+	|
+
+Toename Expertise door Dossierervaring Ervaren Medewerkers=
+	Werkjaren gewerkt aan dossiers Ervaren Medewerkers+Werkjaren gewerkt aan Intake Ervaren Medewerkers
+	~	Medewerker*Werkjaar/Jaar
+	~	Expertise groeit na inhuur vooral door ervaring in het afhandelen van \
+		dossiers.
+	|
+
+Perc Uitbesteding=
+	Dossiers Uitbesteden/Dossiers In Behandeling
+	~	1/Jaar
+	~	Het percentage van de Dossiers in Behandeling dat per jaar uitbesteed \
+		wordt.
+	|
+
+Beschikbare Capaciteit voor Intake in Dossiers=
+	Beschikbare Capaciteit voor Intake in Tijdseenheden/(Gemiddelde Werkinhoud Intake/Omrekenfactor van Week naar FTE\
+		)
+	~	Dossiers/Jaar
+	~	Aantal Dossiers in Intake die Nieuwe en Ervaren Medewerkers per jaar \
+		kunnen verwerken op basis van hun Beschikbare Capaciteit.
+	|
+
+Werkpakket Intake=
+	Meldingen*Gemiddelde Werkinhoud Intake
+	~	Weken
+	~	De gemiddelde hoeveelheid werk (in weken) die verzet moet worden om de \
+		voorraad Meldingen te verwerken.
+	|
+
+Totale Expertise Nieuwe Medewerkers= INTEG (
+	Toename Expertise door Inhuur - 
+	Verlies van Expertise Nieuwe Medewerkers door Verloop + Toename Expertise door Dossierervaring\
+		 - Verouderingssnelheid Expertise Nieuwe Medewerkers-Verlies van Expertise door Doorstroom\
+		,
+		Initiële Totale Expertise Nieuwe Medewerkers)
+	~	Medewerker*Werkjaar
+	~	De totale expertise in aantal menswerkjaren voor de gehele populatie \
+		nieuwe medewerkers
+	|
+
+"Referentie-Expertise Ervaren medewerkers"=
+	Initiële Totale Expertise Ervaren Medewerkers/Initiële Aantal Ervaren Medewerkers
+	~	Werkjaar
+	~	Het referentieniveau van Expertise dat past bij de \
+		Referentieproductiviteit.
+	|
+
+Normale Snelheid van Leren Ervaren Medewerkers=
+	100*(1-(1-Tabel voor Effect Coaching op Leersnelheid Ervaren Medewerkers(Aantal Nieuwe Medewerkers per Ervaren Medewerkers
+	))+0.5*(Opleidingen en Zittingen Ervaren Medewerkers))
+	~	Dmnl
+	~	De normale snelheid waarmee medewerkers leren heeft een constante waarde \
+		van 100 en kan worden verhoogd als zij opleidingen volgen en kan worden \
+		verlaagd als zij heel veel nieuwe medewerkers moeten inwerken/coachen.
+	|
+
+Verouderingssnelheid Expertise Nieuwe Medewerkers=
+	Totale Expertise Nieuwe Medewerkers*Relatieve Verouderingssnelheid Expertise Nieuwe Medewerkers
+	~	Medewerker*Werkjaar/Jaar
+	~	De hoeveelheid expertise die de populatie nieuwe medewerkers kwijtraakt \
+		per periode
+	|
+
+Sterkte Leercurve=
+	0.25-(((Normale Snelheid van Leren Nieuwe Medewerkers-Snelheid van Leren door Nieuwe Medewerkers\
+		)/Normale Snelheid van Leren Nieuwe Medewerkers
+	)*0.25)
+	~	Dimensionless
+	~	De fractionele toename in productiviteit als expertise verdubbelt.
+	|
+
+Verouderingssnelheid Expertise Ervaren Medewerkers=
+	Totale Expertise Ervaren Medewerkers*Relatieve Verouderingssnelheid Expertise Ervaren Medewerkers
+	~	Medewerker*Werkjaar/Jaar
+	~	De hoeveelheid expertise die de populatie ervaren medewerkers kwijtraakt \
+		per periode.
+	|
+
+Totale Expertise Ervaren Medewerkers= INTEG (
+	Toename Expertise door Ervaren Inhuur - 
+	Verlies van Expertise Ervaren Medewerkers door Verloop + Toename Expertise door Dossierervaring Ervaren Medewerkers\
+		 - Verouderingssnelheid Expertise Ervaren Medewerkers+Toename Expertise door Doorstroom\
+		,
+		Initiële Totale Expertise Ervaren Medewerkers)
+	~	Werkjaar*Medewerker
+	~	De totale expertise in aantal menswerkjaren voor de gehele populatie \
+		nieuwe medewerkers.
+	|
+
+Initiële Nieuwe Meldingen=
+	(Groei Dossiers*Basisaanbod Dossiers*Referentiedoorlooptijd Intake/Aantal weken per jaar\
+		)*0+Initiële Dossiers in Behandeling*1
+	~	Dossiers
+	~	Het aantal Nieuwe Meldingen op tijdstip 0 (als de simulatie begint).
+	|
+
+Pulse Inhuur=
+	Pulse Inhuur Omvang*PULSE( Pulse Inhuur Starttijd,TIME STEP)
+	~	Dmnl
+	~	Met Pulse Inhuur kan getest worden wat er met het systeem gebeurt als een \
+		bepaald aantal Medewerkers tegelijkertijd aangenomen wordt op een zeker \
+		tijdstip.
+	|
+
+Initiële Dossiers in Behandeling=
+	(Groei Dossiers*(Basisaanbod Dossiers/2)*Referentiedoorlooptijd Afhandeling/Aantal weken per jaar\
+		)
+	~	Dossiers
+	~	Het aantal Dossiers in Behandeling op tijdstip 0 (als de simulatie begint).
+	|
+
+Bijdrage Expertise in Klanttevredenheid=
+	MAX(0, Min(((Gemiddelde Expertise-Referentie Expertise van Klant)/Referentie Expertise van Klant\
+		), 1))
+	~	Dmnl
+	~	De gemiddelde expertise van medewerkers die door klanten opgemerkt wordt \
+		t.o.v. de gemiddelde expertise van ervaren medewerkers die klanten graag \
+		zouden willen hebben.
+	|
+
+Gewenst Aantal Medewerkers=
+	Totaal Actueel Aantal Medewerkers*Effect van Werkdruk op Gewenst Medewerkerniveau+(Verloop Ervaren Medewerkers\
+		+Verloop Nieuwe Medewerkers
+	)*(1-Switch voor Reactief Aannamebeleid)
+	~	Medewerkers/Jaar
+	~	Het Gewenst Aantal Medewerkers is gebaseerd op het actuele aantal \
+		medewerkers en naar boven of beneden aangepast op basis van de druk op \
+		aannamebeleid.
+	|
+
+Effect van Opleidingen op Tevredenheid=
+	Tabel voor Effect van Opleidingen op Tevredenheid((Opleidingen en Zittingen Ervaren Medewerkers\
+		+Opleidingen en Zittingen Nieuwe Medewerkers
+)/2)
+	~	Dmnl
+	~	Het gemiddelde percentage van de totale beschikbare capaciteit dat \
+		medewerkers aan opleidingen en zittingen mogen besteden.
+	|
+
+Beschikbaarheidspercentage Ervaren Medewerkers=
+	MAX(0,(Beschikbaarheidspercentage Exclusief Vakantie en Normaal Ziekteverzuim-Opleidingen en Zittingen Ervaren Medewerkers
+-Effect Werkdruk op Ziekteverzuim))
+	~	Dmnl
+	~	Het percentage dat aangeeft hoeveel netto tijd ervaren medewerkers \
+		beschikbaar zijn om aan dossiers te werken.
+	|
+
+Afleggen=
+	Min((Dossiers In Behandeling/Minimale Afhandelingstijd),Beschikbare Capaciteit voor Afhandeling in Dossiers\
+		)
+	~	Dossiers/Jaar
+	~	Het aantal Dossiers dat per jaar afgelegd wordt.
+	|
+
+Actuele Medewerker tevredenheid=
+	Gewicht van Werkdruk op Tevredenheid*Effect van Werkdruk op Tevredenheid+Gewicht van Fit Dossiers op Tevredenheid\
+		*Effect van Fit Dossiers op Tevredenheid+Gewicht van Opleidingen op Tevredenheid*Effect van Opleidingen op Tevredenheid
+	~	Dmnl
+	~	De mate van Medewerkertevredenheid die bepaald wordt door de \
+		gepercipieerde werkdruk en de fit tussen (inhoud) dossiers en interesses \
+		van medewerkers.
+	|
+
+Sterkte Leercurve Ervaren=
+	0.25-(((Normale Snelheid van Leren Ervaren Medewerkers-Snelheid van Leren door Ervaren Medewerkers\
+		)/Normale Snelheid van Leren Ervaren Medewerkers)*0.25)
+	~	Dimensionless
+	~	De fractionele toename in productiviteit als expertise verdubbelt.
+	|
+
+Initiëel deel werkpakket intake=
+	0.25
+	~	Dimensionless
+	~		|
+
+Beschikbaarheidspercentage Nieuwe Medewerkers=
+	MAX(0,(Beschikbaarheidspercentage Exclusief Vakantie en Normaal Ziekteverzuim-Effect Werkdruk op Ziekteverzuim\
+		-Opleidingen en Zittingen Nieuwe Medewerkers))
+	~	Dmnl
+	~	Het percentage dat aangeeft hoeveel netto tijd nieuwe medewerkers \
+		beschikbaar zijn om aan dossiers te werken.
+	|
+
+Beschikbaarheidspercentage Exclusief Vakantie en Normaal Ziekteverzuim=
+	0.8
+	~	Dmnl
+	~	Een gemiddeld ziekteverzuimpercentage van 5% en 40 vakantiedagen leveren \
+		190 werkdagen per jaar op. Vergeleken met maximaal 240 werkdagen is dit \
+		een beschikbaarheidspercentage van 80%.
+	|
+
+Opleidingen en Zittingen Nieuwe Medewerkers=
+	0.1
+	~	Dmnl
+	~	Het beschikbaarheidspercentage wordt verminderd doordat werknemers \
+		opleidingen volgen en zittingen bijwonen.
+	|
+
+Snelheid van Leren door Nieuwe Medewerkers=
+	90
+	~	Dmnl
+	~	De snelheid waarmee nieuwe medewerkers leren. Dit kan een andere snelheid \
+		zijn dan de normale snelheid.
+	|
+
+Opleidingen en Zittingen Ervaren Medewerkers=
+	0.1
+	~	Dmnl
+	~	Het beschikbaarheidspercentage wordt verminderd doordat werknemers \
+		opleidingen volgen en zittingen bijwonen.
+	|
+
+Snelheid van Leren door Ervaren Medewerkers=
+	120
+	~	Dmnl
+	~	De snelheid waarmee ervaren medewerkers leren. Dit kan een andere snelheid \
+		zijn dan de normale snelheid.
+	|
+
+Effect Werkdruk op Ziekteverzuim=
+	Tabel voor Effect Werkdruk op Ziekteverzuim(Gepercipieerde Werkdruk)
+	~	Dmnl
+	~	Het percentage ziekteverzuim, dat veroorzaakt wordt door de gepercipieerde \
+		werkdruk.
+	|
+
+Onderhanden Dossiers per Medewerker=
+	(Dossiers In Behandeling+Meldingen)/Totaal Actueel Aantal Medewerkers
+	~	Dossiers/Medewerker
+	~	Het gemiddelde aantal dossiers (zowel Meldingen als Dossiers in \
+		Behandeling) dat elke medewerker onderhanden heeft.
+	|
+
+Tabel voor Effect Werkdruk op Ziekteverzuim(
+	[(0,0)-(10,0.15)],(0,0.05),(0.5,0.01),(1,0),(1.5,0.01),(2,0.05),(3.11927,0.0855263),\
+		(5.29052,0.126096),(10,0.148026))
+	~	Dmnl
+	~	Een tabel/grafiek die de relatie tussen gepercipieerde werkdruk \
+		(horizontale as) en ziekteverzuim (verticale as) weergeeft.\!\!\!
+	|
+
+"Onderhanden Dossiers (exclusief Meldingen) per Medewerker"=
+	Dossiers In Behandeling/Totaal Actueel Aantal Medewerkers
+	~	Dossiers/Medewerker
+	~	Het gemiddelde aantal dossiers (alleen Dossiers in Behandeling) dat elke \
+		medewerker onderhanden heeft.
+	|
+
+dimensie variabele=
+	1
+	~	Jaar
+	~	Variabele die nodig is om de units van het model kloppend te maken
+	|
+
+Aanpassingstijd Klanttevredenheid=
+	0.25
+	~	Jaar
+	~	Aanpassingstijd die klanten nodig hebben om een verandering in hun \
+		tevredenheid op te merken of daadwerkelijk te voelen.
+	|
+
+Actuele Klanttevredenheid=
+	Gewicht Exogene Variabele*Bijdrage Exogene Variabele in Klanttevredenheid+Gewicht Doorlooptijd\
+		*Bijdrage Doorlooptijd in Klanttevredenheid+Gewicht Expertise*Bijdrage Expertise in Klanttevredenheid
+	~	Dmnl
+	~	De mate van Klanttevredenheid die bepaald wordt door een exogene \
+		variabele, de doorlooptijd en de expertise van medewerkers.
+	|
+
+Bijdrage Doorlooptijd in Klanttevredenheid=
+	MAX(0, Min(((Referentiedoorlooptijd van Klant-Totale Actuele Doorlooptijd)/Referentiedoorlooptijd van Klant\
+		), 1))
+	~	Dmnl
+	~	Het verschil tussen de totale actuele doorlooptijd en de \
+		referentiedoorlooptijd van de klant als percentage van de \
+		referentiedoorlooptijd van de klant.
+	|
+
+Bijdrage Exogene Variabele in Klanttevredenheid=
+	1
+	~	Dmnl
+	~	Een exogene variabele die een algemene mate van klant(on-)tevredenheid \
+		uitdrukt (tussen 0 en 1).
+	|
+
+Gewicht Expertise=
+	3.33
+	~	Dmnl
+	~	Belang van de expertise in het bepalen van de Klanttevredenheid.
+	|
+
+Gemiddelde Expertise=
+	(Nieuwe Medewerkers*Gemiddelde Expertise Nieuwe Medewerkers+Ervaren Medewerkers*Gemiddelde Expertise Ervaren Medewerkers\
+		)/(Nieuwe Medewerkers+Ervaren Medewerkers)
+	~	Werkjaar
+	~	Gemiddelde Expertise van alle medewerkers (zowel nieuw als ervaren).
+	|
+
+Gewicht Exogene Variabele=
+	3.33
+	~	Dmnl
+	~	Belang van de exogene variabele in het bepalen van de Klanttevredenheid.
+	|
+
+Gewicht Doorlooptijd=
+	3.33
+	~	Dmnl
+	~	Belang van de doorlooptijd in het bepalen van de Klanttevredenheid.
+	|
+
+Referentiedoorlooptijd van Klant=
+	30
+	~	Weken
+	~	De doorlooptijd waar een klant op rekent.
+	|
+
+Normale Klanttevredenheid=
+	5
+	~	Dimensionless
+	~	De Klanttevredenheid die als uitgangspunt wordt genomen, op tijdstip 0 \
+		(als de simulatie begint).
+	|
+
+Klanttevredenheid= INTEG (
+	Verandering in Klanttevredenheid,
+		Normale Klanttevredenheid)
+	~	Dmnl
+	~	De mate waarin klanten tevreden zijn met de door SRB geleverde diensten.
+	|
+
+Verandering in Klanttevredenheid=
+	(Actuele Klanttevredenheid-Klanttevredenheid)/Aanpassingstijd Klanttevredenheid
+	~	1/Jaar
+	~	De mate waarin de klanttevredenheid verandert per jaar.
+	|
+
+Effect van Fit Dossiers op Tevredenheid=
+	1-Perc van Intakecap door Nieuwe Medewerkers
+	~	Dmnl
+	~	Het percentage van de intakecapaciteit dat door Ervaren Medewerkers wordt \
+		ingevuld en dus het percentage van de Intake waarvoor een juiste fit wordt \
+		gevonden.
+	|
+
+Gewicht van Fit Dossiers op Tevredenheid=
+	3.33
+	~	Dmnl
+	~	Belang van de fit tussen dossiers en medewerkers in het bepalen van de \
+		Medewerkertevredenheid.
+	|
+
+Tabel voor Effect Medewerkertevredenheid op Referentieproductiviteit(
+	[(0,100)-(10,150)],(0.152905,100),(1.6208,102.193),(2.32416,104.386),(3.08869,108.04\
+		),(4.25076,114.693),(5.29052,121.491),(5.8104,125.877),(6.23853,130.263),(7.00306,136.404\
+		),(7.76758,143.421),(8.7156,147.588),(9.93884,149.561))
+	~	Dossiers/(Jaar*Medewerker)
+	~	Een tabel/grafiek waarin de relatie tussen medewerkertevredenheid \
+		(horizontale as) en referentieproductiviteit van nieuwe medewerkers \
+		(verticale as) wordt weergegeven.\!\!\!
+	|
+
+Tabel voor Effect Medewerkertevredenheid op Referentieproductiviteit Ervaren Medewerkers\
+		(
+	[(0,180)-(10,240)],(1,180),(2,182),(3,184),(4.34251,189.474),(5.10703,195.789),(6.02446\
+		,203.509),(6.63609,210.175),(7.06422,217.895),(7.70642,229.825),(8.44037,236.491),(\
+		9.14373,238.596),(9.90826,240))
+	~	Dossiers/(Jaar*Medewerker)
+	~	Een tabel/grafiek waarin de relatie tussen medewerkertevredenheid \
+		(horizontale as) en referentieproductiviteit van ervaren medewerkers \
+		(verticale as) wordt weergegeven.\!\!\!
+	|
+
+Gemiddelde verblijftijd Ervaren Medewerkers=
+	Ervaren Medewerkers/Verloop Ervaren Medewerkers
+	~	Jaar
+	~	De gemiddelde verblijftijd van Ervaren Medewerkers (deze tijd wordt \
+		beeindigd of door verloop).
+	|
+
+Initiële Totale Aantal Medewerkers=
+	207
+	~	Medewerkers
+	~	Het totale aantal medewerkers (zowel nieuw als ervaren) dat in dienst is \
+		op tijdstip 0 (als de simulatie begint).
+	|
+
+Perc Initiële Aantal Nieuwe Medewerkers=
+	0.565
+	~	Dmnl
+	~	Het percentage van het Initiële Totale Aantal Medewerkers dat nieuw is en \
+		dus behoort tot het Initiële Aantal Nieuwe Medewerkers.
+	|
+
+Beschikbare Capaciteit Nieuwe Medewerkers=
+	Totale Capaciteit Nieuwe Medewerkers*Beschikbaarheidspercentage Nieuwe Medewerkers
+	~	FTE/Jaar
+	~	Netto Beschikbare Capaciteit Nieuwe Medewerkers (exclusief vergadertijd, \
+		ziekte, vakantie, opleiding e.d.).
+	|
+
+Beschikbare Capaciteit Ervaren Medewerkers=
+	Totale capaciteit Ervaren Medewerkers*Beschikbaarheidspercentage Ervaren Medewerkers
+	~	FTE/Jaar
+	~	Netto Beschikbare Capaciteit Ervaren Medewerkers (exclusief vergadertijd, \
+		ziekte, vakantie, opleiding e.d.).
+	|
+
+Inhuur Nieuwe Medewerkers=
+	MAX(0,DELAY3((Gewenst Aantal Medewerkers-(Totaal Actueel Aantal Medewerkers/dimensie variabele\
+		)) , Inhuurtijd Nieuwe Medewerkers))
+	~	Medewerkers/Jaar
+	~	Het aantal Nieuwe Medewerkers dat per jaar in dienst treedt.
+	|
+
+Verandering Verloopperc Ervaren Medewerkers=
+	(Actueel Percentage Ervaren Medewerkers met Verloopplannen-Verloopperc Ervaren Medewerkers\
+		)/Aanpassingstijd Verloopperc
+	~	1/(Jaar*Jaar)
+	~	De verandering van het verlooppercentage van ervaren medewerkers per jaar.
+	|
+
+Per Cap Toewijzing Intake Ervaren Medewerkers=
+	Beschikbare Cap Ervaren Medewerkers voor Intake/Beschikbare Capaciteit Ervaren Medewerkers
+	~	Dimensionless
+	~	Het Percentage van de totale capaciteit van Ervaren Medewerkers dat \
+		besteed mag worden aan Intake.
+	|
+
+Per Cap Toewijzing Intake Nieuwe Medewerkers=
+	Beschikbare Cap Nieuwe Medewerkers voor Intake/Beschikbare Capaciteit Nieuwe Medewerkers
+	~	Dimensionless
+	~	Het Percentage van de totale capaciteit van Nieuwe Medewerkers dat besteed \
+		mag worden aan Intake.
+	|
+
+Referentieproductiviteit Nieuwe Medewerkers=
+	Tabel voor Effect Medewerkertevredenheid op Referentieproductiviteit(Medewerkertevredenheid\
+		)
+	~	Dossiers/Medewerker/Jaar
+	~	De Productiviteit die bereikt is als de Gemiddelde Expertise het \
+		referentienivo bereikt.
+	|
+
+Beschikbare Cap Ervaren Medewerkers voor Intake=
+	Min(Beschikbare Capaciteit Ervaren Medewerkers,(Deel van Werkpakket voor Intake*(Beschikbare Capaciteit Nieuwe Medewerkers\
+		+Beschikbare Capaciteit Ervaren Medewerkers)*Nadruk Ervaren Medewerkers voor Intake\
+		))
+	~	FTE/Jaar
+	~	Aantal Ervaren Medewerkers (in FTE's per jaar) dat zich bezighoudt met \
+		Intake.
+	|
+
+Referentieproductiviteit Ervaren Medewerkers=
+	Tabel voor Effect Medewerkertevredenheid op Referentieproductiviteit Ervaren Medewerkers\
+		(Medewerkertevredenheid)
+	~	Dossiers/Medewerker/Jaar
+	~	De Productiviteit die bereikt is als de Gemiddelde Expertise het \
+		referentienivo bereikt.
+	|
+
+Beschikbare Cap Nieuwe Medewerkers voor Intake=
+	Min(Beschikbare Capaciteit Nieuwe Medewerkers,(Deel van Werkpakket voor Intake*(Beschikbare Capaciteit Nieuwe Medewerkers\
+		+Beschikbare Capaciteit Ervaren Medewerkers)*(1-Nadruk Ervaren Medewerkers voor Intake\
+		)))
+	~	FTE/Jaar
+	~	Aantal Nieuwe Medewerkers (in FTE's per jaar) dat zich bezighoudt met \
+		Intake.
+	|
+
+Verloopperc Nieuwe Medewerkers= INTEG (
+	+Verandering Verloopperc Nieuwe Medewerkers,
+		Normaal Verloopperc Nieuwe Medewerkers)
+	~	1/Jaar
+	~	Het verlooppercentage van Nieuwe Medewerkers wordt bepaald door het \
+		Normale Verlooppercentage maar ook door de impact van \
+		medewerkertevredenheid
+	|
+
+Initiële Aantal Ervaren Medewerkers=
+	Initiële Totale Aantal Medewerkers*(1-Perc Initiële Aantal Nieuwe Medewerkers)
+	~	Medewerkers
+	~	De intiële populatie Ervaren Medewerkers (= op tijdstip 0).
+	|
+
+Initiële Aantal Nieuwe Medewerkers=
+	Initiële Totale Aantal Medewerkers*Perc Initiële Aantal Nieuwe Medewerkers
+	~	Medewerkers
+	~	De intiële populatie Nieuwe Medewerkers (= op tijdstip 0).
+	|
+
+Gemiddelde verblijftijd Nieuwe Medewerkers=
+	Nieuwe Medewerkers/(Doorstroom Medewerkers+Verloop Nieuwe Medewerkers)
+	~	Jaar
+	~	De gemiddelde verblijftijd van Nieuwe Medewerkers (deze tijd wordt \
+		beeindigd of door doorstroom naar Ervaren Medewerkers of door verloop).
+	|
+
+Verloopperc Ervaren Medewerkers= INTEG (
+	Verandering Verloopperc Ervaren Medewerkers,
+		Normaal Verloopperc Ervaren Medewerkers)
+	~	1/Jaar
+	~	Het verlooppercentage van Ervaren Medewerkers wordt bepaald door het \
+		Normale Verlooppercentage maar ook door de impact van \
+		medewerkertevredenheid
+	|
+
+Aanpassingstijd Verloopperc=
+	0.25
+	~	Jaar
+	~	Aanpassingstijd die nodig is om een verandering in het verlooppercentage \
+		op te merken en het verlooppercentage overeenkomstig aan te passen.
+	|
+
+Effect van Tevredenheid op Verloop=
+	Tabel voor Effect van Tevredenheid op Verloop(Medewerkertevredenheid/Normale Medewerker tevredenheid\
+		)
+	~	Dimensionless
+	~	Het Verloop is een functie van het quotient van de Medewerkertevredenheid \
+		en de Normale Medewerkertevredenheid.
+	|
+
+Tabel voor Effect van Tevredenheid op Verloop(
+	[(0,0)-(2,3)],(0,3),(0.5,1.5),(0.8,1.05),(1,1),(1.2,0.95),(1.5,0.5),(2,0.25))
+	~	Dimensionless
+	~	Een tabel/grafiek waarin de relatie tussen tevredenheid (horizontale as) \
+		en verloop (verticale as) wordt weergegeven.\!\!
+	|
+
+Actueel Percentage Ervaren Medewerkers met Verloopplannen=
+	Normaal Verloopperc Ervaren Medewerkers*Effect van Tevredenheid op Verloop
+	~	1/Jaar
+	~	Het percentage van Ervaren Medewerkers met verloopplannen wordt bepaald \
+		door een normaal verlooppercentage en door de tevredenheid.
+	|
+
+Actueel Percentage Nieuwe Medewerkers met Verloopplannen=
+	Normaal Verloopperc Nieuwe Medewerkers*Effect van Tevredenheid op Verloop
+	~	1/Jaar
+	~	Het percentage van Nieuwe Medewerkers met verloopplannen wordt bepaald \
+		door een normaal verlooppercentage en door de tevredenheid.
+	|
+
+Verandering Verloopperc Nieuwe Medewerkers=
+	(Actueel Percentage Nieuwe Medewerkers met Verloopplannen-Verloopperc Nieuwe Medewerkers\
+		)/Aanpassingstijd Verloopperc
+	~	1/(Jaar*Jaar)
+	~	De verandering van het verlooppercentage van nieuwe medewerkers per jaar.
+	|
+
+Aanpassingstijd Medewerker tevredenheid=
+	0.25
+	~	Jaar
+	~	Aanpassingstijd die medewerkers nodig hebben om een verandering in hun \
+		tevredenheid op te merken of daadwerkelijk te voelen.
+	|
+
+Effect van Werkdruk op Tevredenheid=
+	Tabel voor Effect van Werkdruk op Tevredenheid(Gepercipieerde Werkdruk/Gewenste Werkdruk Medewerker\
+		)
+	~	Dmnl
+	~	De Medewerkertevredenheid is een functie van het quotient van de \
+		gepercipieerde werkdruk en de gewenste werkdruk.
+	|
+
+Normale Medewerker tevredenheid=
+	6.6
+	~	Dimensionless
+	~	De medewerkertevredenheid die als uitgangspunt wordt genomen, op tijdstip \
+		0 (als de simulatie begint).
+	|
+
+Tabel voor Effect van Werkdruk op Tevredenheid(
+	[(0,0)-(20,1)],(0,0.4),(0.5,0.6),(0.8,0.85),(1,0.9),(1.2,0.85),(1.5,0.6),(2,0.5),(3,\
+		0.4),(20,0.35))
+	~	Dimensionless
+	~	Een tabel/grafiek waarin de relatie tussen werkdruk (horizontale as) en \
+		tevredenheid (verticale as) wordt weergegeven.\!\!
+	|
+
+Druk op Aannamebeleid=
+	Gepercipieerde Werkdruk/Managementnorm Werkdruk
+	~	Dimensionless
+	~	De druk om mensen aan te nemen wordt groter naarmate de gepercipieerde \
+		werkdruk groter is dan de managementnorm.
+	|
+
+Effect van Werkdruk op Gewenst Medewerkerniveau=
+	Switch voor Reactief Aannamebeleid*Tabel voor Effect van Werkdruk op Aannamebeleid(Druk op Aannamebeleid\
+		) + (1-Switch voor Reactief Aannamebeleid
+	)*Exogene Druk op Personeelsgroei
+	~	1/Jaar
+	~	Bij een reactief aannamebeleid is het effect van werkdruk op gewenst \
+		medewerkerniveau een nonlineaire functie van de werkdruk.
+	|
+
+Medewerkertevredenheid= INTEG (
+	+Verandering Medewerker tevredenheid,
+		Normale Medewerker tevredenheid)
+	~	Dimensionless
+	~	De mate waarin medewerkers tevreden zijn met hun werk bij SRB.
+	|
+
+Gewenste Werkdruk Medewerker=
+	0.8
+	~	Dimensionless
+	~	De werkdruk die medewerkers graag zouden willen waarnemen.
+	|
+
+Gewicht van Werkdruk op Tevredenheid=
+	3.33
+	~	Dimensionless
+	~	Belang van de werkdruk van medewerkers in het bepalen van de \
+		Medewerkertevredenheid.
+	|
+
+Verandering Medewerker tevredenheid=
+	(Actuele Medewerker tevredenheid-Medewerkertevredenheid)/Aanpassingstijd Medewerker tevredenheid
+	~	1/Jaar
+	~	De mate waarin de medewerkertevredenheid verandert per jaar.
+	|
+
+Switch voor Reactief Aannamebeleid=
+	1
+	~	Dimensionless
+	~	1 = Aannamebeleid wordt endogeen bepaald op basis van werkdruk. 0 = \
+		Aannamebeleid wordt ook exogeen bepaald op basis van BU Plan.
+	|
+
+Tabel voor Effect van Werkdruk op Aannamebeleid(
+	[(0,0)-(6,2.5)],(0,0.3),(0.5,0.75),(1,1),(1,1),(2,1.3),(3,1.6),(4,1.9),(5,2))
+	~	1/Jaar
+	~	De tabel laat zien wat de invloed is van de Druk op Aannamebeleid op het \
+		Gewenst Medewerkerniveau. Hoe hoger de druk, hoe groter het Gewenst \
+		Medewerkerniveau, maar als de druk heel hoog wordt, vlakt dit effect \
+		af.\!\!\!
+	|
+
+Totaal Actueel Aantal Medewerkers=
+	Nieuwe Medewerkers+Ervaren Medewerkers
+	~	Medewerkers
+	~		|
+
+Totale Referentiedoorlooptijd=
+	Referentiedoorlooptijd Afhandeling+Referentiedoorlooptijd Intake
+	~	Weken
+	~	Hoelang een dossier normaal gesproken in intake EN behandeling zou mogen \
+		zijn, gemiddeld.
+	|
+
+Totale Actuele Doorlooptijd=
+	Actuele Doorlooptijd Afhandeling+Actuele Doorlooptijd Intake
+	~	Weken
+	~	Tijd die nodig is om een dossier geheel af te handelen (som van \
+		doorlooptijd Intake en doorlooptijd Afhandeling).
+	|
+
+Exogene Druk op Personeelsgroei=
+	Groei volgens BU Plan(Time-2000)*(1+Pulse Inhuur)
+	~	1/Jaar
+	~	Exogene druk op personeelsgroei is gebaseerd op het BU Plan en kan \
+		eventueel als test aangepast worden met een bepaalde grootte (pulse).
+	|
+
+Werkdrukindicator=
+	Totale Actuele Doorlooptijd/Totale Referentiedoorlooptijd
+	~	Dmnl
+	~	Hoeveel werk er is t.o.v. hoeveel capaciteit er is om het af te handelen \
+		in deze tijdsperiode
+	|
+
+Managementnorm Werkdruk=
+	1
+	~	Dmnl
+	~	Wat het MT vindt dat een goede werkdruk is
+	|
+
+Aanpassingtijd Capaciteitsinzet Intake=
+	0.1
+	~	Jaar
+	~	Hoe lang het duurt voordat er meer of minder mensen komen bij het \
+		Intakeproces gezien de relatieve werklast daar.
+	|
+
+Aantal weken per jaar=
+	50
+	~	Weken/Jaar
+	~	Omrekenfactor: een jaar bestaat uit 50 weken.
+	|
+
+Actuele Doorlooptijd Intake=
+	(Meldingen/Intake)*Aantal weken per jaar
+	~	Weken
+	~	De actuele verblijftijd van dossiers inintake, gemiddeld gezien.
+	|
+
+Gepercipieerde Werkdruk= INTEG (
+	Verandering in Perceptie Werkdruk,
+		Normale Werkdruk)
+	~	Dmnl
+	~	De werkdruk die medewerkers waarnemen.
+	|
+
+Referentiedoorlooptijd Intake=
+	2
+	~	Week
+	~	Hoelang een dossier normaal gesproken in intake zou mogen zijn, gemiddeld. \
+		Hier dus 1 week. Dit gemiddelde kan heel wel betekenen dat sommige \
+		dossiers langer in intake zijn, andere maar een dag (bv Pareto of 80-20 \
+		verdeling).
+	|
+
+Perceptieinterval Werkdruk=
+	0.125
+	~	Jaar
+	~	Hoe lang het duurt voordat medewerkers merken dat het echt drukker of \
+		rustiger wordt
+	|
+
+Verandering in Perceptie Werkdruk=
+	((Werkdrukindicator/Normale Werkdruk)-Gepercipieerde Werkdruk)/Perceptieinterval Werkdruk
+	~	1/Jaar
+	~	Verandering van de werkdruk die waargenomen wordt door medewerkers.
+	|
+
+Normale Werkdruk=
+	0.8
+	~	Dmnl
+	~	De werkdruk die als uitgangspunt wordt genomen, op tijdstip 0 (als de \
+		simulatie begint).
+	|
+
+Werkpakket Afhandeling=
+	Dossiers In Behandeling*Gemiddelde Werkinhoud Dossier
+	~	Weken
+	~	De gemiddelde hoeveelheid werk (in weken) die verzet moet worden om de \
+		voorraad Dossiers in Behandeling te verwerken.
+	|
+
+Deel van Werkpakket voor Intake= INTEG (
+	Verandering Deel Werkpakket Intake,
+		Initiëel deel werkpakket intake)
+	~	Dmnl
+	~	De relatieve werklast voor Intake (t.o.v. de totale hoeveelheid werklast \
+		voor Intake en Afhandeling).
+	|
+
+Verandering Deel Werkpakket Intake=
+	(Werkpakket Intake/(Werkpakket Intake+Werkpakket Afhandeling)-Deel van Werkpakket voor Intake\
+		)/Aanpassingtijd Capaciteitsinzet Intake
+	~	1/Jaar
+	~	De verandering van de relatieve werklast voor Intake (t.o.v. de totale \
+		hoeveelheid werklast voor Intake en Afhandeling).
+	|
+
+Nadruk Ervaren Medewerkers voor Intake=
+	0.5
+	~	Dmnl
+	~	Het percentage van het Werkpakket Intake dat door Ervaren Medewerkers \
+		wordt uitgevoerd (indien er voldoende ervaren medewerkers beschikbaar \
+		zijn). Default = 0.5
+	|
+
+Inhuur Ervaren Medewerkers=
+	MAX(0,DELAY3(Verloop Ervaren Medewerkers-Doorstroom Medewerkers,Inhuurtijd Ervaren Medewerkers\
+		))
+	~	Medewerkers/Jaar
+	~	Het aantal Ervaren Medewerkers dat per jaar aangenomen wordt.
+	|
+
+Inhuurtijd Ervaren Medewerkers=
+	0.5
+	~	Jaar
+	~	De tijd die het kost om ervaren  medewerkers te vinden. Initieel gezet op \
+		6 maanden, of een half jaar
+	|
+
+Inhuurtijd Nieuwe Medewerkers=
+	0.25
+	~	Jaar
+	~	De tijd die het kost om nieuwe medewerkers te vinden. Initieel gezet op 3 \
+		maanden, of een kwart jaar
+	|
+
+Werkjaren gewerkt aan dossiers Nieuwe Medewerkers=
+	Dossiers door Nieuwe Medewerkers*(Gemiddelde Werkinhoud Dossier/Omrekenfactor van Week naar Werkjaar\
+		)
+	~	Medewerker*Werkjaar/Jaar
+	~	Het gemiddeld aantal werkjaren dat aan Dossiers gewerkt is door Nieuwe \
+		Medewerkers per jaar.
+	|
+
+Omrekenfactor van Week naar Werkjaar=
+	50
+	~	Week/(Medewerker*Werkjaar)
+	~	Een medewerker-werkjaar bestaat uit 50 weken.
+	|
+
+Dossiers door Nieuwe Medewerkers=
+	Afleggen*Perc van Afhandelcap door Nieuwe Medewerkers
+	~	Dossiers/Jaar
+	~	Het aantal Dossiers dat per jaar door Nieuwe Medewerkers wordt afgelegd.
+	|
+
+Werkjaren gewerkt aan dossiers Ervaren Medewerkers=
+	Dossiers door Ervaren Medewerkers*(Gemiddelde Werkinhoud Dossier/Omrekenfactor van Week naar Werkjaar\
+		)
+	~	Medewerker*Werkjaar/Jaar
+	~	Het gemiddeld aantal werkjaren dat aan Dossiers gewerkt is door Ervaren \
+		Medewerkers per jaar.
+	|
+
+Beschikbare Capaciteit voor Afhandeling in Dossiers=
+	Beschikbare Capaciteit voor Afhandeling in Tijdseenheden/(Gemiddelde Werkinhoud Dossier\
+		/Omrekenfactor van Week naar FTE)
+	~	Dossiers/Jaar
+	~	Aantal Dossiers in Afhandeling die Nieuwe en Ervaren Medewerkers per jaar \
+		kunnen verwerken op basis van hun Beschikbare Capaciteit.
+	|
+
+Beschikbare Capaciteit voor Afhandeling in Tijdseenheden=
+	Beschikbare Cap Ervaren Medewerkers voor Afhandeling+Beschikbare Cap Nieuwe Medewerkers voor Afhandeling
+	~	FTE/Jaar
+	~	Totale capaciteit van zowel Nieuwe als Ervaren Medewerkers (in FTE's per \
+		jaar) die beschikbaar is voor Afhandeling.
+	|
+
+Gemiddelde Doorlooptijd Afhandeling=
+	MAX(Minimale Afhandelingstijd,Dossiers In Behandeling/Beschikbare Capaciteit voor Afhandeling in Dossiers\
+		)
+	~	Jaar
+	~	Gemiddelde Doorlooptijd Afhandeling die bepaald wordt door de Beschikbare \
+		Capaciteit voor Afhandeling en het aantal Dossiers in Behandeling.
+	|
+
+Gemiddelde Doorlooptijd Intake=
+	MAX(Minimale Intaketijd,Meldingen/Beschikbare Capaciteit voor Intake in Dossiers)
+	~	Jaar
+	~	Gemiddelde Doorlooptijd Intake die bepaald wordt door de Beschikbare \
+		Capaciteit voor Intake en het aantal Meldingen dat op voorraad ligt.
+	|
+
+Basisaanbod Dossiers=
+	48000
+	~	Dossiers
+	~		|
+
+Omrekenfactor van Week naar FTE=
+	50
+	~	Weken/FTE
+	~	1 FTE bestaat uit 50 (werk)weken.
+	|
+
+Meldingen= INTEG (
+	+Nieuwe Meldingen-Intake-Meldingen afgewezen,
+		Initiële Nieuwe Meldingen)
+	~	Dossiers
+	~	Het aantal Meldingen dat op een bepaald tijdstip op voorraad ligt.
+	|
+
+Intake=
+	MAX(0,Min(Meldingen/Minimale Intaketijd,Beschikbare Capaciteit voor Intake in Dossiers\
+		))
+	~	Dossiers/Jaar
+	~	Het aantal Dossiers dat per jaar in Behandeling wordt genomen.
+	|
+
+Referentiedoorlooptijd Afhandeling=
+	25
+	~	Week
+	~	Hoelang een dossier normaal gesproken in behandeling zou mogen zijn, \
+		gemiddeld. Dit gemiddelde kan heel wel betekenen dat sommige dossiers een \
+		jaar in behandeling zijn, andere maar een dag (bv Pareto of 80-20 \
+		verdeling).
+	|
+
+Groei volgens BU Plan(
+	[(0,0)-(5,1.5)],(0,1),(1,1.18),(2,1.25),(3,1.3),(4,1.33),(5,1.35))
+	~	1/Jaar
+	~	Groei in Werkaanbod uit BU-plan (vertaald vanuit groeiplan \
+		Medewerkers).\!\!\!
+	|
+
+Groei Dossiers=
+	STEP(Exogene Groeivoet,Starttijd Groei)+Groei volgens BU Plan(Time-2000)
+	~	1/Jaar
+	~	Groei Dossiers komt overeen met gegevens uit het BU Plan maar kan ook \
+		bepaald worden door een Exogene Groeivoet vanaf een bepaalde Starttijd.
+	|
+
+Nieuwe Meldingen=
+	Basisaanbod Dossiers*Groei Dossiers
+	~	Dossiers/Jaar
+	~	Aantal Nieuwe Meldingen dat per jaar binnen komt.
+	|
+
+Beschikbare Cap Ervaren Medewerkers voor Afhandeling=
+	Beschikbare Capaciteit Ervaren Medewerkers*(1-Per Cap Toewijzing Intake Ervaren Medewerkers\
+		)
+	~	FTE/Jaar
+	~	Aantal Ervaren Medewerkers (in FTE's per jaar) dat zich bezighoudt met \
+		Afhandeling.
+	|
+
+Beschikbare Cap Nieuwe Medewerkers voor Afhandeling=
+	Beschikbare Capaciteit Nieuwe Medewerkers*(1-Per Cap Toewijzing Intake Nieuwe Medewerkers\
+		)
+	~	FTE/Jaar
+	~	Aantal Nieuwe Medewerkers (in FTE's per jaar) dat zich bezighoudt met \
+		Afhandeling.
+	|
+
+Beschikbare Capaciteit voor Intake in Tijdseenheden=
+	Beschikbare Cap Ervaren Medewerkers voor Intake+Beschikbare Cap Nieuwe Medewerkers voor Intake
+	~	FTE/Jaar
+	~	Totale capaciteit van zowel Nieuwe als Ervaren Medewerkers (in FTE's per \
+		jaar) die beschikbaar is voor Intake.
+	|
+
+Initiële Totale Expertise Ervaren Medewerkers=
+	700
+	~	Medewerker*Werkjaar
+	~	Totale expertise ervaren medewerkers op tijdstip 0 (als simulatie begint).
+	|
+
+Dossiers door Ervaren Medewerkers=
+	(1-Perc van Afhandelcap door Nieuwe Medewerkers)*Afleggen
+	~	Dossiers/Jaar
+	~	Het aantal Dossiers dat per jaar door Ervaren Medewerkers wordt afgelegd.
+	|
+
+Dossiers In Behandeling= INTEG (
+	Intake-Afleggen-Dossiers Uitbesteden,
+		Initiële Dossiers in Behandeling)
+	~	Dossiers
+	~	Het aantal Dossiers dat op een bepaald tijdstip in Behandeling is.
+	|
+
+Jaarlijkse doorstroom=
+	0
+	~	Medewerkers/Jaar
+	~		|
+
+Minimale Afhandelingstijd=
+	0.04
+	~	Jaar
+	~	Tijd die minimaal nodig is voor Afhandeling ongeacht de Beschikbare \
+		Capaciteit die er voor Afhandeling is. Hier gezet op twee weken
+	|
+
+Minimale Intaketijd=
+	0.01
+	~	Jaar
+	~	Tijd die minimaal nodig is voor de Intake, ongeacht de Beschikbare \
+		Capaciteit die er voor de Intake is. Is dus twee werkdagen
+	|
+
+Perc van Intakecap door Nieuwe Medewerkers=
+	Beschikbare Cap Nieuwe Medewerkers voor Intake/Beschikbare Capaciteit voor Intake in Tijdseenheden
+	~	Dimensionless
+	~	Het Percentage van de totale Intakecapaciteit dat door Nieuwe Medewerkers \
+		wordt ingevuld.
+	|
+
+Perc van Afhandelcap door Nieuwe Medewerkers=
+	Beschikbare Cap Nieuwe Medewerkers voor Afhandeling/Beschikbare Capaciteit voor Afhandeling in Tijdseenheden
+	~	Dimensionless
+	~	Het Percentage van de totale Afhandelcapaciteit dat door Nieuwe \
+		Medewerkers wordt ingevuld.
+	|
+
+Initiële Totale Expertise Nieuwe Medewerkers=
+	175
+	~	Werkjaar*Medewerker
+	~	Totale Expertise van Nieuwe Medewerkers op tijdstip 0 (als de simulatie \
+		begint).
+	|
+
+Doorstroom Medewerkers=
+	Nieuwe Medewerkers/Groeitijd tot Ervaren Medewerker
+	~	Medewerkers/Jaar
+	~	Het aantal Nieuwe Medewerkers dat per jaar doorstroomt naar Ervaren \
+		Medewerkers.
+	|
+
+Verlies van Expertise Nieuwe Medewerkers door Verloop=
+	Verloop Nieuwe Medewerkers*Gemiddelde Expertise Nieuwe Medewerkers
+	~	Medewerker*Werkjaar/Jaar
+	~	Medewerkers die vertrekken nemen hun expertise met zich mee.
+	|
+
+Normaal Verloopperc Ervaren Medewerkers=
+	0.12
+	~	1/Jaar
+	~	Het normale verlooppercentage van Ervaren Medewerkers.
+	|
+
+Ervaren Medewerkers= INTEG (
+	Inhuur Ervaren Medewerkers+Doorstroom Medewerkers-Verloop Ervaren Medewerkers,
+		Initiële Aantal Ervaren Medewerkers)
+	~	Medewerkers
+	~	Het aantal Ervaren Medewerkers dat op een bepaald tijdstip in dienst is.
+	|
+
+Groeitijd tot Ervaren Medewerker=
+	3
+	~	Jaar
+	~	Het aantal dienstjaren dat nodig is om Ervaren te worden.
+	|
+
+Nieuwe Medewerkers= INTEG (
+	Inhuur Nieuwe Medewerkers-Verloop Nieuwe Medewerkers-Doorstroom Medewerkers,
+		Initiële Aantal Nieuwe Medewerkers)
+	~	Medewerkers
+	~	Aantal Nieuwe Medewerkers dat op een bepaald tijdstip in dienst is.
+	|
+
+Verloop Ervaren Medewerkers=
+	Verloopperc Ervaren Medewerkers*Ervaren Medewerkers
+	~	Medewerkers/Jaar
+	~	Het aantal Ervaren Medewerkers dat per jaar verloopt.
+	|
+
+Gemiddelde Expertise Ervaren Medewerkers=
+	Totale Expertise Ervaren Medewerkers/Ervaren Medewerkers
+	~	Werkjaar
+	~	De gemiddelde expertise van ervaren medewerkers
+	|
+
+Meldingen afgewezen=
+	500
+	~	Dossiers/Jaar
+	~	Aantal Meldingen dat per jaar wordt afgewezen.
+	|
+
+Exponent Leercurve Ervaren=
+	LN(1+Sterkte Leercurve Ervaren)/LN(2)
+	~	Dimensionless
+	~	De exponent in de leercurve. Berekend op basis van de sterkte van de \
+		leercurve.
+	|
+
+Verouderingstijd Expertise Ervaren Medewerkers=
+	0.25
+	~	Jaar
+	~	Het tijdstip waarop de normale veroudering van expertise verandert (door \
+		een exogene input).
+	|
+
+Gemiddelde Expertise Ervaren Inhuur=
+	Exogene Expertise Inhuur Ervaren Medewerkers
+	~	Werkjaar
+	~	hoeveel expertise ervaren medewerkers met zich meebrengen, exogeen bepaald
+	|
+
+Normale Veroudering Expertise Ervaren Medewerkers=
+	0.1
+	~	1/Jaar
+	~	Het normale percentage waarmee de expertise van ervaren medewerkers per \
+		jaar veroudert.
+	|
+
+Verlies van Expertise Ervaren Medewerkers door Verloop=
+	Verloop Ervaren Medewerkers*Gemiddelde Expertise Ervaren Medewerkers
+	~	Medewerker*Werkjaar/Jaar
+	~	Medewerkers die vertrekken nemen hun expertise met zich mee.
+	|
+
+Verandering Veroudering Expertise Ervaren Medewerkers=
+	0
+	~	1/Jaar
+	~	Een exogene verandering in de mate waarin de expertise van ervaren \
+		medewerkers per jaar veroudert.
+	|
+
+Productiviteit Ervaren Medewerkers=
+	Referentieproductiviteit Ervaren Medewerkers*(Gemiddelde Expertise Ervaren Medewerkers\
+		/"Referentie-Expertise Ervaren medewerkers")^Exponent Leercurve Ervaren
+	~	Dossiers/(Medewerker*Jaar)
+	~	Productiviteit wordt bepaald door een standaard leercurve die doorlopen \
+		wordt via een cumulatieve hoeveelheid werkervaring.
+	|
+
+Toename Expertise door Ervaren Inhuur=
+	Inhuur Ervaren Medewerkers*Gemiddelde Expertise Ervaren Inhuur
+	~	Medewerker*Werkjaar/Jaar
+	~	De snelheid waarmee ervaren medewerkers expertise toevoegen aan de pool \
+		van expertise
+	|
+
+Relatieve Verouderingssnelheid Expertise Ervaren Medewerkers=
+	Normale Veroudering Expertise Ervaren Medewerkers + STEP(Verandering Veroudering Expertise Ervaren Medewerkers\
+		,Verouderingstijd Expertise Ervaren Medewerkers)
+	~	1/Jaar
+	~	Bestaande kennis veroudert of wordt vergeten.
+	|
+
+Gemiddelde Werkinhoud Dossier=
+	0.25
+	~	Weken/Dossier
+	~	Het aantal weken dat gemiddeld gewerkt moet worden aan een Dossier.
+	|
+
+Pulse Inhuur Omvang=
+	0
+	~	Dmnl
+	~	Een percentage waarmee de Inhuur toe- of afneemt op een bepaalde starttijd.
+	|
+
+Pulse Inhuur Starttijd=
+	2001
+	~	Jaar
+	~	Het tijdstip waarop de Pulse plaatsvindt.
+	|
+
+Verandering Veroudering Expertise Nieuwe Medewerkers=
+	0
+	~	1/Jaar
+	~	Een exogene verandering in de mate waarin de expertise van nieuwe \
+		medewerkers per jaar veroudert.
+	|
+
+Exponent Leercurve=
+	LN(1+Sterkte Leercurve)/LN(2)
+	~	Dimensionless
+	~	De exponent in de leercurve. Berekend op basis van de sterkte van de \
+		leercurve.
+	|
+
+Productiviteit Nieuwe Medewerkers=
+	Referentieproductiviteit Nieuwe Medewerkers*(Gemiddelde Expertise Nieuwe Medewerkers\
+		/"Referentie-Expertise Nieuwe Medewerkers")^Exponent Leercurve
+	~	Dossiers/(Medewerker*Jaar)
+	~	Productiviteit wordt bepaald door een standaard leercurve die doorlopen \
+		wordt via een cumulatieve hoeveelheid werkervaring.
+	|
+
+Exogene Expertise Inhuur Ervaren Medewerkers=
+	 Expertise Inhuur Nieuwe Medewerkers*Input
+	~	Werkjaar
+	~	Mogeljkheid om test inputs lost te laten op het model, zoals step, pulse, \
+		sine wave, en random noise.
+	|
+
+Exogene Groeivoet=
+	0
+	~	1/Jaar
+	~	De Exogene Groeivoet in Dossiers. Default 0
+	|
+
+Verouderingstijd Expertise Nieuwe Medewerkers=
+	0.25
+	~	Jaar
+	~	Het tijdstip waarop de normale veroudering van expertise verandert (door \
+		een exogene input).
+	|
+
+Relatieve Verouderingssnelheid Expertise Nieuwe Medewerkers=
+	Normale Veroudering Expertise Nieuwe Medewerkers + STEP(Verandering Veroudering Expertise Nieuwe Medewerkers\
+		,Verouderingstijd Expertise Nieuwe Medewerkers)
+	~	1/Jaar
+	~	Bestaande kennis veroudert of wordt vergeten.
+	|
+
+Starttijd Groei=
+	0.25
+	~	Jaar
+	~	Het moment waarop de Exogene Groei begint.
+	|
+
+"Referentie-Expertise Nieuwe Medewerkers"=
+	0.2
+	~	Werkjaar
+	~	Het referentieniveau van Expertise dat past bij de \
+		Referentieproductiviteit.
+	|
+
+Normaal Verloopperc Nieuwe Medewerkers=
+	0.1
+	~	1/Jaar
+	~	Het normale verlooppercentage van Nieuwe Medewerkers.
+	|
+
+Normale Veroudering Expertise Nieuwe Medewerkers=
+	0.1
+	~	1/Jaar
+	~	Het normale percentage waarmee de expertise van nieuwe medewerkers per \
+		jaar veroudert.
+	|
+
+Verloop Nieuwe Medewerkers=
+	Verloopperc Nieuwe Medewerkers*Nieuwe Medewerkers
+	~	Medewerkers/Jaar
+	~	Het aantal Nieuwe Medewerkers dat per jaar verloopt.
+	|
+
+Exponential Growth Time=
+	5
+	~	Jaar
+	~	The time for exogenous exponential growth to start
+	|
+
+Exponential Growth Rate=
+	0
+	~	1/Jaar
+	~	The exogenous growth rate
+	|
+
+Gemiddelde Expertise Nieuwe Inhuur=
+	Exogene Expertise Inhuur Ervaren Medewerkers
+	~	Werkjaar
+	~	De hoeveelheid expertise die nieuwe medewerkers met zich meebrengen, \
+		exogeen bepaald.
+	|
+
+Pink Noise = INTEG(Change in Pink Noise,0)
+	~	Dimensionless
+	~	Pink Noise is first-order autocorrelated noise.  Pink noise provides a realistic \
+		noise input to
+		        models in which the next random shock depends in part on the previous \
+		shocks.  The user
+		        can specify the correlation time.  The mean is 0 and the standard deviation \
+		is specified
+		         by the user.
+	|
+
+Pulse Quantity=0
+	~	Dimensionless*Jaar
+	~	The quantity to be injected to customer orders, as a fraction of the base value of \
+		Input. 
+		        For example, to pulse in a quantity equal to 50% of the current value of \
+		input, set to
+		         .50.
+	|
+
+Change in Pink Noise = (White Noise - Pink Noise)/Noise Correlation Time
+	~	1/Jaar
+	~	Change in the pink noise value; Pink noise is a first order exponential smoothing \
+		delay of the white
+		         noise input.
+	|
+
+Ramp End Time=1e+09
+	~	Jaar
+	~	End time for the ramp input.
+	|
+
+Expertise Inhuur Nieuwe Medewerkers=
+	0.2
+	~	Werkjaar
+	~	De initiële expertise van nieuwe medewerkers
+	|
+
+Input=
+	1+STEP(Step Height,Step Time)+
+	(Pulse Quantity/TIME STEP)*PULSE(Pulse Time,TIME STEP)+
+	RAMP(Ramp Slope,Ramp Start Time,Ramp End Time)+(STEP(1, Exponential Growth Time)*(exp\
+		(Exponential Growth Rate*(Time - Exponential Growth Time))-1))+
+	Sine Amplitude*SIN(2*3.14159*Time/Sine Period)+
+	  	STEP(1,Noise Start Time)*Pink Noise
+	~	Dimensionless
+	~	Input is een dimensieloze variabele die verschillende input-patronen kan \
+		testen, zoals een step, pulse, sine wave, en random noise.
+	|
+
+Sine Period=50
+	~	Jaar
+	~	Period of sine wave in customer demand.  Set initially to 50 weeks (1 \
+		Jaar).
+	|
+
+Noise Correlation Time = 4
+	~	Jaar
+	~	The correlation time constant for Pink Noise.
+	|
+
+Noise Standard Deviation = 0
+	~	Dimensionless
+	~	The standard deviation of the pink noise process.
+	|
+
+Noise Start Time = 5
+	~	Jaar
+	~	Start time for the random input.
+	|
+
+Ramp Slope=0
+	~	1/Jaar
+	~	Slope of the ramp input, as a fraction of the base value (per week).
+	|
+
+Pulse Time=5
+	~	Jaar
+	~	Time at which the pulse in Input occurs.
+	|
+
+Step Time=5
+	~	Jaar
+	~	Time for the step input.
+	|
+
+White Noise = Noise Standard Deviation*((24*Noise Correlation Time/TIME STEP)^0.5*(RANDOM 0 1\
+		() - 0.5
+))
+	~	Dimensionless
+	~	White noise input to the pink noise process.
+	|
+
+Ramp Start Time=5
+	~	Jaar
+	~	Start time for the ramp input.
+	|
+
+Step Height=0
+	~	Dimensionless
+	~	Height of step input to customer orders, as fraction of initial value.
+	|
+
+Sine Amplitude=0
+	~	Dimensionless
+	~	Amplitude of sine wave in customer orders (fraction of mean).
+	|
+
+Gemiddelde Expertise Nieuwe Medewerkers=
+	Totale Expertise Nieuwe Medewerkers/Nieuwe Medewerkers
+	~	Werkjaar
+	~	De gemiddelde expertise van nieuwe medewerkers
+	|
+
+Toename Expertise door Inhuur=
+	Inhuur Nieuwe Medewerkers*Gemiddelde Expertise Nieuwe Inhuur
+	~	Werkjaar*Medewerker/Jaar
+	~	De snelheid waarmee nieuwe medewerkers expertise toevoegen aan de pool van \
+		Totale Expertise
+	|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Paramaters
+	|
+
+FINAL TIME  = 2005
+	~	Year
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 2000
+	~	Year
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Year
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 0.015625
+	~	Year
+	~	De tijd-stap voor de simulatie.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Dashboard
+$192-192-192,0,Arial|10|B|0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,75,0
+12,1,0,596,-384,558,26,3,4,0,8,-1,0,0,0,0-0-0,0-0-0,|14|B|0-0-0,0,0,0,0,0,0
+WIJZERS
+10,2,Normaal Verloopperc Ervaren Medewerkers,188,-441,158,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,3,Normaal Verloopperc Nieuwe Medewerkers,952,-486,158,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,4,Afleggen,451,-235,52,14,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,5,Dossiers In Behandeling,504,-304,116,15,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,6,Groei volgens BU Plan,546,-570,144,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,7,Basisaanbod Dossiers,555,-676,94,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,8,Actuele Doorlooptijd Afhandeling,532,-203,141,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,9,Gepercipieerde Werkdruk,178,-80,129,21,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+12,10,0,597,-729,557,22,3,4,0,8,-1,0,0,0,0-0-0,0-0-0,|14|B|0-0-0,0,0,0,0,0,0
+KNOPPEN
+10,11,Per Cap Toewijzing Intake Ervaren Medewerkers,872,-238,197,18,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,12,Per Cap Toewijzing Intake Nieuwe Medewerkers,870,-272,188,15,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,13,Beschikbare Capaciteit voor Intake in Dossiers,865,-328,187,21,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,14,Beschikbare Capaciteit voor Afhandeling in Dossiers,879,-303,211,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,15,Intake,447,-272,46,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,16,Meldingen,464,-339,74,18,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,17,Deel van Werkpakket voor Intake,530,-168,142,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,18,Aanpassingtijd Capaciteitsinzet Intake,603,-499,162,18,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,19,Nadruk Ervaren Medewerkers voor Intake,189,-536,160,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,20,Gemiddelde Werkinhoud Dossier,173,-626,132,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,21,Referentieproductiviteit Ervaren Medewerkers,956,-672,182,18,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,22,Referentieproductiviteit Nieuwe Medewerkers,953,-635,172,26,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,23,Nieuwe Medewerkers,156,-347,122,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,24,Ervaren Medewerkers,150,-316,104,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,25,Totaal Actueel Aantal Medewerkers,185,-256,129,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,26,Switch voor Reactief Aannamebeleid,186,-689,142,17,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,27,Medewerkertevredenheid,162,-114,121,21,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,28,Gemiddelde verblijftijd Ervaren Medewerkers,206,-282,166,24,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,29,Gemiddelde verblijftijd Nieuwe Medewerkers,198,-214,167,17,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,30,Perc Initiële Aantal Nieuwe Medewerkers,933,-521,200,24,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,31,Initiële Totale Aantal Medewerkers,912,-599,191,21,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+12,32,0,190,471,177,17,8,4,0,24,-1,0,0,0,0-0-0,0-0-0,|12|BI|0-0-0,0,0,0,0,0,0
+Totale Actuele Doorlooptijd (in weken)
+12,33,0,429,-597,40,20,8,0,0,0,-1,0,0,0,0,0,0,0,0,0
+10,34,Verloop Ervaren Medewerkers,160,-184,105,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,35,Verloop Nieuwe Medewerkers,167,-149,118,14,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,36,Totale Actuele Doorlooptijd,520,-134,151,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+12,37,0,373,673,334,188,3,60,0,0,1,0,0,0,0,0,0,0,0,0
+TOTALE_ACTUELE_DOORLOOPTIJD
+12,38,0,374,1103,336,200,3,60,0,0,1,0,0,0,0,0,0,0,0,0
+VERLOOP_NIEUWE_MEDEWERKERS
+12,39,0,234,887,203,24,8,4,0,24,-1,0,0,0,0-0-0,0-0-0,|12|BI|0-0-0,0,0,0,0,0,0
+Verloop Nieuwe Medewerkers (in medewerkers/jaar)
+12,40,0,1036,1102,323,203,3,60,0,0,1,0,0,0,0,0,0,0,0,0
+VERLOOP_ERVAREN_MEDEWERKERS
+12,41,0,912,883,201,30,8,4,0,24,-1,0,0,0,0-0-0,0-0-0,|12|BI|0-0-0,0,0,0,0,0,0
+Verloop Ervaren Medewerkers (in medewerkers/jaar)
+12,42,0,372,1551,337,200,3,60,0,0,1,0,0,0,0,0,0,0,0,0
+MELDINGEN
+12,43,0,137,1337,141,20,8,4,0,24,-1,0,0,0,0-0-0,0-0-0,|12|BI|0-0-0,0,0,0,0,0,0
+Meldingen (in dossiers)
+12,44,0,1040,1552,325,200,3,60,0,0,1,0,0,0,0,0,0,0,0,0
+DOSSIERS_IN_BEHANDELING
+12,45,0,865,1334,163,24,8,4,0,24,-1,0,0,0,0-0-0,0-0-0,|12|BI|0-0-0,0,0,0,0,0,0
+Dossiers in Behandeling (in dossiers)
+12,46,0,371,1996,336,203,3,60,0,0,1,0,0,0,0,0,0,0,0,0
+NIEUWE_MEDEWERKERS
+12,47,0,203,1776,167,27,8,4,0,24,-1,0,0,0,0-0-0,0-0-0,|12|BI|0-0-0,0,0,0,0,0,0
+Nieuwe Medewerkers (in medewerkers)
+12,48,0,1042,1995,332,203,3,60,0,0,1,0,0,0,0,0,0,0,0,0
+ERVAREN_MEDEWERKERS
+12,49,0,864,1775,162,24,8,4,0,24,-1,0,0,0,0-0-0,0-0-0,|12|BI|0-0-0,0,0,0,0,0,0
+Ervaren Medewerkers (in medewerkers)
+10,50,Perc Uitbesteding,487,-43,147,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+12,51,0,398,188,86,28,3,60,0,0,0,0,0,0,0,0,0,0,0,0
+Grens voor Uitbesteding,10,1000,1
+12,52,0,392,134,67,18,8,4,0,24,-1,0,0,0,0-0-0,0-0-0,|12|BI|0-0-0,0,0,0,0,0,0
+Scenario 2: Meer Uitbesteden?
+10,53,Pulse Inhuur Omvang,907,-560,119,14,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+12,54,0,182,191,87,29,3,60,0,0,0,0,0,0,0,0,0,0,0,0
+Switch voor Reactief Aannamebeleid,0,1,1
+12,55,0,180,138,125,23,8,4,0,24,-1,0,0,0,0-0-0,0-0-0,|12|BI|0-0-0,0,0,0,0,0,0
+Scenario 1: Reactief Aannamebeleid?
+12,56,0,621,186,91,26,3,60,0,0,0,0,0,0,0,0,0,0,0,0
+Gemiddelde Werkinhoud Dossier,0,20,0.05
+12,57,0,621,135,103,19,8,4,0,24,-1,0,0,0,0-0-0,0-0-0,|12|BI|0-0-0,0,0,0,0,0,0
+Scenario 3: Verlagen werkinhoud?
+12,58,0,837,186,87,29,3,60,0,0,0,0,0,0,0,0,0,0,0,0
+Snelheid van Leren door Nieuwe Medewerkers,0,200,1
+12,59,0,834,134,97,28,8,4,0,24,-1,0,0,0,0-0-0,0-0-0,|12|BI|0-0-0,0,0,0,0,0,0
+Scenario 4: Verhogen snelheid van leren?
+12,60,0,281,331,91,27,3,60,0,0,0,0,0,0,0,0,0,0,0,0
+Nadruk Ervaren Medewerkers voor Intake,0,1,0.05
+12,61,0,284,288,70,18,8,4,0,24,-1,0,0,0,0-0-0,0-0-0,|12|BI|0-0-0,0,0,0,0,0,0
+Scenario 5: Meer "ervaren intake"?
+12,62,0,514,331,88,27,3,60,0,0,0,0,0,0,0,0,0,0,0,0
+Opleidingen en Zittingen Nieuwe Medewerkers,0,1,0.05
+12,63,0,517,385,90,30,3,60,0,0,0,0,0,0,0,0,0,0,0,0
+Opleidingen en Zittingen Ervaren Medewerkers,0,1,0.05
+12,64,0,518,280,120,29,8,4,0,24,-1,0,0,0,0-0-0,0-0-0,|12|BI|0-0-0,0,0,0,0,0,0
+Scenario 6: Minder opleidingen en zittingen?
+12,65,0,723,346,87,31,3,60,0,0,0,0,0,0,0,0,0,0,0,0
+Normaal Verloopperc Ervaren Medewerkers,0,1,0.05
+12,66,0,724,292,67,18,8,4,0,24,-1,0,0,0,0-0-0,0-0-0,|12|BI|0-0-0,0,0,0,0,0,0
+Scenario 7: Meer "up or out"?
+12,67,0,1043,2438,333,200,3,60,0,0,1,0,0,0,0,0,0,0,0,0
+VERBLIJFTIJD_ERVAREN_MEDEWERKERS
+12,68,0,914,2221,206,29,8,4,0,24,-1,0,0,0,0-0-0,0-0-0,|12|BI|0-0-0,0,0,0,0,0,0
+Gemiddelde Verblijftijd Ervaren Medewerkers (in jaar)
+12,69,0,504,23,436,11,0,4,0,10,-1,0,0,0,0-0-0,0-0-0,|12|B|255-0-0,0,0,0,0,0,0
+Gebruiksaanwijzing Dashboard: druk op "SET" in de toolbar, stel nieuwe waarde van variabele in m.b.v. de schuif, 
+12,70,0,667,51,448,20,8,4,0,10,-1,0,0,0,0-0-0,0-0-0,|12|B|255-0-0,0,0,0,0,0,0
+bewaar de simulatie als bbs(spatie)+scenarionummer, simuleer en de grafiek komt vanzelf
+10,71,Klanttevredenheid,768,-207,128,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+12,72,0,1032,673,320,192,3,60,0,0,1,0,0,0,0,0,0,0,0,0
+GEPERCIPIEERDE_WERKDRUK
+12,73,0,885,462,175,27,8,4,0,24,-1,0,0,0,0-0-0,0-0-0,|12|BI|0-0-0,0,0,0,0,0,0
+Gepercipieerde Werkdruk (dimensieloos)
+12,74,0,366,2882,335,198,3,60,0,0,1,0,0,0,0,0,0,0,0,0
+MEDEWERKERTEVREDENHEID
+12,75,0,186,2667,250,20,8,4,0,24,-1,0,0,0,0-0-0,0-0-0,|12|BI|0-0-0,0,0,0,0,0,0
+Medewerkertevredenheid (dimensieloos)
+12,76,0,1053,2883,336,200,3,60,0,0,1,0,0,0,0,0,0,0,0,0
+KLANTTEVREDENHEID
+12,77,0,868,2667,162,20,8,4,0,24,-1,0,0,0,0-0-0,0-0-0,|12|BI|0-0-0,0,0,0,0,0,0
+Klanttevredenheid (dimensieloos)
+12,78,0,837,241,88,27,3,60,0,0,0,0,0,0,0,0,0,0,0,0
+Snelheid van Leren door Ervaren Medewerkers,0,200,1
+12,79,0,358,3312,341,178,3,60,0,0,1,0,0,0,0,0,0,0,0,0
+ONDERHANDEN_DOSSIERS_PER_MEDEWERKER
+12,80,0,295,3112,273,20,8,4,0,24,-1,0,0,0,0-0-0,0-0-0,|12|BI|0-0-0,0,0,0,0,0,0
+Onderhanden Dossiers per Medewerker (in dossiers/medewerker)
+12,81,0,674,80,489,20,8,4,0,10,-1,0,0,0,0-0-0,0-0-0,|12|BI|255-0-0,0,0,0,0,0,0
+na de simulatie springt de waarde van de 'schuif' weer terug naar zijn oorspronkelijke waarde
+12,82,0,369,2443,336,204,3,60,0,0,1,0,0,0,0,0,0,0,0,0
+GEMIDDELDE_VERBLIJFTIJD_NIEUWE_MEDEWERKERS
+12,83,0,248,2222,200,34,8,4,0,24,-1,0,0,0,0-0-0,0-0-0,|12|BI|0-0-0,0,0,0,0,0,0
+Gemiddelde Verblijftijd Nieuwe Medewerkers (in jaar)
+10,84,Referentiedoorlooptijd Afhandeling,591,-609,133,18,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,85,Referentiedoorlooptijd Intake,578,-641,114,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,86,Onderhanden Dossiers per Medewerker,535,-97,278,21,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,87,Snelheid van Leren door Ervaren Medewerkers,200,-568,186,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,88,Snelheid van Leren door Nieuwe Medewerkers,211,-598,160,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,89,Output per Medewerker,787,-176,124,15,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,90,Productiviteit Nieuwe Medewerkers,827,-151,170,14,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,91,Productiviteit Ervaren Medewerkers,832,-125,158,23,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,92,Gemiddelde Expertise Nieuwe Medewerkers,865,-92,187,15,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,93,Gemiddelde Expertise Ervaren Medewerkers,866,-70,182,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,94,Gemiddelde Werkinhoud Intake,583,-542,188,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,95,Grens voor Uitbesteding,142,-661,139,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,96,Dossiers Uitbesteden,495,-68,142,17,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,97,Aantal Nieuwe Medewerkers per Ervaren Medewerkers,194,-43,205,17,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,98,Opleidingen en Zittingen Ervaren Medewerkers,202,-473,212,21,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,99,Opleidingen en Zittingen Nieuwe Medewerkers,190,-505,181,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+12,100,0,1012,3324,281,183,3,60,0,0,1,0,0,0,0,0,0,0,0,0
+FEEDBACK_LOOPS
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Dossiers
+$192-192-192,0,Helvetica|12|B|0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,75,0
+10,1,Werkjaren gewerkt aan dossiers Nieuwe Medewerkers,1133,711,90,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Gemiddelde Werkinhoud Dossier,805,645,47,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,3,Dossiers door Nieuwe Medewerkers,1136,860,55,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,4,3,1,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,5,2,1,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+10,6,Meldingen,364,302,70,34,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,7,48,42,302,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,8,10,6,4,0,0,22,0,0,0,-1--1--1,,1|(228,302)|
+1,9,10,7,100,0,0,22,0,0,0,-1--1--1,,1|(98,302)|
+11,10,48,153,302,9,13,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,11,Nieuwe Meldingen,153,329,97,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,12,Dossiers In Behandeling,778,312,70,34,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,13,14,6,100,0,0,22,0,0,0,-1--1--1,,1|(489,312)|
+11,14,828,554,312,9,13,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,15,Intake,554,337,34,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,16,48,1071,309,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,17,19,16,4,0,0,22,0,0,0,-1--1--1,,1|(1011,305)|
+1,18,19,12,100,0,0,22,0,0,0,-1--1--1,,1|(896,305)|
+11,19,48,953,305,9,13,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,20,Afleggen,953,333,55,15,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,21,Initiële Nieuwe Meldingen,328,220,62,22,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,22,21,6,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+10,23,Initiële Dossiers in Behandeling,791,217,71,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,24,23,12,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+12,25,48,359,576,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,26,28,25,4,0,0,22,0,0,0,-1--1--1,,1|(359,515)|
+1,27,28,6,100,0,0,22,0,0,0,-1--1--1,,1|(359,390)|
+11,28,48,359,453,13,9,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,29,Meldingen afgewezen,434,453,59,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+11,30,3212,755,442,13,9,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,31,Dossiers Uitbesteden,855,442,87,15,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,32,30,12,100,0,0,22,0,0,0,-1--1--1,,1|(755,390)|
+12,33,48,750,538,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,34,30,33,4,0,0,22,0,0,0,-1--1--1,,1|(755,490)|
+10,35,Werkjaren gewerkt aan dossiers Ervaren Medewerkers,513,713,90,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,36,Dossiers door Ervaren Medewerkers,513,857,55,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,37,36,35,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,38,2,35,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,39,14,12,4,0,0,22,0,0,0,-1--1--1,,1|(635,312)|
+1,40,6,14,1,0,0,0,0,64,0,-1--1--1,,1|(449,242)|
+1,41,12,19,1,0,0,0,0,64,0,-1--1--1,,1|(867,246)|
+10,42,Minimale Afhandelingstijd,1006,164,93,25,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,43,Minimale Intaketijd,564,171,85,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,44,42,19,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,45,Perc van Afhandelcap door Nieuwe Medewerkers,820,946,123,37,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,46,Afleggen,814,828,59,14,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,47,46,3,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,48,45,3,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,49,45,36,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,50,46,36,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,51,Groei volgens BU Plan,-8,502,55,25,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,52,Starttijd Groei,-191,432,53,11,8,3,1,0,0,0,0,0,0,0,0,0,0,0
+10,53,Exogene Groeivoet,-170,284,39,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,54,Groei Dossiers,-45,376,57,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,55,53,54,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,56,52,54,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,57,51,54,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,58,Basisaanbod Dossiers,-57,150,51,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,59,54,11,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,60,58,10,1,0,0,0,0,64,0,-1--1--1,,1|(146,292)|
+10,61,Time,-21,306,53,26,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,62,61,54,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,63,58,21,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,64,43,14,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,65,12,31,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,66,Perc Uitbesteding,899,534,99,19,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,67,Beschikbare Capaciteit voor Afhandeling in Dossiers,1105,242,99,23,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,68,67,20,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,69,Beschikbare Capaciteit voor Intake in Tijdseenheden,500,383,53,26,8,2,2,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,70,Beschikbare Capaciteit voor Intake in Dossiers,594,532,86,32,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,71,70,15,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,72,Omrekenfactor van Week naar Werkjaar,814,754,79,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,73,72,35,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,74,72,1,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,75,Basisaanbod Dossiers,726,94,57,30,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,76,75,23,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,77,Referentiedoorlooptijd Afhandeling,893,95,90,25,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,78,77,23,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+10,79,Actuele Doorlooptijd Afhandeling,1100,429,62,29,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,80,20,79,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,81,12,79,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,82,Omrekenfactor van Week naar Werkjaar,1159,366,72,34,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,83,Aantal weken per jaar,1186,300,61,25,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,84,83,79,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,85,Referentiedoorlooptijd Intake,270,126,73,39,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,86,85,21,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,87,Actuele Doorlooptijd Intake,444,121,62,26,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,88,6,87,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,89,14,87,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,90,Aantal weken per jaar,290,39,61,36,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,91,90,87,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,92,90,21,1,0,0,0,0,64,0,-1--1--1,,1|(361,121)|
+1,93,83,23,1,0,0,0,0,64,0,-1--1--1,,1|(1176,271)|
+10,94,Totaal Actueel Aantal Medewerkers,465,-51,108,31,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,95,Onderhanden Dossiers per Medewerker,714,-57,61,27,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,96,"Onderhanden Dossiers (exclusief Meldingen) per Medewerker",924,-51,97,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,97,94,95,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,98,6,95,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,99,12,95,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,100,12,96,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,101,94,96,1,0,0,0,0,64,0,-1--1--1,,1|(773,15)|
+1,102,54,21,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,103,Groei Dossiers,644,231,40,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,104,103,23,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,105,23,21,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,106,Output per Medewerker,1097,25,58,22,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,107,19,106,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,108,94,106,1,0,0,0,0,64,0,-1--1--1,,1|(817,51)|
+10,109,Intake,826,1007,34,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,110,Perc van Intakecap door Nieuwe Medewerkers,853,1077,115,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,111,Intake door Ervaren Medewerkers,509,1044,73,32,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,112,Gemiddelde Werkinhoud Intake,815,1153,52,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,113,Werkjaren gewerkt aan Intake Ervaren Medewerkers,505,1146,90,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,114,109,111,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,115,110,111,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,116,111,113,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,117,112,113,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,118,Omrekenfactor van Week naar Werkjaar,826,1221,84,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,119,118,113,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,120,Intake door Nieuwe Medewerkers,1151,1038,74,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,121,Werkjaren gewerkt aan Intake Nieuwe Medewerkers,1166,1151,90,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,122,109,120,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,123,110,120,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,124,120,121,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,125,112,121,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,126,118,121,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,127,20,31,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,128,83,31,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,129,31,79,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,130,12,66,1,0,0,0,0,64,0,-1--1--1,,1|(693,433)|
+1,131,31,66,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,132,Grens voor Uitbesteding,1074,537,53,21,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,133,132,31,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Medewerkers
+$192-192-192,0,Helvetica|12|B|0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,75,0
+10,1,Nieuwe Medewerkers,365,209,82,46,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,2,48,51,221,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,5,1,4,0,0,22,0,0,0,-1--1--1,,1|(225,216)|
+1,4,5,2,100,0,0,22,0,0,0,-1--1--1,,1|(105,216)|
+11,5,48,158,216,9,13,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,6,Inhuur Nieuwe Medewerkers,158,250,77,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,7,48,368,546,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,8,10,7,4,0,0,22,0,0,0,-1--1--1,,1|(364,454)|
+1,9,10,1,100,0,0,22,0,0,0,-1--1--1,,1|(364,300)|
+11,10,48,364,358,9,13,33,3,0,0,2,0,0,0,0,0,0,0,0,0
+10,11,Verloop Nieuwe Medewerkers,265,358,86,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,12,1,11,1,0,43,0,0,192,0,-1--1--1,,1|(328,303)|
+10,13,Verloopperc Nieuwe Medewerkers,483,627,97,33,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,14,13,10,1,0,43,0,0,192,0,-1--1--1,,1|(492,531)|
+10,15,Normaal Verloopperc Nieuwe Medewerkers,199,702,94,23,8,131,1,0,0,0,0,0,0,0,0,0,0,0
+1,16,15,13,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+10,17,Initiële Aantal Nieuwe Medewerkers,350,54,93,27,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,18,17,1,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+10,19,Ervaren Medewerkers,776,213,82,46,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+11,20,428,982,201,9,13,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,21,Inhuur Ervaren Medewerkers,982,253,89,38,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+11,22,3020,802,326,9,13,33,3,0,0,2,0,0,0,0,0,0,0,0,0
+10,23,Verloop Ervaren Medewerkers,702,326,87,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,24,22,19,100,0,0,22,0,0,0,-1--1--1,,1|(802,286)|
+12,25,48,802,437,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,26,22,25,4,0,0,22,0,0,0,-1--1--1,,1|(802,384)|
+1,27,20,19,4,0,0,22,0,0,0,-1--1--1,,1|(915,201)|
+1,28,30,19,4,0,0,22,0,0,0,-1--1--1,,1|(630,211)|
+1,29,30,1,100,0,0,22,0,0,0,-1--1--1,,1|(498,211)|
+11,30,48,558,211,9,13,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,31,Doorstroom Medewerkers,558,243,73,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,32,Initiële Aantal Ervaren Medewerkers,777,58,87,27,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,33,32,19,0,0,0,0,0,0,1,-1--1--1,,1|(0,0)|
+12,34,48,1127,197,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,35,20,34,100,0,0,22,0,0,0,-1--1--1,,1|(1054,201)|
+10,36,Groeitijd tot Ervaren Medewerker,541,73,66,30,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,37,19,23,1,0,0,0,0,64,0,-1--1--1,,1|(692,297)|
+10,38,Verloopperc Ervaren Medewerkers,908,545,92,32,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,39,Normaal Verloopperc Ervaren Medewerkers,1158,786,94,18,8,131,1,0,0,0,0,0,0,0,0,0,0,0
+1,40,39,38,0,0,0,0,0,0,1,-1--1--1,,1|(0,0)|
+1,41,38,23,1,0,0,0,0,64,0,-1--1--1,,1|(764,475)|
+1,42,36,30,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,43,22,20,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,44,31,21,1,0,0,0,0,64,0,-1--1--1,,1|(774,124)|
+1,45,1,31,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,46,Gemiddelde verblijftijd Nieuwe Medewerkers,585,445,95,21,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,47,Jaarlijkse doorstroom,650,569,63,25,8,3,2,0,0,0,0,0,0,0,0,0,0,0
+10,48,Inhuurtijd Nieuwe Medewerkers,211,125,73,25,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,49,48,6,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,50,Inhuurtijd Ervaren Medewerkers,1020,120,60,26,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,51,50,20,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,52,Pulse Inhuur,158,282,40,20,8,2,4,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,53,Gewenst Aantal Medewerkers,43,334,73,35,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,54,53,6,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+10,55,Totaal Actueel Aantal Medewerkers,544,-16,68,29,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,56,19,55,1,0,0,0,0,64,0,-1--1--1,,1|(670,68)|
+1,57,1,55,1,0,0,0,0,64,0,-1--1--1,,1|(437,68)|
+1,58,55,6,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+10,59,Verandering Verloopperc Nieuwe Medewerkers,518,742,82,41,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,60,59,13,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+10,61,Verandering Verloopperc Ervaren Medewerkers,902,669,92,32,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,62,61,38,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,63,1,46,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,64,31,46,1,0,0,0,0,64,0,-1--1--1,,1|(556,423)|
+1,65,11,46,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,66,Gemiddelde verblijftijd Ervaren Medewerkers,1006,437,93,23,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,67,22,66,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,68,19,66,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,69,Perc Initiële Aantal Nieuwe Medewerkers,347,-73,96,29,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,70,69,17,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,71,69,32,1,0,0,0,0,64,0,-1--1--1,,1|(720,2)|
+10,72,Initiële Totale Aantal Medewerkers,146,-70,90,36,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,73,72,17,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,74,72,32,1,0,0,0,0,64,0,-1--1--1,,1|(617,-89)|
+10,75,dimensie variabele,145,410,51,20,8,130,1,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,76,75,6,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+10,77,Aantal Nieuwe Medewerkers per Ervaren Medewerkers,890,-52,93,32,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,78,1,77,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,79,19,77,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Expertise en productiviteit
+$192-192-192,0,Helvetica|12|B|0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,75,0
+10,1,Totale Expertise Nieuwe Medewerkers,531,-109,82,46,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,2,48,235,-107,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,5,1,4,0,0,22,0,0,0,-1--1--1,,1|(395,-107)|
+1,4,5,2,100,0,0,22,0,0,0,-1--1--1,,1|(284,-107)|
+11,5,48,333,-107,9,13,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,6,Toename Expertise door Inhuur,333,-55,81,30,40,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,7,48,843,-153,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,8,10,7,4,0,0,22,0,0,0,-1--1--1,,1|(788,-154)|
+1,9,10,1,100,0,0,22,0,0,0,-1--1--1,,1|(669,-154)|
+11,10,48,735,-154,9,13,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,11,Verlies van Expertise Nieuwe Medewerkers door Verloop,735,-114,112,27,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,12,Gemiddelde Expertise Nieuwe Inhuur,115,-27,97,30,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,13,Gemiddelde Expertise Nieuwe Medewerkers,809,-305,86,31,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,14,12,6,1,0,43,0,0,192,0,-1--1--1,,1|(195,13)|
+1,15,1,13,1,0,43,0,0,192,0,-1--1--1,,1|(720,-223)|
+10,16,Exogene Expertise Inhuur Ervaren Medewerkers,-187,-87,109,30,8,2,1,1,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,17,16,12,1,1,43,0,0,192,0,-1--1--1,,1|(-48,-11)|
+12,18,48,479,151,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,19,21,1,4,0,0,22,0,0,0,-1--1--1,,1|(477,-6)|
+1,20,21,18,100,0,0,22,0,0,0,-1--1--1,,1|(477,106)|
+11,21,48,477,61,13,9,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,22,Toename Expertise door Dossierervaring,580,61,83,30,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,23,48,464,-348,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,24,26,23,4,0,0,22,0,0,0,-1--1--1,,1|(469,-296)|
+1,25,26,1,100,0,0,22,0,0,0,-1--1--1,,1|(469,-195)|
+11,26,48,469,-243,13,9,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,27,Verouderingssnelheid Expertise Nieuwe Medewerkers,608,-243,126,33,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,28,Relatieve Verouderingssnelheid Expertise Nieuwe Medewerkers,259,-330,115,41,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,29,28,26,1,0,43,0,0,192,0,-1--1--1,,1|(335,-261)|
+10,30,Productiviteit Nieuwe Medewerkers,431,377,78,29,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,31,Gemiddelde Expertise Nieuwe Medewerkers,693,317,75,36,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,32,Exponent Leercurve,557,561,54,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,33,32,30,1,0,43,0,0,192,0,-1--1--1,,1|(481,513)|
+1,34,31,30,1,0,43,0,0,192,0,-1--1--1,,1|(515,302)|
+10,35,Referentieproductiviteit Nieuwe Medewerkers,180,311,131,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,36,"Referentie-Expertise Nieuwe Medewerkers",182,448,90,22,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,37,35,30,1,0,43,0,0,192,0,-1--1--1,,1|(297,317)|
+1,38,36,30,1,0,45,0,0,192,0,-1--1--1,,1|(302,442)|
+10,39,Sterkte Leercurve,808,585,94,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,40,39,32,1,0,43,0,0,192,0,-1--1--1,,1|(689,600)|
+10,41,Normale Veroudering Expertise Nieuwe Medewerkers,-187,-459,114,30,8,3,1,0,0,0,0,0,0,0,0,0,0,0
+10,42,Verandering Veroudering Expertise Nieuwe Medewerkers,-273,-335,119,30,8,3,1,0,0,0,0,0,0,0,0,0,0,0
+10,43,Verouderingstijd Expertise Nieuwe Medewerkers,-169,-197,97,30,8,3,1,0,0,0,0,0,0,0,0,0,0,0
+1,44,41,28,1,1,43,0,0,192,0,-1--1--1,,1|(57,-405)|
+1,45,42,28,1,1,43,0,0,192,0,-1--1--1,,1|(-11,-334)|
+1,46,43,28,1,1,0,0,0,64,0,-1--1--1,,1|(59,-241)|
+10,47,Verloop Nieuwe Medewerkers,1032,-110,114,35,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,48,Nieuwe Medewerkers,1019,-217,98,30,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,49,48,13,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,50,Verloop Nieuwe Medewerkers,531,-41,70,34,8,2,3,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,51,Totale Expertise Ervaren Medewerkers,2104,-98,82,46,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,52,48,1804,-140,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,53,55,51,4,0,0,22,0,0,0,-1--1--1,,1|(1969,-135)|
+1,54,55,52,100,0,0,22,0,0,0,-1--1--1,,1|(1856,-135)|
+11,55,48,1907,-135,9,13,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,56,Toename Expertise door Ervaren Inhuur,1907,-92,81,30,40,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,57,48,2416,-97,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,58,60,57,4,0,0,22,0,0,0,-1--1--1,,1|(2353,-97)|
+1,59,60,51,100,0,0,22,0,0,0,-1--1--1,,1|(2234,-97)|
+11,60,48,2292,-97,9,13,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,61,Verlies van Expertise Ervaren Medewerkers door Verloop,2292,-45,118,30,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,62,Gemiddelde Expertise Ervaren Inhuur,1650,-103,97,30,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,63,Gemiddelde Expertise Ervaren Medewerkers,2382,-294,78,29,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,64,62,56,1,0,43,0,0,192,0,-1--1--1,,1|(1734,-105)|
+1,65,51,63,1,0,43,0,0,192,0,-1--1--1,,1|(2293,-213)|
+1,66,63,60,1,0,43,0,0,128,0,-1--1--1,,1|(2330,-129)|
+10,67,Exogene Expertise Inhuur Ervaren Medewerkers,1385,-77,109,30,8,2,1,1,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,68,67,62,1,1,43,0,0,192,0,-1--1--1,,1|(1518,-55)|
+12,69,48,2052,162,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,70,72,51,4,0,0,22,0,0,0,-1--1--1,,1|(2050,5)|
+1,71,72,69,100,0,0,22,0,0,0,-1--1--1,,1|(2050,117)|
+11,72,48,2050,71,13,9,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,73,Toename Expertise door Dossierervaring Ervaren Medewerkers,2153,71,118,30,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,74,48,2050,-330,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,75,77,74,4,0,0,22,0,0,0,-1--1--1,,1|(2050,-281)|
+1,76,77,51,100,0,0,22,0,0,0,-1--1--1,,1|(2050,-183)|
+11,77,48,2050,-230,13,9,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,78,Verouderingssnelheid Expertise Ervaren Medewerkers,2192,-230,115,30,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,79,Relatieve Verouderingssnelheid Expertise Ervaren Medewerkers,1832,-319,143,41,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,80,79,77,1,0,43,0,0,192,0,-1--1--1,,1|(1972,-310)|
+10,81,Productiviteit Ervaren Medewerkers,2004,387,75,30,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,82,Gemiddelde Expertise Ervaren Medewerkers,2266,327,85,31,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,83,Exponent Leercurve Ervaren,2045,574,57,31,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,84,83,81,1,0,43,0,0,192,0,-1--1--1,,1|(2003,510)|
+1,85,82,81,1,0,43,0,0,192,0,-1--1--1,,1|(2088,313)|
+10,86,Referentieproductiviteit Ervaren Medewerkers,1741,304,92,30,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,87,"Referentie-Expertise Ervaren medewerkers",1753,451,90,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,88,86,81,1,0,43,0,0,192,0,-1--1--1,,1|(1866,314)|
+1,89,87,81,1,0,45,0,0,192,0,-1--1--1,,1|(1876,450)|
+10,90,Sterkte Leercurve Ervaren,2315,586,54,30,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,91,90,83,1,0,43,0,0,192,0,-1--1--1,,1|(2185,611)|
+10,92,Normale Veroudering Expertise Ervaren Medewerkers,1385,-449,114,30,8,3,1,0,0,0,0,0,0,0,0,0,0,0
+10,93,Verandering Veroudering Expertise Ervaren Medewerkers,1300,-325,119,30,8,3,1,0,0,0,0,0,0,0,0,0,0,0
+10,94,Verouderingstijd Expertise Ervaren Medewerkers,1403,-186,97,30,8,3,1,0,0,0,0,0,0,0,0,0,0,0
+1,95,92,79,1,1,43,0,0,192,0,-1--1--1,,1|(1629,-394)|
+1,96,93,79,1,1,43,0,0,192,0,-1--1--1,,1|(1547,-323)|
+1,97,94,79,1,1,0,0,0,64,0,-1--1--1,,1|(1630,-230)|
+10,98,Verloop Nieuwe Medewerkers,2104,-30,70,34,8,2,3,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,99,Werkjaren gewerkt aan dossiers Nieuwe Medewerkers,805,180,137,51,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,100,Inhuur Ervaren Medewerkers,1770,-191,103,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,101,100,56,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,102,47,11,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,103,13,11,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,104,99,22,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,105,Ervaren Medewerkers,2521,-195,78,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,106,105,63,1,0,0,0,0,64,0,-1--1--1,,1|(2448,-234)|
+10,107,Verloopperc Ervaren Medewerkers,1780,103,131,38,8,2,3,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,108,Werkjaren gewerkt aan dossiers Ervaren Medewerkers,2234,221,131,62,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,109,108,73,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,110,Verloop Ervaren Medewerkers,2438,91,131,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,111,110,61,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+10,112,Initiële Totale Expertise Ervaren Medewerkers,1898,-244,83,25,8,3,1,0,-1,0,0,0,0,0,0,0,0,0
+1,113,112,51,0,1,0,0,0,0,1,-1--1--1,,1|(0,0)|
+10,114,Ervaren Medewerkers,1602,-211,53,26,8,2,3,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,115,Inhuur Ervaren Medewerkers,1602,-211,53,26,8,2,3,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,116,Verloopperc Ervaren Medewerkers,1690,-137,53,26,8,2,3,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,117,Werkjaren gewerkt aan dossiers Ervaren Medewerkers,1561,-115,53,26,8,2,3,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,118,Initiële Totale Expertise Nieuwe Medewerkers,204,-213,104,28,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,119,118,1,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+10,120,Inhuur Nieuwe Medewerkers,335,54,76,31,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,121,120,6,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+10,122,Medewerkertevredenheid,79,155,107,22,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,123,Tabel voor Effect Medewerkertevredenheid op Referentieproductiviteit,-125,264,110,33,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,124,122,35,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,125,123,35,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,126,Medewerkertevredenheid,1585,178,110,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,127,126,86,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,128,Tabel voor Effect Medewerkertevredenheid op Referentieproductiviteit Ervaren Medewerkers,1473,360,121,45,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,129,128,86,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,130,Snelheid van Leren door Ervaren Medewerkers,2424,449,74,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,131,Normale Snelheid van Leren Ervaren Medewerkers,2211,703,115,29,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,132,131,90,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,133,130,90,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,134,Snelheid van Leren door Nieuwe Medewerkers,904,451,114,30,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,135,134,39,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,136,Opleidingen en Zittingen Ervaren Medewerkers,1946,792,66,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,137,Opleidingen en Zittingen Nieuwe Medewerkers,541,748,76,29,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,138,136,131,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,139,Aantal Nieuwe Medewerkers per Ervaren Medewerkers,2235,798,90,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,140,Tabel voor Effect Coaching op Leersnelheid Ervaren Medewerkers,2503,746,140,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,141,139,131,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,142,140,131,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,143,Normale Snelheid van Leren Nieuwe Medewerkers,864,698,113,26,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,144,Aantal Nieuwe Medewerkers per Ervaren Medewerkers,765,814,104,30,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,145,Tabel voor Effect Coaching op Leersnelheid Nieuwe Medewerkers,1038,802,118,34,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,146,137,143,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,147,144,143,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,148,145,143,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,149,143,39,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,150,1,27,1,0,0,0,0,64,0,-1--1--1,,1|(605,-213)|
+1,151,51,78,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+12,152,48,1804,-60,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,153,155,51,4,0,0,22,0,0,0,-1--1--1,,1|(1972,-60)|
+1,154,155,152,100,0,0,22,0,0,0,-1--1--1,,1|(1862,-60)|
+11,155,48,1917,-60,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,156,Toename Expertise door Doorstroom,1917,-25,75,27,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,157,Gemiddelde Expertise Nieuwe Medewerkers,1631,55,68,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,158,Doorstroom Medewerkers,1878,67,58,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,159,157,156,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,160,158,156,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+12,161,48,848,-76,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,162,164,161,4,0,0,22,0,0,0,-1--1--1,,1|(785,-76)|
+1,163,164,1,100,0,0,22,0,0,0,-1--1--1,,1|(667,-76)|
+11,164,48,727,-76,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,165,Verlies van Expertise door Doorstroom,727,-44,89,24,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,166,Gemiddelde Expertise Nieuwe Medewerkers,756,42,68,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,167,Doorstroom Medewerkers,948,29,58,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,168,166,165,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,169,167,165,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,170,Initiële Totale Expertise Ervaren Medewerkers,1571,554,70,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,171,Initiële Aantal Ervaren Medewerkers,1784,562,58,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,172,170,87,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,173,171,87,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,174,Werkjaren gewerkt aan Intake Nieuwe Medewerkers,624,221,129,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,175,174,22,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,176,Werkjaren gewerkt aan Intake Ervaren Medewerkers,2380,161,141,31,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,177,176,73,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Capaciteitstoewijzing
+$192-192-192,0,Helvetica|12|B|0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,75,0
+10,1,Productiviteit Ervaren Medewerkers,1160,1071,78,37,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,2,Productiviteit Nieuwe Medewerkers,552,1044,78,37,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,3,Meldingen,858,313,67,14,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,4,Dossiers In Behandeling,1706,286,74,25,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,5,Nieuwe Medewerkers,806,1064,78,25,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,6,Ervaren Medewerkers,1434,1075,78,25,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,7,Totale Capaciteit Nieuwe Medewerkers,720,889,86,32,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,8,2,7,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,9,5,7,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,10,Totale capaciteit Ervaren Medewerkers,1329,917,87,37,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,11,1,10,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,12,6,10,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,13,Beschikbare Capaciteit Nieuwe Medewerkers,727,745,79,32,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,14,7,13,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,15,Beschikbare Capaciteit Ervaren Medewerkers,1287,756,98,37,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,16,10,15,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,17,Per Cap Toewijzing Intake Nieuwe Medewerkers,737,520,103,37,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,18,Beschikbare Cap Nieuwe Medewerkers voor Afhandeling,1000,617,114,37,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,19,17,18,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,20,13,18,1,0,0,0,0,64,0,-1--1--1,,1|(886,728)|
+10,21,Beschikbare Capaciteit voor Afhandeling in Tijdseenheden,1441,361,93,34,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,22,18,21,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,23,Per Cap Toewijzing Intake Ervaren Medewerkers,1571,557,103,37,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,24,Beschikbare Cap Ervaren Medewerkers voor Afhandeling,1851,608,115,37,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,25,23,24,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,26,15,24,1,0,0,0,0,64,0,-1--1--1,,1|(1575,714)|
+1,27,24,21,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,28,Beschikbare Cap Nieuwe Medewerkers voor Intake,435,590,114,37,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,29,Beschikbare Cap Ervaren Medewerkers voor Intake,1245,583,115,37,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,30,15,29,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,31,13,28,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,32,Beschikbare Capaciteit voor Intake in Tijdseenheden,572,324,94,23,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,33,29,32,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,34,28,32,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,35,Gemiddelde Doorlooptijd Intake,708,187,66,37,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,36,3,35,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,37,Minimale Intaketijd,964,239,53,25,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,38,37,35,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,39,Minimale Afhandelingstijd,1747,202,87,25,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,40,Gemiddelde Doorlooptijd Afhandeling,1516,179,78,38,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,41,39,40,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,42,4,40,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,43,Perc van Intakecap door Nieuwe Medewerkers,278,311,102,37,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,44,32,43,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,45,28,43,1,0,0,0,0,64,0,-1--1--1,,1|(344,480)|
+10,46,Perc van Afhandelcap door Nieuwe Medewerkers,1102,377,117,37,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,47,21,46,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,48,18,46,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,49,Beschikbare Capaciteit voor Afhandeling in Dossiers,1257,248,94,23,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,50,21,49,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,51,Gemiddelde Werkinhoud Dossier,1059,27,69,28,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,52,51,49,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,53,Beschikbare Capaciteit voor Intake in Dossiers,417,192,73,23,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,54,32,53,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,55,Omrekenfactor van Week naar FTE,994,977,88,23,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,56,55,7,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,57,Omrekenfactor van Week naar FTE,811,112,88,26,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,58,57,53,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,59,55,10,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,60,57,49,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,61,53,35,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,62,49,40,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,63,Deel van Werkpakket voor Intake,504,48,64,30,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,64,Dossiers In Behandeling,846,-115,59,21,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,65,Meldingen,198,-103,48,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,66,Werkpakket Intake,326,-47,62,21,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,67,65,66,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,68,Werkpakket Afhandeling,840,-15,50,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,69,64,68,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,70,Gemiddelde Werkinhoud Dossier,710,52,90,23,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,71,70,68,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,72,Deel van Werkpakket voor Intake,635,435,97,37,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,73,Nadruk Ervaren Medewerkers voor Intake,720,616,73,29,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,74,Nadruk Ervaren Medewerkers voor Intake,1518,664,77,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,75,Deel van Werkpakket voor Intake,1513,473,99,24,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+12,76,48,498,-172,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,77,79,63,4,0,0,22,0,0,0,-1--1--1,,1|(502,-43)|
+1,78,79,76,100,0,0,22,0,0,0,-1--1--1,,1|(502,-140)|
+11,79,48,502,-111,8,6,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,80,Verandering Deel Werkpakket Intake,601,-111,91,32,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,81,66,80,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,82,68,80,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,83,63,80,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,84,Aanpassingtijd Capaciteitsinzet Intake,357,-143,95,31,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,85,84,80,1,0,0,0,0,64,0,-1--1--1,,1|(406,-118)|
+1,86,72,28,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,87,73,28,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,88,15,28,1,0,0,0,0,64,0,-1--1--1,,1|(848,711)|
+1,89,28,17,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,90,13,17,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,91,13,29,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,92,74,29,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,93,75,29,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,94,29,23,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,95,15,23,1,0,0,0,0,64,0,-1--1--1,,1|(1408,639)|
+10,96,Beschikbaarheidspercentage Nieuwe Medewerkers,406,749,118,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,97,96,13,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,98,Beschikbaarheidspercentage Ervaren Medewerkers,1654,757,118,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,99,98,15,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,100,Initiëel deel werkpakket intake,225,148,95,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,101,100,63,0,0,0,0,0,0,1,-1--1--1,,1|(0,0)|
+10,102,Gemiddelde Werkinhoud Intake,260,31,78,22,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,103,102,66,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,104,102,53,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,105,Gemiddelde Werkinhoud Dossier,680,1014,40,20,8,2,2,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,106,Gemiddelde Werkinhoud Dossier,1534,974,40,20,8,2,2,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,107,Basiswerkinhoud Dossiers,954,850,67,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,108,107,7,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,109,107,10,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Werkdruk en Verzuim
+$192-192-192,0,Arial|12|B|0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,75,0
+10,1,Werkdrukindicator,335,174,40,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Normale Werkdruk,620,310,40,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,3,Gepercipieerde Werkdruk,876,123,81,28,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,4,48,514,141,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,5,7,3,4,0,0,22,0,0,0,-1--1--1,,1|(712,138)|
+1,6,7,4,100,0,0,22,0,0,0,-1--1--1,,1|(570,138)|
+11,7,48,623,138,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,8,Verandering in Perceptie Werkdruk,623,171,93,25,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,9,1,8,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,10,2,8,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,11,Perceptieinterval Werkdruk,500,255,68,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,12,11,8,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,13,3,8,1,0,0,0,0,0,0,-1--1--1,,1|(846,216)|
+1,14,2,3,0,0,0,0,0,0,1,-1--1--1,,1|(0,0)|
+10,15,Referentiedoorlooptijd Afhandeling,131,60,90,21,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,16,Aantal weken per jaar,336,62,59,19,8,2,3,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,17,Referentiedoorlooptijd Intake,131,294,92,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,18,Actuele Doorlooptijd Afhandeling,476,453,113,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,19,Totale Actuele Doorlooptijd,332,340,63,33,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,20,18,19,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,21,19,1,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,22,Totale Referentiedoorlooptijd,133,171,95,31,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,23,15,22,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,24,17,22,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,25,22,1,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,26,Actuele Doorlooptijd Intake,194,448,98,31,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,27,26,19,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+10,28,Aantal weken per jaar,623,79,65,21,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,29,Tabel voor Effect Werkdruk op Ziekteverzuim,1121,323,88,34,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,30,Effect Werkdruk op Ziekteverzuim,875,323,77,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,31,Beschikbaarheidspercentage Exclusief Vakantie en Normaal Ziekteverzuim,878,696,118,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,32,Beschikbaarheidspercentage Nieuwe Medewerkers,675,541,118,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,33,Beschikbaarheidspercentage Ervaren Medewerkers,1078,540,118,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,34,3,30,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,35,29,30,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,36,30,32,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,37,31,32,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,38,30,33,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,39,31,33,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,40,Opleidingen en Zittingen Nieuwe Medewerkers,531,694,67,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,41,Opleidingen en Zittingen Ervaren Medewerkers,1239,698,69,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,42,40,32,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,43,41,33,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Exogenous Inputs
+$192-192-192,0,Helvetica|12|B|0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,75,0
+10,1,Input,437,588,75,30,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,Pink Noise,1066,534,70,34,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,3,48,1300,539,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,4,White Noise,1114,718,70,34,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,5,Noise Standard Deviation,924,767,70,34,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,6,TIME STEP,948,646,75,30,0,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,7,Pink Noise,297,498,75,30,0,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,8,Noise Start Time,380,448,75,30,0,3,0,1,-1,0,0,0,128-128-128,0-0-0,||B|0-0-0,0,0,0,0,0,0
+10,9,Pulse Quantity,539,421,75,30,0,3,0,1,-1,0,0,0,128-128-128,0-0-0,||B|0-0-0,0,0,0,0,0,0
+10,10,Pulse Time,633,464,75,30,0,3,0,1,-1,0,0,0,128-128-128,0-0-0,||B|0-0-0,0,0,0,0,0,0
+10,11,Ramp End Time,324,746,75,30,0,3,0,1,-1,0,0,0,128-128-128,0-0-0,||B|0-0-0,0,0,0,0,0,0
+10,12,Ramp Slope,260,642,75,30,0,3,0,1,-1,0,0,0,128-128-128,0-0-0,||B|0-0-0,0,0,0,0,0,0
+10,13,Ramp Start Time,256,696,75,30,0,3,0,1,-1,0,0,0,128-128-128,0-0-0,||B|0-0-0,0,0,0,0,0,0
+10,14,Sine Amplitude,639,650,75,30,0,3,0,1,-1,0,0,0,128-128-128,0-0-0,||B|0-0-0,0,0,0,0,0,0
+10,15,Sine Period,601,700,75,30,0,3,0,1,-1,0,0,0,128-128-128,0-0-0,||B|0-0-0,0,0,0,0,0,0
+10,16,Step Height,447,773,75,30,0,3,0,1,-1,0,0,0,128-128-128,0-0-0,||B|0-0-0,0,0,0,0,0,0
+10,17,Step Time,540,737,75,30,0,3,0,1,-1,0,0,0,128-128-128,0-0-0,||B|0-0-0,0,0,0,0,0,0
+10,18,Time,252,556,75,30,0,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,19,TIME STEP,252,600,75,30,0,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+11,20,92,1226,542,9,13,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,21,Change in Pink Noise,1226,591,70,34,40,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,22,Noise Correlation Time,1346,683,70,34,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,23,8,1,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,24,9,1,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,25,10,1,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,26,11,1,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,27,12,1,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,28,13,1,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,29,14,1,1,0,0,0,0,0,0,-1--1--1,,1|(503,614)|
+1,30,15,1,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,31,16,1,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,32,17,1,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,33,18,1,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,34,19,1,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,35,20,2,4,0,0,22,0,0,0,-1--1--1,,1|(1176,542)|
+1,36,20,3,100,0,0,22,0,0,0,-1--1--1,,1|(1262,542)|
+1,37,2,21,2,0,0,0,0,0,0,-1--1--1,,1|(1154,632)|
+1,38,4,21,2,0,0,0,0,0,0,-1--1--1,,1|(1220,659)|
+1,39,22,21,2,0,0,0,0,0,0,-1--1--1,,1|(1320,598)|
+1,40,22,4,1,0,0,0,0,0,0,-1--1--1,,1|(1220,750)|
+1,41,6,4,1,0,0,0,0,0,0,-1--1--1,,1|(1012,696)|
+1,42,5,4,1,0,0,0,0,0,0,-1--1--1,,1|(1043,747)|
+1,43,7,1,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+10,44,Exogene Expertise Inhuur Ervaren Medewerkers,433,194,103,30,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,45,Expertise Inhuur Nieuwe Medewerkers,149,248,87,30,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,46,45,44,0,0,43,0,0,192,0,-1--1--1,,1|(0,0)|
+10,47,Exponential Growth Rate,697,528,70,34,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,48,47,1,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+10,49,Exponential Growth Time,772,602,70,34,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,50,49,1,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+10,51,Input,147,126,70,34,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,52,51,44,0,0,43,0,0,192,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Aannamebeleid
+$192-192-192,0,Helvetica|12|B|0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,75,0
+10,1,Gewenst Aantal Medewerkers,290,398,62,26,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Druk op Aannamebeleid,552,230,71,32,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,3,Managementnorm Werkdruk,844,230,75,33,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,4,Effect van Werkdruk op Gewenst Medewerkerniveau,553,395,111,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,5,Tabel voor Effect van Werkdruk op Aannamebeleid,551,525,120,30,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,6,Switch voor Reactief Aannamebeleid,843,309,84,30,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,7,Exogene Druk op Personeelsgroei,854,394,83,32,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,8,4,1,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,9,3,2,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,10,2,4,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,11,5,4,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+10,12,Gepercipieerde Werkdruk,547,128,73,23,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,13,12,2,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,14,Groei volgens BU Plan,852,532,106,25,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,15,14,7,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,16,Pulse Inhuur,1068,392,66,11,8,3,1,0,0,0,0,0,0,0,0,0,0,0
+10,17,Pulse Inhuur Starttijd,1219,523,58,19,8,131,1,0,0,0,0,0,0,0,0,0,0,0
+10,18,Pulse Inhuur Omvang,1225,294,67,19,8,3,1,0,0,0,0,0,0,0,0,0,0,0
+1,19,18,16,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,20,17,16,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+10,21,TIME STEP,1069,294,40,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,22,16,7,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+11,23,92,297,200,9,13,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,24,Inhuur Nieuwe Medewerkers,297,232,77,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,25,Inhuurtijd Nieuwe Medewerkers,307,130,82,23,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,26,25,24,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,27,1,24,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,28,Totaal Actueel Aantal Medewerkers,297,525,96,31,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,29,28,24,1,0,0,0,0,64,0,-1--1--1,,1|(184,369)|
+1,30,28,1,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,31,Time,1069,524,40,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,32,31,7,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,33,7,4,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,34,6,4,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+10,35,Verloop Ervaren Medewerkers,90,524,75,21,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,36,Verloop Nieuwe Medewerkers,81,400,68,24,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,37,36,1,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,38,35,1,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,39,6,1,1,0,0,0,0,64,0,-1--1--1,,1|(510,304)|
+10,40,dimensie variabele,78,296,94,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,41,40,24,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,42,21,16,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Medewerkertevredenheid
+$192-192-192,0,Helvetica|12|B|0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,75,0
+10,1,Gepercipieerde Werkdruk,185,202,83,38,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,2,Medewerkertevredenheid,743,585,101,19,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,3,Normale Medewerker tevredenheid,744,458,124,31,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,4,48,358,592,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,5,7,2,4,0,0,22,0,0,0,-1--1--1,,1|(555,589)|
+1,6,7,4,100,0,0,22,0,0,0,-1--1--1,,1|(412,589)|
+11,7,48,463,589,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,8,Verandering Medewerker tevredenheid,463,624,85,27,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,9,2,8,1,0,0,0,0,64,0,-1--1--1,,1|(592,698)|
+10,10,Aanpassingstijd Medewerker tevredenheid,462,766,113,35,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,11,10,8,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,12,3,2,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+10,13,Actuele Medewerker tevredenheid,462,461,80,31,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,14,Effect van Werkdruk op Tevredenheid,459,205,99,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,15,14,13,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,16,13,7,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,17,1,14,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,18,Tabel voor Effect van Werkdruk op Tevredenheid,454,87,130,30,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,19,18,14,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,20,Gewenste Werkdruk Medewerker,740,206,98,32,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,21,20,14,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,22,Gewicht van Werkdruk op Tevredenheid,196,308,94,32,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,23,22,13,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,24,Perc van Intakecap door Nieuwe Medewerkers,183,631,117,27,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,25,Gewicht van Fit Dossiers op Tevredenheid,199,406,96,32,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,26,25,13,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,27,Effect van Fit Dossiers op Tevredenheid,186,510,93,32,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,28,24,27,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,29,27,13,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,30,Effect van Opleidingen op Tevredenheid,884,322,88,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,31,Opleidingen en Zittingen Ervaren Medewerkers,1097,230,79,31,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,32,Opleidingen en Zittingen Nieuwe Medewerkers,1105,380,76,37,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,33,31,30,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,34,32,30,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,35,Gewicht van Opleidingen op Tevredenheid,606,325,95,25,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,36,30,13,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,37,35,13,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,38,Tabel voor Effect van Opleidingen op Tevredenheid,906,106,135,31,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,39,38,30,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Tevredenheid en Verloop
+$192-192-192,0,Helvetica|12|B|0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,75,0
+11,1,0,223,238,9,13,33,3,0,0,2,0,0,0,0,0,0,0,0,0
+10,2,Verloop Nieuwe Medewerkers,151,238,63,18,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,3,Verloopperc Nieuwe Medewerkers,393,242,77,25,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,4,Normaal Verloopperc Nieuwe Medewerkers,366,362,88,23,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,5,Nieuwe Medewerkers,149,116,66,18,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,6,5,2,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,7,3,2,1,0,0,0,0,0,0,-1--1--1,,1|(268,162)|
+10,8,Effect van Tevredenheid op Verloop,795,442,98,27,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,9,Medewerkertevredenheid,1057,441,107,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,10,9,8,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,11,Tabel voor Effect van Tevredenheid op Verloop,1040,505,95,32,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,12,11,8,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,13,Aanpassingstijd Verloopperc,554,442,95,26,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,14,Actueel Percentage Nieuwe Medewerkers met Verloopplannen,798,268,99,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,15,8,14,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,16,Normale Medewerker tevredenheid,1029,374,92,25,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,17,16,8,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+12,18,48,668,242,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,19,21,3,4,0,0,22,0,0,0,-1--1--1,,1|(508,241)|
+1,20,21,18,100,0,0,22,0,0,0,-1--1--1,,1|(608,241)|
+11,21,48,553,241,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,22,Verandering Verloopperc Nieuwe Medewerkers,553,279,100,30,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,23,14,22,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,24,13,22,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,25,4,3,1,0,0,0,0,64,1,-1--1--1,,1|(380,304)|
+1,26,3,22,1,0,0,0,0,64,0,-1--1--1,,1|(448,290)|
+1,27,4,14,1,0,0,0,0,64,0,-1--1--1,,1|(585,396)|
+11,28,2556,221,595,9,13,33,3,0,0,2,0,0,0,0,0,0,0,0,0
+10,29,Verloop Ervaren Medewerkers,151,595,61,31,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,30,Verloopperc Ervaren Medewerkers,359,598,85,31,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,31,Normaal Verloopperc Ervaren Medewerkers,365,719,92,21,8,131,1,0,0,0,0,0,0,0,0,0,0,0
+10,32,Ervaren Medewerkers,138,466,66,18,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,33,32,29,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,34,30,29,1,0,0,0,0,0,0,-1--1--1,,1|(231,542)|
+1,35,31,30,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+12,36,48,665,598,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,37,39,30,4,0,0,22,0,0,0,-1--1--1,,1|(495,594)|
+1,38,39,36,100,0,0,22,0,0,0,-1--1--1,,1|(606,594)|
+11,39,48,552,594,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,40,Verandering Verloopperc Ervaren Medewerkers,552,630,110,28,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,41,30,40,1,0,0,0,0,64,0,-1--1--1,,1|(510,657)|
+10,42,Actueel Percentage Ervaren Medewerkers met Verloopplannen,796,630,106,47,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,43,8,42,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,44,31,42,1,0,0,0,0,64,0,-1--1--1,,1|(658,744)|
+1,45,42,40,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,46,13,39,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Klanttevredenheid
+$192-192-192,0,Helvetica|12|B|0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,75,0
+10,1,Klanttevredenheid,598,156,77,18,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,2,48,295,154,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,5,1,4,0,0,22,0,0,0,-1--1--1,,1|(468,151)|
+1,4,5,2,100,0,0,22,0,0,0,-1--1--1,,1|(354,151)|
+11,5,48,409,151,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,6,Verandering in Klanttevredenheid,409,182,82,23,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,Gewicht Exogene Variabele,107,407,81,18,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,8,Totale Actuele Doorlooptijd,319,637,66,28,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,9,Gemiddelde Expertise Nieuwe Medewerkers,1137,638,87,34,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,10,Gemiddelde Expertise Ervaren Medewerkers,722,635,75,34,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,11,Nieuwe Medewerkers,1039,735,58,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,12,Ervaren Medewerkers,828,735,58,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,13,Gemiddelde Expertise,924,629,47,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,14,11,13,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,15,9,13,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,16,12,13,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,17,10,13,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,18,Aanpassingstijd Klanttevredenheid,420,24,84,19,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,19,18,5,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,20,Actuele Klanttevredenheid,408,300,71,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,21,7,20,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,22,20,6,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,23,1,5,1,0,0,0,0,64,0,-1--1--1,,1|(551,77)|
+10,24,Normale Klanttevredenheid,851,157,71,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,25,24,1,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+10,26,Bijdrage Exogene Variabele in Klanttevredenheid,90,517,141,31,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,27,Gewicht Doorlooptijd,409,404,47,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,28,Gewicht Expertise,819,415,56,21,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,29,Referentiedoorlooptijd van Klant,499,630,85,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,30,Bijdrage Doorlooptijd in Klanttevredenheid,414,515,94,23,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,31,8,30,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,32,29,30,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,33,Bijdrage Expertise in Klanttevredenheid,804,515,80,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,34,13,33,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,35,27,20,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,36,28,20,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,37,26,20,1,0,0,0,0,64,0,-1--1--1,,1|(251,406)|
+1,38,33,20,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,39,30,20,1,0,0,0,0,64,0,-1--1--1,,1|(457,423)|
+10,40,Referentie Expertise van Klant,1065,525,80,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,41,40,33,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+///---\\\
+:GRAPH VERBLIJFTIJD_ERVAREN_MEDEWERKERS
+:TITLE VERBLIJFTIJD_ERVAREN_MEDEWERKERS
+:NO-LEGEND 2
+:SCALE
+:VAR Gemiddelde verblijftijd Ervaren Medewerkers
+:DATASET bbs 1
+:VAR Gemiddelde verblijftijd Ervaren Medewerkers
+:DATASET bbs 2
+:VAR Gemiddelde verblijftijd Ervaren Medewerkers
+:DATASET bbs 3
+:VAR Gemiddelde verblijftijd Ervaren Medewerkers
+:DATASET bbs 4
+:VAR Gemiddelde verblijftijd Ervaren Medewerkers
+:DATASET bbs 5
+:VAR Gemiddelde verblijftijd Ervaren Medewerkers
+:DATASET bbs 6
+
+:GRAPH TOTALE_ACTUELE_DOORLOOPTIJD
+:TITLE TOTALE_ACTUELE_DOORLOOPTIJD
+:NO-LEGEND 2
+:SCALE
+:VAR Totale Actuele Doorlooptijd
+:DATASET bbs 1
+:VAR Totale Actuele Doorlooptijd
+:DATASET bbs 2
+:VAR Totale Actuele Doorlooptijd
+:DATASET bbs 3
+:VAR Totale Actuele Doorlooptijd
+:DATASET bbs 4
+:VAR Totale Actuele Doorlooptijd
+:DATASET bbs 5
+:VAR Totale Actuele Doorlooptijd
+:DATASET bbs 6
+
+:GRAPH VERLOOP_NIEUWE_MEDEWERKERS
+:TITLE VERLOOP_NIEUWE_MEDEWERKERS
+:NO-LEGEND 2
+:SCALE
+:VAR Verloop Nieuwe Medewerkers
+:DATASET bbs 1
+:VAR Verloop Nieuwe Medewerkers
+:DATASET bbs 2
+:VAR Verloop Nieuwe Medewerkers
+:DATASET bbs 3
+:VAR Verloop Nieuwe Medewerkers
+:DATASET bbs 4
+:VAR Verloop Nieuwe Medewerkers
+:DATASET bbs 5
+:VAR Verloop Nieuwe Medewerkers
+:DATASET bbs 6
+
+:GRAPH VERLOOP_ERVAREN_MEDEWERKERS
+:TITLE VERLOOP_ERVAREN_MEDEWERKERS
+:NO-LEGEND 2
+:SCALE
+:VAR Verloop Ervaren Medewerkers
+:DATASET bbs 1
+:VAR Verloop Ervaren Medewerkers
+:DATASET bbs 2
+:VAR Verloop Ervaren Medewerkers
+:DATASET bbs 3
+:VAR Verloop Ervaren Medewerkers
+:DATASET bbs 4
+:VAR Verloop Ervaren Medewerkers
+:DATASET bbs 5
+:VAR Verloop Ervaren Medewerkers
+:DATASET bbs 6
+
+:GRAPH MELDINGEN
+:TITLE MELDINGEN
+:NO-LEGEND 2
+:SCALE
+:VAR Meldingen
+:DATASET bbs 1
+:VAR Meldingen
+:DATASET bbs 2
+:VAR Meldingen
+:DATASET bbs 3
+:VAR Meldingen
+:DATASET bbs 4
+:VAR Meldingen
+:DATASET bbs 5
+:VAR Meldingen
+:DATASET bbs 6
+
+:GRAPH DOSSIERS_IN_BEHANDELING
+:TITLE DOSSIERS_IN_BEHANDELING
+:NO-LEGEND 2
+:SCALE
+:VAR Dossiers In Behandeling
+:DATASET bbs 1
+:VAR Dossiers In Behandeling
+:DATASET bbs 2
+:VAR Dossiers In Behandeling
+:DATASET bbs 3
+:VAR Dossiers In Behandeling
+:DATASET bbs 4
+:VAR Dossiers In Behandeling
+:DATASET bbs 5
+:VAR Dossiers In Behandeling
+:DATASET bbs 6
+
+:GRAPH NIEUWE_MEDEWERKERS
+:TITLE NIEUWE_MEDEWERKERS
+:NO-LEGEND 2
+:SCALE
+:VAR Nieuwe Medewerkers
+:DATASET bbs 1
+:VAR Nieuwe Medewerkers
+:DATASET bbs 2
+:VAR Nieuwe Medewerkers
+:DATASET bbs 3
+:VAR Nieuwe Medewerkers
+:DATASET bbs 4
+:VAR Nieuwe Medewerkers
+:DATASET bbs 5
+:VAR Nieuwe Medewerkers
+:DATASET bbs 6
+
+:GRAPH ERVAREN_MEDEWERKERS
+:TITLE ERVAREN_MEDEWERKERS
+:NO-LEGEND 2
+:SCALE
+:VAR Ervaren Medewerkers
+:DATASET bbs 1
+:VAR Ervaren Medewerkers
+:DATASET bbs 2
+:VAR Ervaren Medewerkers
+:DATASET bbs 3
+:VAR Ervaren Medewerkers
+:DATASET bbs 4
+:VAR Ervaren Medewerkers
+:DATASET bbs 5
+:VAR Ervaren Medewerkers
+:DATASET bbs 6
+
+:GRAPH GEPERCIPIEERDE_WERKDRUK
+:TITLE GEPERCIPIEERDE_WERKDRUK
+:NO-LEGEND 2
+:SCALE
+:VAR Gepercipieerde Werkdruk
+:DATASET bbs 1
+:VAR Gepercipieerde Werkdruk
+:DATASET bbs 2
+:VAR Gepercipieerde Werkdruk
+:DATASET bbs 3
+:VAR Gepercipieerde Werkdruk
+:DATASET bbs 4
+:VAR Gepercipieerde Werkdruk
+:DATASET bbs 5
+:VAR Gepercipieerde Werkdruk
+:DATASET bbs 6
+
+:GRAPH MEDEWERKERTEVREDENHEID
+:TITLE MEDEWERKERTEVREDENHEID
+:NO-LEGEND 2
+:SCALE
+:VAR Medewerkertevredenheid
+:DATASET bbs 1
+:VAR Medewerkertevredenheid
+:DATASET bbs 2
+:VAR Medewerkertevredenheid
+:DATASET bbs 3
+:VAR Medewerkertevredenheid
+:DATASET bbs 4
+:VAR Medewerkertevredenheid
+:DATASET bbs 5
+:VAR Medewerkertevredenheid
+:DATASET bbs 6
+
+:GRAPH KLANTTEVREDENHEID
+:TITLE KLANTTEVREDENHEID
+:NO-LEGEND 2
+:SCALE
+:VAR Klanttevredenheid
+:DATASET bbs 1
+:VAR Klanttevredenheid
+:DATASET bbs 2
+:VAR Klanttevredenheid
+:DATASET bbs 3
+:VAR Klanttevredenheid
+:DATASET bbs 4
+:VAR Klanttevredenheid
+:DATASET bbs 5
+:VAR Klanttevredenheid
+:DATASET bbs 6
+
+:GRAPH "ONDERHANDEN_DOSSIERS_(EXCLUSIEF_MELDINGEN)_PER_MEDEWERKER"
+:TITLE "ONDERHANDEN_DOSSIERS_(EXCLUSIEF_MELDINGEN)_PER_MEDEWERKER"
+:NO-LEGEND 2
+:SCALE
+:VAR "Onderhanden Dossiers (exclusief Meldingen) per Medewerker"
+:DATASET bbs 1
+:VAR "Onderhanden Dossiers (exclusief Meldingen) per Medewerker"
+:DATASET bbs 2
+:VAR "Onderhanden Dossiers (exclusief Meldingen) per Medewerker"
+:DATASET bbs 3
+:VAR "Onderhanden Dossiers (exclusief Meldingen) per Medewerker"
+:DATASET bbs 4
+:VAR "Onderhanden Dossiers (exclusief Meldingen) per Medewerker"
+:DATASET bbs 5
+:VAR "Onderhanden Dossiers (exclusief Meldingen) per Medewerker"
+:DATASET bbs 6
+
+:GRAPH ONDERHANDEN_DOSSIERS_PER_MEDEWERKER
+:TITLE ONDERHANDEN_DOSSIERS_PER_MEDEWERKER
+:NO-LEGEND 2
+:SCALE
+:VAR Onderhanden Dossiers per Medewerker
+:DATASET bbs 1
+:VAR Onderhanden Dossiers per Medewerker
+:DATASET bbs 2
+:VAR Onderhanden Dossiers per Medewerker
+:DATASET bbs 3
+:VAR Onderhanden Dossiers per Medewerker
+:DATASET bbs 4
+:VAR Onderhanden Dossiers per Medewerker
+:DATASET bbs 5
+:VAR Onderhanden Dossiers per Medewerker
+:DATASET bbs 6
+
+:GRAPH GEMIDDELDE_VERBLIJFTIJD_NIEUWE_MEDEWERKERS
+:TITLE GEMIDDELDE_VERBLIJFTIJD_NIEUWE_MEDEWERKERS
+:NO-LEGEND 2
+:SCALE
+:VAR Gemiddelde verblijftijd Nieuwe Medewerkers
+:DATASET bbs 1
+:VAR Gemiddelde verblijftijd Nieuwe Medewerkers
+:DATASET bbs 2
+:VAR Gemiddelde verblijftijd Nieuwe Medewerkers
+:DATASET bbs 3
+:VAR Gemiddelde verblijftijd Nieuwe Medewerkers
+:DATASET bbs 4
+:VAR Gemiddelde verblijftijd Nieuwe Medewerkers
+:DATASET bbs 5
+:VAR Gemiddelde verblijftijd Nieuwe Medewerkers
+:DATASET bbs 6
+
+:GRAPH GRAPH
+:TITLE GRAPH
+:SCALE
+:VAR hulp
+:DATASET bbs 2
+:VAR Dossiers In Behandeling
+:DATASET bbs 2
+:VAR intake
+:DATASET bbs 2
+:VAR hulp
+:DATASET bbs 3
+:VAR Dossiers In Behandeling
+:DATASET bbs 3
+:VAR intake
+:DATASET bbs 3
+
+:GRAPH FEEDBACK_LOOPS
+:TITLE FEEDBACK_LOOPS
+:NO-LEGEND 1
+:SCALE
+:VAR Medewerkertevredenheid
+:DATASET 
+:SCALE
+:VAR Gepercipieerde Werkdruk
+:DATASET 
+:SCALE
+:VAR Productiviteit Ervaren Medewerkers
+:DATASET 
+
+:GRAPH Figure_1
+:TITLE Figure 1
+:SCALE
+:VAR Actuele Doorlooptijd Afhandeling
+:DATASET 
+:SCALE
+:VAR Gepercipieerde Werkdruk
+:DATASET 
+:SCALE
+:VAR Productiviteit Ervaren Medewerkers
+:DATASET 
+
+:GRAPH Figure_2
+:TITLE Figure 2
+:SCALE
+:VAR Inhuur Nieuwe Medewerkers
+:DATASET 
+:SCALE
+:VAR Nieuwe Meldingen
+:DATASET 
+:SCALE
+:VAR Gepercipieerde Werkdruk
+:DATASET 
+
+:GRAPH Figure_3
+:TITLE Figure 3
+:SCALE
+:VAR Gepercipieerde Werkdruk
+:DATASET bsc 1
+:VAR Gepercipieerde Werkdruk
+:DATASET bsc 2
+:SCALE
+:VAR Perc Uitbesteding
+:DATASET bsc 2
+
+:GRAPH Figure_4
+:TITLE Figure 4
+:SCALE
+:VAR Actuele Doorlooptijd Afhandeling
+:DATASET bsc 1
+:VAR Actuele Doorlooptijd Afhandeling
+:DATASET bsc 2
+:SCALE
+:VAR Productiviteit Ervaren Medewerkers
+:DATASET bsc 1
+:VAR Productiviteit Ervaren Medewerkers
+:DATASET bsc 2
+:L<%^E!@
+4:Time
+5:Grens voor Uitbesteding
+9:Current
+19:75,0
+24:2000
+25:2005
+26:2005
+23:0
+15:0,0,0,0,0,0
+27:2,
+34:0,
+42:0
+72:0
+73:0
+95:0
+96:0
+97:0
+77:0
+78:0
+102:1
+93:0
+94:0
+92:0
+91:0
+90:0
+87:0
+75:
+43:
+103:8,8,8,3,8
+105:0,0,0,0,0,0,0,0,0,0
+104:Courier|12||0-0-0|0-0-0|-1--1--1|0-0-255|192-192-192|-1--1--1

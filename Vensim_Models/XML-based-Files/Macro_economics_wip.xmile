@@ -1,0 +1,2171 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Year">
+		<start> 0</start>
+		<stop> 20</stop>
+		<dt> 0.0078125</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="Book_Value_of_Capital_Assets">
+				<units>$</units>
+				<doc></doc>
+					<eqn>
+					Initial_Assets*Asset_Price
+					</eqn>
+					<inflow>
+					Financial Investment
+					</inflow>
+					<outflow>
+					Capital Depreciation
+					</outflow>
+					<outflow>
+					Book Losses
+					</outflow>
+			</stock>
+			<stock name="Capital_Assets">
+				<units>Capital_Units</units>
+				<doc></doc>
+					<eqn>
+					Initial_Assets
+					</eqn>
+					<inflow>
+					Investment
+					</inflow>
+					<outflow>
+					Capital Consumption
+					</outflow>
+					<outflow>
+					Loses
+					</outflow>
+			</stock>
+			<stock name="Cumulative_Investment">
+				<units>Capital_Units</units>
+				<doc></doc>
+					<eqn>
+					Reference_Investment
+					</eqn>
+					<inflow>
+					New Investment
+					</inflow>
+			</stock>
+			<stock name="Cumulative_Production">
+				<units>Goods</units>
+				<doc></doc>
+					<eqn>
+					Reference_Production
+					</eqn>
+					<inflow>
+					New Production
+					</inflow>
+			</stock>
+			<stock name="Employed_Labor">
+				<units>People</units>
+				<doc></doc>
+					<eqn>
+					Initial_Labor
+					</eqn>
+					<inflow>
+					Hiring
+					</inflow>
+					<outflow>
+					Attrition Rate
+					</outflow>
+			</stock>
+			<stock name="Exog_Gov_Budget">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+					Natural_Grw_Gov_Budget
+					</eqn>
+					<inflow>
+					Chg in Gov Budget
+					</inflow>
+			</stock>
+			<stock name="Expected_Asset_Income_Ratio">
+				<units>$/(Year*Capital_Units)</units>
+				<doc></doc>
+					<eqn>
+					Asset_Income_Ratio
+					</eqn>
+					<inflow>
+					Adjustment of Asset Income Ratio Expectations
+					</inflow>
+			</stock>
+			<stock name="Expected_Asset_Price">
+				<units>$/Capital_Unit</units>
+				<doc></doc>
+					<eqn>
+					Initial_Asset_Price
+					</eqn>
+					<inflow>
+					Adjustment of Asset Price Expectations
+					</inflow>
+			</stock>
+			<stock name="Expected_Chg_in_Asset_Income_Ratio">
+				<units>Fraction/Year</units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Expectations Adjustment Asset Inc Ratio
+					</inflow>
+			</stock>
+			<stock name="Expected_Chg_in_Return_on_Capital">
+				<units>Fraction/Year</units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Expectations Adjustment Return on Capital
+					</inflow>
+			</stock>
+			<stock name="Expected_Chg_in_Unemployment">
+				<units>Fraction/Year</units>
+				<doc></doc>
+					<eqn>
+					Initial_Exp_Chg_in_Unemployment
+					</eqn>
+					<inflow>
+					Expectations Adjustment Unemployment
+					</inflow>
+			</stock>
+			<stock name="Expected_Chg_in_Wages_Income_Ratio">
+				<units>Fraction/Year</units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Expectations Adjustment Wages Income Ratio
+					</inflow>
+			</stock>
+			<stock name="Expected_Chg_in_Wealth">
+				<units>Fraction/Year</units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Expectations Adjustment Wealth
+					</inflow>
+			</stock>
+			<stock name="Expected_Chg_in_Worker_Pdty">
+				<units>Fraction/Year</units>
+				<doc></doc>
+					<eqn>
+					Initial_Expected_Chg_in_Worker_Pdty
+					</eqn>
+					<inflow>
+					Expectations Adjustment Worker Pdty
+					</inflow>
+			</stock>
+			<stock name="Expected_Fraction_of_Income_Devoted_to_Wages">
+				<units>Fraction</units>
+				<doc></doc>
+					<eqn>
+					Initial_Fraction_of_Income_Devoted_to_Wages
+					</eqn>
+					<inflow>
+					Adjust of Fract of Income Devoted to Wages
+					</inflow>
+			</stock>
+			<stock name="Expected_Money_Inflation">
+				<units>Fraction/Year</units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Expectations Adjustment Money Inflation
+					</inflow>
+			</stock>
+			<stock name="Expected_Price">
+				<units>$/Good</units>
+				<doc></doc>
+					<eqn>
+					Initial_Price
+					</eqn>
+					<inflow>
+					Adjustment of Price Expectations
+					</inflow>
+			</stock>
+			<stock name="Expected_Production_Trend">
+				<units>Fraction/Year</units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Perception of Production Trend
+					</inflow>
+			</stock>
+			<stock name="Expected_Return_on_Capital">
+				<units>Fraction/Year</units>
+				<doc></doc>
+					<eqn>
+					Desired_Return_on_Capital
+					</eqn>
+					<inflow>
+					Adjustment of Expected Return on Capital
+					</inflow>
+			</stock>
+			<stock name="Expected_Wealth">
+				<units>$/Person</units>
+				<doc></doc>
+					<eqn>
+					Initial_Wealth/Working_Population
+					</eqn>
+					<inflow>
+					Adjustment of Expected Wealth
+					</inflow>
+			</stock>
+			<stock name="Final_Tax_Rate">
+				<units>Percent</units>
+				<doc></doc>
+					<eqn>
+					Initial_Tax_Rate
+					</eqn>
+					<inflow>
+					Adjustment of Final Tax Rate
+					</inflow>
+			</stock>
+			<stock name="Money_Supply">
+				<units>$</units>
+				<doc></doc>
+					<eqn>
+					Initial_Money_Supply
+					</eqn>
+					<inflow>
+					Growth In Money
+					</inflow>
+			</stock>
+			<stock name="Normal_Savings_Fraction">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+					Initial_Savings_Rate/Percent
+					</eqn>
+					<inflow>
+					Adjustment of Normal Savings Rate
+					</inflow>
+			</stock>
+			<stock name="Normal_Share_of_Working_Pop_in_Labor_Pool">
+				<units>Percent</units>
+				<doc></doc>
+					<eqn>
+					Initial_Share_of_Work_Pop_in_Labor_Pool
+					</eqn>
+					<inflow>
+					Adj of Norm Share of Work Pop in Labor Pool
+					</inflow>
+			</stock>
+			<stock name="Perceived_Asset_Income_Ratio">
+				<units>$/(Year*Capital_Units)</units>
+				<doc></doc>
+					<eqn>
+					Asset_Income_Ratio
+					</eqn>
+					<inflow>
+					Perception of Asset Income Ratio
+					</inflow>
+			</stock>
+			<stock name="Perceived_Money_Ratio">
+				<units>$*Year/Goods</units>
+				<doc></doc>
+					<eqn>
+					Money_Ratio
+					</eqn>
+					<inflow>
+					Money Ratio Perception
+					</inflow>
+			</stock>
+			<stock name="Perceived_Production">
+				<units>Goods/Year</units>
+				<doc></doc>
+					<eqn>
+					Production
+					</eqn>
+					<inflow>
+					Production Perception
+					</inflow>
+			</stock>
+			<stock name="Perceived_Return_on_Capital">
+				<units>Fraction/Year</units>
+				<doc></doc>
+					<eqn>
+					Desired_Return_on_Capital
+					</eqn>
+					<inflow>
+					Perception of Return on Capital
+					</inflow>
+			</stock>
+			<stock name="Perceived_Unemployment_Rate">
+				<units>Percent</units>
+				<doc></doc>
+					<eqn>
+					Unemployment_Rate*Initial_Variation_Perc_Unemp_Rate
+					</eqn>
+					<inflow>
+					Unemployment Rate Perception
+					</inflow>
+			</stock>
+			<stock name="Perceived_Wages_Income_Ratio">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+					Wages_Income_Ratio
+					</eqn>
+					<inflow>
+					Wages Income Ratio Perception
+					</inflow>
+			</stock>
+			<stock name="Perceived_Wealth">
+				<units>$/Person</units>
+				<doc></doc>
+					<eqn>
+					Initial_Wealth/Working_Population
+					</eqn>
+					<inflow>
+					Perception of Wealth
+					</inflow>
+			</stock>
+			<stock name="Perceived_Worker_Pdty">
+				<units>Percent</units>
+				<doc></doc>
+					<eqn>
+					Worker_Productivity*Initial_Variation_in_Perc_Wkr_Pdty
+					</eqn>
+					<inflow>
+					Worker Pdty Perception
+					</inflow>
+			</stock>
+			<stock name="Real_Book_Value_of_Capital_Assets">
+				<units>Starting_$</units>
+				<doc></doc>
+					<eqn>
+					Initial_Assets*Asset_Price/Initial_$
+					</eqn>
+					<inflow>
+					Real Financial Investment
+					</inflow>
+					<outflow>
+					Real Capital Depreciation
+					</outflow>
+					<outflow>
+					Real Book Losses
+					</outflow>
+			</stock>
+			<stock name="Reference_Money_Ratio">
+				<units>$*Year/Goods</units>
+				<doc></doc>
+					<eqn>
+					Money_Ratio
+					</eqn>
+					<inflow>
+					Adjustment of Money Ratio Expectations
+					</inflow>
+			</stock>
+			<stock name="Reference_Production_for_Trend">
+				<units>Goods/Year</units>
+				<doc></doc>
+					<eqn>
+					Production
+					</eqn>
+					<inflow>
+					Adjustment of Production Expectations
+					</inflow>
+			</stock>
+			<stock name="Reference_Unemployment_Rate">
+				<units>Percent</units>
+				<doc></doc>
+					<eqn>
+					Unemployment_Rate*Initial_Variation_in_Ref_Unempl_Rate
+					</eqn>
+					<inflow>
+					Adjustment of Unemployment Expectations
+					</inflow>
+			</stock>
+			<stock name="Reference_Wages_Income_Ratio">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+					Wages_Income_Ratio
+					</eqn>
+					<inflow>
+					Adjustment for Reference Wages Income Ratio
+					</inflow>
+			</stock>
+			<stock name="Reference_Woker_Productivity">
+				<units>Goods/(Person*Year)</units>
+				<doc></doc>
+					<eqn>
+					Worker_Productivity*Initial_Variation_in_Ref_Wkr_Pdty
+					</eqn>
+					<inflow>
+					Adjustment of Pdty Expectations
+					</inflow>
+			</stock>
+			<stock name="Vacancies">
+				<units>People</units>
+				<doc></doc>
+					<eqn>
+					Time_to_Fill_Vacancies*(Attrition_Rate + Population_Growth_Rate*Employed_Labor/Percent)
+					</eqn>
+					<inflow>
+					Vacancy Creation
+					</inflow>
+					<outflow>
+					Vacancy Closure
+					</outflow>
+			</stock>
+			<stock name="Wages">
+				<units>$/(Person*Year)</units>
+				<doc></doc>
+					<eqn>
+					Initial_Wages
+					</eqn>
+					<inflow>
+					Adjustment of Wage Expectations
+					</inflow>
+			</stock>
+			<stock name="Working_Population">
+				<units>People</units>
+				<doc></doc>
+					<eqn>
+					Initial_Working_Population
+					</eqn>
+					<inflow>
+					Pop Growth
+					</inflow>
+			</stock>
+			<aux name="Adj_of_Norm_Share_of_Work_Pop_in_Labor_Pool">
+				<units>Percent/Year</units>
+				<doc></doc>
+					<eqn>
+	(Constrained_Share_of_Work_Pop_in_Labor_Pool - Normal_Share_of_Working_Pop_in_Labor_Pool)/Time_to_Adjust_Norm_Share_of_Work_Pop_in_Labor_Pool					</eqn>
+			</aux>
+			<aux name="Adjust_of_Fract_of_Income_Devoted_to_Wages">
+				<units>Fraction/Year</units>
+				<doc></doc>
+					<eqn>
+	(Fraction_of_Income_Devoted_to_Wages - Expected_Fraction_of_Income_Devoted_to_Wages)/Time_to_Adjust_Wage_Income_Expectations					</eqn>
+			</aux>
+			<aux name="Adjustment_for_Desired_Labor">
+				<units>People/Year</units>
+				<doc></doc>
+					<eqn>
+	(Desired_Employed_Labor-Employed_Labor)/Labor_Adjustment_Time					</eqn>
+			</aux>
+			<aux name="Adjustment_for_Reference_Wages_Income_Ratio">
+				<units>Dimensionless/Year</units>
+				<doc></doc>
+					<eqn>
+	(Perceived_Wages_Income_Ratio-Reference_Wages_Income_Ratio)/Time_Horizon_to_Assess_Wages_Income_Ratio					</eqn>
+			</aux>
+			<aux name="Adjustment_for_Vacancies">
+				<units>People/Year</units>
+				<doc></doc>
+					<eqn>
+	(Desired_Vacancies-Vacancies)/Vacancy_Adjustment_Time					</eqn>
+			</aux>
+			<aux name="Adjustment_of_Asset_Income_Ratio_Expectations">
+				<units>$/(Year*Year*Capital_Units)</units>
+				<doc></doc>
+					<eqn>
+	(Perceived_Asset_Income_Ratio-Expected_Asset_Income_Ratio)/Time_Horizon_to_Assess_Asset_Income_Ratio					</eqn>
+			</aux>
+			<aux name="Adjustment_of_Asset_Price_Expectations">
+				<units>$/(Year*Capital_Unit)</units>
+				<doc></doc>
+					<eqn>
+	(Asset_Price-Expected_Asset_Price)/Time_to_Adjust_Asset_Price_Expectations					</eqn>
+			</aux>
+			<aux name="Adjustment_of_Expected_Return_on_Capital">
+				<units>Fraction/(Year*Year)</units>
+				<doc></doc>
+					<eqn>
+	(Perceived_Return_on_Capital - Expected_Return_on_Capital)/Time_Horizon_to_Assess_Capital_Returns					</eqn>
+			</aux>
+			<aux name="Adjustment_of_Expected_Wealth">
+				<units>$/(Person*Year)</units>
+				<doc></doc>
+					<eqn>
+	(Perceived_Wealth - Expected_Wealth)/Time_Horizon_to_Assess_Wealth					</eqn>
+			</aux>
+			<aux name="Adjustment_of_Final_Tax_Rate">
+				<units>Percent/Year</units>
+				<doc></doc>
+					<eqn>
+	((Gov_Spending_Share_of_Income - Final_Tax_Rate)/Time_to_Adjut_Final_Tax_Rate)*IF_THEN_ELSE(Tax_Transition = 0, 0 , 1 )					</eqn>
+			</aux>
+			<aux name="Adjustment_of_Money_Ratio_Expectations">
+				<units>$/Goods</units>
+				<doc></doc>
+					<eqn>
+	(Perceived_Money_Ratio - Reference_Money_Ratio)/Time_Horizon_to_Assess_Inflation					</eqn>
+			</aux>
+			<aux name="Adjustment_of_Normal_Savings_Rate">
+				<units>Dimensionless/Year</units>
+				<doc></doc>
+					<eqn>
+	(Constrained_Savings_Fraction - Normal_Savings_Fraction)/Time_to_Adjust_Savings_Norms					</eqn>
+			</aux>
+			<aux name="Adjustment_of_Pdty_Expectations">
+				<units>Goods/(Person*Year*Year)</units>
+				<doc></doc>
+					<eqn>
+	(Perceived_Worker_Pdty - Reference_Woker_Productivity)/Time_Horizon_to_Assess_Worker_Pdty					</eqn>
+			</aux>
+			<aux name="Adjustment_of_Price_Expectations">
+				<units>$/(Years*Good)</units>
+				<doc></doc>
+					<eqn>
+	(Price - Expected_Price)/Time_to_Adjust_Price_Expectations					</eqn>
+			</aux>
+			<aux name="Adjustment_of_Production_Expectations">
+				<units>Goods/(Year*Year)</units>
+				<doc></doc>
+					<eqn>
+	(Perceived_Production - Reference_Production_for_Trend)/Time_Horizon_to_Assess_Production_Changes					</eqn>
+			</aux>
+			<aux name="Adjustment_of_Unemployment_Expectations">
+				<units>Percent/Year</units>
+				<doc></doc>
+					<eqn>
+	(Perceived_Unemployment_Rate - Reference_Unemployment_Rate)/Time_Horizon_to_Assess_Unemployment					</eqn>
+			</aux>
+			<aux name="Adjustment_of_Wage_Expectations">
+				<units>$/(Person*Year*Year)</units>
+				<doc></doc>
+					<eqn>
+	(Indicated_Wages - Wages)/Time_to_Adjust_Wage_Expectations					</eqn>
+			</aux>
+			<aux name="Applied_Labor">
+				<units>Person*Years</units>
+				<doc>Translates people employed to person-years of labor applied.</doc>
+					<eqn>
+	Employed_Labor*Work_Effort					</eqn>
+			</aux>
+			<aux name="Asset_Earnings">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	Asset_Income - Capital_Depreciation - Asset_Taxes					</eqn>
+			</aux>
+			<aux name="Asset_Income">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	Income - Wage_Income					</eqn>
+			</aux>
+			<aux name="Asset_Income_Ratio">
+				<units>$/(Year*Capital_Units)</units>
+				<doc></doc>
+					<eqn>
+	Asset_Income/Capital_Assets					</eqn>
+			</aux>
+			<aux name="Asset_Income_Ratiox">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	Asset_Income/Income					</eqn>
+			</aux>
+			<aux name="Asset_Price">
+				<units>$/Capital_Unit</units>
+				<doc></doc>
+					<eqn>
+	Expected_Asset_Price*Effect_of_Asset_Income_Ratio_on_Asset_Price*Effect_of_Money_Inflation_on_Price*Effect_of_Wage_Income_Ratio_on_Price					</eqn>
+			</aux>
+			<aux name="Asset_Price_Inflation">
+				<units>$/Starting_$</units>
+				<doc></doc>
+					<eqn>
+	Initial_$*Asset_Price/Initial_Asset_Price					</eqn>
+			</aux>
+			<aux name="Asset_Taxes">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	(Tax_Rate/Percent)*Asset_Income					</eqn>
+			</aux>
+			<aux name="Attrition_Rate">
+				<units>People/Year</units>
+				<doc></doc>
+					<eqn>
+	Employed_Labor/Ave_Duration_of_Employment					</eqn>
+			</aux>
+			<aux name="Book_Losses">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	0 +( Loss_Rate/Percent)*Book_Value_of_Capital_Assets*PULSE(Time_to_Start_Loss, Duration_of_Losses )					</eqn>
+			</aux>
+			<aux name="Capital_Assets_per_Capita">
+				<units>Capital_Units/Person</units>
+				<doc></doc>
+					<eqn>
+	Capital_Assets/Working_Population					</eqn>
+			</aux>
+			<aux name="Capital_Consumption">
+				<units>Capital_Units/Year</units>
+				<doc></doc>
+					<eqn>
+	Capital_Assets/Ave_Life_of_Cap					</eqn>
+			</aux>
+			<aux name="Capital_Depreciation">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	Book_Value_of_Capital_Assets/Ave_Life_of_Cap					</eqn>
+			</aux>
+			<aux name="Change_in_Asset_Income_Ratio">
+				<units>Fraction/Year</units>
+				<doc></doc>
+					<eqn>
+	(Perceived_Asset_Income_Ratio - Expected_Asset_Income_Ratio)/Expected_Asset_Income_Ratio/Time_Horizon_to_Assess_Asset_Income_Ratio					</eqn>
+			</aux>
+			<aux name="Change_in_Return_on_Capital">
+				<units>Fraction/Year</units>
+				<doc></doc>
+					<eqn>
+	(Perceived_Return_on_Capital-Expected_Return_on_Capital)/ABS(Expected_Return_on_Capital)/Time_Horizon_to_Assess_Capital_Returns					</eqn>
+			</aux>
+			<aux name="Change_in_Unemployment_Rate">
+				<units>Fraction/Year</units>
+				<doc></doc>
+					<eqn>
+	(Perceived_Unemployment_Rate - Reference_Unemployment_Rate)/Reference_Unemployment_Rate/Time_Horizon_to_Assess_Unemployment					</eqn>
+			</aux>
+			<aux name="Change_in_Wages_Income_Ratio">
+				<units>Fraction/Year</units>
+				<doc></doc>
+					<eqn>
+	(Perceived_Wages_Income_Ratio-Reference_Wages_Income_Ratio)/Reference_Wages_Income_Ratio/Time_Horizon_to_Assess_Wages_Income_Ratio					</eqn>
+			</aux>
+			<aux name="Change_in_Wealth">
+				<units>Fraction/Year</units>
+				<doc></doc>
+					<eqn>
+	(Perceived_Wealth-Expected_Wealth)/Expected_Wealth/Time_Horizon_to_Assess_Wealth					</eqn>
+			</aux>
+			<aux name="Change_in_Worker_Productiivity">
+				<units>Fraction/Year</units>
+				<doc></doc>
+					<eqn>
+	(Perceived_Worker_Pdty - Reference_Woker_Productivity)/Reference_Woker_Productivity/Time_Horizon_to_Assess_Worker_Pdty					</eqn>
+			</aux>
+			<aux name="Chg_in_Gov_Budget">
+				<units>$/(Year*Year)</units>
+				<doc></doc>
+					<eqn>
+	((Gov_Budget_Growth_Rate+Switch_to_Include_Money_Growth_in_Gov_Budget*Expected_Money_Inflation_Rate)/Percent)*Exog_Gov_Budget					</eqn>
+			</aux>
+			<aux name="Chg_in_Nominal_Wages">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	Wages/Initial_Wages					</eqn>
+			</aux>
+			<aux name="Constrained_Savings_Fraction">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	MIN(Maximum_Savings_Fraction,Savings_Fraction)					</eqn>
+			</aux>
+			<aux name="Constrained_Share_of_Work_Pop_in_Labor_Pool">
+				<units>Percent</units>
+				<doc></doc>
+					<eqn>
+	MIN(Share_of_Working_Pop_in_Labor_Pool,Maximum_Share_of_Working_Pop_in_Labor_Pool)					</eqn>
+			</aux>
+			<aux name="Consumption">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	(1-Savings_Fraction)*Disposable_Income					</eqn>
+			</aux>
+			<aux name="Current_Net_Investment_in_Capital_Units">
+				<units>Capital_Units/Year</units>
+				<doc>The amount of investment above replacement investment.</doc>
+					<eqn>
+	((Private_Investment +Gov_Investment)/Asset_Price)-Capital_Consumption					</eqn>
+			</aux>
+			<aux name="Depreciation_Fraction">
+				<units>Fraction/Year</units>
+				<doc></doc>
+					<eqn>
+	1/Ave_Life_of_Cap					</eqn>
+			</aux>
+			<aux name="Desired_Employed_Labor">
+				<units>People</units>
+				<doc></doc>
+					<eqn>
+	Income_Devoted_to_Wages/Wages					</eqn>
+			</aux>
+			<aux name="Desired_Hiring">
+				<units>People/Year</units>
+				<doc></doc>
+					<eqn>
+	Expected_Attrition+Adjustment_for_Desired_Labor					</eqn>
+			</aux>
+			<aux name="Desired_Vacancies">
+				<units>People</units>
+				<doc></doc>
+					<eqn>
+	MAX(0,Expected_Time_to_Fill_Vacancies*Desired_Hiring)					</eqn>
+			</aux>
+			<aux name="Desired_Vacancy_Creation">
+				<units>People/Year</units>
+				<doc></doc>
+					<eqn>
+	Desired_Hiring+Adjustment_for_Vacancies					</eqn>
+			</aux>
+			<aux name="Disposable_Income">
+				<units>$/Year</units>
+				<doc>The money income available to individuals employed in the production of goods and services.</doc>
+					<eqn>
+	(1-(Tax_Rate/Percent))*Income					</eqn>
+			</aux>
+			<aux name="DT">
+				<units>Year</units>
+				<doc></doc>
+					<eqn>
+	TIME_STEP					</eqn>
+			</aux>
+			<aux name="Effect_of_Asset_Income_Ratio_on_Asset_Price">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	2*(Max_Asset_Inc_Ratio_Eff_on_Asset_Price-1)/(1+exp(-(Expected_Chg_in_Asset_Income_Ratio)*Sens_of_Asset_Price_to_Asset_Income_Ratio))+(2-
+	Max_Asset_Inc_Ratio_Eff_on_Asset_Price)					</eqn>
+			</aux>
+			<aux name="Effect_of_Chg_in_Unemployment_on_Labor_Pool">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	2*(Max_Eff_of_Chg_in_Unemploy_on_Labor_Pool-1)/(1+exp((Expected_Chg_in_Unemployment)*Sensitivity_of_Labor_Pool_to_Chg_in_Unemployment))+(2-Max_Eff_of_Chg_in_Unemploy_on_Labor_Pool)					</eqn>
+			</aux>
+			<aux name="Effect_of_Experience_on_Tech_Pdty">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	1/(Cumulative_Production/Reference_Production)^Learning_from_Experience					</eqn>
+			</aux>
+			<aux name="Effect_of_Inflaton_Expectations_on_Wages">
+				<units>Dimensionless</units>
+				<doc>2*(Max Effect of Wealth on Savings-1)/(1+exp(-(Perceived Wealth Ratio-1)*Sensitivity of Wealth on Savings))+(
+2-Max Effect of Wealth on Savings)</doc>
+					<eqn>
+	2*(Max_Effect_of_Inflation_on_Wages-1)/(1+exp(-(Expected_Money_Inflation)*Sensitivity_of_Inlation_on_Wages))+(
+	2-Max_Effect_of_Inflation_on_Wages)					</eqn>
+			</aux>
+			<aux name="Effect_of_Investment_on_Tech_Pdty">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	1/(Cumulative_Investment/Reference_Investment)^Learning_from_Investment					</eqn>
+			</aux>
+			<aux name="Effect_of_Money_Inflation_on_Price">
+				<units>Dimensionless</units>
+				<doc>This function creates an S-curve centered on 1 with an input of 0.  The maximum effect is controlled by the Maximum Inflation Effect on Price.  The slope of the effect is controlled by the Sens of Price to Inflation.  With a Max of 1.5, a sensitivity of 5 produces a slightly lower than 1 effect.  A value of 6 produces a slightly higher than 1 effect.
+
+2*(Max Inflation Eff on Price-1)/(1+exp(-(Perceived Inflation)*Sens of Price to Inflation))+(2-Max Inflation Eff on Price)
+
+1 + Perceived Inflation</doc>
+					<eqn>
+	2*(Max_Inflation_Eff_on_Price-1)/(1+exp(-(Expected_Money_Inflation)*Sens_of_Price_to_Inflation))+(2-Max_Inflation_Eff_on_Price)					</eqn>
+			</aux>
+			<aux name="Effect_of_Pdty_Expectations_on_Wages">
+				<units>Dimensionless</units>
+				<doc>2*(Max Effect of Wealth on Savings-1)/(1+exp(-(Perceived Wealth Ratio-1)*Sensitivity of Wealth on Savings))+(
+2-Max Effect of Wealth on Savings)</doc>
+					<eqn>
+	2*(Max_Effect_of_Worker_Pdty_on_Wages-1)/(1+exp(-(Expected_Chg_in_Worker_Pdty)*Sensitivity_of_Worker_Pdty_on_Wages))+(
+	2-Max_Effect_of_Worker_Pdty_on_Wages)					</eqn>
+			</aux>
+			<aux name="Effect_of_Returns_on_Savings">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	2*(Max_Effect_of_Return_on_Savings-1)/(1+exp((-Expected_Chg_in_Return_on_Capital)*Sensitivity_of_Return_on_Savings))+(
+	2-Max_Effect_of_Return_on_Savings)					</eqn>
+			</aux>
+			<aux name="Effect_of_Unemployment_on_Wages">
+				<units>Dimensionless</units>
+				<doc>2*(Max Effect of Wealth on Savings-1)/(1+exp(-(Perceived Wealth Ratio-1)*Sensitivity of Wealth on Savings))+(
+2-Max Effect of Wealth on Savings)</doc>
+					<eqn>
+	2*(Max_Effect_of_Unemployment_on_Wages-1)/(1+exp((Expected_Chg_in_Unemployment)*Sensitivity_of_Unemployment_on_Wages))+(
+	2-Max_Effect_of_Unemployment_on_Wages)					</eqn>
+			</aux>
+			<aux name="Effect_of_Wage_Income_Ratio_on_Price">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	2*(Max_Wages_Income_Ratio_Eff_on_Price-1)/(1+exp(-(Expected_Chg_in_Wages_Income_Ratio)*Sens_of_Price_to_Wages_Income_Ratio))+(2-Max_Wages_Income_Ratio_Eff_on_Price)					</eqn>
+			</aux>
+			<aux name="Effect_of_Wealth_on_Savings">
+				<units>Dimensionless</units>
+				<doc>2*(Max Effect of Wealth on Savings-1)/(1+exp(-(Perceived Wealth Ratio-1)*Sensitivity of Wealth on Savings))+(
+2-Max Effect of Wealth on Savings)</doc>
+					<eqn>
+	2*(Max_Effect_of_Wealth_on_Savings-1)/(1+exp((Expected_Chg_in_Wealth)*Sensitivity_of_Wealth_on_Savings))+(
+	2-Max_Effect_of_Wealth_on_Savings)					</eqn>
+			</aux>
+			<aux name="Effective_Savings_Rate">
+				<units>Percent</units>
+				<doc></doc>
+					<eqn>
+	Percent*(Private_Investment + Gov_Investment)/Income					</eqn>
+			</aux>
+			<aux name="Expectations_Adjustment_Asset_Inc_Ratio">
+				<units>Fraction/(Year*Year)</units>
+				<doc></doc>
+					<eqn>
+	(Change_in_Asset_Income_Ratio-Expected_Chg_in_Asset_Income_Ratio)/Time_to_Adjust_Expectations_AIR					</eqn>
+			</aux>
+			<aux name="Expectations_Adjustment_Money_Inflation">
+				<units>Fraction/(Year*Year)</units>
+				<doc></doc>
+					<eqn>
+	(Money_Inflation - Expected_Money_Inflation)/Time_to_Adjust_Expectations_MI					</eqn>
+			</aux>
+			<aux name="Expectations_Adjustment_Return_on_Capital">
+				<units>Fraction/(Year*Year)</units>
+				<doc></doc>
+					<eqn>
+	(Change_in_Return_on_Capital - Expected_Chg_in_Return_on_Capital)/Time_to_Adjust_Expectations_ROC					</eqn>
+			</aux>
+			<aux name="Expectations_Adjustment_Unemployment">
+				<units>Fraction/(Year*Year)</units>
+				<doc></doc>
+					<eqn>
+	(Change_in_Unemployment_Rate - Expected_Chg_in_Unemployment)/Time_to_Adjust_Expectations_UE					</eqn>
+			</aux>
+			<aux name="Expectations_Adjustment_Wages_Income_Ratio">
+				<units>Fraction/(Year*Year)</units>
+				<doc></doc>
+					<eqn>
+	(Change_in_Wages_Income_Ratio-Expected_Chg_in_Wages_Income_Ratio)/Time_to_Adjust_Expectations_WIR					</eqn>
+			</aux>
+			<aux name="Expectations_Adjustment_Wealth">
+				<units>Fraction/(Year*Year)</units>
+				<doc></doc>
+					<eqn>
+	(Change_in_Wealth - Expected_Chg_in_Wealth)/Time_to_Adjust_Expectations_Wealth					</eqn>
+			</aux>
+			<aux name="Expectations_Adjustment_Worker_Pdty">
+				<units>Fraction/(Year*Year)</units>
+				<doc></doc>
+					<eqn>
+	(Change_in_Worker_Productiivity - Expected_Chg_in_Worker_Pdty)/Time_to_Adjust_Expectations_Pdty					</eqn>
+			</aux>
+			<aux name="Expected_Attrition">
+				<units>People/Year</units>
+				<doc></doc>
+					<eqn>
+	SMOOTH(Attrition_Rate, Time_to_Ave_Attrition )					</eqn>
+			</aux>
+			<aux name="Expected_Money_Inflation_Rate">
+				<units>Percent/Year</units>
+				<doc></doc>
+					<eqn>
+	Expected_Money_Inflation*Percent					</eqn>
+			</aux>
+			<aux name="Expected_Percent_Chg_in_AIR">
+				<units>Percent/Year</units>
+				<doc></doc>
+					<eqn>
+	Percent*Expected_Chg_in_Asset_Income_Ratio					</eqn>
+			</aux>
+			<aux name="Expected_Percent_Chg_in_Returns">
+				<units>Percent/Year</units>
+				<doc></doc>
+					<eqn>
+	Percent*Expected_Chg_in_Return_on_Capital					</eqn>
+			</aux>
+			<aux name="Expected_Percent_Chg_in_Wealth">
+				<units>Percent/Year</units>
+				<doc></doc>
+					<eqn>
+	Percent*Expected_Chg_in_Wealth					</eqn>
+			</aux>
+			<aux name="Expected_Percent_Chg_in_WIR">
+				<units>Percent/Year</units>
+				<doc></doc>
+					<eqn>
+	Percent*Expected_Chg_in_Wages_Income_Ratio					</eqn>
+			</aux>
+			<aux name="Expected_Percent_Chg_of_Unemployment">
+				<units>Percent/Year</units>
+				<doc></doc>
+					<eqn>
+	Expected_Chg_in_Unemployment*Percent					</eqn>
+			</aux>
+			<aux name="Expected_Percent_Chg_of_Worker_Pdty">
+				<units>Percent/Year</units>
+				<doc></doc>
+					<eqn>
+	Expected_Chg_in_Worker_Pdty*Percent					</eqn>
+			</aux>
+			<aux name="Expected_Time_to_Fill_Vacancies">
+				<units>Year</units>
+				<doc></doc>
+					<eqn>
+	SMOOTH(Time_to_Fill_Vacancies, Time_to_Adjust_Hiring_Expectations )					</eqn>
+			</aux>
+			<aux name="Financial_Investment">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	DELAY3((Private_Investment +Gov_Investment),Time_to_Acquire_Capital_Assets)					</eqn>
+			</aux>
+			<aux name="Fraction_of_Income_Devoted_to_Wages">
+				<units>Fraction</units>
+				<doc></doc>
+					<eqn>
+	Wage_Income/Income					</eqn>
+			</aux>
+			<aux name="Gov_Borrowing">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	Savings-Private_Investment					</eqn>
+			</aux>
+			<aux name="Gov_Borrowing_as_Share_of_Income">
+				<units>Percent</units>
+				<doc></doc>
+					<eqn>
+	(Gov_Borrowing/Income)*Percent					</eqn>
+			</aux>
+			<aux name="Gov_Budget">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	Switch_for_Endog_Gov_Grwth*Natural_Grw_Gov_Budget + (1 - Switch_for_Endog_Gov_Grwth)*Exog_Gov_Budget +Gov_Stimulus					</eqn>
+			</aux>
+			<aux name="Gov_Consump_share_of_Income">
+				<units>Percent</units>
+				<doc></doc>
+					<eqn>
+	(Gov_Consumption_Spending/Income)*Percent					</eqn>
+			</aux>
+			<aux name="Gov_Consumption_Spending">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	(1-(Gov_Invest_Share/Percent))*Gov_Spending					</eqn>
+			</aux>
+			<aux name="Gov_Deficit">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	Gov_Budget - Taxes					</eqn>
+			</aux>
+			<aux name="Gov_Investment">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	(Gov_Invest_Share/Percent)*Gov_Spending					</eqn>
+			</aux>
+			<aux name="Gov_Spending">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	Taxes+Gov_Borrowing					</eqn>
+			</aux>
+			<aux name="Gov_Spending_Share_of_Income">
+				<units>Percent</units>
+				<doc></doc>
+					<eqn>
+	(Gov_Spending/Income)*Percent					</eqn>
+			</aux>
+			<aux name="Gov_Stimulus">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	(Exog_Gov_Budget*Magnitude_of_Gov_Stimulus/Percent)*PULSE(Time_to_Start_Stimulus, Duration_of_Stimulus)					</eqn>
+			</aux>
+			<aux name="Growth_In_Money">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	((Money_Growth_Rate/Percent) + Temporary_Shift_in_Money_Growth_Rate)*Money_Supply					</eqn>
+			</aux>
+			<aux name="Hiring">
+				<units>People/Year</units>
+				<doc></doc>
+					<eqn>
+	MIN(Maximum_Hiring,Vacancies/Time_to_Fill_Vacancies)					</eqn>
+			</aux>
+			<aux name="Income">
+				<units>$/Year</units>
+				<doc>The money income generated from the exchange of goods and services produced in a year.</doc>
+					<eqn>
+	Production*Price					</eqn>
+			</aux>
+			<aux name="Income_Devoted_to_Wages">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	Beta*Income					</eqn>
+			</aux>
+			<aux name="Income_per_Capita">
+				<units>$/(Person*Year)</units>
+				<doc></doc>
+					<eqn>
+	Income/Working_Population					</eqn>
+			</aux>
+			<aux name="Indicated_Wages">
+				<units>$/(Person*Year)</units>
+				<doc>(Effect of Unemployment on Wages*Test Switch + 1-Test Switch)*(Income*Beta)/Employed Labor</doc>
+					<eqn>
+	Effect_of_Pdty_Expectations_on_Wages*Effect_of_Inflaton_Expectations_on_Wages*Effect_of_Unemployment_on_Wages*Wages					</eqn>
+			</aux>
+			<aux name="Initial_Money_Supply">
+				<units>$</units>
+				<doc></doc>
+					<eqn>
+	Employed_Labor*Initial_Per_Worker_Money_Supply					</eqn>
+			</aux>
+			<aux name="Initial_Wealth">
+				<units>$</units>
+				<doc></doc>
+					<eqn>
+	Capital_Assets*Asset_Price					</eqn>
+			</aux>
+			<aux name="Investment">
+				<units>Capital_Units/Year</units>
+				<doc></doc>
+					<eqn>
+	DELAY3((Private_Investment +Gov_Investment)/Asset_Price,Time_to_Acquire_Capital_Assets)					</eqn>
+			</aux>
+			<aux name="Investment_per_Capita">
+				<units>Capital_Units/(Person*Year)</units>
+				<doc></doc>
+					<eqn>
+	Investment/Working_Population					</eqn>
+			</aux>
+			<aux name="Labor_Pool">
+				<units>People</units>
+				<doc></doc>
+					<eqn>
+	(Share_of_Working_Pop_in_Labor_Pool/Percent)*Working_Population					</eqn>
+			</aux>
+			<aux name="Learning_from_Experience">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	ln(1 - Learning_Strength_from_Experience)/ln(2)					</eqn>
+			</aux>
+			<aux name="Learning_from_Investment">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	ln(1 - Learning_Strength_from_Investment)/ln(2)					</eqn>
+			</aux>
+			<aux name="Loses">
+				<units>Capital_Units/Year</units>
+				<doc></doc>
+					<eqn>
+	0 + (Loss_Rate/Percent)*Capital_Assets*PULSE(Time_to_Start_Loss, Duration_of_Losses )					</eqn>
+			</aux>
+			<aux name="Maximum_Hiring">
+				<units>People/Year</units>
+				<doc></doc>
+					<eqn>
+	Unemployed_Labor/MAX(Min_Time_to_Hire,2*DT)					</eqn>
+			</aux>
+			<aux name="Money_Inflation">
+				<units>Fraction/Year</units>
+				<doc></doc>
+					<eqn>
+	(Perceived_Money_Ratio - Reference_Money_Ratio)/Reference_Money_Ratio/Time_Horizon_to_Assess_Inflation					</eqn>
+			</aux>
+			<aux name="Money_Inflation_Rate">
+				<units>Percent/Year</units>
+				<doc></doc>
+					<eqn>
+	Money_Inflation*Percent					</eqn>
+			</aux>
+			<aux name="Money_Ratio">
+				<units>$*Year/Goods</units>
+				<doc></doc>
+					<eqn>
+	Money_Supply/Production					</eqn>
+			</aux>
+			<aux name="Money_Ratio_Perception">
+				<units>$/Goods</units>
+				<doc></doc>
+					<eqn>
+	(Money_Ratio - Perceived_Money_Ratio)/Time_to_Perceive_Money_Ratio					</eqn>
+			</aux>
+			<aux name="Money_Velocity">
+				<units>Dimensionless/Year</units>
+				<doc></doc>
+					<eqn>
+	Income/Money_Supply					</eqn>
+			</aux>
+			<aux name="Natural_Grw_Gov_Budget">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	(Desired_Gov_Share_Income/Percent)*Income					</eqn>
+			</aux>
+			<aux name="Net_Investment">
+				<units>$/Year</units>
+				<doc>The amount of investment above replacement investment.</doc>
+					<eqn>
+	Net_Investment_in_Capital_Units*Asset_Price					</eqn>
+			</aux>
+			<aux name="Net_Investment_in_Capital_Units">
+				<units>Capital_Units/Year</units>
+				<doc>The amount of investment above replacement investment.</doc>
+					<eqn>
+	(Investment-Capital_Consumption)					</eqn>
+			</aux>
+			<aux name="Net_Investment_per_Capita">
+				<units>$/(Person*Year)</units>
+				<doc></doc>
+					<eqn>
+	Net_Investment/Working_Population					</eqn>
+			</aux>
+			<aux name="New_Investment">
+				<units>Capital_Units/Year</units>
+				<doc></doc>
+					<eqn>
+	Investment					</eqn>
+			</aux>
+			<aux name="New_Production">
+				<units>Goods/Year</units>
+				<doc></doc>
+					<eqn>
+	Production					</eqn>
+			</aux>
+			<aux name="Nominal_Wealth">
+				<units>$</units>
+				<doc></doc>
+					<eqn>
+	Asset_Price*Capital_Assets					</eqn>
+			</aux>
+			<aux name="Normal_Savings_Rate">
+				<units>Percent</units>
+				<doc></doc>
+					<eqn>
+	Normal_Savings_Fraction*Percent					</eqn>
+			</aux>
+			<aux name="Pdty_Indicated_Wages">
+				<units>$/(Person*Year)</units>
+				<doc>(Effect of Unemployment on Wages*Test Switch + 1-Test Switch)*(Income*Beta)/Employed Labor</doc>
+					<eqn>
+	(Income*Beta)/Employed_Labor					</eqn>
+			</aux>
+			<aux name="Per_Capital_Nom_Wealth">
+				<units>$/Person</units>
+				<doc></doc>
+					<eqn>
+	Nominal_Wealth/Working_Population					</eqn>
+			</aux>
+			<aux name="Percent_Change_in_WIR">
+				<units>Percent/Year</units>
+				<doc></doc>
+					<eqn>
+	Percent*Change_in_Wages_Income_Ratio					</eqn>
+			</aux>
+			<aux name="Percent_Chg_in_AIR">
+				<units>Percent/Year</units>
+				<doc></doc>
+					<eqn>
+	Percent*Change_in_Asset_Income_Ratio					</eqn>
+			</aux>
+			<aux name="Percent_Chg_in_Returns">
+				<units>Percent/Year</units>
+				<doc></doc>
+					<eqn>
+	Percent*Change_in_Return_on_Capital					</eqn>
+			</aux>
+			<aux name="Percent_Chg_in_Wealth">
+				<units>Percent/Year</units>
+				<doc></doc>
+					<eqn>
+	Percent*Change_in_Wealth					</eqn>
+			</aux>
+			<aux name="Perception_of_Asset_Income_Ratio">
+				<units>$/(Year*Year*Capital_Units)</units>
+				<doc></doc>
+					<eqn>
+	(Asset_Income_Ratio-Perceived_Asset_Income_Ratio)/Time_to_Perceive_Asset_Income_Ratio					</eqn>
+			</aux>
+			<aux name="Perception_of_Production_Trend">
+				<units>Fraction/(Year*Year)</units>
+				<doc></doc>
+					<eqn>
+	(Production_Trend - Expected_Production_Trend)/Time_to_Perceive_Production_Trend					</eqn>
+			</aux>
+			<aux name="Perception_of_Return_on_Capital">
+				<units>Fraction/(Year*Year)</units>
+				<doc></doc>
+					<eqn>
+	(Return_on_Capital - Perceived_Return_on_Capital)/Time_to_Perceive_Capital_Returns					</eqn>
+			</aux>
+			<aux name="Perception_of_Wealth">
+				<units>$/(Person*Year)</units>
+				<doc></doc>
+					<eqn>
+	(Per_Capital_Nom_Wealth - Perceived_Wealth)/Time_to_Perceive_Wealth					</eqn>
+			</aux>
+			<aux name="Pop_Growth">
+				<units>People/Year</units>
+				<doc></doc>
+					<eqn>
+	Working_Population*(Population_Growth_Rate/Percent)					</eqn>
+			</aux>
+			<aux name="Price">
+				<units>$/Good</units>
+				<doc></doc>
+					<eqn>
+	Expected_Price*Effect_of_Money_Inflation_on_Price*Effect_of_Wage_Income_Ratio_on_Price					</eqn>
+			</aux>
+			<aux name="Price_Inflation">
+				<units>$/Starting_$</units>
+				<doc></doc>
+					<eqn>
+	Initial_$*Price/Initial_Price					</eqn>
+			</aux>
+			<aux name="Private_Investment">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	MAX(0,Savings-Gov_Deficit)					</eqn>
+			</aux>
+			<aux name="Prod_to_Labor_Ratio">
+				<units>Goods/(Person*Year)</units>
+				<doc></doc>
+					<eqn>
+	Production/Employed_Labor					</eqn>
+			</aux>
+			<aux name="Production">
+				<units>Goods/Year</units>
+				<doc>Quantity of goods and services produced by applied labor and capital in a year.</doc>
+					<eqn>
+	Technology*((Applied_Labor/Ref_Labor)^Beta)*((Capital_Assets/Ref_Capital)^(1-Beta))					</eqn>
+			</aux>
+			<aux name="Production_per_Capita">
+				<units>Goods/(Person*Year)</units>
+				<doc></doc>
+					<eqn>
+	Production/Working_Population					</eqn>
+			</aux>
+			<aux name="Production_Perception">
+				<units>Goods/(Year*Year)</units>
+				<doc></doc>
+					<eqn>
+	(Production - Perceived_Production)/Time_to_Perceive_Production					</eqn>
+			</aux>
+			<aux name="Production_Trend">
+				<units>Fraction/Year</units>
+				<doc></doc>
+					<eqn>
+	(Perceived_Production - Reference_Production_for_Trend)/Reference_Production_for_Trend/Time_Horizon_to_Assess_Production_Changes					</eqn>
+			</aux>
+			<aux name="Rate_of_Change_in_Unemployment">
+				<units>Percent/Year</units>
+				<doc></doc>
+					<eqn>
+	Change_in_Unemployment_Rate*Percent					</eqn>
+			</aux>
+			<aux name="Rate_of_Change_in_Worker_Pdty">
+				<units>Percent/Year</units>
+				<doc></doc>
+					<eqn>
+	Change_in_Worker_Productiivity*Percent					</eqn>
+			</aux>
+			<aux name="Real_Asset_Income">
+				<units>Starting_$/Year</units>
+				<doc></doc>
+					<eqn>
+	Asset_Income/Asset_Price_Inflation					</eqn>
+			</aux>
+			<aux name="Real_Asset_Taxes">
+				<units>Starting_$/Year</units>
+				<doc></doc>
+					<eqn>
+	(Tax_Rate/Percent)*Real_Asset_Income					</eqn>
+			</aux>
+			<aux name="Real_Book_Losses">
+				<units>Starting_$/Year</units>
+				<doc></doc>
+					<eqn>
+	0 + (Loss_Rate/Percent)*Real_Book_Value_of_Capital_Assets*PULSE(Time_to_Start_Loss, Duration_of_Losses )					</eqn>
+			</aux>
+			<aux name="Real_Capital_Depreciation">
+				<units>Starting_$/Year</units>
+				<doc></doc>
+					<eqn>
+	Real_Book_Value_of_Capital_Assets/Ave_Life_of_Cap					</eqn>
+			</aux>
+			<aux name="Real_Earnings">
+				<units>Starting_$/Year</units>
+				<doc></doc>
+					<eqn>
+	Real_Asset_Income - Real_Capital_Depreciation - Real_Asset_Taxes					</eqn>
+			</aux>
+			<aux name="Real_Financial_Investment">
+				<units>Starting_$/Year</units>
+				<doc></doc>
+					<eqn>
+	DELAY3((Private_Investment +Gov_Investment)/Asset_Price_Inflation,Time_to_Acquire_Capital_Assets)					</eqn>
+			</aux>
+			<aux name="Real_Per_Capita_Wealth">
+				<units>Starting_$/Person</units>
+				<doc></doc>
+					<eqn>
+	Per_Capital_Nom_Wealth/Asset_Price_Inflation					</eqn>
+			</aux>
+			<aux name="Real_Return_on_Capital">
+				<units>Fraction/Year</units>
+				<doc></doc>
+					<eqn>
+	Real_Earnings/Real_Book_Value_of_Capital_Assets					</eqn>
+			</aux>
+			<aux name="Real_Return_on_Capital_Percent">
+				<units>Percent/Year</units>
+				<doc></doc>
+					<eqn>
+	Real_Return_on_Capital*Percent					</eqn>
+			</aux>
+			<aux name="Real_Total_Return_on_Capital">
+				<units>Fraction/Year</units>
+				<doc></doc>
+					<eqn>
+	Real_Asset_Income/Real_Book_Value_of_Capital_Assets					</eqn>
+			</aux>
+			<aux name="Real_Wages">
+				<units>Starting_$/(Person*Year)</units>
+				<doc></doc>
+					<eqn>
+	Wages/Price_Inflation					</eqn>
+			</aux>
+			<aux name="Real_Wealth">
+				<units>Starting_$</units>
+				<doc></doc>
+					<eqn>
+	Nominal_Wealth/Asset_Price_Inflation					</eqn>
+			</aux>
+			<aux name="Ref_Capital">
+				<units>Capital_Units</units>
+				<doc></doc>
+					<eqn>
+	Initial_Assets					</eqn>
+			</aux>
+			<aux name="Ref_Labor">
+				<units>Person*Years</units>
+				<doc></doc>
+					<eqn>
+	Initial_Labor*Work_Effort					</eqn>
+			</aux>
+			<aux name="Return_on_Capital">
+				<units>Fraction/Year</units>
+				<doc></doc>
+					<eqn>
+	(Asset_Earnings/Book_Value_of_Capital_Assets)					</eqn>
+			</aux>
+			<aux name="Return_on_Capital_Percent">
+				<units>Percent/Year</units>
+				<doc></doc>
+					<eqn>
+	Return_on_Capital*Percent					</eqn>
+			</aux>
+			<aux name="Savings">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	Savings_Fraction*Disposable_Income					</eqn>
+			</aux>
+			<aux name="Savings_Fraction">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	Normal_Savings_Fraction*Effect_of_Wealth_on_Savings*Effect_of_Returns_on_Savings					</eqn>
+			</aux>
+			<aux name="Savings_per_Capita">
+				<units>$/(Person*Year)</units>
+				<doc></doc>
+					<eqn>
+	Savings/Working_Population					</eqn>
+			</aux>
+			<aux name="Savings_Rate">
+				<units>Percent</units>
+				<doc></doc>
+					<eqn>
+	Savings_Fraction*Percent					</eqn>
+			</aux>
+			<aux name="Share_of_Working_Pop_in_Labor_Pool">
+				<units>Percent</units>
+				<doc></doc>
+					<eqn>
+	Normal_Share_of_Working_Pop_in_Labor_Pool*Effect_of_Chg_in_Unemployment_on_Labor_Pool					</eqn>
+			</aux>
+			<aux name="Tax_Rate">
+				<units>Percent</units>
+				<doc></doc>
+					<eqn>
+	Initial_Tax_Rate * (1 - Tax_Transition) + Final_Tax_Rate * Tax_Transition					</eqn>
+			</aux>
+			<aux name="Tax_Transition">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	MIN(1,MAX(0,XIDZ( Time - Time_to_Change_Gov_Budget_Growth_Rate, Time_to_Stop_Change_in_Gov_Budget_Growth_Rate-Time_to_Change_Gov_Budget_Growth_Rate,Default_Tax_Transition
+	)))					</eqn>
+			</aux>
+			<aux name="Taxes">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	Income*(Tax_Rate/Percent)					</eqn>
+			</aux>
+			<aux name="Technology">
+				<units>Goods/Year</units>
+				<doc></doc>
+					<eqn>
+	Initial_Technology_Productivity*Effect_of_Experience_on_Tech_Pdty*Effect_of_Investment_on_Tech_Pdty					</eqn>
+			</aux>
+			<aux name="Temporary_Shift_in_Money_Growth_Rate">
+				<units>Fraction/Year</units>
+				<doc></doc>
+					<eqn>
+	(Temporary_Change_in_Money_Growth_Rate/Percent)*PULSE(Time_to_Start_Change_in_Money_Growth_Rate, Duration_of_Change_in_Money_Growth_Rate )					</eqn>
+			</aux>
+			<aux name="Total_Return_on_Capital">
+				<units>Fraction/Year</units>
+				<doc></doc>
+					<eqn>
+	(Asset_Income/Book_Value_of_Capital_Assets)					</eqn>
+			</aux>
+			<aux name="Unemployed_Labor">
+				<units>People</units>
+				<doc></doc>
+					<eqn>
+	MAX(0,Labor_Pool - Employed_Labor)					</eqn>
+			</aux>
+			<aux name="Unemployment_Rate">
+				<units>Percent</units>
+				<doc></doc>
+					<eqn>
+	Percent*Unemployed_Labor/Labor_Pool					</eqn>
+			</aux>
+			<aux name="Unemployment_Rate_Perception">
+				<units>Percent/Year</units>
+				<doc></doc>
+					<eqn>
+	(Unemployment_Rate - Perceived_Unemployment_Rate)/Time_to_Perceive_Unemployment_Rate					</eqn>
+			</aux>
+			<aux name="Vacancy_Closure">
+				<units>People/Year</units>
+				<doc></doc>
+					<eqn>
+	Hiring					</eqn>
+			</aux>
+			<aux name="Vacancy_Creation">
+				<units>People/Year</units>
+				<doc></doc>
+					<eqn>
+	MAX(0,Desired_Vacancy_Creation)					</eqn>
+			</aux>
+			<aux name="Wage_Income">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn>
+	Employed_Labor*Wages					</eqn>
+			</aux>
+			<aux name="Wage_Ratio">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	Wages/Indicated_Wages					</eqn>
+			</aux>
+			<aux name="Wages_Income_Ratio">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	Wage_Income/Income					</eqn>
+			</aux>
+			<aux name="Wages_Income_Ratio_Perception">
+				<units>Dimensionless/Year</units>
+				<doc></doc>
+					<eqn>
+	(Wages_Income_Ratio - Perceived_Wages_Income_Ratio)/Time_to_Perceive_Wages_Income_Ratio					</eqn>
+			</aux>
+			<aux name="Worker_Pdty_Perception">
+				<units>Goods/(Person*Year*Year)</units>
+				<doc></doc>
+					<eqn>
+	(Worker_Productivity - Perceived_Worker_Pdty)/Time_to_Perceive_Worker_Pdty					</eqn>
+			</aux>
+			<aux name="Worker_Productivity">
+				<units>Goods/(Person*Year)</units>
+				<doc></doc>
+					<eqn>
+	Production/Applied_Labor					</eqn>
+			</aux>
+			<aux name="Ave_Duration_of_Employment">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	5					</eqn>
+			</aux>
+			<aux name="Ave_Life_of_Cap">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	10					</eqn>
+			</aux>
+			<aux name="Beta">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	0.75					</eqn>
+			</aux>
+			<aux name="Default_Tax_Transition">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="Desired_Gov_Share_Income">
+				<units>Percent</units>
+				<doc></doc>
+					<eqn>
+	25					</eqn>
+			</aux>
+			<aux name="Desired_Return_on_Capital">
+				<units>Fraction/Year</units>
+				<doc></doc>
+					<eqn>
+	0.15					</eqn>
+			</aux>
+			<aux name="Duration_of_Change_in_Money_Growth_Rate">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+			<aux name="Duration_of_Losses">
+				<units>Year</units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="Duration_of_Stimulus">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+			<aux name="Gov_Budget_Growth_Rate">
+				<units>Percent/Year</units>
+				<doc></doc>
+					<eqn>
+	3					</eqn>
+			</aux>
+			<aux name="Gov_Invest_Share">
+				<units>Percent</units>
+				<doc></doc>
+					<eqn>
+	20					</eqn>
+			</aux>
+			<aux name="Initial_$">
+				<units>$/Starting_$</units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="Initial_Asset_Price">
+				<units>$/Capital_Unit</units>
+				<doc></doc>
+					<eqn>
+	40000					</eqn>
+			</aux>
+			<aux name="Initial_Assets">
+				<units>Capital_Units</units>
+				<doc></doc>
+					<eqn>
+	1e+06					</eqn>
+			</aux>
+			<aux name="Initial_Exp_Chg_in_Unemployment">
+				<units>Fraction/Year</units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="Initial_Expected_Chg_in_Worker_Pdty">
+				<units>Fraction/Year</units>
+				<doc></doc>
+					<eqn>
+	0.002					</eqn>
+			</aux>
+			<aux name="Initial_Final_Tax_Rate">
+				<units>Percent</units>
+				<doc></doc>
+					<eqn>
+	20					</eqn>
+			</aux>
+			<aux name="Initial_Labor">
+				<units>People</units>
+				<doc></doc>
+					<eqn>
+	1e+06					</eqn>
+			</aux>
+			<aux name="Initial_Per_Worker_Money_Supply">
+				<units>$/Person</units>
+				<doc></doc>
+					<eqn>
+	10000					</eqn>
+			</aux>
+			<aux name="Initial_Price">
+				<units>$/Good</units>
+				<doc></doc>
+					<eqn>
+	200					</eqn>
+			</aux>
+			<aux name="Initial_Savings_Rate">
+				<units>Percent</units>
+				<doc></doc>
+					<eqn>
+	20					</eqn>
+			</aux>
+			<aux name="Initial_Share_of_Work_Pop_in_Labor_Pool">
+				<units>Percent</units>
+				<doc></doc>
+					<eqn>
+	60					</eqn>
+			</aux>
+			<aux name="Initial_Tax_Rate">
+				<units>Percent</units>
+				<doc></doc>
+					<eqn>
+	20					</eqn>
+			</aux>
+			<aux name="Initial_Technology_Productivity">
+				<units>Goods/Year</units>
+				<doc></doc>
+					<eqn>
+	2e+08					</eqn>
+			</aux>
+			<aux name="Initial_Variation_in_Perc_Wkr_Pdty">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	0.995					</eqn>
+			</aux>
+			<aux name="Initial_Variation_in_Ref_Unempl_Rate">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="Initial_Variation_in_Ref_Wkr_Pdty">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	0.99					</eqn>
+			</aux>
+			<aux name="Initial_Variation_Perc_Unemp_Rate">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="Initial_Wages">
+				<units>$/(Person*Year)</units>
+				<doc></doc>
+					<eqn>
+	30000					</eqn>
+			</aux>
+			<aux name="Initial_Working_Population">
+				<units>People</units>
+				<doc></doc>
+					<eqn>
+	1.75e+06					</eqn>
+			</aux>
+			<aux name="Labor_Adjustment_Time">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	0.25					</eqn>
+			</aux>
+			<aux name="Learning_Strength_from_Experience">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	0.05					</eqn>
+			</aux>
+			<aux name="Learning_Strength_from_Investment">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	0.1					</eqn>
+			</aux>
+			<aux name="Loss_Rate">
+				<units>Percent/Year</units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="Magnitude_of_Gov_Stimulus">
+				<units>Percent</units>
+				<doc></doc>
+					<eqn>
+	30					</eqn>
+			</aux>
+			<aux name="Max_Asset_Inc_Ratio_Eff_on_Asset_Price">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	1.5					</eqn>
+			</aux>
+			<aux name="Max_Eff_of_Chg_in_Unemploy_on_Labor_Pool">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	1.25					</eqn>
+			</aux>
+			<aux name="Max_Effect_of_Inflation_on_Wages">
+				<units>Dimensionless</units>
+				<doc>1.5</doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+			<aux name="Max_Effect_of_Return_on_Savings">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	1.5					</eqn>
+			</aux>
+			<aux name="Max_Effect_of_Unemployment_on_Wages">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	1.5					</eqn>
+			</aux>
+			<aux name="Max_Effect_of_Wealth_on_Savings">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	1.5					</eqn>
+			</aux>
+			<aux name="Max_Effect_of_Worker_Pdty_on_Wages">
+				<units>Dimensionless</units>
+				<doc>1.5</doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+			<aux name="Max_Inflation_Eff_on_Price">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+			<aux name="Max_Wages_Income_Ratio_Eff_on_Price">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	1.5					</eqn>
+			</aux>
+			<aux name="Maximum_Savings_Fraction">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	0.8					</eqn>
+			</aux>
+			<aux name="Maximum_Share_of_Working_Pop_in_Labor_Pool">
+				<units>Percent</units>
+				<doc></doc>
+					<eqn>
+	70					</eqn>
+			</aux>
+			<aux name="Min_Time_to_Hire">
+				<units>Year</units>
+				<doc></doc>
+					<eqn>
+	0.1					</eqn>
+			</aux>
+			<aux name="Money_Growth_Rate">
+				<units>Percent/Year</units>
+				<doc></doc>
+					<eqn>
+	3					</eqn>
+			</aux>
+			<aux name="Percent">
+				<units>Percent</units>
+				<doc></doc>
+					<eqn>
+	100					</eqn>
+			</aux>
+			<aux name="Population_Growth_Rate">
+				<units>Percent/Year</units>
+				<doc></doc>
+					<eqn>
+	3					</eqn>
+			</aux>
+			<aux name="Ref_Invest_Mult_from_Initial">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	20					</eqn>
+			</aux>
+			<aux name="Risk_Free_Rate">
+				<units>Fraction/Year</units>
+				<doc></doc>
+					<eqn>
+	0.03					</eqn>
+			</aux>
+			<aux name="Sens_of_Asset_Price_to_Asset_Income_Ratio">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	4					</eqn>
+			</aux>
+			<aux name="Sens_of_Price_to_Inflation">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+			<aux name="Sens_of_Price_to_Wages_Income_Ratio">
+				<units>Year*Dimensionless/Fraction</units>
+				<doc></doc>
+					<eqn>
+	4					</eqn>
+			</aux>
+			<aux name="Sensitivity_of_Inlation_on_Wages">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	3					</eqn>
+			</aux>
+			<aux name="Sensitivity_of_Labor_Pool_to_Chg_in_Unemployment">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	1.5					</eqn>
+			</aux>
+			<aux name="Sensitivity_of_Return_on_Savings">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+			<aux name="Sensitivity_of_Unemployment_on_Wages">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+			<aux name="Sensitivity_of_Wealth_on_Savings">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	4					</eqn>
+			</aux>
+			<aux name="Sensitivity_of_Worker_Pdty_on_Wages">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	3					</eqn>
+			</aux>
+			<aux name="Switch_for_Endog_Gov_Grwth">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="Switch_to_Include_Money_Growth_in_Gov_Budget">
+				<units>Dimensionless</units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="Temporary_Change_in_Money_Growth_Rate">
+				<units>Percent/Year</units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="Test_Switch">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="Time_Horizon_to_Assess_Asset_Income_Ratio">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="Time_Horizon_to_Assess_Capital_Returns">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+			<aux name="Time_Horizon_to_Assess_Inflation">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+			<aux name="Time_Horizon_to_Assess_Production_Changes">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+			<aux name="Time_Horizon_to_Assess_Unemployment">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+			<aux name="Time_Horizon_to_Assess_Wages_Income_Ratio">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="Time_Horizon_to_Assess_Wealth">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+			<aux name="Time_Horizon_to_Assess_Worker_Pdty">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+			<aux name="Time_to_Acquire_Capital_Assets">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	3					</eqn>
+			</aux>
+			<aux name="Time_to_Adjust_Asset_Price_Expectations">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+			<aux name="Time_to_Adjust_Expectations_AIR">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	0.5					</eqn>
+			</aux>
+			<aux name="Time_to_Adjust_Expectations_MI">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+			<aux name="Time_to_Adjust_Expectations_Pdty">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+			<aux name="Time_to_Adjust_Expectations_ROC">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	0.5					</eqn>
+			</aux>
+			<aux name="Time_to_Adjust_Expectations_UE">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+			<aux name="Time_to_Adjust_Expectations_Wealth">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	0.5					</eqn>
+			</aux>
+			<aux name="Time_to_Adjust_Expectations_WIR">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	0.5					</eqn>
+			</aux>
+			<aux name="Time_to_Adjust_Hiring_Expectations">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="Time_to_Adjust_Norm_Share_of_Work_Pop_in_Labor_Pool">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+			<aux name="Time_to_Adjust_Price_Expectations">
+				<units>Year</units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="Time_to_Adjust_Savings_Norms">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+			<aux name="Time_to_Adjust_Wage_Expectations">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	3					</eqn>
+			</aux>
+			<aux name="Time_to_Adjust_Wage_Income_Expectations">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	10					</eqn>
+			</aux>
+			<aux name="Time_to_Adjut_Final_Tax_Rate">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	10					</eqn>
+			</aux>
+			<aux name="Time_to_Ave_Attrition">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="Time_to_Change_Gov_Budget_Growth_Rate">
+				<units>Year</units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="Time_to_Fill_Vacancies">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	0.5					</eqn>
+			</aux>
+			<aux name="Time_to_Perceive_Asset_Income_Ratio">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	0.5					</eqn>
+			</aux>
+			<aux name="Time_to_Perceive_Capital_Returns">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	0.5					</eqn>
+			</aux>
+			<aux name="Time_to_Perceive_Money_Ratio">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="Time_to_Perceive_Production">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	0.5					</eqn>
+			</aux>
+			<aux name="Time_to_Perceive_Production_Trend">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+			<aux name="Time_to_Perceive_Unemployment_Rate">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	0.25					</eqn>
+			</aux>
+			<aux name="Time_to_Perceive_Wages_Income_Ratio">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	0.5					</eqn>
+			</aux>
+			<aux name="Time_to_Perceive_Wealth">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	0.5					</eqn>
+			</aux>
+			<aux name="Time_to_Perceive_Worker_Pdty">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	0.25					</eqn>
+			</aux>
+			<aux name="Time_to_Start_Change_in_Money_Growth_Rate">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	3.5					</eqn>
+			</aux>
+			<aux name="Time_to_Start_Loss">
+				<units>Year</units>
+				<doc></doc>
+					<eqn>
+	3					</eqn>
+			</aux>
+			<aux name="Time_to_Start_Stimulus">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	30					</eqn>
+			</aux>
+			<aux name="Time_to_Stop_Change_in_Gov_Budget_Growth_Rate">
+				<units>Year</units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="Vacancy_Adjustment_Time">
+				<units>Years</units>
+				<doc></doc>
+					<eqn>
+	0.5					</eqn>
+			</aux>
+			<aux name="Work_Effort">
+				<units>Years</units>
+				<doc>Defines the average number of person years worked per person per year.  At this time, model does not address overtime.</doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

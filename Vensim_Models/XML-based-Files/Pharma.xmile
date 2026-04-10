@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Hour">
+		<start> 0</start>
+		<stop> 48</stop>
+		<dt> 0.25</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="Medicine_in_Intestines">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Intake
+					</inflow>
+					<outflow>
+					absorption
+					</outflow>
+			</stock>
+			<stock name="Plasma_Level">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					absorption
+					</inflow>
+					<outflow>
+					excretion
+					</outflow>
+			</stock>
+			<aux name="absorption">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Absorption_rate_constant*Medicine_in_Intestines					</eqn>
+			</aux>
+			<aux name="Dosage">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	dosage_per_day/doses_per_day					</eqn>
+			</aux>
+			<aux name="Every_?_hours">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	24/doses_per_day					</eqn>
+			</aux>
+			<aux name="excretion">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Excretion_rate_constant*Plasma_Level					</eqn>
+			</aux>
+			<aux name="Excretion_rate_constant">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.693/"Half-life"					</eqn>
+			</aux>
+			<aux name="Intake">
+				<units></units>
+				<doc>this is the first time I ever used a pulse train. today anyway.</doc>
+					<eqn>
+	Dosage*PULSE_TRAIN( Start_Time {start} , TIME_STEP {duration} , "Every_?_hours" {repeattime} , End_Time {end} )/TIME_STEP					</eqn>
+			</aux>
+			<aux name="Medicinal_Level">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	800/1					</eqn>
+			</aux>
+			<aux name="Plasma_Concentration">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Plasma_Level/Blood_Volume					</eqn>
+			</aux>
+			<aux name="Toxic_Level">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1000/1					</eqn>
+			</aux>
+			<aux name="Absorption_rate_constant">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.25					</eqn>
+			</aux>
+			<aux name="Blood_Volume">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	4.6					</eqn>
+			</aux>
+			<aux name="dosage_per_day">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	6000					</eqn>
+			</aux>
+			<aux name="doses_per_day">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="End_Time">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	48					</eqn>
+			</aux>
+			<aux name="Half-life">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	6					</eqn>
+			</aux>
+			<aux name="Start_Time">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

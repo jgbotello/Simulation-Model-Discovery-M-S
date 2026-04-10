@@ -1,0 +1,143 @@
+{UTF-8}
+Loyalists= INTEG (
+	Coming to Senses,
+		0)
+	~	
+	~		|
+
+Gullibles= INTEG (
+	-Mongerization,
+		999)
+	~	
+	~		|
+
+Rumor Mongerers= INTEG (
+	Mongerization-Coming to Senses,
+		1)
+	~	
+	~		|
+
+Total Population=
+	Rumor Mongerers+Loyalists+Gullibles
+	~	
+	~		|
+
+Mongerization=
+	Spreading probability*(Gullibles*Rumor Mongerers)
+	~	
+	~		|
+
+Spreading probability=
+	0.001
+	~	 [0,0.005,1e-05]
+	~		|
+
+Coming to Senses=
+	Rationality rate*Rumor Mongerers
+	~	
+	~		|
+
+Rationality rate=
+	0.5
+	~	 [0,1,0.001]
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 50
+	~	Hour
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Hour
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP 
+	~	Hour [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 0.015625
+	~	Hour [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|72,72,100,0
+10,1,Gullibles,64,157,40,20,3,3,0,0,0,0,0,0
+10,2,Rumor Mongerers,341,155,40,20,3,3,0,0,0,0,0,0
+10,3,Loyalists,638,151,40,20,3,3,0,0,0,0,0,0
+1,28,30,2,4,0,0,22,0,0,0,-1--1--1,,1|(255,156)|
+1,29,30,1,100,0,0,22,0,0,0,-1--1--1,,1|(150,156)|
+11,30,348,203,156,6,8,34,3,0,0,1,0,0,0
+10,31,Mongerization,203,180,52,16,40,131,0,0,-1,0,0,0
+1,32,34,3,4,0,0,22,0,0,0,-1--1--1,,1|(533,153)|
+1,33,34,2,100,0,0,22,0,0,0,-1--1--1,,1|(418,153)|
+11,34,284,462,153,6,8,34,3,0,0,1,0,0,0
+10,35,Coming to Senses,462,184,72,23,40,131,0,0,-1,0,0,0
+10,38,Rationality rate,500,94,66,13,8,131,0,0,0,0,0,0
+10,39,Spreading probability,245,78,52,8,8,3,0,0,0,0,0,0
+10,40,Total Population,285,464,43,8,8,3,0,0,0,0,0,0
+1,42,39,30,1,0,0,0,0,64,0,-1--1--1,,1|(227,101)|
+1,43,38,34,1,0,0,0,0,64,0,-1--1--1,,1|(460,106)|
+1,48,1,30,1,0,0,0,0,64,0,-1--1--1,,1|(140,116)|
+1,49,2,30,1,0,0,0,0,64,0,-1--1--1,,1|(257,127)|
+1,50,2,34,1,0,0,0,0,64,0,-1--1--1,,1|(387,138)|
+10,55,Gullibles,120,420,57,8,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,56,Rumor Mongerers,87,465,56,12,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,57,Loyalists,111,503,57,17,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,58,55,40,0,0,0,0,0,64,0,-1--1--1,,1|(195,440)|
+1,59,56,40,0,0,0,0,0,64,0,-1--1--1,,1|(185,464)|
+1,60,57,40,0,0,0,0,0,64,0,-1--1--1,,1|(201,483)|
+12,63,0,655,378,150,150,3,12,0,0,1,0,0,0
+Population
+///---\\\
+:GRAPH Population
+:TITLE Population
+:X-AXIS Time
+:SCALE
+:VAR Gullibles
+:Y-MIN 0
+:Y-MAX 2000
+:LINE-WIDTH 2
+:VAR Rumor Mongerers
+:Y-MIN 0
+:Y-MAX 2000
+:LINE-WIDTH 2
+:VAR Loyalists
+:Y-MIN 0
+:Y-MAX 2000
+:LINE-WIDTH 2
+:VAR Total Population
+:Y-MIN 0
+:Y-MAX 2000
+:LINE-WIDTH 2
+:L<%^E!@
+1:Current.vdf
+9:Current
+23:0
+15:0,0,0,0,0,0
+19:100,0
+27:2,
+34:0,
+4:Time
+5:Rationality rate
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:5
+41:0
+24:0
+25:50
+26:50

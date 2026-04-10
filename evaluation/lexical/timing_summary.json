@@ -1,0 +1,7 @@
+{
+  "total_experiments": 9,
+  "total_queries": 15,
+  "total_elapsed_seconds": 0.31875059998128563,
+  "average_seconds_per_experiment": 0.03541673333125396,
+  "average_seconds_per_query_overall": 0.0023611155554169308
+}

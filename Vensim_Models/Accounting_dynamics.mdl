@@ -1,0 +1,879 @@
+{UTF-8}
+Accum Capital Productivity= INTEG (
+	incr accum capital productivity-decr accum capital productivity,
+		5972)
+	~	
+	~		|
+
+Depreciable Assets Completed= INTEG (
+	depreciable asset completion-depreciation,
+		813)
+	~	
+	~		|
+
+effect rgdp growth=
+	if then else(Time > 25,0,smooth(rdgp exponent*(0),rgdp smooth time))
+	~	
+	~		|
+
+av life asset=
+	9
+	~	
+	~		|
+
+Financial Assets= INTEG (
+	incr financial assets-decr financial assets,
+		0)
+	~	
+	~		|
+
+depreciation=
+	DELAY3I(depreciable asset completion, av life asset, Depreciable Assets Completed/av life asset\
+		 )
+	~	
+	~		|
+
+cogs pct=
+	0.34
+	~	
+	~		|
+
+rental expense pct=
+	0.0241
+	~	
+	~		|
+
+sga pct=
+	0.3697
+	~	
+	~		|
+
+expected return=
+	smooth3I(expected cash flow-1/av life asset,expected ROI smooth time,0.11)
+	~	
+	~		|
+
+expected capital productivity=
+	marginal capital productivity
+	~	
+	~		|
+
+investment coverage=
+	depreciable asset completion/baseline investment coverage
+	~	
+	~		|
+
+Depreciable Assets in Process= INTEG (
+	depreciable asset starts-depreciable asset completion,
+		initial depreciable assets in process)
+	~	
+	~		|
+
+incr capital improvement=
+	depreciable asset completion*potential improvement per unit*marginal capital productivity
+	~	
+	~		|
+
+cash flow=
+	gross cash flow-depreciable asset completion-RD
+	~	
+	~		|
+
+incr accum capital productivity=
+	depreciable asset completion*marginal capital productivity+Accum Capital Productivity
+	*av potential improvement*capital productivity adjust
+	~	
+	~		|
+
+RD in Process= INTEG (
+	RD starts-incr RD capital,
+		initial rd pipeline)
+	~	
+	~		|
+
+initial cume Investment=
+	30000
+	~	
+	~		|
+
+initial depreciable assets in process=
+	2036
+	~	
+	~		|
+
+cume Investment= INTEG (
+	depreciable asset starts,
+		initial cume Investment)
+	~	
+	~		|
+
+decr accum capital productivity=
+	depreciation*av capital productivity
+	~	
+	~		|
+
+baseline investment coverage=
+	1000
+	~	
+	~		|
+
+decr potential capital improvement=
+	depreciation*av potential improvement+Accum Capital Productivity*av potential improvement\
+		*capital productivity adjust
+	~	
+	~		|
+
+initial rd pipeline=
+	1447
+	~	
+	~		|
+
+depletion effect=
+	(cume Investment/initial cume Investment)^depletion effect exponent
+	~	
+	~		|
+
+effect RD capital productivity=
+	(RD Capital/initial RD capital)^rd exponent
+	~	
+	~		|
+
+initial RD capital=
+	217
+	~	
+	~		|
+
+depreciable asset starts=
+	(max(gross cash flow,0)*ploughback fraction)*effect cap prod plough back
+	~	
+	~		|
+
+depreciable assets=
+	Depreciable Assets Completed
+	~	
+	~		|
+
+marginal capital productivity=
+	(base capital productivity*effect RD capital productivity*depletion effect*exp(investment coverage
+	*capital productivity exponent))
+	~	
+	~		|
+
+rd exponent=
+	0.4706
+	~	
+	~		|
+
+depletion effect exponent=
+	-7.479
+	~	
+	~		|
+
+rgdp smooth time=
+	1
+	~	
+	~		|
+
+Potential Capital Improvement= INTEG (
+	incr capital improvement-decr potential capital improvement,
+		Depreciable Assets Completed*initial potential capital improvement*capital productivity\
+		)
+	~	
+	~		|
+
+incr RD capital=
+	DELAY3(RD starts, RD completion time)
+	~	
+	~		|
+
+sales growth smoothed=
+	smooth(sales growth,5)
+	~	
+	~		|
+
+RD Capital= INTEG (
+	incr RD capital-rd depreciation,
+		initial RD capital)
+	~	
+	~		|
+
+Cume RD= INTEG (
+	rd depreciation,
+		0)
+	~	
+	~		|
+
+RD=
+	gross cash flow*rd pct
+	~	
+	~		|
+
+rd pct=
+	0.2698
+	~	
+	~		|
+
+frac cf to stock repurch=
+	0.2
+	~	
+	~		|
+
+frac cf to dividend=
+	0.2
+	~	
+	~		|
+
+decr fa from stock repurchase=
+	gross cash flow*frac cf to stock repurch
+	~	
+	~		|
+
+decr fa dividends=
+	gross cash flow*frac cf to dividend
+	~	
+	~		|
+
+decr financial assets=
+	depreciable asset starts+decr fa dividends+decr fa from stock repurchase
+	~	
+	~		|
+
+incr fa from new debt=
+	0
+	~	
+	~		|
+
+incr financial assets=
+	gross cash flow+incr fa from stock sales+incr fa from new debt
+	~	
+	~		|
+
+incr fa from stock sales=
+	0
+	~	
+	~		|
+
+ploughback fraction=
+	0.039
+	~	
+	~		|
+
+effect cap prod plough back=
+	2*exp(100*(expected return-0.1)*ploughback exponent)/(1+exp(100*(expected return-0.1\
+		)*ploughback exponent))
+	~	
+	~		|
+
+expected reurn scaled=
+	expected return*100
+	~	
+	~		|
+
+rd depreciation=
+	DELAY3(incr RD capital, rd life)
+	~	
+	~		|
+
+capital productivity=
+	av capital productivity+effect rgdp growth
+	~	
+	~		|
+
+expected cash flow=
+	expected capital productivity*(1-expected cogs-expected sga pct)
+	~	
+	~		|
+
+net cash flow=
+	incr financial assets-decr financial assets
+	~	
+	~		|
+
+rental expense=
+	sales*rental expense pct
+	~	
+	~		|
+
+gross cash flow=
+	operating profit-rental expense
+	~	
+	~		|
+
+av sales= INTEG (
+	(sales-av sales)/1,
+		sales)
+	~	
+	~		|
+
+sales growth=
+	(sales-av sales)/av sales
+	~	
+	~		|
+
+RD starts=
+	RD
+	~	
+	~		|
+
+Depreciable Assets in Process driving=
+	2000
+	~	
+	~		|
+
+Accum Capital Productivity driving=
+	2000
+	~	
+	~		|
+
+potential investment driving=
+	1000
+	~	
+	~		|
+
+Depreciable Assets Completed driving=
+	2000
+	~	
+	~		|
+
+Potential Capital driving=
+	2000
+	~	
+	~		|
+
+RD driving=
+	0.3
+	~	
+	~		|
+
+sales=
+	Depreciable Assets Completed*capital productivity
+	~	
+	~		|
+
+initial potential capital improvement=
+	0.413
+	~	
+	~		|
+
+capital productivity adjust=
+	0.2
+	~	
+	~		|
+
+av potential improvement=
+	zidz(Potential Capital Improvement,Depreciable Assets Completed)
+	~	
+	~		|
+
+initil gross investment completed= INITIAL(
+	Depreciable Assets Completed)
+	~	
+	~		|
+
+rdgp exponent=
+	0
+	~	
+	~		|
+
+initial rgdp growth= INITIAL(
+	2.5)
+	~	
+	~		|
+
+base capital productivity=
+	1.186
+	~	
+	~		|
+
+RD completion time=
+	3.638
+	~	
+	~		|
+
+av capital productivity=
+	Accum Capital Productivity/Depreciable Assets Completed
+	~	
+	~		|
+
+capital productivity exponent=
+	-1.176
+	~	
+	~		|
+
+potential improvement per unit=
+	12.92
+	~	
+	~		|
+
+expected cogs=
+	cogs pct
+	~	
+	~		|
+
+expected ROI smooth time=
+	2
+	~	
+	~		|
+
+expected sga pct=
+	sga pct
+	~	
+	~		|
+
+depreciable asset completion=
+	Depreciable Assets in Process/investment completion time
+	~	
+	~		|
+
+gross profit=
+	sales*(1-cogs pct)
+	~	
+	~		|
+
+initial potential investment2=
+	5
+	~	
+	~		|
+
+initial RD= INITIAL(
+	RD Capital)
+	~	
+	~		|
+
+investment completion time=
+	9
+	~	
+	~		|
+
+operating profit=
+	gross profit-sga
+	~	
+	~		|
+
+ploughback exponent=
+	0
+	~	
+	~		|
+
+rd life=
+	14
+	~	
+	~		|
+
+sga=
+	sales*sga pct
+	~	
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 35
+	~	Year
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Year
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Year [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 0.03125
+	~	Year [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|16||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,Depreciable Assets Completed,916,393,102,34,3,131,0,4,0,0,0,0,0-0-0,255-255-255,|||0-0-0,0,0,0,0,0,0
+12,2,48,1201,384,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,5,2,4,0,0,22,0,0,0,-1--1--1,,1|(1148,384)|
+1,4,5,1,100,0,0,22,0,0,0,-1--1--1,,1|(1055,384)|
+11,5,48,1099,384,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,6,depreciation,1099,405,53,13,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,Depreciable Assets in Process,464,399,78,39,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,8,10,1,4,0,0,22,0,0,0,-1--1--1,,1|(747,388)|
+1,9,10,7,100,0,0,22,0,0,0,-1--1--1,,1|(605,388)|
+11,10,316,675,388,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,11,depreciable asset completion,675,417,123,21,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,12,13,7,4,0,0,22,0,0,0,-1--1--1,,1|(330,392)|
+11,13,236,269,392,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,14,depreciable asset starts,269,421,101,21,40,131,0,4,-1,0,0,0,0-0-0,255-0-0,|||0-0-0,0,0,0,0,0,0
+10,15,depreciable assets,687,296,89,19,8,131,0,4,0,0,0,0,0-0-0,255-0-0,|||0-0-0,0,0,0,0,0,0
+1,16,1,15,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,17,investment completion time,679,497,132,21,8,131,0,4,0,0,0,0,0-0-0,0-0-255,|||0-0-0,0,0,0,0,0,0
+1,18,17,11,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,19,1,6,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,20,7,11,1,0,0,0,0,64,0,-1--1--1,,1|(535,449)|
+10,21,sales,819,186,22,13,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,22,1,21,1,0,0,0,0,64,0,-1--1--1,,1|(895,269)|
+10,23,capital productivity,989,179,88,19,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,24,23,21,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,25,gross profit,565,140,50,13,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,26,cogs pct,579,63,36,13,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,27,26,25,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,28,21,25,1,0,0,0,0,64,0,-1--1--1,,1|(716,123)|
+10,29,operating profit,292,236,77,14,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,30,25,29,1,0,0,0,0,64,0,-1--1--1,,1|(418,156)|
+10,31,sga pct,279,46,31,13,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,32,sga,279,123,16,13,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,33,31,32,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,34,sales,148,176,34,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,35,34,32,1,0,0,0,0,64,0,-1--1--1,,1|(196,128)|
+1,36,32,29,1,0,0,0,0,64,0,-1--1--1,,1|(303,161)|
+10,37,gross cash flow,284,318,68,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,38,37,14,1,0,0,0,0,64,0,-1--1--1,,1|(257,413)|
+10,39,ploughback fraction,58,510,91,14,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,40,39,14,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,41,rd pct,41,128,26,13,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,42,effect cap prod plough back,194,690,119,21,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,43,ploughback exponent,173,766,110,17,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,44,43,42,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,45,expected cash flow,677,696,85,22,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,46,expected capital productivity,910,693,133,19,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,47,46,45,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,48,expected cogs,822,617,60,13,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,49,48,45,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,50,expected sga pct,803,767,79,20,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,51,50,45,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,52,cogs pct,1045,569,48,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,53,52,48,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,54,sga pct,966,840,43,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,55,54,50,1,0,0,0,0,64,0,-1--1--1,,1|(921,786)|
+10,56,expected ROI smooth time,450,612,118,18,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,57,RD Capital,-640,72,64,40,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,58,59,57,100,0,0,22,0,0,0,-1--1--1,,1|(-756,72)|
+11,59,796,-814,72,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,60,rd depreciation,-814,98,83,18,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,61,rd life,-884,158,27,13,8,131,0,4,0,0,0,0,0-0-0,0-0-255,|||0-0-0,0,0,0,0,0,0
+1,62,61,60,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,63,65,57,4,0,0,22,0,0,0,-1--1--1,,1|(-527,72)|
+1,64,65,71,100,0,0,22,0,0,0,-1--1--1,,1|(-419,72)|
+11,65,1580,-473,72,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,66,incr RD capital,-473,103,97,23,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,67,av capital productivity,1187,122,106,17,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,68,67,23,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,69,marginal capital productivity,1069,754,149,21,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,70,69,46,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,71,RD in Process,-314,80,57,34,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,72,48,-64,78,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,73,75,71,4,0,0,22,0,0,0,-1--1--1,,1|(-214,78)|
+1,74,75,72,100,0,0,22,0,0,0,-1--1--1,,1|(-117,78)|
+11,75,48,-166,78,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,76,RD starts,-166,99,41,13,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,77,RD completion time,-441,199,92,22,8,131,0,4,0,0,0,0,0-0-0,0-0-255,|||0-0-0,0,0,0,0,0,0
+1,78,77,66,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,79,rental expense,17,244,62,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,80,rental expense pct,-187,275,87,17,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,81,34,79,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,82,effect rgdp growth,1198,227,87,18,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,83,initial rgdp growth,1437,249,85,24,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,84,82,23,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,85,rdgp exponent,1221,307,71,21,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,86,85,82,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,87,80,79,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,88,initial potential investment2,59,462,73,23,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,89,RD driving,-819,-138,51,14,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,90,potential investment driving,-968,-33,118,31,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,91,Potential Capital driving,-803,-89,108,29,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,92,Accum Capital Productivity driving,-482,-102,156,22,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,93,Depreciable Assets Completed driving,-498,-34,169,23,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,94,Depreciable Assets in Process driving,-305,-155,166,22,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,95,RD,-54,163,17,13,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,96,41,95,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,97,95,76,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,98,29,37,1,0,0,0,0,64,0,-1--1--1,,1|(272,262)|
+1,99,79,37,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,100,av sales,905,111,34,13,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,101,21,100,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,102,sales growth,832,29,54,13,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,103,100,102,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,104,21,102,1,0,0,0,0,64,0,-1--1--1,,1|(807,109)|
+10,105,expected return,447,697,72,20,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,106,45,105,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,107,105,42,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,108,66,60,1,0,0,0,0,64,0,-1--1--1,,1|(-641,164)|
+1,109,56,105,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,110,potential improvement per unit,1206,648,149,28,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,111,11,6,1,0,0,0,0,64,0,-1--1--1,,1|(912,455)|
+10,112,expected reurn scaled,387,813,100,20,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,113,42,14,1,0,0,0,0,64,0,-1--1--1,,1|(183,555)|
+1,114,37,95,1,0,0,0,0,64,0,-1--1--1,,1|(122,221)|
+10,115,Cume RD,-952,75,49,36,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,116,sales growth smoothed,815,-59,109,21,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,117,76,66,1,0,0,0,0,64,0,-1--1--1,,1|(-295,139)|
+10,118,rgdp smooth time,1443,167,83,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,119,31,32,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,120,cash flow,30,331,42,13,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,121,depreciable asset completion,-8,405,137,12,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,122,initial RD capital,-640,135,50,23,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,123,initial rd pipeline,-159,-27,80,20,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,124,initial depreciable assets in process,376,532,153,32,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,125,Time,1115,269,36,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,126,av life asset,1156,454,51,13,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,127,126,6,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,128,124,7,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+1,129,122,57,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+1,130,123,71,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+1,131,118,82,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,132,Time,1198,268,36,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,133,132,82,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,134,126,105,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,135,105,112,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,136,60,115,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,137,102,116,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,138,11,120,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,139,37,120,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,140,95,120,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 2
+$192-192-192,0,Times New Roman|16||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,Financial Assets,1389,-239,77,40,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,2,48,1016,-247,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,5,1,4,0,0,22,0,0,0,-1--1--1,,1|(1243,-247)|
+1,4,5,2,100,0,0,22,0,0,0,-1--1--1,,1|(1094,-247)|
+11,5,48,1169,-247,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,6,incr financial assets,1169,-217,106,22,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+12,7,48,1747,-245,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,8,10,7,4,0,0,22,0,0,0,-1--1--1,,1|(1672,-245)|
+1,9,10,1,100,0,0,22,0,0,0,-1--1--1,,1|(1530,-245)|
+11,10,48,1601,-245,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,11,decr financial assets,1601,-216,115,21,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,12,63,6,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,13,depreciable asset starts,1858,-175,112,16,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,14,13,11,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,15,Accum Capital Productivity,1416,209,131,42,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,16,marginal capital productivity,656,414,134,19,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,17,capital productivity exponent,427,349,138,17,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,18,17,16,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,19,av capital productivity,1670,94,111,23,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,20,15,19,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,21,depreciation,1960,462,72,13,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,22,potential improvement per unit,1243,586,132,19,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,23,depreciable asset completion,1190,403,137,18,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,24,Depreciable Assets Completed,1725,329,149,15,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,25,24,19,1,0,0,0,0,64,0,-1--1--1,,1|(1841,232)|
+10,26,base capital productivity,346,406,123,21,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,27,29,16,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,28,capital productivity adjust,1101,317,126,18,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,29,Potential Capital Improvement,1426,466,80,35,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,30,48,1129,465,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,31,36,32,4,0,0,22,0,0,0,-1--1--1,,1|(1278,466)|
+1,32,36,33,100,0,0,22,0,0,0,-1--1--1,,1|(1169,466)|
+11,33,48,1205,466,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,34,incr capital improvement,1205,497,118,23,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,35,23,37,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+12,36,48,1794,476,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,37,42,39,4,0,0,22,0,0,0,-1--1--1,,1|(1729,475)|
+1,38,42,32,100,0,0,22,0,0,0,-1--1--1,,1|(1584,475)|
+11,39,48,1669,475,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,40,decr potential capital improvement,1669,507,158,24,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,41,21,42,1,0,0,0,0,64,0,-1--1--1,,1|(1845,437)|
+10,42,av potential improvement,1375,308,118,21,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,43,32,45,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,44,24,45,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,45,45,42,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,46,15,43,1,0,0,0,0,64,0,-1--1--1,,1|(1544,361)|
+1,47,31,43,1,0,0,0,0,64,0,-1--1--1,,1|(1374,361)|
+10,48,initial potential capital improvement,1505,545,175,18,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,49,net cash flow,1372,-346,57,13,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,50,5,52,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,51,10,52,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,52,incr fa from stock sales,896,-193,104,21,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,53,55,6,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,54,incr fa from new debt,910,-121,110,22,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,55,57,6,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,56,decr fa dividends,1409,-163,81,21,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,57,59,11,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,58,decr fa from stock repurchase,1505,8,131,24,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,59,61,11,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,60,gross cash flow,1137,-98,88,21,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,61,63,61,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,62,63,59,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,63,frac cf to dividend,1387,-98,84,18,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,64,66,59,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,65,frac cf to stock repurch,1164,14,110,23,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,66,68,61,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,67,investment coverage,611,513,96,26,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,68,70,16,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,69,24,32,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+1,70,51,32,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+1,71,22,37,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,72,16,37,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,73,effect RD capital productivity,381,469,139,21,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,74,RD Capital,236,536,62,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,75,77,76,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,76,rd exponent,409,550,51,13,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,77,79,76,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,78,76,16,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,79,cume Investment,761,581,80,22,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,80,depletion effect,796,480,93,27,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,81,82,83,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,82,83,16,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,83,depletion effect exponent,962,658,117,23,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,84,86,83,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,85,capital productivity,1495,602,116,14,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,86,88,32,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+12,87,48,932,201,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,88,93,15,4,0,0,22,0,0,0,-1--1--1,,1|(1196,201)|
+1,89,93,90,100,0,0,22,0,0,0,-1--1--1,,1|(1019,201)|
+11,90,48,1102,201,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,91,incr accum capital productivity,1102,225,143,16,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,92,15,94,1,0,0,0,0,64,0,-1--1--1,,1|(1283,231)|
+1,93,45,94,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,94,31,94,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,95,depreciable asset completion,768,262,162,22,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,96,16,94,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+12,97,48,1812,184,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,98,103,100,4,0,0,22,0,0,0,-1--1--1,,1|(1759,184)|
+1,99,103,15,100,0,0,22,0,0,0,-1--1--1,,1|(1625,184)|
+11,100,48,1710,184,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,101,decr accum capital productivity,1710,214,143,22,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,102,19,104,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,103,21,104,1,0,0,0,0,64,0,-1--1--1,,1|(1908,307)|
+10,104,initial RD capital,116,474,79,22,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,105,108,76,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,106,initial cume Investment,996,544,104,21,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,107,110,82,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+1,108,110,83,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,109,baseline investment coverage,416,669,128,19,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,110,113,70,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,111,98,94,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,112,depreciable asset starts,611,562,56,23,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,113,depreciable asset starts,761,626,56,23,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,114,117,82,0,1,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,115,depreciable asset completion,669,639,141,15,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,116,119,70,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+///---\\\
+:GRAPH CFROI_and_change_gross_i
+:TITLE CFROI and change gross invest
+:SCALE
+:VAR CFROI Data
+:DATASET 
+:SCALE
+:VAR changeGrossInvest
+:DATASET 
+
+:GRAPH depreciable_assets
+:TITLE depreciable assets
+:SCALE
+:VAR Depreciable Assets Completed
+:DATASET 
+:VAR productive assets model
+:DATASET 
+
+:GRAPH Gross_Cash_Flow
+:TITLE Gross Cash Flow
+:SCALE
+:VAR gross cash flow
+:DATASET 
+:VAR Gross Cash Flow Data
+:DATASET 
+
+:GRAPH Cash
+:TITLE financial assets
+:SCALE
+:VAR financial asset data
+:DATASET 
+:VAR Financial Assets
+:DATASET 
+
+:GRAPH Capital_Productivity
+:TITLE Capital Productivity
+:SCALE
+:VAR capital productivity
+:Y-MIN 0
+:DATASET 
+:VAR capital productivity data
+:Y-MIN 0
+:DATASET 
+:SCALE
+:VAR rgdp growth
+:Y-MIN 0
+:DATASET 
+
+:GRAPH Sales
+:TITLE Sales
+:SCALE
+:VAR sales
+:DATASET 
+:VAR Sales Data
+:DATASET 
+
+:GRAPH growth
+:TITLE growth
+:SCALE
+:VAR sales growth
+:DATASET 
+:VAR sales growth data
+:DATASET 
+
+:GRAPH sales_and_sales_growth
+:TITLE sales and sales growth
+:SCALE
+:VAR Sales Data
+:DATASET 
+:SCALE
+:VAR sales growth data
+:DATASET 
+
+:GRAPH RD
+:TITLE RD
+:SCALE
+:VAR RD
+:DATASET 
+:VAR RD data
+:DATASET 
+:L<%^E!@
+4:Time
+5:sales
+9:test
+19:100,0
+24:0
+25:35
+26:35
+11:cashOpt.voc
+12:cashPay.vpd
+23:0
+15:0,0,0,0,1,0
+27:2,
+34:0,
+42:0
+72:0
+73:0
+35:Date
+36:YYYY-MM-DD
+37:1983
+38:1
+39:1
+40:0
+41:0
+95:0
+96:0
+97:0
+77:0
+78:0
+102:1
+93:0
+94:0
+92:0
+91:0
+90:0
+87:0
+75:
+43:
+103:8,8,8,3,8
+105:0,0,0,0,0,0,0,0,0,0
+104:Courier|12||0-0-0|0-0-0|-1--1--1|0-0-255|192-192-192|-1--1--1

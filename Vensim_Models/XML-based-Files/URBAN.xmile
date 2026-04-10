@@ -1,0 +1,1952 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="year">
+		<start> 0</start>
+		<stop> 250</stop>
+		<dt> 1</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="Attract_Migr_Mult_Perc">
+				<units>dimensionless</units>
+				<doc>  Attractiveness for Migration Multiplier 
+      Perceived</doc>
+					<eqn>
+					1
+					</eqn>
+					<inflow>
+					attract migr mult perc table
+					</inflow>
+			</stock>
+			<stock name="Declining_Industry">
+				<units>production_unit</units>
+				<doc>  Declining Industry</doc>
+					<eqn>
+					100
+					</eqn>
+			</stock>
+			<stock name="Labor">
+				<units>worker</units>
+				<doc>  Labor</doc>
+					<eqn>
+					14000
+					</eqn>
+			</stock>
+			<stock name="Labor_Arrival_Mult_Perc">
+				<units>dimensionless</units>
+				<doc>  Labor Arrival Multiplier Perceived</doc>
+					<eqn>
+					1
+					</eqn>
+					<inflow>
+					labor arrival mult perc tab
+					</inflow>
+			</stock>
+			<stock name="Labor_Mob_Mult_Perc">
+				<units>dimensionless</units>
+				<doc>  Labor Mobility Multiplier Perceived</doc>
+					<eqn>
+					1
+					</eqn>
+					<inflow>
+					labor mob mult perc time
+					</inflow>
+			</stock>
+			<stock name="Labor_Ratio_Perc">
+				<units>dimensionless</units>
+				<doc>  Labor Ratio Perceived</doc>
+					<eqn>
+					1
+					</eqn>
+					<inflow>
+					labor ratio perception time
+					</inflow>
+			</stock>
+			<stock name="Manager_Prof_Arriv_Mult_Perc">
+				<units>dimensionless</units>
+				<doc>  Manager-professional Arrival Multiplied 
+      Percieved</doc>
+					<eqn>
+					1
+					</eqn>
+					<inflow>
+					manager prof arriv mult perc time
+					</inflow>
+			</stock>
+			<stock name="Manager_Professional">
+				<units>worker</units>
+				<doc>  Manager-Professionals</doc>
+					<eqn>
+					3900
+					</eqn>
+			</stock>
+			<stock name="Mature_Business">
+				<units>production_unit</units>
+				<doc>  Mature Business</doc>
+					<eqn>
+					1000
+					</eqn>
+			</stock>
+			<stock name="New_Enterprise">
+				<units>production_unit</units>
+				<doc>  New Enterprise</doc>
+					<eqn>
+					200
+					</eqn>
+			</stock>
+			<stock name="New_Enterprise_Average">
+				<units>production_unit</units>
+				<doc>  New Industry Average</doc>
+					<eqn>
+					New_Enterprise*
+               (1-new_enterprise_growth_rate_initial*
+              new_enterprise_average_time)
+					</eqn>
+					<inflow>
+					new enterprise average time
+					</inflow>
+			</stock>
+			<stock name="Premium_Housing">
+				<units>housing_unit</units>
+				<doc>  Premium Housing</doc>
+					<eqn>
+					5000
+					</eqn>
+			</stock>
+			<stock name="Premium_Housing_Average">
+				<units>housing_unit</units>
+				<doc>  Premium Housing Average</doc>
+					<eqn>
+					                 Premium_Housing*(1-premium_housing_growth_rate_init*
+                  premium_housing_averate_time)
+					</eqn>
+					<inflow>
+					premium housing averate time
+					</inflow>
+			</stock>
+			<stock name="Tax_Ratio_Needed_Perc">
+				<units>dimensionless</units>
+				<doc>  Tax Ratio Needed Perceived</doc>
+					<eqn>
+					tax_ratio_needed
+					</eqn>
+					<inflow>
+					tax ratio needed perception time
+					</inflow>
+			</stock>
+			<stock name="Underemp_Housing">
+				<units>housing_unit</units>
+				<doc>  Underemployed Housing</doc>
+					<eqn>
+					1100
+					</eqn>
+			</stock>
+			<stock name="Underemp_Mob_Mult_Perc">
+				<units>dimensionless</units>
+				<doc>  Underemployed Mobility Multiplier Percieved</doc>
+					<eqn>
+					1
+					</eqn>
+					<inflow>
+					underemp mob mult perc time
+					</inflow>
+			</stock>
+			<stock name="Underemp_to_Labor_Perc">
+				<units>worker/year</units>
+				<doc>  Underemployed to Labor Perceived</doc>
+					<eqn>
+					75
+					</eqn>
+					<inflow>
+					underemp to labor perc time
+					</inflow>
+			</stock>
+			<stock name="Underemployed">
+				<units>worker</units>
+				<doc>  Underemployed</doc>
+					<eqn>
+					1200
+					</eqn>
+			</stock>
+			<stock name="Worker_Housing">
+				<units>housing_unit</units>
+				<doc>  Worker Housing</doc>
+					<eqn>
+					21000
+					</eqn>
+			</stock>
+			<stock name="Worker_Housing_Average">
+				<units>housing_unit</units>
+				<doc>  Worker Housing Average</doc>
+					<eqn>
+					Worker_Housing*
+           (1-worker_housing_growth_rate_initial*
+              worker_housing_average_time)
+					</eqn>
+					<inflow>
+					worker housing average time
+					</inflow>
+			</stock>
+			<aux name="assessed_value">
+				<units>THOU_$</units>
+				<doc>  Assessed Value</doc>
+					<eqn>(housing_assessed_value+business_assessed_value)					</eqn>
+			</aux>
+			<aux name="attract_migr_mult">
+				<units>dimensionless</units>
+				<doc>  Attractiveness for Migration Multiplier</doc>
+					<eqn>underemp_arr_mob_mult*
+        underemp_housing_mult*
+        public_expenditure_mult*
+        underemp_job_mult*
+        underemp_hous_prog_mult*
+        attract_migr_factor					</eqn>
+			</aux>
+			<aux name="business_assessed_value">
+				<units>THOU_$</units>
+				<doc>  Business Assessed Value</doc>
+					<eqn>
+      new_enterprise_assessed_value*New_Enterprise+
+      maturre_business_assessed_value*Mature_Business+
+      declining_industry_assessed_value*Declining_Industry					</eqn>
+			</aux>
+			<aux name="business_decline_mult">
+				<units>dimensionless</units>
+				<doc>  Business Decline Multiplier</doc>
+					<eqn>business_decline_mult_tab(
+             1.44*LN(enterprise_multiplier))					</eqn>
+			</aux>
+			<aux name="declining_industry_demise">
+				<units>production_unit/year</units>
+				<doc>  Declining Industry Decline</doc>
+					<eqn>(declining_industry_demise_norm*
+       Declining_Industry*declining_industry_demise_mult)+
+       declining_industry_demolition_program					</eqn>
+			</aux>
+			<aux name="declining_industry_demise_mult">
+				<units>dimensionless</units>
+				<doc>  Declining Industry Decline Multiplier</doc>
+					<eqn>
+        declining_industry_from_enterprise_mult*
+        declining_industry_from_land_mult*
+        declining_industry_decline_factor					</eqn>
+			</aux>
+			<aux name="declining_industry_demolition_program">
+				<units>production_unit/year</units>
+				<doc>  Declining Industry Demolition Program</doc>
+					<eqn>
+       declining_industry_demolition_rate*Declining_Industry*
+       IF_THEN_ELSE(Time >= SWITCH_TIME_7,1,0)					</eqn>
+			</aux>
+			<aux name="declining_industry_demolition_rate">
+				<units>fraction/year</units>
+				<doc>  Declining Industry Demolition Ratio</doc>
+					<eqn>GAME(0)					</eqn>
+			</aux>
+			<aux name="declining_industry_from_enterprise_mult">
+				<units>dimensionless</units>
+				<doc>  Declining Undustry from Enterprise Multiplier</doc>
+					<eqn>
+       declining_industry_from_enterprise_mult_tab(
+             1.44*LN(enterprise_multiplier))					</eqn>
+			</aux>
+			<aux name="declining_industry_from_land_mult">
+				<units>dimensionless</units>
+				<doc>  Declining Industry from Land Multiplier</doc>
+					<eqn>declining_industry_from_land_mult_tab(
+            land_fraction_occupied)					</eqn>
+			</aux>
+			<aux name="enterprise_decline_mult">
+				<units>dimensionless</units>
+				<doc>  Enterprise Decline Multiplier</doc>
+					<eqn>enterprise_decline_mult_tab(
+           1.44*LN(enterprise_multiplier))					</eqn>
+			</aux>
+			<aux name="enterprise_growth_mult">
+				<units>dimensionless</units>
+				<doc>  Enterprise from Growth Multiplier</doc>
+					<eqn>enterprise_growth_mult_tab(
+            new_enterprise_growth_rate)					</eqn>
+			</aux>
+			<aux name="enterprise_labor_job_mult">
+				<units>dimensionless</units>
+				<doc>  Enterprise from Labor Job
+      Multiplier</doc>
+					<eqn>enterprise_labor_job_mult_tab(Labor_Ratio_Perc)					</eqn>
+			</aux>
+			<aux name="enterprise_land_mult">
+				<units>dimensionless</units>
+				<doc>  Enterprise from Land Multiplier</doc>
+					<eqn>enterprise_land_mult_tab(land_fraction_occupied)					</eqn>
+			</aux>
+			<aux name="enterprise_manager_prof_job_mult">
+				<units>dimensionless</units>
+				<doc>  Enterprise from Manager-professional job
+      Multiplier</doc>
+					<eqn>enterprise_manager_prof_job_mult_tab(
+            manager_job_ratio)					</eqn>
+			</aux>
+			<aux name="enterprise_multiplier">
+				<units>dimensionless</units>
+				<doc>  Enterprise Multiplier</doc>
+					<eqn>enterprise_manager_prof_job_mult*
+        enterprise_land_mult*
+        enterprise_labor_job_mult*
+        enterprise_tax_mult*
+        enterprise_growth_mult*
+        enterprise_factor					</eqn>
+			</aux>
+			<aux name="enterprise_tax_mult">
+				<units>dimensionless</units>
+				<doc>  Enterprise from Tax Multiplier</doc>
+					<eqn>enterprise_tax_mult_tab(1.44*LN(tax_ratio))					</eqn>
+			</aux>
+			<aux name="housing_assessed_value">
+				<units>THOU_$</units>
+				<doc>  Housing Assessed value</doc>
+					<eqn>
+       premium_housing_assessed_value*Premium_Housing+
+       worker_housing_assessed_value*Worker_Housing+
+       underemp_housing_assessed_value*Underemp_Housing					</eqn>
+			</aux>
+			<aux name="housing_units_total">
+				<units>housing_unit</units>
+				<doc>  Housing Units Total</doc>
+					<eqn>Premium_Housing+Worker_Housing+Underemp_Housing					</eqn>
+			</aux>
+			<aux name="labor_arrival">
+				<units>worker/year</units>
+				<doc>  Labor Arrivals</doc>
+					<eqn>labor_arrival_normal*Labor*
+        Labor_Arrival_Mult_Perc					</eqn>
+			</aux>
+			<aux name="labor_arrival_housing_mult">
+				<units>dimensionless</units>
+				<doc>  Labor Arrival from Housing Multiplier</doc>
+					<eqn>labor_arrival_housing_mult_tab(
+         labor_housing_ratio)					</eqn>
+			</aux>
+			<aux name="labor_arrival_jobs_mult">
+				<units>dimensionless</units>
+				<doc>  Labor Arrival from Jobs Multiplier</doc>
+					<eqn>labor_arrival_jobs_mult_tab(labor_ratio)					</eqn>
+			</aux>
+			<aux name="labor_arrival_mult">
+				<units>dimensionless</units>
+				<doc>  Labor Arrival Multiplier</doc>
+					<eqn>labor_arrival_jobs_mult*labor_arrival_underemp_mult*
+             labor_arrival_tax_mult*labor_arrival_housing_mult*
+             labor_arrival_factor					</eqn>
+			</aux>
+			<aux name="labor_arrival_tax_mult">
+				<units>dimensionless</units>
+				<doc>  Labor Arrivals from Tax Multiplier</doc>
+					<eqn>labor_arrival_tax_mult_tab(1.44*LN(tax_ratio))					</eqn>
+			</aux>
+			<aux name="labor_arrival_underemp_mult">
+				<units>dimensionless</units>
+				<doc>  Labor Arrivals from Underembloyed Multiplier</doc>
+					<eqn>labor_arrival_underemp_mult_Tab(labor_underemp_ratio)					</eqn>
+			</aux>
+			<aux name="labor_birth">
+				<units>worker/year</units>
+				<doc>  Labor Births</doc>
+					<eqn>Labor*labor_birth_rate					</eqn>
+			</aux>
+			<aux name="labor_construction_ratio">
+				<units>dimensionless</units>
+				<doc>  Labor Construction Ratio</doc>
+					<eqn>labor_construction_ratio_tab(labor_ratio)					</eqn>
+			</aux>
+			<aux name="labor_daparture_mult">
+				<units>dimensionless</units>
+				<doc>  Labor Departure Multiplier</doc>
+					<eqn>labor_daparture_mult_tab(1.44*LN(labor_arrival_mult))					</eqn>
+			</aux>
+			<aux name="labor_departure">
+				<units>worker/year</units>
+				<doc>  Labor Departure</doc>
+					<eqn>labor_daparture_normal*Labor*labor_daparture_mult					</eqn>
+			</aux>
+			<aux name="labor_desired_construct">
+				<units>worker</units>
+				<doc>  Labor Desired for Construction</doc>
+					<eqn>premium_housing_construct_desired*
+             premium_housing_constr_lab+
+             worker_housing_const_des*
+             worker_housing_constr_lab+
+               new_enterprise_construction_desired*
+               new_enterprise_constr_lab+
+            low_cost_housing_constr_des*
+             low_cost_housing_constr_lab					</eqn>
+			</aux>
+			<aux name="labor_desired_industry">
+				<units>worker</units>
+				<doc>  Labor Desired for Industry</doc>
+					<eqn>New_Enterprise*new_enterprise_labor+
+    Mature_Business*mature_business_labor+
+    Declining_Industry*declining_industry_labor					</eqn>
+			</aux>
+			<aux name="labor_edu_mult">
+				<units>dimensionless</units>
+				<doc>  Labor Educational Multiplier</doc>
+					<eqn>labor_edu_mult_tab(tax_per_cap_ratio)					</eqn>
+			</aux>
+			<aux name="labor_housing_ratio">
+				<units>dimensionless</units>
+				<doc>  Labor Housing Ratio</doc>
+					<eqn>(Labor*labor_family_size)/(Worker_Housing*
+            worker_housing_pop_density)					</eqn>
+			</aux>
+			<aux name="labor_jobs">
+				<units>worker</units>
+				<doc>  Labor Jobs</doc>
+					<eqn>labor_desired_construct+labor_desired_industry					</eqn>
+			</aux>
+			<aux name="labor_layoff_frac">
+				<units>fraction/year</units>
+				<doc>  Labor Layoff Fraction</doc>
+					<eqn>labor_layoff_frac_Tab(labor_ratio)					</eqn>
+			</aux>
+			<aux name="labor_mob_mult">
+				<units>dimensionless</units>
+				<doc>  Labor Mobility Multiplier</doc>
+					<eqn>manage_supply_mult*manage_labor_mult*
+            labor_edu_mult*labor_mob_fact					</eqn>
+			</aux>
+			<aux name="labor_ratio">
+				<units>dimensionless</units>
+				<doc>  Labor Ratio</doc>
+					<eqn>Labor/labor_jobs					</eqn>
+			</aux>
+			<aux name="labor_supply_mult">
+				<units>dimensionless</units>
+				<doc>  Labor Supply Multiplier</doc>
+					<eqn>labor_supply_mult_tab(labor_ratio)					</eqn>
+			</aux>
+			<aux name="labor_to_manager">
+				<units>worker/year</units>
+				<doc>  Labor To Manager</doc>
+					<eqn>labor_to_manager_norm*Labor*
+         Labor_Mob_Mult_Perc+labor_training_prog					</eqn>
+			</aux>
+			<aux name="labor_to_underemp">
+				<units>worker/year</units>
+				<doc>  Labor To Underemployed</doc>
+					<eqn>Labor*labor_layoff_frac					</eqn>
+			</aux>
+			<aux name="labor_training_prog">
+				<units>worker/year</units>
+				<doc>  Labor Training ProGram</doc>
+					<eqn>LABOR_TRAINING_RATE*Labor*
+         IF_THEN_ELSE(Time >= SWITCH_TIME_2,1,0)					</eqn>
+			</aux>
+			<aux name="labor_underemp_ratio">
+				<units>dimensionless</units>
+				<doc>  Labor Underemployed Ration</doc>
+					<eqn>Labor/Underemployed					</eqn>
+			</aux>
+			<aux name="labor_unedermp_mult">
+				<units>dimensionless</units>
+				<doc>  Labor Underemployed Multiplier</doc>
+					<eqn>labor_underemp_mult_tab(labor_underemp_ratio)					</eqn>
+			</aux>
+			<aux name="land_fraction_occupied">
+				<units>fraction</units>
+				<doc>  Land Fraction Occupied</doc>
+					<eqn>(housing_units_total*land_per_house+
+          production_units_total*land_per_production_unit)/
+           TOTAL_LAND_AREA					</eqn>
+			</aux>
+			<aux name="low_cost_hous_prog">
+				<units>housing_unit/year</units>
+				<doc>  Low Cost Housing Program</doc>
+					<eqn>low_cost_housing_constr_des*labor_construction_ratio					</eqn>
+			</aux>
+			<aux name="low_cost_housing_constr_des">
+				<units>housing_unit/year</units>
+				<doc>   Low Cost Housing Construction Desired</doc>
+					<eqn>
+      low_cost_housing_prog_coeff*Underemployed*worker_housing_land_mult*
+      IF_THEN_ELSE(Time >= SWITCH_TIME_10,1,0)					</eqn>
+			</aux>
+			<aux name="low_cost_housing_prog_coeff">
+				<units>housing_unit/(year*worker)</units>
+				<doc>  Low Cost Housing Program Coefficient</doc>
+					<eqn>GAME(0)					</eqn>
+			</aux>
+			<aux name="manage_labor_mult">
+				<units>dimensionless</units>
+				<doc>  Manager Labor Multiplier</doc>
+					<eqn>manage_labor_mult_tab(manager_labor_ratio)					</eqn>
+			</aux>
+			<aux name="manage_supply_mult">
+				<units>dimensionless</units>
+				<doc>  Managment Supply Multiplier</doc>
+					<eqn>manage_supply_mult_tab(manager_job_ratio)					</eqn>
+			</aux>
+			<aux name="manager_job_ratio">
+				<units>dimensionless</units>
+				<doc>  Manager job Ratio</doc>
+					<eqn>Manager_Professional/Manager_Prof_Jobs					</eqn>
+			</aux>
+			<aux name="manager_labor_ratio">
+				<units>dimensionless</units>
+				<doc>  Manager Labor Ration</doc>
+					<eqn>Manager_Professional/Labor					</eqn>
+			</aux>
+			<aux name="manager_prof_arriv_hous_mult">
+				<units>dimensionless</units>
+				<doc>  Manager-professional Arrivals from Housing
+      Multiplier</doc>
+					<eqn>manager_prof_arriv_housing_mult_tab
+          (manager_prof_hous_ratio)					</eqn>
+			</aux>
+			<aux name="manager_prof_arriv_job_mult">
+				<units>dimensionless</units>
+				<doc>  Manager-professional Arrival from Jobs 
+      Multiplier</doc>
+					<eqn>manager_prof_arriv_job_mult_tab(manager_job_ratio)					</eqn>
+			</aux>
+			<aux name="manager_prof_arriv_mult">
+				<units>dimensionless</units>
+				<doc>  Manager-professional Arrival Multiplier</doc>
+					<eqn>manager_prof_arriv_job_mult*
+        manager_prof_arriv_pop_mult*
+        manager_prof_arriv_tax_mult*
+        manager_prof_arriv_hous_mult*
+        manager_prof_arriv_factor					</eqn>
+			</aux>
+			<aux name="manager_prof_arriv_pop_mult">
+				<units>dimensionless</units>
+				<doc>  Manager-professional Arrivals from
+      Population Multiplier</doc>
+					<eqn>manager_prof_arriv_pop_mult_tab(
+               manager_prof_ratio)					</eqn>
+			</aux>
+			<aux name="manager_prof_arriv_tax_mult">
+				<units>dimensionless</units>
+				<doc>  Manager-professional Arrival from Tax 
+      Multiplier</doc>
+					<eqn>manager_prof_arriv_tax_mult_tab(
+             1.44*LN(tax_ratio))					</eqn>
+			</aux>
+			<aux name="manager_prof_arrivals">
+				<units>worker/year</units>
+				<doc>  Manager-professional Arrivals</doc>
+					<eqn>manager_prof_arrival_norm*Manager_Professional*
+        Manager_Prof_Arriv_Mult_Perc					</eqn>
+			</aux>
+			<aux name="manager_prof_birth">
+				<units>worker/year</units>
+				<doc>  Manager-Professional Births</doc>
+					<eqn>Manager_Professional*manager_prof_birth_rate					</eqn>
+			</aux>
+			<aux name="manager_prof_depart">
+				<units>worker/year</units>
+				<doc>  Manaeger-professional Departures</doc>
+					<eqn>manager_prof_depart_norm*Manager_Professional*
+            manager_prof_depart_mult					</eqn>
+			</aux>
+			<aux name="manager_prof_depart_mult">
+				<units>dimensionless</units>
+				<doc>  Manager-professional Departures Multiplier</doc>
+					<eqn>manager_prof_depart_mult_tab(1.44*LN(manager_prof_arriv_mult))					</eqn>
+			</aux>
+			<aux name="manager_prof_hous_ratio">
+				<units>dimensionless</units>
+				<doc>  Manager-professional Housing Ration</doc>
+					<eqn>(Manager_Professional*manager_prof_family_size)/
+        (Premium_Housing*premium_housing_pop_dens)					</eqn>
+			</aux>
+			<aux name="Manager_Prof_Jobs">
+				<units>worker</units>
+				<doc>  Managerial and professional Jobs</doc>
+					<eqn>(New_Enterprise*new_enterprise_management)+
+            (Mature_Business*mature_business_management)+
+            (Declining_Industry*declining_industry_management)					</eqn>
+			</aux>
+			<aux name="manager_prof_ratio">
+				<units>dimensionless</units>
+				<doc>  Manager-professional Population Ratio</doc>
+					<eqn>Manager_Professional/(Labor+Underemployed)					</eqn>
+			</aux>
+			<aux name="mature_business_decline">
+				<units>production_unit/year</units>
+				<doc>  Mature Business Decline</doc>
+					<eqn>mature_business_decline_norm*Mature_Business*
+              business_decline_mult					</eqn>
+			</aux>
+			<aux name="NEW_ENTERPRISE_CONSTR_RATE">
+				<units>fraction/year</units>
+				<doc>  New Enterprise Construction Rate</doc>
+					<eqn>GAME(0)					</eqn>
+			</aux>
+			<aux name="new_enterprise_Construction">
+				<units>production_unit/year</units>
+				<doc>  New Enterprise Construction</doc>
+					<eqn>new_enterprise_construction_desired*
+             labor_construction_ratio					</eqn>
+			</aux>
+			<aux name="new_enterprise_construction_desired">
+				<units>production_unit/year</units>
+				<doc>  New Enterprise Construction Desired</doc>
+					<eqn>new_enterprise_construction_norm*
+       (new_enterprise_construction_factor*New_Enterprise+
+        mature_business_construction_factor*Mature_Business+
+        declining_industry_construction_factor*Declining_Industry)*
+        enterprise_multiplier+new_enterprise_construction_program					</eqn>
+			</aux>
+			<aux name="new_enterprise_construction_program">
+				<units>production_unit/year</units>
+				<doc>   New Enterprise Construction Program</doc>
+					<eqn>
+    NEW_ENTERPRISE_CONSTR_RATE*production_units_total*
+    enterprise_land_mult*
+    IF_THEN_ELSE(Time >= SWITCH_TIME_6,1,0)					</eqn>
+			</aux>
+			<aux name="new_enterprise_decline">
+				<units>production_unit/year</units>
+				<doc>  New Enterprise Decline</doc>
+					<eqn>new_enterprise_decline_normal*New_Enterprise*
+       enterprise_decline_mult					</eqn>
+			</aux>
+			<aux name="new_enterprise_growth_rate">
+				<units>fraction/year</units>
+				<doc>  New Enterprise Growth Rate</doc>
+					<eqn>(New_Enterprise-New_Enterprise_Average)/
+      (New_Enterprise_Average*new_enterprise_average_time)					</eqn>
+			</aux>
+			<aux name="percent_underemp">
+				<units>Dmnl</units>
+				<doc>   The percentage of the population that is underemployed.</doc>
+					<eqn> 100 * Underemployed*underemp_family_size/population					</eqn>
+			</aux>
+			<aux name="population">
+				<units>person</units>
+				<doc>  Population</doc>
+					<eqn>Manager_Professional*manager_prof_family_size+
+          Labor*labor_family_size+
+          Underemployed*underemp_family_size					</eqn>
+			</aux>
+			<aux name="premium_housing_adeq_mult">
+				<units>dimensionless</units>
+				<doc>  Premium Housing from Adequacy Multipler</doc>
+					<eqn>premium_housing_adeq_mult_tab(manager_prof_hous_ratio)					</eqn>
+			</aux>
+			<aux name="premium_housing_const_prog">
+				<units>housing_unit/year</units>
+				<doc>  Premium Housing Construction Program</doc>
+					<eqn>
+     premium_housing_construction_ratio*
+        Premium_Housing*premium_housing_land_mult*
+     IF_THEN_ELSE(Time >= SWITCH_TIME_3,1,0)					</eqn>
+			</aux>
+			<aux name="premium_housing_construct_desired">
+				<units>housing_unit/year</units>
+				<doc>  Premium Housing Construction Desired</doc>
+					<eqn>(premium_housing_construction_norm*
+            Premium_Housing*premium_housing_mult)+
+            premium_housing_const_prog					</eqn>
+			</aux>
+			<aux name="premium_housing_contruction">
+				<units>housing_unit/year</units>
+				<doc>  Premium Housing Construction</doc>
+					<eqn>premium_housing_construct_desired*
+          labor_construction_ratio					</eqn>
+			</aux>
+			<aux name="premium_housing_enterprise_mult">
+				<units>dimensionless</units>
+				<doc>  Premium Housing from Enterprize Multiplier.</doc>
+					<eqn>premium_housing_enterprise_mult_tab(
+           new_enterprise_growth_rate)					</eqn>
+			</aux>
+			<aux name="premium_housing_growth_mult">
+				<units>dimensionless</units>
+				<doc>  Premium Housing from Growth Multiplier</doc>
+					<eqn>premium_housing_growth_mult_tab(
+           premium_housing_growth_rate)					</eqn>
+			</aux>
+			<aux name="premium_housing_growth_rate">
+				<units>fraction/year</units>
+				<doc>  Premium Housing Growth Rate</doc>
+					<eqn>(Premium_Housing-Premium_Housing_Average)/
+            (Premium_Housing_Average*premium_housing_averate_time)					</eqn>
+			</aux>
+			<aux name="premium_housing_land_mult">
+				<units>dimensionless</units>
+				<doc>  Premium Housing from Land Multiplier</doc>
+					<eqn>premium_housing_land_mult_tab(land_fraction_occupied)					</eqn>
+			</aux>
+			<aux name="premium_housing_mult">
+				<units>dimensionless</units>
+				<doc>  Premium Housing Multiplier</doc>
+					<eqn>premium_housing_adeq_mult*
+          premium_housing_land_mult*
+          premium_housing_pop_mult*
+          premium_housing_tax_mult*
+          premium_housing_enterprise_mult*
+          premium_housing_growth_mult*
+          premium_housing_factor					</eqn>
+			</aux>
+			<aux name="premium_housing_obsolescence">
+				<units>housing_unit/year</units>
+				<doc>  Premium Housing Obsolescence</doc>
+					<eqn>premium_housing_obsolescense_normal*
+             Premium_Housing*premium_housing_obsolescense_mult					</eqn>
+			</aux>
+			<aux name="premium_housing_obsolescense_mult">
+				<units>dimensionless</units>
+				<doc>  Premium Housing Obsolescence Multiplier</doc>
+					<eqn>premium_housing_obsolescense_mult_tab(
+                     1.44*LN(premium_housing_mult))					</eqn>
+			</aux>
+			<aux name="premium_housing_pop_mult">
+				<units>dimensionless</units>
+				<doc>  Premium Housing from Population Multiplier</doc>
+					<eqn>premium_housing_pop_mult_tab(manager_prof_ratio)					</eqn>
+			</aux>
+			<aux name="premium_housing_tax_mult">
+				<units>dimensionless</units>
+				<doc>  Premium Housing From Tax Multiplier</doc>
+					<eqn>premium_housing_tax_mult_tab(1.44*LN(tax_ratio))					</eqn>
+			</aux>
+			<aux name="production_units_total">
+				<units>production_unit</units>
+				<doc>  Production Units Total</doc>
+					<eqn>New_Enterprise+Mature_Business+Declining_Industry					</eqn>
+			</aux>
+			<aux name="public_expenditure_mult">
+				<units>dimensionless</units>
+				<doc>  Public Expenditure Multiplier</doc>
+					<eqn>
+	public_exp_mult_tab(tax_per_cap_ratio)					</eqn>
+			</aux>
+			<aux name="slum_housing_abandoned_mult">
+				<units>dimensionless</units>
+				<doc>  Slum Housing Abandoned Multiplier</doc>
+					<eqn>slum_housing_abandomed_mult_tab(
+               underemp_housing_ratio)					</eqn>
+			</aux>
+			<aux name="slum_housing_demolition">
+				<units>housing_unit/year</units>
+				<doc>  Slum Housing Demolition</doc>
+					<eqn>(slum_housing_demolition_norm*
+         Underemp_Housing*slum_housing_demolition_mult)+
+          slum_housing_demolition_program					</eqn>
+			</aux>
+			<aux name="slum_housing_demolition_mult">
+				<units>dimensionless</units>
+				<doc>  Slum Housing Demolition Multiplier</doc>
+					<eqn>slum_housing_abandoned_mult*
+          slum_housing_land_mult*
+          slum_housing_demolitin_factor					</eqn>
+			</aux>
+			<aux name="slum_housing_demolition_program">
+				<units>housing_unit/year</units>
+				<doc>  Slum Housing Demolition Program</doc>
+					<eqn>
+        SLUM_HOUSING_DEMOLITION_RATE*Underemp_Housing*
+        IF_THEN_ELSE(Time >= SWITCH_TIME_5,1,0)					</eqn>
+			</aux>
+			<aux name="SLUM_HOUSING_DEMOLITION_RATE">
+				<units>fraction/year</units>
+				<doc>  Slum Housing Demolition Rate</doc>
+					<eqn>GAME(0)					</eqn>
+			</aux>
+			<aux name="slum_housing_land_mult">
+				<units>dimensionless</units>
+				<doc>  Slum Housing from Land Multiplier</doc>
+					<eqn>slum_housing_land_mult_tab(land_fraction_occupied)					</eqn>
+			</aux>
+			<aux name="tax_assessment_indicated">
+				<units>$/(year*THOU_$)</units>
+				<doc>  Tax Assessment Indicated</doc>
+					<eqn>tax_needed/assessed_value					</eqn>
+			</aux>
+			<aux name="tax_collection_mult">
+				<units>dimensionless</units>
+				<doc>  Tax Collection Multiplier</doc>
+					<eqn>tax_collection_mult_tab(labor_underemp_ratio)					</eqn>
+			</aux>
+			<aux name="tax_collections">
+				<units>$/year</units>
+				<doc>  Tax Collections</doc>
+					<eqn>assessed_value*tax_assessment_norm*tax_ratio					</eqn>
+			</aux>
+			<aux name="tax_needed">
+				<units>$/year</units>
+				<doc>  Tax Needed</doc>
+					<eqn>(tax_spending_per_manager*manager_prof_family_size*
+            Manager_Professional+
+           tax_spending_per_labor*labor_family_size*Labor+
+            tax_spending_per_underemp*underemp_family_size*Underemployed)*
+            tax_collection_mult					</eqn>
+			</aux>
+			<aux name="tax_per_cap_ratio">
+				<units>dimensionless</units>
+				<doc>  Tax Per Capita Ratio</doc>
+					<eqn>((tax_collections/population)+tax_per_cap_subsidy)/
+           tax_per_cap_norm					</eqn>
+			</aux>
+			<aux name="tax_per_cap_subsidy">
+				<units>$/(year*person)</units>
+				<doc>  Tax Per Capita Subsidy Program</doc>
+					<eqn>tax_per_cap_subsidy_size*
+        IF_THEN_ELSE(Time >= SWITCH_TIME_8,1,0)					</eqn>
+			</aux>
+			<aux name="tax_ratio">
+				<units>dimensionless</units>
+				<doc>  Tax Ratio</doc>
+					<eqn>tax_ratio_table(1.44*LN(Tax_Ratio_Needed_Perc))					</eqn>
+			</aux>
+			<aux name="tax_ratio_needed">
+				<units>dimensionless</units>
+				<doc>  Tax Ratio Needed</doc>
+					<eqn>tax_assessment_indicated/tax_assessment_norm					</eqn>
+			</aux>
+			<aux name="underemp_arr_mob_mult">
+				<units>dimensionless</units>
+				<doc>  Underemployed Arrivals Mobility Multiplier</doc>
+					<eqn>underemp_arr_mob_mult_tab(underemp_mobility)					</eqn>
+			</aux>
+			<aux name="underemp_births">
+				<units>worker/year</units>
+				<doc>  Underemployed Births</doc>
+					<eqn>Underemployed*underemp_birth_rate					</eqn>
+			</aux>
+			<aux name="underemp_departures">
+				<units>worker/year</units>
+				<doc>  Underemployed Departures</doc>
+					<eqn>underemp_departures_norm*Underemployed*
+             underemp_departures_mult					</eqn>
+			</aux>
+			<aux name="underemp_departures_mult">
+				<units>dimensionless</units>
+				<doc>  Underemployed Departures Multiplier</doc>
+					<eqn>underemp_depart_mult_tab(1.44*LN(attract_migr_mult))					</eqn>
+			</aux>
+			<aux name="underemp_edu_mult">
+				<units>dimensionless</units>
+				<doc>  Underemployed Educational Multiplier</doc>
+					<eqn>underemp_edu_mult_tab(tax_per_cap_ratio)					</eqn>
+			</aux>
+			<aux name="underemp_fract_working">
+				<units>fraction</units>
+				<doc>  Underemployed Fraction Working</doc>
+					<eqn>underemp_fract_working_tab(underemp_ratio)					</eqn>
+			</aux>
+			<aux name="underemp_hous_prog_mult">
+				<units>dimensionless</units>
+				<doc>  Underemployed Housing Program Multiplier</doc>
+					<eqn>underemp_hous_prog_mult_tab(underemp_hous_prog_rate)					</eqn>
+			</aux>
+			<aux name="underemp_hous_prog_rate">
+				<units>housing_unit/(year*worker)</units>
+				<doc>  Underemployed Housing Program Rate</doc>
+					<eqn>low_cost_hous_prog/Underemployed					</eqn>
+			</aux>
+			<aux name="underemp_housing_mult">
+				<units>dimensionless</units>
+				<doc>  Underemployed Housing Multiplier</doc>
+					<eqn>underemp_hous_mult_table(underemp_housing_ratio)					</eqn>
+			</aux>
+			<aux name="underemp_housing_ratio">
+				<units>dimensionless</units>
+				<doc>  Underemployed Housing Ratio</doc>
+					<eqn>(Underemployed*underemp_family_size)/
+          (Underemp_Housing*underemp_pop_density)					</eqn>
+			</aux>
+			<aux name="underemp_job_mult">
+				<units>dimensionless</units>
+				<doc>  Underemployed Job Multiplier</doc>
+					<eqn>underemp_job_mult_tab(underemp_ratio)					</eqn>
+			</aux>
+			<aux name="underemp_job_program_coeff">
+				<units>dimensionless</units>
+				<doc>  Underemployed Job Program Coefficient</doc>
+					<eqn>GAME(0)					</eqn>
+			</aux>
+			<aux name="underemp_mob_mult">
+				<units>dimensionless</units>
+				<doc>  Underemployed Mobility Multiplier</doc>
+					<eqn>labor_supply_mult*labor_unedermp_mult*
+           underemp_edu_mult*underemp_mob_factor					</eqn>
+			</aux>
+			<aux name="underemp_mobility">
+				<units>fraction/year</units>
+				<doc>  Underemployed Mobility</doc>
+					<eqn>Underemp_to_Labor_Perc/Underemployed					</eqn>
+			</aux>
+			<aux name="underemp_ratio">
+				<units>dimensionless</units>
+				<doc>  Underemployed Ratio</doc>
+					<eqn>Underemployed/underemployed_jobs					</eqn>
+			</aux>
+			<aux name="underemp_to_labor">
+				<units>worker/year</units>
+				<doc>  Underemployed to Labor</doc>
+					<eqn>(underemp_mobility_norm*
+        underemp_working*Underemp_Mob_Mult_Perc)+
+        underemp_training_prog					</eqn>
+			</aux>
+			<aux name="underemp_to_labor_net">
+				<units>worker/year</units>
+				<doc>  Underemployed to Labor Net</doc>
+					<eqn>underemp_to_labor-labor_to_underemp					</eqn>
+			</aux>
+			<aux name="underemp_training_prog">
+				<units>worker/year</units>
+				<doc>  Underemployed Training Program</doc>
+					<eqn>underemp_training_rate*Underemployed*
+           IF_THEN_ELSE(Time >= SWITCH_TIME_1,1,0)					</eqn>
+			</aux>
+			<aux name="underemp_training_rate">
+				<units>fraction/year</units>
+				<doc>  Underemployed Training Rate</doc>
+					<eqn>GAME(0)					</eqn>
+			</aux>
+			<aux name="underemp_working">
+				<units>worker</units>
+				<doc>  Underemployed Working</doc>
+					<eqn>Underemployed*underemp_fract_working					</eqn>
+			</aux>
+			<aux name="underemployed_arrivals">
+				<units>worker/year</units>
+				<doc>  Underemployed Arrivals</doc>
+					<eqn>(Underemployed+Labor)*
+   UNDEREMP_ARRIVALS_NORMAL*Attract_Migr_Mult_Perc					</eqn>
+			</aux>
+			<aux name="underemployed_crowding">
+				<units>Dmnl</units>
+				<doc>   The level of crowding among the unemployed.</doc>
+					<eqn> 100*underemp_housing_ratio					</eqn>
+			</aux>
+			<aux name="underemployed_job_program">
+				<units>worker</units>
+				<doc>  Underemployed Job Program</doc>
+					<eqn>
+        underemp_job_program_coeff*Underemployed*
+        IF_THEN_ELSE(Time >= SWITCH_TIME_9,1,0)					</eqn>
+			</aux>
+			<aux name="underemployed_jobs">
+				<units>worker</units>
+				<doc>  Underemployed Jobs</doc>
+					<eqn>labor_jobs*underemployed_labor_job_ratio+
+       underemployed_job_program					</eqn>
+			</aux>
+			<aux name="underemployed_labor_job_ratio">
+				<units>dimensionless</units>
+				<doc>  Underemployed Labor Job Ratio</doc>
+					<eqn>underemployed_labor_job_ratio_tab(labor_ratio)					</eqn>
+			</aux>
+			<aux name="unemployment_rate">
+				<units>Dmnl</units>
+				<doc>   The unemployment rate.</doc>
+					<eqn> 100 * (1 - (labor_jobs + underemployed_jobs + Manager_Prof_Jobs)/
+               (Labor + Manager_Professional + Underemployed))					</eqn>
+			</aux>
+			<aux name="worker_housing_adequacy_mult">
+				<units>dimensionless</units>
+				<doc>  Worker Housing from Adequacy Multipler</doc>
+					<eqn>worker_housing_adequacy_mult_tab(labor_housing_ratio)					</eqn>
+			</aux>
+			<aux name="worker_housing_const_des">
+				<units>housing_unit/year</units>
+				<doc>  Worker Housing Construction Desired</doc>
+					<eqn>(worker_housing_const_norm*Worker_Housing*
+            worker_housing_mult)+worker_housing_const_prog					</eqn>
+			</aux>
+			<aux name="worker_housing_const_prog">
+				<units>housing_unit/year</units>
+				<doc>   Worker Housing Construction Program</doc>
+					<eqn>
+           WORKER_HOUSING_CONSTR_RATIO*housing_units_total*
+           worker_housing_land_mult*
+           IF_THEN_ELSE(Time >= SWITCH_TIME_4,1,0)					</eqn>
+			</aux>
+			<aux name="worker_housing_construction">
+				<units>housing_unit/year</units>
+				<doc>  Worker Housing Construction</doc>
+					<eqn>worker_housing_const_des*
+            labor_construction_ratio					</eqn>
+			</aux>
+			<aux name="worker_housing_enterprise_mult">
+				<units>dimensionless</units>
+				<doc>  Worker Housing from Enterprise Multiplier</doc>
+					<eqn>worker_housing_enterprise_mult_tab(
+              new_enterprise_growth_rate)					</eqn>
+			</aux>
+			<aux name="worker_housing_growth_mult">
+				<units>dimensionless</units>
+				<doc>  Worker Housing from Growth Multiplier</doc>
+					<eqn>worker_housing_growth_mult_tab(
+               worker_housing_growth_rate)					</eqn>
+			</aux>
+			<aux name="worker_housing_growth_rate">
+				<units>fraction/year</units>
+				<doc>  Worker Housing Growth Rate</doc>
+					<eqn>(Worker_Housing-Worker_Housing_Average)/
+            (Worker_Housing_Average*worker_housing_average_time)					</eqn>
+			</aux>
+			<aux name="worker_housing_land_mult">
+				<units>dimensionless</units>
+				<doc>  Worker Housing from Land Multiplier</doc>
+					<eqn>worker_housing_land_mult_tab(
+               land_fraction_occupied)					</eqn>
+			</aux>
+			<aux name="worker_housing_mult">
+				<units>dimensionless</units>
+				<doc>  Worker Housing Multiplier</doc>
+					<eqn>worker_housing_adequacy_mult*
+        worker_housing_land_mult*
+        worker_housing_underemp_mult*
+        worker_housing_tax_mult*
+        worker_housing_enterprise_mult*
+        worker_housing_growth_mult*
+        worker_housing_factor					</eqn>
+			</aux>
+			<aux name="worker_housing_obsolescence">
+				<units>housing_unit/year</units>
+				<doc>  Worker Housing Obsolescence</doc>
+					<eqn>worker_housing_obsolescense_norm*
+        Worker_Housing*worker_housing_obsolescense_mult					</eqn>
+			</aux>
+			<aux name="worker_housing_obsolescense_mult">
+				<units>dimensionless</units>
+				<doc>  Worker Housing Obsolescence Multiplier</doc>
+					<eqn>worker_housing_obsolescense_mult_tab(
+          1.44*LN(worker_housing_mult))					</eqn>
+			</aux>
+			<aux name="worker_housing_tax_mult">
+				<units>dimensionless</units>
+				<doc>  Worker Housing From Tax Multiplier</doc>
+					<eqn>worker_housing_tax_mult_tab(1.44*LN(tax_ratio))					</eqn>
+			</aux>
+			<aux name="worker_housing_underemp_mult">
+				<units>dimensionless</units>
+				<doc>  Worker Housing from Underemployed Multiplier</doc>
+					<eqn>worker_housing_underemp_mult_tab(
+                    labor_underemp_ratio)					</eqn>
+			</aux>
+			<aux name="business_decline_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Business Decline Multipler Table</doc>
+<gf>
+<xpts>-3.000000,-1.000000,1.000000,3.000000,1.800000,1.000000,0.500000</xpts>
+<ypts>-2.000000,0.000000,2.000000,2.000000,1.500000,0.700000,0.400000</ypts>
+</gf>
+			</aux>
+			<aux name="declining_industry_from_enterprise_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Declining Industry from Enterprise Multiplier 
+      Table</doc>
+<gf>
+<xpts>-3.000000,-1.000000,1.000000,3.000000,0.500000,1.000000,2.400000</xpts>
+<ypts>-2.000000,0.000000,2.000000,0.400000,0.700000,1.600000,4.000000</ypts>
+</gf>
+			</aux>
+			<aux name="declining_industry_from_land_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Declining Industry from Land Multiplier
+      Table</doc>
+<gf>
+<xpts>0.800000,0.900000,1.000000,1.200000,2.200000</xpts>
+<ypts>0.850000,0.950000,1.000000,1.600000,6.000000</ypts>
+</gf>
+			</aux>
+			<aux name="enterprise_decline_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Enterprise Decline Multipler Table</doc>
+<gf>
+<xpts>-3.000000,-1.000000,1.000000,3.000000,1.800000,1.000000,0.500000</xpts>
+<ypts>-2.000000,0.000000,2.000000,2.000000,1.500000,0.700000,0.500000</ypts>
+</gf>
+			</aux>
+			<aux name="enterprise_growth_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Enterprise from growth Multiplier Table</doc>
+<gf>
+<xpts>-0.100000,0.000000,0.100000,0.200000,1.000000,1.800000</xpts>
+<ypts>-0.050000,0.050000,0.150000,0.600000,1.400000,2.200000</ypts>
+</gf>
+			</aux>
+			<aux name="enterprise_labor_job_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Enterprise from Labor Job
+      Multiplier Table</doc>
+<gf>
+<xpts>0.000000,0.500000,1.000000,1.500000,2.000000,0.050000,0.400000,1.500000,1.800000</xpts>
+<ypts>0.250000,0.750000,1.250000,1.750000,0.000000,0.150000,1.000000,1.700000,1.800000</ypts>
+</gf>
+			</aux>
+			<aux name="enterprise_land_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Enterprise from Land Multiplier Table</doc>
+<gf>
+<xpts>0.000000,0.200000,0.400000,0.600000,0.800000,1.000000,1.150000,1.400000,1.400000,1.000000,0.400000</xpts>
+<ypts>0.100000,0.300000,0.500000,0.700000,0.900000,1.000000,1.300000,1.450000,1.300000,0.700000,0.000000</ypts>
+</gf>
+			</aux>
+			<aux name="enterprise_manager_prof_job_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Enterprise from Manager-professional job
+      Multiplier Table</doc>
+<gf>
+<xpts>0.000000,0.500000,1.000000,1.500000,2.000000,0.150000,0.500000,1.400000,1.900000</xpts>
+<ypts>0.250000,0.750000,1.250000,1.750000,0.100000,0.300000,1.000000,1.700000,2.000000</ypts>
+</gf>
+			</aux>
+			<aux name="enterprise_tax_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Enterprise from Tax Multiplier Table</doc>
+<gf>
+<xpts>-2.000000,0.000000,2.000000,4.000000,1.200000,0.800000,0.250000</xpts>
+<ypts>-1.000000,1.000000,3.000000,1.300000,1.000000,0.500000,0.100000</ypts>
+</gf>
+			</aux>
+			<aux name="labor_arrival_housing_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Labor Arrival from Housing Multiplier</doc>
+<gf>
+<xpts>0.000000,1.000000,2.000000,3.000000,1.200000,0.500000,0.100000</xpts>
+<ypts>0.500000,1.500000,2.500000,1.300000,1.000000,0.200000,0.050000</ypts>
+</gf>
+			</aux>
+			<aux name="labor_arrival_jobs_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Labor Arrival from Jobs Multiplier Table</doc>
+<gf>
+<xpts>0.000000,0.500000,1.000000,1.500000,2.000000,2.600000,1.800000,0.400000,0.100000</xpts>
+<ypts>0.250000,0.750000,1.250000,1.750000,2.600000,2.400000,1.000000,0.200000,0.050000</ypts>
+</gf>
+			</aux>
+			<aux name="labor_arrival_tax_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Labor Arrivals from Tax Multiplier Table</doc>
+<gf>
+<xpts>-2.000000,2.000000,1.200000,0.700000</xpts>
+<ypts>0.000000,4.000000,1.000000,0.300000</ypts>
+</gf>
+			</aux>
+			<aux name="labor_arrival_underemp_mult_Tab">
+				<units>dimensionless</units>
+				<doc>  Labor Arrivals from Underembloyed Multiplier
+      Table</doc>
+<gf>
+<xpts>0.000000,2.000000,4.000000,0.400000,1.000000,1.300000</xpts>
+<ypts>1.000000,3.000000,5.000000,0.800000,1.200000,1.300000</ypts>
+</gf>
+			</aux>
+			<aux name="labor_construction_ratio_tab">
+				<units>dimensionless</units>
+				<doc>  Labor Construction Ratio Table</doc>
+<gf>
+<xpts>0.000000,1.000000,2.000000,0.500000,1.100000</xpts>
+<ypts>0.500000,1.500000,0.000000,0.900000,1.150000</ypts>
+</gf>
+			</aux>
+			<aux name="labor_daparture_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Labor Departure Multiplier Table.</doc>
+<gf>
+<xpts>-3.000000,-1.000000,1.000000,3.000000,4.000000,1.000000,0.250000</xpts>
+<ypts>-2.000000,0.000000,2.000000,8.000000,2.000000,0.500000,0.125000</ypts>
+</gf>
+			</aux>
+			<aux name="labor_edu_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Labor Educational Multiplier Table</doc>
+<gf>
+<xpts>0.000000,1.000000,2.000000,3.000000,0.700000,1.300000,1.600000</xpts>
+<ypts>0.500000,1.500000,2.500000,0.200000,1.000000,1.500000,1.700000</ypts>
+</gf>
+			</aux>
+			<aux name="labor_layoff_frac_Tab">
+				<units>fraction/year</units>
+				<doc>  Labor Layoff Fraction Table</doc>
+<gf>
+<xpts>0.000000,1.000000,2.000000,0.010000,0.100000</xpts>
+<ypts>0.500000,1.500000,0.000000,0.030000,0.300000</ypts>
+</gf>
+			</aux>
+			<aux name="labor_supply_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Labor Supply Multiplier Table</doc>
+<gf>
+<xpts>0.000000,1.000000,2.000000,2.000000,0.400000</xpts>
+<ypts>0.500000,1.500000,2.400000,1.000000,0.200000</ypts>
+</gf>
+			</aux>
+			<aux name="labor_underemp_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Labor Underemployed Multiplier Table</doc>
+<gf>
+<xpts>0.000000,2.000000,4.000000,0.200000,1.000000,1.300000</xpts>
+<ypts>1.000000,3.000000,5.000000,0.700000,1.200000,1.400000</ypts>
+</gf>
+			</aux>
+			<aux name="manage_labor_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Manager Labor Multiplier Table</doc>
+<gf>
+<xpts>0.000000,0.100000,0.200000,0.700000,1.200000</xpts>
+<ypts>0.050000,0.150000,0.200000,1.000000,1.300000</ypts>
+</gf>
+			</aux>
+			<aux name="manage_supply_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Manager Supply Multiplier Table</doc>
+<gf>
+<xpts>0.000000,0.500000,1.000000,1.500000,2.000000,2.200000,1.600000,0.500000,0.100000</xpts>
+<ypts>0.250000,0.750000,1.250000,1.750000,2.300000,2.000000,1.000000,0.200000,0.050000</ypts>
+</gf>
+			</aux>
+			<aux name="manager_prof_arriv_housing_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Manager-professional Arrivals from Housing
+      Multiplier Table</doc>
+<gf>
+<xpts>0.000000,1.000000,2.000000,3.000000,1.200000,0.500000,0.100000</xpts>
+<ypts>0.500000,1.500000,2.500000,1.300000,1.000000,0.200000,0.050000</ypts>
+</gf>
+			</aux>
+			<aux name="manager_prof_arriv_job_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Manager-professional Arrival from Jobs 
+      Multiplier Table</doc>
+<gf>
+<xpts>0.000000,0.500000,1.000000,1.500000,2.000000,2.600000,2.000000,0.400000,0.100000</xpts>
+<ypts>0.250000,0.750000,1.250000,1.750000,2.700000,2.400000,1.000000,0.200000,0.050000</ypts>
+</gf>
+			</aux>
+			<aux name="manager_prof_arriv_pop_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Manager-professional Arrivals from
+      Population Multiplier Table</doc>
+<gf>
+<xpts>0.000000,0.040000,0.080000,0.300000,1.000000,1.300000</xpts>
+<ypts>0.020000,0.060000,0.100000,0.700000,1.200000,1.300000</ypts>
+</gf>
+			</aux>
+			<aux name="manager_prof_arriv_tax_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Manager-professional Arrival from Tax 
+      Multiplier Table</doc>
+<gf>
+<xpts>-2.000000,2.000000,1.400000,0.700000</xpts>
+<ypts>0.000000,4.000000,1.000000,0.300000</ypts>
+</gf>
+			</aux>
+			<aux name="manager_prof_depart_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Manager-professional Departures Multiplier
+      Table</doc>
+<gf>
+<xpts>-3.000000,-1.000000,1.000000,3.000000,4.000000,1.000000,0.250000</xpts>
+<ypts>-2.000000,0.000000,2.000000,8.000000,2.000000,0.500000,0.125000</ypts>
+</gf>
+			</aux>
+			<aux name="premium_housing_adeq_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Premium Housing from Adequacy Multipler
+      Table</doc>
+<gf>
+<xpts>0.000000,0.500000,1.000000,1.500000,2.000000,0.001000,0.200000,3.000000,5.600000</xpts>
+<ypts>0.250000,0.750000,1.250000,1.750000,0.000000,0.010000,1.000000,4.600000,6.000000</ypts>
+</gf>
+			</aux>
+			<aux name="premium_housing_enterprise_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Premium Housing from Enterprize Multiplier 
+      Table</doc>
+<gf>
+<xpts>-0.100000,0.000000,0.100000,0.200000,1.000000,1.800000</xpts>
+<ypts>-0.050000,0.050000,0.150000,0.600000,1.400000,2.200000</ypts>
+</gf>
+			</aux>
+			<aux name="premium_housing_growth_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Premium Housing from Growth Multiplier 
+      Table</doc>
+<gf>
+<xpts>-0.100000,0.000000,0.100000,0.200000,1.000000,1.800000</xpts>
+<ypts>-0.050000,0.050000,0.150000,0.600000,1.400000,2.200000</ypts>
+</gf>
+			</aux>
+			<aux name="premium_housing_land_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Premium Housing from Land Multiplier 
+      Table</doc>
+<gf>
+<xpts>0.000000,0.200000,0.400000,0.600000,0.800000,1.000000,0.900000,1.600000,1.900000,1.400000,0.200000</xpts>
+<ypts>0.100000,0.300000,0.500000,0.700000,0.900000,0.400000,1.300000,1.800000,1.800000,0.700000,0.000000</ypts>
+</gf>
+			</aux>
+			<aux name="premium_housing_obsolescense_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Premium Housing Obsolescence Multipier
+      Table</doc>
+<gf>
+<xpts>-3.000000,-1.000000,1.000000,3.000000,2.600000,1.000000,0.300000</xpts>
+<ypts>-2.000000,0.000000,2.000000,2.800000,2.000000,0.500000,0.200000</ypts>
+</gf>
+			</aux>
+			<aux name="premium_housing_pop_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Premium Housing from Population Multiplier
+      Table</doc>
+<gf>
+<xpts>0.000000,0.040000,0.080000,0.300000,1.000000,1.300000</xpts>
+<ypts>0.020000,0.060000,0.100000,0.700000,1.200000,1.300000</ypts>
+</gf>
+			</aux>
+			<aux name="premium_housing_tax_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Premium Housing From Tax Multiplier Table</doc>
+<gf>
+<xpts>-2.000000,2.000000,1.200000,0.700000</xpts>
+<ypts>0.000000,4.000000,1.000000,0.300000</ypts>
+</gf>
+			</aux>
+			<aux name="public_exp_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Public Expenditure Multiplier Table</doc>
+<gf>
+<xpts>0.000000,1.000000,2.000000,3.000000,0.600000,1.600000,3.200000</xpts>
+<ypts>0.500000,1.500000,2.500000,0.200000,1.000000,2.400000,4.000000</ypts>
+</gf>
+			</aux>
+			<aux name="slum_housing_abandomed_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Slum Housing Abandoned Multiplier Table</doc>
+<gf>
+<xpts>0.000000,1.000000,2.000000,2.000000,0.600000</xpts>
+<ypts>0.500000,1.500000,3.600000,1.000000,0.400000</ypts>
+</gf>
+			</aux>
+			<aux name="slum_housing_land_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Slum Housing from Land Multiplier Table</doc>
+<gf>
+<xpts>0.800000,0.900000,1.000000,1.200000,2.200000</xpts>
+<ypts>0.850000,0.950000,1.000000,1.600000,6.000000</ypts>
+</gf>
+			</aux>
+			<aux name="tax_collection_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Tax Collection Multiplier Table</doc>
+<gf>
+<xpts>0.000000,1.000000,2.000000,3.000000,1.600000,1.100000,0.900000</xpts>
+<ypts>0.500000,1.500000,2.500000,2.000000,1.300000,1.000000,0.800000</ypts>
+</gf>
+			</aux>
+			<aux name="tax_ratio_table">
+				<units>dimensionless</units>
+				<doc>  Tax Ratio Table</doc>
+<gf>
+<xpts>-2.000000,0.000000,2.000000,4.000000,0.500000,1.800000,3.600000</xpts>
+<ypts>-1.000000,1.000000,3.000000,0.300000,1.000000,2.800000,4.000000</ypts>
+</gf>
+			</aux>
+			<aux name="underemp_arr_mob_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Underemployed Arrivals Mobility Multiplier 
+      Table</doc>
+<gf>
+<xpts>0.000000,0.050000,0.100000,0.150000,0.700000,1.200000,1.400000</xpts>
+<ypts>0.025000,0.075000,0.125000,0.300000,1.000000,1.300000,1.500000</ypts>
+</gf>
+			</aux>
+			<aux name="underemp_depart_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Underemployed Departures Multiplier Table</doc>
+<gf>
+<xpts>-3.000000,-1.000000,1.000000,3.000000,4.000000,1.000000,0.250000</xpts>
+<ypts>-2.000000,0.000000,2.000000,8.000000,2.000000,0.500000,0.125000</ypts>
+</gf>
+			</aux>
+			<aux name="underemp_edu_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Underemployed Educational Multiplier Table</doc>
+<gf>
+<xpts>0.000000,1.000000,2.000000,3.000000,0.700000,1.300000,1.600000</xpts>
+<ypts>0.500000,1.500000,2.500000,0.200000,1.000000,1.500000,1.700000</ypts>
+</gf>
+			</aux>
+			<aux name="underemp_fract_working_tab">
+				<units>fraction</units>
+				<doc>  Underemployed Fraction Working Table</doc>
+<gf>
+<xpts>0.000000,2.000000,4.000000,0.800000,0.330000</xpts>
+<ypts>1.000000,3.000000,0.900000,0.500000,0.250000</ypts>
+</gf>
+			</aux>
+			<aux name="underemp_hous_mult_table">
+				<units>dimensionless</units>
+				<doc>  Underemployed Housing Multiplier Table</doc>
+<gf>
+<xpts>0.000000,0.500000,1.000000,1.500000,2.000000,2.400000,1.700000,0.400000,0.100000</xpts>
+<ypts>0.250000,0.750000,1.250000,1.750000,2.500000,2.200000,1.000000,0.200000,0.050000</ypts>
+</gf>
+			</aux>
+			<aux name="underemp_hous_prog_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Underemployed Housing Program Multiplier 
+      Table</doc>
+<gf>
+<xpts>0.000000,0.020000,0.040000,1.000000,1.500000,2.400000</xpts>
+<ypts>0.010000,0.030000,0.050000,1.200000,1.900000,3.000000</ypts>
+</gf>
+			</aux>
+			<aux name="underemp_job_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Underemployed Job Multiplier Table.</doc>
+<gf>
+<xpts>0.000000,0.500000,1.000000,1.500000,2.000000,2.500000,3.000000,2.000000,1.600000,0.600000,0.300000,0.150000,0.050000</xpts>
+<ypts>0.250000,0.750000,1.250000,1.750000,2.250000,2.750000,2.000000,1.900000,1.000000,0.400000,0.200000,0.100000,0.020000</ypts>
+</gf>
+			</aux>
+			<aux name="underemployed_labor_job_ratio_tab">
+				<units>dimensionless</units>
+				<doc>  Underemployed Labor Job Ratio Table</doc>
+<gf>
+<xpts>0.000000,1.000000,2.000000,0.800000,0.250000</xpts>
+<ypts>0.500000,1.500000,1.150000,0.500000,0.100000</ypts>
+</gf>
+			</aux>
+			<aux name="worker_housing_adequacy_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Worker Housing from Adequacy Multipler
+      Table</doc>
+<gf>
+<xpts>0.000000,0.500000,1.000000,1.500000,2.000000,0.050000,0.300000,1.800000,2.800000</xpts>
+<ypts>0.250000,0.750000,1.250000,1.750000,0.000000,0.100000,1.000000,2.400000,3.000000</ypts>
+</gf>
+			</aux>
+			<aux name="worker_housing_enterprise_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Worker Housing from Enterprize Multiplier 
+      Table</doc>
+<gf>
+<xpts>-0.200000,0.000000,0.200000,0.300000,1.000000,1.300000</xpts>
+<ypts>-0.100000,0.100000,0.300000,0.700000,1.200000,1.400000</ypts>
+</gf>
+			</aux>
+			<aux name="worker_housing_growth_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Worker Housing from Growth Multiplier 
+      Table</doc>
+<gf>
+<xpts>-0.100000,0.000000,0.100000,0.200000,1.000000,1.800000</xpts>
+<ypts>-0.050000,0.050000,0.150000,0.600000,1.400000,2.200000</ypts>
+</gf>
+			</aux>
+			<aux name="worker_housing_land_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Worker Housing from Land Multiplier 
+      Table</doc>
+<gf>
+<xpts>0.000000,0.200000,0.400000,0.600000,0.800000,1.000000,0.900000,1.600000,1.900000,1.400000,0.200000</xpts>
+<ypts>0.100000,0.300000,0.500000,0.700000,0.900000,0.400000,1.300000,1.800000,1.800000,0.700000,0.000000</ypts>
+</gf>
+			</aux>
+			<aux name="worker_housing_obsolescense_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Worker Housing Obsolescence Multipier
+      Table</doc>
+<gf>
+<xpts>-3.000000,-1.000000,1.000000,3.000000,2.000000,1.000000,0.500000</xpts>
+<ypts>-2.000000,0.000000,2.000000,2.200000,1.600000,0.700000,0.400000</ypts>
+</gf>
+			</aux>
+			<aux name="worker_housing_tax_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Worker Housing From Tax Multiplier Table</doc>
+<gf>
+<xpts>-2.000000,2.000000,1.200000,0.700000</xpts>
+<ypts>0.000000,4.000000,1.000000,0.300000</ypts>
+</gf>
+			</aux>
+			<aux name="worker_housing_underemp_mult_tab">
+				<units>dimensionless</units>
+				<doc>  Worker Housing from Underemployed Multiplier
+      Table</doc>
+<gf>
+<xpts>0.000000,2.000000,4.000000,0.500000,1.000000,1.300000</xpts>
+<ypts>1.000000,3.000000,5.000000,0.800000,1.200000,1.300000</ypts>
+</gf>
+			</aux>
+			<aux name="attract_migr_factor">
+				<units>dimensionless</units>
+				<doc>  Attractoveness for Migration Factor</doc>
+					<eqn>1					</eqn>
+			</aux>
+			<aux name="attract_migr_mult_perc_table">
+				<units>year</units>
+				<doc>  Attractiveness for Migration Multiplier
+      Perception Time</doc>
+					<eqn>20					</eqn>
+			</aux>
+			<aux name="declining_industry_assessed_value">
+				<units>THOU_$/production_unit</units>
+				<doc>  Declining Industry Assessed Value</doc>
+					<eqn>100					</eqn>
+			</aux>
+			<aux name="declining_industry_construction_factor">
+				<units>dimensionless</units>
+				<doc>  Declining Industry Construction Factor</doc>
+					<eqn>0.3					</eqn>
+			</aux>
+			<aux name="declining_industry_decline_factor">
+				<units>dimensionless</units>
+				<doc>  Declining Industry Decline Factor</doc>
+					<eqn>1					</eqn>
+			</aux>
+			<aux name="declining_industry_demise_norm">
+				<units>fraction/year</units>
+				<doc>  Declining Industry Decline Normal</doc>
+					<eqn>0.03					</eqn>
+			</aux>
+			<aux name="declining_industry_labor">
+				<units>worker/production_unit</units>
+				<doc>  Declining Enterprise Labor</doc>
+					<eqn>10					</eqn>
+			</aux>
+			<aux name="declining_industry_management">
+				<units>worker/production_unit</units>
+				<doc>  Declining Industry Management</doc>
+					<eqn>1					</eqn>
+			</aux>
+			<aux name="enterprise_factor">
+				<units>dimensionless</units>
+				<doc>  Enterprise Factor</doc>
+					<eqn>1					</eqn>
+			</aux>
+			<aux name="labor_arrival_factor">
+				<units>dimensionless</units>
+				<doc>  Labor Arrival Factor</doc>
+					<eqn>1					</eqn>
+			</aux>
+			<aux name="labor_arrival_mult_perc_tab">
+				<units>year</units>
+				<doc>  Labor Arrival Multiplier Perception Time</doc>
+					<eqn>15					</eqn>
+			</aux>
+			<aux name="labor_arrival_normal">
+				<units>fraction/year</units>
+				<doc>  Labor Arrivals Normal</doc>
+					<eqn>0.03					</eqn>
+			</aux>
+			<aux name="labor_birth_rate">
+				<units>fraction/year</units>
+				<doc>  Labor Birth Rate</doc>
+					<eqn>0.01					</eqn>
+			</aux>
+			<aux name="labor_daparture_normal">
+				<units>fraction/year</units>
+				<doc>  Labor departure Normal</doc>
+					<eqn>0.02					</eqn>
+			</aux>
+			<aux name="labor_family_size">
+				<units>person/worker</units>
+				<doc>  Labor Family Size</doc>
+					<eqn>6					</eqn>
+			</aux>
+			<aux name="labor_mob_fact">
+				<units>dimensionless</units>
+				<doc>  Labor Mobility Factor</doc>
+					<eqn>1					</eqn>
+			</aux>
+			<aux name="labor_mob_mult_perc_time">
+				<units>year</units>
+				<doc>  Labor Mobility Multiplier Perception Time</doc>
+					<eqn>15					</eqn>
+			</aux>
+			<aux name="labor_ratio_perception_time">
+				<units>year</units>
+				<doc>  Labor Ratio Perception Time</doc>
+					<eqn>5					</eqn>
+			</aux>
+			<aux name="labor_to_manager_norm">
+				<units>fraction/year</units>
+				<doc>  Labor to Manager Normal</doc>
+					<eqn>0.02					</eqn>
+			</aux>
+			<aux name="LABOR_TRAINING_RATE">
+				<units>fraction/year</units>
+				<doc>  Labor Training Rate</doc>
+					<eqn>0					</eqn>
+			</aux>
+			<aux name="land_per_house">
+				<units>acres/housing_unit</units>
+				<doc>  Land Per House</doc>
+					<eqn>0.1					</eqn>
+			</aux>
+			<aux name="land_per_production_unit">
+				<units>acres/production_unit</units>
+				<doc>  Land Per Production unit</doc>
+					<eqn>0.2					</eqn>
+			</aux>
+			<aux name="low_cost_housing_constr_lab">
+				<units>year*worker/housing_unit</units>
+				<doc>  Low Cost Housing Constrtuction Labor</doc>
+					<eqn>0.6					</eqn>
+			</aux>
+			<aux name="manager_prof_arriv_factor">
+				<units>dimensionless</units>
+				<doc>  Manager-professional Arrival Factor</doc>
+					<eqn>1					</eqn>
+			</aux>
+			<aux name="manager_prof_arriv_mult_perc_time">
+				<units>year</units>
+				<doc>  Manager-professional Arrival Multiplier
+      Perception Time</doc>
+					<eqn>10					</eqn>
+			</aux>
+			<aux name="manager_prof_arrival_norm">
+				<units>fraction/year</units>
+				<doc>  Manager-professional Arrivals Normal</doc>
+					<eqn>0.03					</eqn>
+			</aux>
+			<aux name="manager_prof_birth_rate">
+				<units>fraction/year</units>
+				<doc>  Manager-Professional Birth Rate</doc>
+					<eqn>0.0075					</eqn>
+			</aux>
+			<aux name="manager_prof_depart_norm">
+				<units>fraction/year</units>
+				<doc>  Manager Departures Normal</doc>
+					<eqn>0.02					</eqn>
+			</aux>
+			<aux name="manager_prof_family_size">
+				<units>person/worker</units>
+				<doc>  Managerial/Professional Family Size</doc>
+					<eqn>5					</eqn>
+			</aux>
+			<aux name="mature_business_construction_factor">
+				<units>dimensionless</units>
+				<doc>  Mature Business Construction Factor</doc>
+					<eqn>0.5					</eqn>
+			</aux>
+			<aux name="mature_business_decline_norm">
+				<units>fraction/year</units>
+				<doc>  Mature Business Decline Normal</doc>
+					<eqn>0.05					</eqn>
+			</aux>
+			<aux name="mature_business_labor">
+				<units>worker/production_unit</units>
+				<doc>  Mature Business Labor</doc>
+					<eqn>15					</eqn>
+			</aux>
+			<aux name="mature_business_management">
+				<units>worker/production_unit</units>
+				<doc>  Mature Business Management</doc>
+					<eqn>2					</eqn>
+			</aux>
+			<aux name="maturre_business_assessed_value">
+				<units>THOU_$/production_unit</units>
+				<doc>  Mature Business Assessed Value</doc>
+					<eqn>300					</eqn>
+			</aux>
+			<aux name="new_enterprise_assessed_value">
+				<units>THOU_$/production_unit</units>
+				<doc>  New enterprise Assessed Value</doc>
+					<eqn>500					</eqn>
+			</aux>
+			<aux name="new_enterprise_average_time">
+				<units>year</units>
+				<doc>  New Industry Average Time</doc>
+					<eqn>10					</eqn>
+			</aux>
+			<aux name="new_enterprise_constr_lab">
+				<units>year*worker/production_unit</units>
+				<doc>  New Enterprise Construction Labor</doc>
+					<eqn>20					</eqn>
+			</aux>
+			<aux name="new_enterprise_construction_factor">
+				<units>dimensionless</units>
+				<doc>  New Enterprise Construction Factor</doc>
+					<eqn>1					</eqn>
+			</aux>
+			<aux name="new_enterprise_construction_norm">
+				<units>fraction/year</units>
+				<doc>  New Enterprise construction Normal</doc>
+					<eqn>0.05					</eqn>
+			</aux>
+			<aux name="new_enterprise_decline_normal">
+				<units>fraction/year</units>
+				<doc>  New Enterprise Decline Normal</doc>
+					<eqn>0.08					</eqn>
+			</aux>
+			<aux name="new_enterprise_growth_rate_initial">
+				<units>fraction/year</units>
+				<doc>  New Industry Growth Rate Initial</doc>
+					<eqn>0.03					</eqn>
+			</aux>
+			<aux name="new_enterprise_labor">
+				<units>worker/production_unit</units>
+				<doc>  New Enterprise Labor</doc>
+					<eqn>20					</eqn>
+			</aux>
+			<aux name="new_enterprise_management">
+				<units>worker/production_unit</units>
+				<doc>  New Enterprise Management</doc>
+					<eqn>4					</eqn>
+			</aux>
+			<aux name="premium_housing_assessed_value">
+				<units>THOU_$/housing_unit</units>
+				<doc>  Premium Housing Assessed Value</doc>
+					<eqn>30					</eqn>
+			</aux>
+			<aux name="premium_housing_averate_time">
+				<units>year</units>
+				<doc>  Premium Housing Averaging Time</doc>
+					<eqn>10					</eqn>
+			</aux>
+			<aux name="premium_housing_constr_lab">
+				<units>year*worker/housing_unit</units>
+				<doc>  Premium Housing Constrtuction Labor</doc>
+					<eqn>2					</eqn>
+			</aux>
+			<aux name="premium_housing_construction_norm">
+				<units>fraction/year</units>
+				<doc>  Premium Housing Construction Normal</doc>
+					<eqn>0.03					</eqn>
+			</aux>
+			<aux name="premium_housing_construction_ratio">
+				<units>fraction/year</units>
+				<doc>  Premium Housing Construction Ratio</doc>
+					<eqn>0					</eqn>
+			</aux>
+			<aux name="premium_housing_factor">
+				<units>dimensionless</units>
+				<doc>  Premium Housing factor</doc>
+					<eqn>1					</eqn>
+			</aux>
+			<aux name="premium_housing_growth_rate_init">
+				<units>fraction/year</units>
+				<doc>  Premium Housing Growth Rate Initial</doc>
+					<eqn>0.03					</eqn>
+			</aux>
+			<aux name="premium_housing_obsolescense_normal">
+				<units>fraction/year</units>
+				<doc>  Premium Housing Obsolescence Normal</doc>
+					<eqn>0.03					</eqn>
+			</aux>
+			<aux name="premium_housing_pop_dens">
+				<units>person/housing_unit</units>
+				<doc>  Premium Housing Population Density</doc>
+					<eqn>3					</eqn>
+			</aux>
+			<aux name="slum_housing_demolitin_factor">
+				<units>dimensionless</units>
+				<doc>  Slum Housing Demolition Factor</doc>
+					<eqn>1					</eqn>
+			</aux>
+			<aux name="slum_housing_demolition_norm">
+				<units>fraction/year</units>
+				<doc>  Slum Housing Demolition Normal</doc>
+					<eqn>0.02					</eqn>
+			</aux>
+			<aux name="SWITCH_TIME_1">
+				<units>year</units>
+				<doc>  SWitch Time 1</doc>
+					<eqn>0					</eqn>
+			</aux>
+			<aux name="SWITCH_TIME_10">
+				<units>year</units>
+				<doc>  Switch Time 10</doc>
+					<eqn>0					</eqn>
+			</aux>
+			<aux name="SWITCH_TIME_2">
+				<units>year</units>
+				<doc>  SWitch Time 2</doc>
+					<eqn>0					</eqn>
+			</aux>
+			<aux name="SWITCH_TIME_3">
+				<units>year</units>
+				<doc>  SWitch Time 3</doc>
+					<eqn>0					</eqn>
+			</aux>
+			<aux name="SWITCH_TIME_4">
+				<units>year</units>
+				<doc>  SWitch Time 4</doc>
+					<eqn>0					</eqn>
+			</aux>
+			<aux name="SWITCH_TIME_5">
+				<units>year</units>
+				<doc>  SWitch Time 5</doc>
+					<eqn>0					</eqn>
+			</aux>
+			<aux name="SWITCH_TIME_6">
+				<units>year</units>
+				<doc>  SWitch Time 6</doc>
+					<eqn>0					</eqn>
+			</aux>
+			<aux name="SWITCH_TIME_7">
+				<units>year</units>
+				<doc>  SWitch Time 7</doc>
+					<eqn>0					</eqn>
+			</aux>
+			<aux name="SWITCH_TIME_8">
+				<units>year</units>
+				<doc>  SWitch Time 8</doc>
+					<eqn>0					</eqn>
+			</aux>
+			<aux name="SWITCH_TIME_9">
+				<units>year</units>
+				<doc>  SWitch Time 9</doc>
+					<eqn>0					</eqn>
+			</aux>
+			<aux name="tax_assessment_norm">
+				<units>$/(year*THOU_$)</units>
+				<doc>   Tax Assessment Normal</doc>
+					<eqn>50					</eqn>
+			</aux>
+			<aux name="tax_per_cap_norm">
+				<units>$/(year*person)</units>
+				<doc>  Tax Per Capita Normal</doc>
+					<eqn>250					</eqn>
+			</aux>
+			<aux name="tax_per_cap_subsidy_size">
+				<units>$/(year*person)</units>
+				<doc>  Tax Per Capita Subsidy</doc>
+					<eqn>0					</eqn>
+			</aux>
+			<aux name="tax_ratio_needed_perception_time">
+				<units>year</units>
+				<doc>  Tax Ratio Needed Perception Time</doc>
+					<eqn>30					</eqn>
+			</aux>
+			<aux name="tax_spending_per_labor">
+				<units>$/(year*person)</units>
+				<doc>  Tax spending per Labor Person</doc>
+					<eqn>200					</eqn>
+			</aux>
+			<aux name="tax_spending_per_manager">
+				<units>$/(year*person)</units>
+				<doc>  Tax spending per Manager-professional Person</doc>
+					<eqn>150					</eqn>
+			</aux>
+			<aux name="tax_spending_per_underemp">
+				<units>$/(year*person)</units>
+				<doc>  Tax spending per Underemployed Person</doc>
+					<eqn>300					</eqn>
+			</aux>
+			<aux name="TOTAL_LAND_AREA">
+				<units>acres</units>
+				<doc>  total land AREA</doc>
+					<eqn>100000					</eqn>
+			</aux>
+			<aux name="UNDEREMP_ARRIVALS_NORMAL">
+				<units>1/year</units>
+				<doc>  Underemployed Arrivals Normal</doc>
+					<eqn>0.05					</eqn>
+			</aux>
+			<aux name="underemp_birth_rate">
+				<units>fraction/year</units>
+				<doc>  Underemployed Birth Rate</doc>
+					<eqn>0.015					</eqn>
+			</aux>
+			<aux name="underemp_departures_norm">
+				<units>fraction/year</units>
+				<doc>  Underemployed Departures Normal</doc>
+					<eqn>0.02					</eqn>
+			</aux>
+			<aux name="underemp_family_size">
+				<units>person/worker</units>
+				<doc>  Underemployed Family Size</doc>
+					<eqn>8					</eqn>
+			</aux>
+			<aux name="underemp_housing_assessed_value">
+				<units>THOU_$/housing_unit</units>
+				<doc>  Underemployed Housing Assessed Value</doc>
+					<eqn>5					</eqn>
+			</aux>
+			<aux name="underemp_mob_factor">
+				<units>dimensionless</units>
+				<doc>  Underemployed Mobility Factor</doc>
+					<eqn>1					</eqn>
+			</aux>
+			<aux name="underemp_mob_mult_perc_time">
+				<units>year</units>
+				<doc>  Underemployed Mobility Multiplier Perception
+      Time</doc>
+					<eqn>10					</eqn>
+			</aux>
+			<aux name="underemp_mobility_norm">
+				<units>fraction/year</units>
+				<doc>  Underemployed Mobility Normal</doc>
+					<eqn>0.1					</eqn>
+			</aux>
+			<aux name="underemp_pop_density">
+				<units>person/housing_unit</units>
+				<doc>  Underemployed Population Density</doc>
+					<eqn>12					</eqn>
+			</aux>
+			<aux name="underemp_to_labor_perc_time">
+				<units>year</units>
+				<doc>  Underemployed to Labor Perception Time</doc>
+					<eqn>10					</eqn>
+			</aux>
+			<aux name="worker_housing_assessed_value">
+				<units>THOU_$/housing_unit</units>
+				<doc>  Worker Housing Assessed Value</doc>
+					<eqn>15					</eqn>
+			</aux>
+			<aux name="worker_housing_average_time">
+				<units>year</units>
+				<doc>  Worker Housing Averaging Time</doc>
+					<eqn>10					</eqn>
+			</aux>
+			<aux name="worker_housing_const_norm">
+				<units>fraction/year</units>
+				<doc>  Worker Housing Construction Normal</doc>
+					<eqn>0.03					</eqn>
+			</aux>
+			<aux name="worker_housing_constr_lab">
+				<units>year*worker/housing_unit</units>
+				<doc>  Worker Housing Constrtuction Labor</doc>
+					<eqn>1					</eqn>
+			</aux>
+			<aux name="WORKER_HOUSING_CONSTR_RATIO">
+				<units>fraction/year</units>
+				<doc>  Worker Housing Construction Ratio</doc>
+					<eqn>0					</eqn>
+			</aux>
+			<aux name="worker_housing_factor">
+				<units>dimensionless</units>
+				<doc>  Worker Housing factor</doc>
+					<eqn>1					</eqn>
+			</aux>
+			<aux name="worker_housing_growth_rate_initial">
+				<units>fraction/year</units>
+				<doc>  Worker Housing Growth Rate Initial</doc>
+					<eqn>0.03					</eqn>
+			</aux>
+			<aux name="worker_housing_obsolescense_norm">
+				<units>fraction/year</units>
+				<doc>  Worker Housing Obsolescence Normal</doc>
+					<eqn>0.02					</eqn>
+			</aux>
+			<aux name="worker_housing_pop_density">
+				<units>person/housing_unit</units>
+				<doc>  Worker Housing Population Density</doc>
+					<eqn>6					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

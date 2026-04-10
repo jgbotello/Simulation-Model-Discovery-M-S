@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Year">
+		<start> 0</start>
+		<stop> 5</stop>
+		<dt>  0.015625</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="Accounts_Receivable">
+				<units>$</units>
+				<doc></doc>
+					<eqn>
+					billings /
+
+            (1/average_payable_delay + fractional_loss_rate)
+					</eqn>
+					<inflow>
+					billings
+					</inflow>
+					<outflow>
+					cash receipts
+					</outflow>
+					<outflow>
+					losses
+					</outflow>
+			</stock>
+			<stock name="Average_Orders">
+				<units>Gadget/Year</units>
+				<doc></doc>
+					<eqn>
+					orders_received
+					</eqn>
+					<inflow>
+					time to average orders
+					</inflow>
+			</stock>
+			<stock name="Awaiting_Billing">
+				<units>$</units>
+				<doc></doc>
+					<eqn>
+					price * production * billing_processing_time
+					</eqn>
+					<inflow>
+					price
+					</inflow>
+					<outflow>
+					billings
+					</outflow>
+			</stock>
+			<stock name="Backlog">
+				<units>Gadget</units>
+				<doc></doc>
+					<eqn>
+					desired_backlog
+					</eqn>
+					<inflow>
+					orders received
+					</inflow>
+					<outflow>
+					production
+					</outflow>
+			</stock>
+			<stock name="Book_Value">
+				<units>$</units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					new investment
+					</inflow>
+					<outflow>
+					tax depreciation
+					</outflow>
+			</stock>
+			<stock name="Capacity">
+				<units>Gadget/Year</units>
+				<doc></doc>
+					<eqn>
+					    desired_capacity
+					</eqn>
+					<inflow>
+					investment
+					</inflow>
+					<outflow>
+					reductions
+					</outflow>
+			</stock>
+			<stock name="Customers">
+				<units>Person</units>
+				<doc></doc>
+					<eqn>
+					initial_customers
+					</eqn>
+					<inflow>
+					completions
+					</inflow>
+			</stock>
+			<stock name="Debt">
+				<units>$</units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					borrowing
+					</inflow>
+					<outflow>
+					principal repayment
+					</outflow>
+			</stock>
+			<stock name="New_Backlog">
+				<units>Gadget</units>
+				<doc></doc>
+					<eqn>
+					                    new_orders*normal_delivery_delay
+					</eqn>
+					<inflow>
+					new orders
+					</inflow>
+					<outflow>
+					new shipments
+					</outflow>
+			</stock>
+			<stock name="Potential_Customers">
+				<units>Person</units>
+				<doc></doc>
+					<eqn>
+					1e+07
+					</eqn>
+					<outflow>
+					committals
+					</outflow>
+			</stock>
+			<stock name="Product_In_Use">
+				<units>Gadget</units>
+				<doc></doc>
+					<eqn>
+					Customers*product_per_customer
+					</eqn>
+					<inflow>
+					new shipments
+					</inflow>
+					<inflow>
+					replacement shipments
+					</inflow>
+					<outflow>
+					replacement orders
+					</outflow>
+			</stock>
+			<stock name="Replacement_Backlog">
+				<units>Gadget</units>
+				<doc></doc>
+					<eqn>
+					                      replacement_orders*normal_delivery_delay
+					</eqn>
+					<inflow>
+					replacement orders
+					</inflow>
+					<outflow>
+					replacement shipments
+					</outflow>
+			</stock>
+			<stock name="Waiting_Customers">
+				<units>Person</units>
+				<doc></doc>
+					<eqn>
+					New_Backlog/product_per_customer
+					</eqn>
+					<inflow>
+					committals
+					</inflow>
+					<outflow>
+					completions
+					</outflow>
+			</stock>
+			<aux name="backlog_correction">
+				<units>Gadget/Year</units>
+				<doc></doc>
+					<eqn> (Backlog-desired_backlog)/time_to_correct_backlog					</eqn>
+			</aux>
+			<aux name="billings">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn> Awaiting_Billing/billing_processing_time					</eqn>
+			</aux>
+			<aux name="borrowing">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn> new_investment * debt_financing_fraction					</eqn>
+			</aux>
+			<aux name="capacity_adjustment">
+				<units>Gadget/(Year*Year)</units>
+				<doc></doc>
+					<eqn> (desired_capacity - Capacity)/time_to_adjust_capacity					</eqn>
+			</aux>
+			<aux name="cash_receipts">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn> Accounts_Receivable/average_payable_delay					</eqn>
+			</aux>
+			<aux name="committals">
+				<units>Person/Year</units>
+				<doc></doc>
+					<eqn> customer_with_non_customer_contacts * sales_fraction					</eqn>
+			</aux>
+			<aux name="completions">
+				<units>Person/Year</units>
+				<doc></doc>
+					<eqn> new_shipments/product_per_customer					</eqn>
+			</aux>
+			<aux name="customer_prevalence">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn> Customers/total_market					</eqn>
+			</aux>
+			<aux name="customer_with_non_customer_contacts">
+				<units>Person/Year</units>
+				<doc></doc>
+					<eqn> non_customer_contacts *
+                       customer_prevalence					</eqn>
+			</aux>
+			<aux name="delivery_delay">
+				<units>Year</units>
+				<doc></doc>
+					<eqn> Backlog/production					</eqn>
+			</aux>
+			<aux name="desired_backlog">
+				<units>Gadget</units>
+				<doc></doc>
+					<eqn> Average_Orders* target_delivery_delay					</eqn>
+			</aux>
+			<aux name="desired_capacity">
+				<units>Gadget/Year</units>
+				<doc></doc>
+					<eqn> desired_production					</eqn>
+			</aux>
+			<aux name="desired_production">
+				<units>Gadget/Year</units>
+				<doc></doc>
+					<eqn> Average_Orders + backlog_correction					</eqn>
+			</aux>
+			<aux name="direct_costs">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn> production * variable_production_cost					</eqn>
+			</aux>
+			<aux name="gross_income">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn> billings					</eqn>
+			</aux>
+			<aux name="interest_payments">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn> Debt * interest_rate					</eqn>
+			</aux>
+			<aux name="investment">
+				<units>Gadget/(Year*Year)</units>
+				<doc></doc>
+					<eqn> capacity_adjustment + replacement_investment					</eqn>
+			</aux>
+			<aux name="losses">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn> Accounts_Receivable * fractional_loss_rate					</eqn>
+			</aux>
+			<aux name="net_cash_flow">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn> cash_receipts + borrowing - new_investment - 
+
+                              direct_costs - interest_payments - 
+
+                              principal_repayment - taxes					</eqn>
+			</aux>
+			<aux name="net_income">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn> taxable_income - taxes					</eqn>
+			</aux>
+			<aux name="new_investment">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn> investment * capacity_cost					</eqn>
+			</aux>
+			<aux name="new_orders">
+				<units>Gadget/Year</units>
+				<doc></doc>
+					<eqn> committals * product_per_customer					</eqn>
+			</aux>
+			<aux name="new_shipments">
+				<units>Gadget/Year</units>
+				<doc></doc>
+					<eqn> total_shipments * New_Backlog/
+         total_backlog					</eqn>
+			</aux>
+			<aux name="non_customer_contacts">
+				<units>Person/Year</units>
+				<doc></doc>
+					<eqn> Potential_Customers * contact_rate					</eqn>
+			</aux>
+			<aux name="npv_cash_flow">
+				<units>$</units>
+				<doc></doc>
+					<eqn> NPV(net_cash_flow,discount_rate,0,1)					</eqn>
+			</aux>
+			<aux name="npv_income">
+				<units>$</units>
+				<doc></doc>
+					<eqn> NPV(net_income,discount_rate,0,1)					</eqn>
+			</aux>
+			<aux name="orders_received">
+				<units>Gadget/Year</units>
+				<doc></doc>
+					<eqn>total_orders					</eqn>
+			</aux>
+			<aux name="potential_production">
+				<units>Gadget/Year</units>
+				<doc></doc>
+					<eqn> Capacity					</eqn>
+			</aux>
+			<aux name="principal_repayment">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn> Debt/debt_retirement_time					</eqn>
+			</aux>
+			<aux name="production">
+				<units>Gadget/Year</units>
+				<doc></doc>
+					<eqn> MIN(desired_production,potential_production)					</eqn>
+			</aux>
+			<aux name="reductions">
+				<units>Gadget/(Year*Year)</units>
+				<doc></doc>
+					<eqn> Capacity/capacity_life					</eqn>
+			</aux>
+			<aux name="replacement_investment">
+				<units>Gadget/(Year*Year)</units>
+				<doc></doc>
+					<eqn> reductions					</eqn>
+			</aux>
+			<aux name="replacement_orders">
+				<units>Gadget/Year</units>
+				<doc></doc>
+					<eqn> 
+     Product_In_Use/average_life_product					</eqn>
+			</aux>
+			<aux name="replacement_shipments">
+				<units>Gadget/Year</units>
+				<doc></doc>
+					<eqn> total_shipments *Replacement_Backlog/
+         total_backlog					</eqn>
+			</aux>
+			<aux name="tax_depreciation">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn> Book_Value/tax_depreciation_time					</eqn>
+			</aux>
+			<aux name="taxable_income">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn> gross_income - direct_costs - losses - interest_payments - tax_depreciation					</eqn>
+			</aux>
+			<aux name="taxes">
+				<units>$/Year</units>
+				<doc></doc>
+					<eqn> taxable_income * tax_rate					</eqn>
+			</aux>
+			<aux name="total_backlog">
+				<units>Gadget</units>
+				<doc></doc>
+					<eqn> New_Backlog + Replacement_Backlog					</eqn>
+			</aux>
+			<aux name="total_market">
+				<units>Person</units>
+				<doc></doc>
+					<eqn> ACTIVE INITIAL(Potential_Customers +Waiting_Customers + Customers,
+                          Potential_Customers)					</eqn>
+			</aux>
+			<aux name="total_orders">
+				<units>Gadget/Year</units>
+				<doc></doc>
+					<eqn> new_orders + replacement_orders					</eqn>
+			</aux>
+			<aux name="total_shipments">
+				<units>Gadget/Year</units>
+				<doc></doc>
+					<eqn> production					</eqn>
+			</aux>
+			<aux name="average_life_product">
+				<units>Year</units>
+				<doc></doc>
+					<eqn> 2					</eqn>
+			</aux>
+			<aux name="average_payable_delay">
+				<units>Year</units>
+				<doc></doc>
+					<eqn> 0.09					</eqn>
+			</aux>
+			<aux name="billing_processing_time">
+				<units>Year</units>
+				<doc></doc>
+					<eqn> 0.04					</eqn>
+			</aux>
+			<aux name="capacity_cost">
+				<units>$*Year/Gadget</units>
+				<doc></doc>
+					<eqn> 0.5					</eqn>
+			</aux>
+			<aux name="capacity_life">
+				<units>Year</units>
+				<doc></doc>
+					<eqn> 2					</eqn>
+			</aux>
+			<aux name="contact_rate">
+				<units>1/Year</units>
+				<doc></doc>
+					<eqn> 500					</eqn>
+			</aux>
+			<aux name="debt_financing_fraction">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn> 0.6					</eqn>
+			</aux>
+			<aux name="debt_retirement_time">
+				<units>Year</units>
+				<doc></doc>
+					<eqn> 3					</eqn>
+			</aux>
+			<aux name="discount_rate">
+				<units>1/Year</units>
+				<doc></doc>
+					<eqn> 0.12					</eqn>
+			</aux>
+			<aux name="fractional_loss_rate">
+				<units>1/Year</units>
+				<doc></doc>
+					<eqn> 0.06					</eqn>
+			</aux>
+			<aux name="initial_customers">
+				<units>Person</units>
+				<doc></doc>
+					<eqn> 100000					</eqn>
+			</aux>
+			<aux name="interest_rate">
+				<units>1/Year</units>
+				<doc></doc>
+					<eqn> 0.12					</eqn>
+			</aux>
+			<aux name="normal_delivery_delay">
+				<units>Year</units>
+				<doc></doc>
+					<eqn> 0.125					</eqn>
+			</aux>
+			<aux name="price">
+				<units>$/Gadget</units>
+				<doc></doc>
+					<eqn> 1					</eqn>
+			</aux>
+			<aux name="product_per_customer">
+				<units>Gadget/Person</units>
+				<doc></doc>
+					<eqn> 1					</eqn>
+			</aux>
+			<aux name="sales_fraction">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn> 0.005					</eqn>
+			</aux>
+			<aux name="target_delivery_delay">
+				<units>Year</units>
+				<doc></doc>
+					<eqn> 0.125					</eqn>
+			</aux>
+			<aux name="tax_depreciation_time">
+				<units>Year</units>
+				<doc></doc>
+					<eqn> 2					</eqn>
+			</aux>
+			<aux name="tax_rate">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn> 0.4					</eqn>
+			</aux>
+			<aux name="time_to_adjust_capacity">
+				<units>Year</units>
+				<doc></doc>
+					<eqn> 1					</eqn>
+			</aux>
+			<aux name="time_to_average_orders">
+				<units>Year</units>
+				<doc></doc>
+					<eqn> 0.25					</eqn>
+			</aux>
+			<aux name="time_to_correct_backlog">
+				<units>Year</units>
+				<doc></doc>
+					<eqn> 0.5					</eqn>
+			</aux>
+			<aux name="variable_production_cost">
+				<units>$/Gadget</units>
+				<doc></doc>
+					<eqn> 0.6					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

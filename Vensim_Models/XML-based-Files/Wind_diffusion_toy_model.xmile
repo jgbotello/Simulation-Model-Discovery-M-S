@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Year">
+		<start> 0</start>
+		<stop> 50</stop>
+		<dt> 0.25</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="Cumulative_GW_wind_capacity_in_Country_X">
+				<units>GW</units>
+				<doc></doc>
+					<eqn>
+					Government_demo_Projects
+					</eqn>
+					<inflow>
+					Turbine Installations per Year
+					</inflow>
+			</stock>
+			<stock name="Potential_GW_wind_capacity_in_Country_X">
+				<units>GW</units>
+				<doc></doc>
+					<eqn>
+					total_potential_GW_wind_capacity_in_Country_X-Government_demo_Projects
+					</eqn>
+					<outflow>
+					Turbine Installations per Year
+					</outflow>
+			</stock>
+			<aux name="annual_profits">
+				<units>$</units>
+				<doc></doc>
+					<eqn>
+	annual_revenue-annual_maintenance_cost					</eqn>
+			</aux>
+			<aux name="annual_revenue">
+				<units>$</units>
+				<doc></doc>
+					<eqn>
+	estimated_annual_site_output*(electricity_price+price_production_incentive*price_production_present)					</eqn>
+			</aux>
+			<aux name="annuity_factor">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+	(1-(1/(1+interest_rate)^avg_turbine_lifetime))/interest_rate					</eqn>
+			</aux>
+			<aux name="estimated_annual_site_output">
+				<units>kW*hr</units>
+				<doc></doc>
+					<eqn>
+	average_turbine_size*max_capacity_of_a_wind_site*hours_per_year					</eqn>
+			</aux>
+			<aux name="feasibility_of_wind">
+				<units>GW/Year</units>
+				<doc></doc>
+					<eqn>
+	IF_THEN_ELSE(total_profitable_sites > 0, MIN(Potential_GW_wind_capacity_in_Country_X,total_profitable_sites*((total_profitable_sites - (total_potential_GW_wind_capacity_in_Country_X
+	- Potential_GW_wind_capacity_in_Country_X) ) / total_profitable_sites)), 0 )					</eqn>
+			</aux>
+			<aux name="fractional_resistance_to_wind">
+				<units>Dmnl</units>
+				<doc>those resisting wind are those with no familiarity with the technology</doc>
+					<eqn>
+	(1 - (Cumulative_GW_wind_capacity_in_Country_X/total_potential_GW_wind_capacity_in_Country_X)*(interaction_rate))					</eqn>
+			</aux>
+			<aux name="hours_per_year">
+				<units>hr</units>
+				<doc></doc>
+					<eqn>
+	24*365					</eqn>
+			</aux>
+			<aux name="price_production_present">
+				<units>dimensionless</units>
+				<doc></doc>
+					<eqn>
+	1-1*PULSE_TRAIN(20, 1 , 5, 40)*PTC_switch					</eqn>
+			</aux>
+			<aux name="total_profitable_sites">
+				<units>GW</units>
+				<doc></doc>
+					<eqn>
+	IF_THEN_ELSE( (total_potential_GW_wind_capacity_in_Country_X * (-1) * LN((upfront_project_costs - grants) / (annuity_factor*annual_profits))) > 0 , (total_potential_GW_wind_capacity_in_Country_X * (-1) * LN((upfront_project_costs - grants) / (annuity_factor*annual_profits)) ), 0 )					</eqn>
+			</aux>
+			<aux name="Turbine_Installations_per_Year">
+				<units>GW/Year</units>
+				<doc></doc>
+					<eqn>
+	(1-fractional_resistance_to_wind)*feasibility_of_wind					</eqn>
+			</aux>
+			<aux name="annual_maintenance_cost">
+				<units>$</units>
+				<doc></doc>
+					<eqn>
+	50000					</eqn>
+			</aux>
+			<aux name="average_turbine_size">
+				<units>kW</units>
+				<doc></doc>
+					<eqn>
+	1000					</eqn>
+			</aux>
+			<aux name="avg_turbine_lifetime">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+	20					</eqn>
+			</aux>
+			<aux name="electricity_price">
+				<units>$/(kW*hr)</units>
+				<doc></doc>
+					<eqn>
+	0.05					</eqn>
+			</aux>
+			<aux name="Government_demo_Projects">
+				<units>GW</units>
+				<doc>government projects to kickstart industry</doc>
+					<eqn>
+	0.005					</eqn>
+			</aux>
+			<aux name="grants">
+				<units>$</units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="interaction_rate">
+				<units>dimensionless</units>
+				<doc></doc>
+					<eqn>
+	2					</eqn>
+			</aux>
+			<aux name="interest_rate">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+	0.08					</eqn>
+			</aux>
+			<aux name="max_capacity_of_a_wind_site">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+	0.5					</eqn>
+			</aux>
+			<aux name="price_production_incentive">
+				<units>$/(kW*hr)</units>
+				<doc></doc>
+					<eqn>
+	0.019					</eqn>
+			</aux>
+			<aux name="PTC_switch">
+				<units>dimensionless</units>
+				<doc>0 means that the PTC credit is permanently available and 1 means that the PTC credit availability fluctuates from year to year</doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="total_potential_GW_wind_capacity_in_Country_X">
+				<units>GW</units>
+				<doc></doc>
+					<eqn>
+	8000					</eqn>
+			</aux>
+			<aux name="upfront_project_costs">
+				<units>$</units>
+				<doc></doc>
+					<eqn>
+	2e+06					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

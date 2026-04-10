@@ -1,0 +1,101 @@
+[
+  {
+    "experiment_name": "xml__bm25",
+    "experiment_group": "lexical",
+    "representation": "xml",
+    "lexical_method": "bm25",
+    "n_queries": 15,
+    "precision@5": 0.10666666666666667,
+    "recall@5": 0.2111111111111111,
+    "ndcg@5": 0.13880219710669572,
+    "precision@R": 0.12777777777777777
+  },
+  {
+    "experiment_name": "xml__tfidf",
+    "experiment_group": "lexical",
+    "representation": "xml",
+    "lexical_method": "tfidf",
+    "n_queries": 15,
+    "precision@5": 0.10666666666666667,
+    "recall@5": 0.21666666666666665,
+    "ndcg@5": 0.1487873305884249,
+    "precision@R": 0.10555555555555556
+  },
+  {
+    "experiment_name": "xml__query_likelihood",
+    "experiment_group": "lexical",
+    "representation": "xml",
+    "lexical_method": "query_likelihood",
+    "n_queries": 15,
+    "precision@5": 0.09333333333333334,
+    "recall@5": 0.19444444444444445,
+    "ndcg@5": 0.12297995310958576,
+    "precision@R": 0.12777777777777777
+  },
+  {
+    "experiment_name": "json__bm25",
+    "experiment_group": "lexical",
+    "representation": "json",
+    "lexical_method": "bm25",
+    "n_queries": 15,
+    "precision@5": 0.09333333333333334,
+    "recall@5": 0.19999999999999998,
+    "ndcg@5": 0.12343381567901553,
+    "precision@R": 0.14444444444444443
+  },
+  {
+    "experiment_name": "json__tfidf",
+    "experiment_group": "lexical",
+    "representation": "json",
+    "lexical_method": "tfidf",
+    "n_queries": 15,
+    "precision@5": 0.08,
+    "recall@5": 0.18333333333333332,
+    "ndcg@5": 0.12266072910379355,
+    "precision@R": 0.10555555555555556
+  },
+  {
+    "experiment_name": "json__query_likelihood",
+    "experiment_group": "lexical",
+    "representation": "json",
+    "lexical_method": "query_likelihood",
+    "n_queries": 15,
+    "precision@5": 0.13333333333333333,
+    "recall@5": 0.25555555555555554,
+    "ndcg@5": 0.16557362331956638,
+    "precision@R": 0.18888888888888888
+  },
+  {
+    "experiment_name": "json_narratives__bm25",
+    "experiment_group": "lexical",
+    "representation": "json_narratives",
+    "lexical_method": "bm25",
+    "n_queries": 15,
+    "precision@5": 0.2,
+    "recall@5": 0.37222222222222223,
+    "ndcg@5": 0.33607689547162667,
+    "precision@R": 0.29444444444444445
+  },
+  {
+    "experiment_name": "json_narratives__tfidf",
+    "experiment_group": "lexical",
+    "representation": "json_narratives",
+    "lexical_method": "tfidf",
+    "n_queries": 15,
+    "precision@5": 0.21333333333333335,
+    "recall@5": 0.39444444444444443,
+    "ndcg@5": 0.3419386561087063,
+    "precision@R": 0.3277777777777778
+  },
+  {
+    "experiment_name": "json_narratives__query_likelihood",
+    "experiment_group": "lexical",
+    "representation": "json_narratives",
+    "lexical_method": "query_likelihood",
+    "n_queries": 15,
+    "precision@5": 0.2,
+    "recall@5": 0.37777777777777777,
+    "ndcg@5": 0.3104581295831014,
+    "precision@R": 0.23888888888888887
+  }
+]

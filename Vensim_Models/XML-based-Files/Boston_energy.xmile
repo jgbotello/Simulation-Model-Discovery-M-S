@@ -1,0 +1,736 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Month">
+		<start> 0</start>
+		<stop> 365</stop>
+		<dt> 1</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="Conventional_Energy">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Conventional Energy Rat
+					</inflow>
+			</stock>
+			<stock name="Distance_Traveled_per_Day">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					32.8
+					</eqn>
+			</stock>
+			<stock name="Electric_Energy">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Electric Energy Rate
+					</inflow>
+			</stock>
+			<stock name="Food_Stored">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					100000
+					</eqn>
+					<outflow>
+					Food Consumption per Day
+					</outflow>
+			</stock>
+			<stock name="Human_Energy_Provided">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Human Energy per Day
+					</inflow>
+			</stock>
+			<stock name="Hybrid_Energy">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Hybrid Energy Rate
+					</inflow>
+			</stock>
+			<stock name="Number_of_people_who_drive_cars">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					population * 2/6
+					</eqn>
+			</stock>
+			<stock name="Number_of_People_who_use_the_MBTA_Subway">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					Initial_MBTA_Users
+					</eqn>
+					<inflow>
+					People who like the MBTA
+					</inflow>
+					<outflow>
+					People who don't like the MBTA
+					</outflow>
+			</stock>
+			<stock name="population">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					987700
+					</eqn>
+					<inflow>
+					birth rate
+					</inflow>
+					<outflow>
+					death rate
+					</outflow>
+			</stock>
+			<stock name="Total">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					1
+					</eqn>
+					<inflow>
+					Conventional Fraction
+					</inflow>
+					<inflow>
+					Electric Fraction
+					</inflow>
+					<inflow>
+					Hybrid Fraction
+					</inflow>
+			</stock>
+			<stock name="Total_Electricity">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Energy from Electricity
+					</inflow>
+			</stock>
+			<stock name="Total_Energy">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Building Energy
+					</inflow>
+			</stock>
+			<stock name="Total_Energy_from_Cars">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					conventional elec
+					</inflow>
+					<inflow>
+					elec elec
+					</inflow>
+					<inflow>
+					hybrid elec
+					</inflow>
+			</stock>
+			<stock name="Total_Energy_from_Oil">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Energy from Oil
+					</inflow>
+			</stock>
+			<stock name="Total_Food_Consumed">
+				<units>kg</units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Food Consumption per Day
+					</inflow>
+			</stock>
+			<stock name="Total_Food_Energy">
+				<units>J</units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Energy per Day
+					</inflow>
+			</stock>
+			<stock name="Total_Public_Transportation_Energy">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Energy used by Train
+					</inflow>
+			</stock>
+			<stock name="Total_Solar_Energy">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Solar Energy
+					</inflow>
+			</stock>
+			<stock name="Total_Wind_Energy">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					Energy from Wind
+					</inflow>
+			</stock>
+			<aux name="Average_Distance_Travelled_per_Train">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	24  + Improvement_in_Stations_and_Routes / 100					</eqn>
+			</aux>
+			<aux name="birth_fraction">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	14/1000					</eqn>
+			</aux>
+			<aux name="birth_rate">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	population*birth_fraction					</eqn>
+			</aux>
+			<aux name="Building_Energy">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Buildings*Energy_per_building					</eqn>
+			</aux>
+			<aux name="Buildings">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	population/People_per_Building					</eqn>
+			</aux>
+			<aux name="CO2">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.45*Hybrid_Energy					</eqn>
+			</aux>
+			<aux name="CO2_Conventional">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Conventional_Energy*1.02					</eqn>
+			</aux>
+			<aux name="CO2_Electric">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.2*Electric_Energy					</eqn>
+			</aux>
+			<aux name="CO2_produced">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	122*Total_Electricity					</eqn>
+			</aux>
+			<aux name="CO2_produced_per_Oil">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	113*Total_Energy_from_Oil					</eqn>
+			</aux>
+			<aux name="CO2_produced_per_Solar_Energy">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0*Total_Solar_Energy					</eqn>
+			</aux>
+			<aux name="CO2_produced_per_Wind_Energy">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0*Total_Wind_Energy					</eqn>
+			</aux>
+			<aux name="Coal">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Energy_from_Electricity/Energy_Per_Coal					</eqn>
+			</aux>
+			<aux name="Conventiona">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Conventional_Fraction*Number_of_people_who_drive_cars					</eqn>
+			</aux>
+			<aux name="conventional_elec">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Conventional_Energy_Rat					</eqn>
+			</aux>
+			<aux name="Conventional_Energy_Rat">
+				<units>Mj/miles</units>
+				<doc></doc>
+					<eqn>
+	Conventiona*Energy_per_Conventional*Distance_Traveled_per_Day					</eqn>
+			</aux>
+			<aux name="Cost_for_Electricity">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.144*Total_Electricity					</eqn>
+			</aux>
+			<aux name="Cost_for_Oil">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Total_Energy_from_Oil*0.216					</eqn>
+			</aux>
+			<aux name="Cost_for_Solar_Energy">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Total_Solar_Energy*0.98					</eqn>
+			</aux>
+			<aux name="Cost_for_Wind_Energy">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Total_Wind_Energy*0.108					</eqn>
+			</aux>
+			<aux name="death_fraction">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	8/1000					</eqn>
+			</aux>
+			<aux name="death_rate">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	population*death_fraction					</eqn>
+			</aux>
+			<aux name="Decrease_in_Quality_of_Service">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	IF_THEN_ELSE( MBTA_Profit &lt; 30, 50 + Deterioration_of_Stations_and_Routes +More_Time_Consuming_Routes, 0)					</eqn>
+			</aux>
+			<aux name="Deterioration_of_Stations_and_Routes">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	IF_THEN_ELSE( MBTA_Profit &lt; 30, 10 + "Safety:_Decrease_in_MBTA_Police_Detail",0)					</eqn>
+			</aux>
+			<aux name="elec_elec">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Electric_Energy_Rate					</eqn>
+			</aux>
+			<aux name="Electric">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Electric_Fraction*Number_of_people_who_drive_cars					</eqn>
+			</aux>
+			<aux name="Electric_Energy_Rate">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Electric*Energy_per_Electric*Distance_Traveled_per_Day					</eqn>
+			</aux>
+			<aux name="Energy_from_Electricity">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Building_Energy*fraction_of_Electricity					</eqn>
+			</aux>
+			<aux name="Energy_from_Oil">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Building_Energy*fraction_of_oil					</eqn>
+			</aux>
+			<aux name="Energy_from_Wind">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Building_Energy*fraction_of_Wind					</eqn>
+			</aux>
+			<aux name="Energy_Per_Coal">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	3.2 *10^7*1.6					</eqn>
+			</aux>
+			<aux name="Energy_per_Dairy">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	871 * 4					</eqn>
+			</aux>
+			<aux name="Energy_per_Day">
+				<units>J/day</units>
+				<doc></doc>
+					<eqn>
+	Energy_Per_Kg_of_Food*Food_Consumption_per_Day					</eqn>
+			</aux>
+			<aux name="Energy_per_gallons_of_oil">
+				<units></units>
+				<doc>value, and efficiency factor</doc>
+					<eqn>
+	1.35e+08 * 1.6					</eqn>
+			</aux>
+			<aux name="Energy_Per_Kg_of_Food">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	(Energy_per_Dairy * Fraction_Dairy ) + (Energy_per_Meat * Fraction_Meat) + (Energy_per_Vegetables * Fraction_Vegetables)					</eqn>
+			</aux>
+			<aux name="Energy_per_Meat">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	108824 * 4					</eqn>
+			</aux>
+			<aux name="Energy_per_Solar_Panel">
+				<units>W/area</units>
+				<doc></doc>
+					<eqn>
+	1000 * 86400					</eqn>
+			</aux>
+			<aux name="Energy_per_Turbine">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	10 * 1e+06 * 86400					</eqn>
+			</aux>
+			<aux name="Energy_per_Vegetables">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	871 * 4					</eqn>
+			</aux>
+			<aux name="Energy_used_by_Train">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Number_of_Trains*Energy_per_Km*Average_Distance_Travelled_per_Train					</eqn>
+			</aux>
+			<aux name="Food_Consumption_per_Day">
+				<units>kg/day</units>
+				<doc></doc>
+					<eqn>
+	Food_Per_Person*population					</eqn>
+			</aux>
+			<aux name="Gallons_of_Oil">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Energy_from_Oil/Energy_per_gallons_of_oil					</eqn>
+			</aux>
+			<aux name="Human_Energy_per_Dairy">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	436 * 4					</eqn>
+			</aux>
+			<aux name="Human_Energy_per_Day">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Food_Consumption_per_Day * ( (Fraction_Dairy * Human_Energy_per_Dairy ) + ( Fraction_Meat * Human_Energy_per_Meat) + ( Fraction_Vegetables * Human_Energy_Per_Vegetables) )					</eqn>
+			</aux>
+			<aux name="Human_Energy_per_Meat">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	2176 * 4					</eqn>
+			</aux>
+			<aux name="Human_Energy_Per_Vegetables">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	324 * 4					</eqn>
+			</aux>
+			<aux name="Hybrid">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Hybrid_Fraction*Number_of_people_who_drive_cars					</eqn>
+			</aux>
+			<aux name="hybrid_elec">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Energy_per_Hybrid					</eqn>
+			</aux>
+			<aux name="Hybrid_Energy_Rate">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Energy_per_Hybrid*Hybrid*Distance_Traveled_per_Day					</eqn>
+			</aux>
+			<aux name="Improvement_in_Stations_and_Routes">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	IF_THEN_ELSE( MBTA_Profit &gt; 40, 10 + "Safety:_Increase_in_MBTA_Police_Detail" + "Convenience:_Fewer_Time_Cosuming_Routes" + "Attractivness:_Increase_in_Cleanliness_of_Stations_and_Vehicles", 0)					</eqn>
+			</aux>
+			<aux name="Increase_in_Quality_of_Service">
+				<units></units>
+				<doc>For every $50 there's one unit increase in quality</doc>
+					<eqn>
+	IF_THEN_ELSE( MBTA_Profit &gt; 40, 100 + Improvement_in_Stations_and_Routes,0)					</eqn>
+			</aux>
+			<aux name="Initial_MBTA_Users">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	population*Fraction					</eqn>
+			</aux>
+			<aux name="MBTA_Profit">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Profit_that_the_MBTA_makes_per_Person * Number_of_People_who_use_the_MBTA_Subway					</eqn>
+			</aux>
+			<aux name="Number_of_Trains">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Number_of_People_who_use_the_MBTA_Subway/Number_of_People_per_Train					</eqn>
+			</aux>
+			<aux name="People_who_don't_like_the_MBTA">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Decrease_in_Quality_of_Service					</eqn>
+			</aux>
+			<aux name="People_who_like_the_MBTA">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Increase_in_Quality_of_Service					</eqn>
+			</aux>
+			<aux name="Solar_Energy">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	fraction_of_Solar*Building_Energy					</eqn>
+			</aux>
+			<aux name="Solar_Panel_Area">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Solar_Energy/Energy_per_Solar_Panel					</eqn>
+			</aux>
+			<aux name="Total_CO2">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	CO2+CO2_Conventional+CO2_Electric					</eqn>
+			</aux>
+			<aux name="Wind_Turbines">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	Energy_from_Wind/Energy_per_Turbine					</eqn>
+			</aux>
+			<aux name="Attractivness:_Increase_in_Cleanliness_of_Stations_and_Vehicles">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="Convenience:_Fewer_Time_Cosuming_Routes">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="Conventional_Fraction">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.97					</eqn>
+			</aux>
+			<aux name="Electric_Fraction">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.01					</eqn>
+			</aux>
+			<aux name="Energy_per_building">
+				<units></units>
+				<doc>joules/day</doc>
+					<eqn>
+	6.90411e+07					</eqn>
+			</aux>
+			<aux name="Energy_per_Conventional">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1.88e+06					</eqn>
+			</aux>
+			<aux name="Energy_per_Electric">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	930000					</eqn>
+			</aux>
+			<aux name="Energy_per_Hybrid">
+				<units>Mj/Mile</units>
+				<doc>MJ/mile</doc>
+					<eqn>
+	1.88e+06					</eqn>
+			</aux>
+			<aux name="Energy_per_Km">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1.04133e+08					</eqn>
+			</aux>
+			<aux name="Food_Per_Person">
+				<units>kg/(day*person)</units>
+				<doc>This is the average amount of food one person eats</doc>
+					<eqn>
+	1.16					</eqn>
+			</aux>
+			<aux name="Fraction">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.16					</eqn>
+			</aux>
+			<aux name="Fraction_Dairy">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.03					</eqn>
+			</aux>
+			<aux name="Fraction_Meat">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.28					</eqn>
+			</aux>
+			<aux name="fraction_of_Electricity">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.3					</eqn>
+			</aux>
+			<aux name="fraction_of_oil">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.6					</eqn>
+			</aux>
+			<aux name="fraction_of_Solar">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.05					</eqn>
+			</aux>
+			<aux name="fraction_of_Wind">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.05					</eqn>
+			</aux>
+			<aux name="Fraction_Vegetables">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.69					</eqn>
+			</aux>
+			<aux name="Hybrid_Fraction">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.29					</eqn>
+			</aux>
+			<aux name="More_Time_Consuming_Routes">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="Number_of_People_per_Train">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	300					</eqn>
+			</aux>
+			<aux name="People_per_Building">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	6					</eqn>
+			</aux>
+			<aux name="Profit_that_the_MBTA_makes_per_Person">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.5					</eqn>
+			</aux>
+			<aux name="Safety:_Decrease_in_MBTA_Police_Detail">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="Safety:_Increase_in_MBTA_Police_Detail">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

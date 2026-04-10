@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Second">
+		<start> 0</start>
+		<stop> 25</stop>
+		<dt> 0.125</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="E">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					1
+					</eqn>
+					<inflow>
+					dEdt
+					</inflow>
+			</stock>
+			<stock name="ES">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					dESdt
+					</inflow>
+			</stock>
+			<stock name="P">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					dPdt
+					</inflow>
+			</stock>
+			<stock name="S">
+				<units></units>
+				<doc></doc>
+					<eqn>
+					10
+					</eqn>
+					<inflow>
+					dSdt
+					</inflow>
+			</stock>
+			<aux name="dEdt">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	-k1*E*S+km1*ES+k2*ES					</eqn>
+			</aux>
+			<aux name="dESdt">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	k1*E*S-km1*ES-k2*ES					</eqn>
+			</aux>
+			<aux name="dPdt">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	k2*ES					</eqn>
+			</aux>
+			<aux name="dSdt">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	-k1*E*S+km1*ES					</eqn>
+			</aux>
+			<aux name="k1">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="k2">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.5					</eqn>
+			</aux>
+			<aux name="km1">
+				<units></units>
+				<doc></doc>
+					<eqn>
+	0.5					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

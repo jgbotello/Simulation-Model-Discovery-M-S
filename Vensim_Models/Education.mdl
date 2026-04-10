@@ -1,0 +1,223 @@
+{UTF-8}
+summer vacation=
+	4
+	~	 [0,12,1]
+	~		|
+
+Class Density=
+	sophmores/Classrooms
+	~	
+	~		|
+
+matriculation=
+	content mastered*PULSE TRAIN(summer vacation, lab time ,length of class ,FINAL TIME \
+		)
+	~	
+	~		|
+
+content mastered=
+	content per day/classes per day
+	~	
+	~		|
+
+content per day=
+	6000
+	~	 [0,12000,500]
+	~		|
+
+length of class=
+	24/classes per day
+	~	
+	~	dose interval is 24 hours divided by the number of administrations per day
+	|
+
+classes per day=
+	6
+	~	 [1,12,1]
+	~		|
+
+lab time=
+	0.25
+	~	
+	~		|
+
+graduation=
+	success rate*sophmores
+	~	
+	~		|
+
+Time Devoted to Classes=
+	4
+	~	 [1,24,1]
+	~		|
+
+freshmen= INTEG (
+	matriculation-promotion,
+		0)
+	~	
+	~		|
+
+learning rate=
+	0.25
+	~	
+	~		|
+
+success rate=
+	0.693/Time Devoted to Classes
+	~	
+	~	.693 is logn of 2.  This is used for connversion purposes.
+	|
+
+Minimal level=
+	7
+	~	 [0,20,1]
+	~		|
+
+sophmores= INTEG (
+	+promotion-graduation,
+		0)
+	~	
+	~		|
+
+Mastery level=
+	15
+	~	 [0,20,1]
+	~		|
+
+promotion=
+	learning rate*freshmen
+	~	
+	~		|
+
+Classrooms=
+	70
+	~	
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 72
+	~	Month
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Month
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Month [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 0.125
+	~	Month [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Model View
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|72,72,100,0
+10,1,sophmores,317,74,30,15,3,3,0,0,0,0,0,0
+10,2,freshmen,159,75,30,15,3,3,0,0,0,0,0,0
+12,3,48,50,74,10,8,0,3,0,0,-1,0,0,0
+1,4,6,2,4,0,0,22,0,0,0,-1--1--1,,1|(113,74)|
+1,5,6,3,100,0,0,22,0,0,0,-1--1--1,,1|(74,74)|
+11,6,48,93,74,5,6,34,3,0,0,1,0,0,0
+10,7,matriculation,93,87,35,8,40,131,0,0,-1,0,0,0
+1,8,10,1,4,0,0,22,0,0,0,-1--1--1,,1|(259,75)|
+1,9,10,2,100,0,0,22,0,0,0,-1--1--1,,1|(205,75)|
+11,10,204,227,75,5,6,34,3,0,0,1,0,0,0
+10,11,promotion,227,89,37,8,40,131,0,0,-1,0,0,0
+12,12,48,497,70,10,8,0,3,0,0,-1,0,0,0
+1,13,15,12,4,0,0,22,0,0,0,-1--1--1,,1|(450,76)|
+1,14,15,1,100,0,0,22,0,0,0,-1--1--1,,1|(375,76)|
+11,15,48,409,76,5,6,34,3,0,0,1,0,0,0
+10,16,graduation,409,90,39,8,40,131,0,0,-1,0,0,0
+10,17,learning rate,251,163,34,11,8,131,0,0,0,0,0,0
+10,18,Time Devoted to Classes,314,220,40,14,8,131,0,0,0,0,0,0
+10,19,success rate,413,145,32,8,8,131,0,0,0,0,0,0
+10,20,Classrooms,80,259,30,6,8,131,0,0,0,0,0,0
+1,21,17,11,1,0,0,0,0,64,0,-1--1--1,,1|(258,125)|
+1,22,2,11,1,0,0,0,0,64,0,-1--1--1,,1|(194,107)|
+1,23,1,16,1,0,0,0,0,64,0,-1--1--1,,1|(360,117)|
+1,24,19,16,1,0,0,0,0,64,0,-1--1--1,,1|(414,121)|
+1,25,18,19,1,0,0,0,0,64,0,-1--1--1,,1|(393,195)|
+10,26,lab time,32,119,26,9,8,131,0,0,0,0,0,0
+10,27,length of class,149,139,51,10,8,131,0,0,0,0,0,0
+1,28,26,7,0,0,0,0,0,64,0,-1--1--1,,1|(56,105)|
+1,29,27,7,1,0,0,0,0,64,0,-1--1--1,,1|(137,120)|
+10,30,content mastered,51,153,30,17,8,131,0,0,0,0,0,0
+1,31,30,7,1,0,0,0,0,64,0,-1--1--1,,1|(88,130)|
+10,32,FINAL TIME,71,14,61,5,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,33,32,7,1,0,0,0,0,64,0,-1--1--1,,1|(56,55)|
+10,34,content per day,85,231,44,8,8,131,0,0,0,0,0,0
+10,35,classes per day,158,196,38,5,8,131,0,0,0,0,0,0
+1,36,35,27,1,0,0,0,0,64,0,-1--1--1,,1|(136,143)|
+1,37,35,30,1,0,0,0,0,64,0,-1--1--1,,1|(56,177)|
+1,38,34,30,1,0,0,0,0,64,0,-1--1--1,,1|(7,202)|
+10,39,Mastery level,376,412,50,13,8,131,0,0,0,0,0,0
+10,40,Minimal level,377,377,37,8,8,131,0,0,0,0,0,0
+12,41,17000392,612,196,113,113,3,44,0,0,1,0,0,0
+Blood_Levels
+10,42,sophmores,81,329,45,8,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,43,Class Density,172,289,41,6,8,3,0,0,0,0,0,0
+1,44,20,43,0,0,0,0,0,64,0,-1--1--1,,1|(118,271)|
+1,45,42,43,0,0,0,0,0,64,0,-1--1--1,,1|(122,310)|
+10,46,Time,291,325,29,9,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,47,summer vacation,155,26,44,10,8,131,0,0,0,0,0,0
+1,48,47,7,0,0,0,0,0,64,0,-1--1--1,,1|(128,52)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Control/Output View
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|72,72,100,0
+12,1,0,362,143,113,113,3,44,0,0,1,0,0,0
+Blood_Levels
+12,2,0,87,100,60,15,3,92,0,0,0,0,0,0
+classes per day,0,12,1
+12,3,0,84,189,60,15,3,92,0,0,0,0,0,0
+content per day,0,12000,50
+12,4,0,86,264,60,15,3,124,0,0,0,0,0,0
+Time Devoted to Classes,0,24,0.5
+///---\\\
+:GRAPH Blood_Levels
+:TITLE Enrollment Levels
+:X-AXIS Time
+:SCALE
+:VAR Minimal Level
+:Y-MIN 0
+:Y-MAX 20
+:LINE-WIDTH 2
+:VAR Mastery Level
+:Y-MIN 0
+:Y-MAX 20
+:LINE-WIDTH 2
+:VAR Class Density
+:Y-MIN 0
+:Y-MAX 20
+:LINE-WIDTH 2
+
+:GRAPH function
+:TITLE function
+:SCALE
+:VAR something
+:L<%^E!@
+1:Current.vdf
+9:Current
+23:0
+15:0,0,0,0,0,0
+19:100,0
+27:2,
+34:0,
+4:Time
+5:Mastery level
+24:0
+25:72
+26:72

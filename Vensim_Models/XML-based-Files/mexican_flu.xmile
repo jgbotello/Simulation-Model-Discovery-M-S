@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Month">
+		<start> 0</start>
+		<stop> 48</stop>
+		<dt> 0.25</dt>
+	</sim_specs>
+	<model>
+		<variables>
+			<stock name="immune_population_region_1">
+				<units>persons</units>
+				<doc></doc>
+					<eqn>
+					initial_value_immune_population_region_1
+					</eqn>
+					<inflow>
+					susceptible to immune population flow region 1
+					</inflow>
+			</stock>
+			<stock name="immune_population_region_2">
+				<units>persons</units>
+				<doc></doc>
+					<eqn>
+					initial_value_immune_population_region_2
+					</eqn>
+					<inflow>
+					susceptible to immune population flow region 2
+					</inflow>
+			</stock>
+			<stock name="infected_population_region_1">
+				<units>persons</units>
+				<doc></doc>
+					<eqn>
+					initial_value_infected_population_region_1
+					</eqn>
+					<inflow>
+					infections region 1
+					</inflow>
+					<outflow>
+					recoveries region 1
+					</outflow>
+			</stock>
+			<stock name="infected_population_region_2">
+				<units>persons</units>
+				<doc></doc>
+					<eqn>
+					initial_value_infected_population_region_2
+					</eqn>
+					<inflow>
+					infections region 2
+					</inflow>
+					<outflow>
+					recoveries region 2
+					</outflow>
+			</stock>
+			<stock name="recovered_population_region_1">
+				<units>persons</units>
+				<doc></doc>
+					<eqn>
+					initial_value_recovered_population_region_1
+					</eqn>
+					<inflow>
+					recoveries region 1
+					</inflow>
+			</stock>
+			<stock name="recovered_population_region_2">
+				<units>persons</units>
+				<doc></doc>
+					<eqn>
+					0
+					</eqn>
+					<inflow>
+					recoveries region 2
+					</inflow>
+			</stock>
+			<stock name="susceptible_population_region_1">
+				<units>persons</units>
+				<doc></doc>
+					<eqn>
+					initial_value_susceptible_population_region_1
+					</eqn>
+					<outflow>
+					infections region 1
+					</outflow>
+					<outflow>
+					susceptible to immune population flow region 1
+					</outflow>
+			</stock>
+			<stock name="susceptible_population_region_2">
+				<units>persons</units>
+				<doc></doc>
+					<eqn>
+					initial_value_susceptible_population_region_2
+					</eqn>
+					<outflow>
+					infections region 2
+					</outflow>
+					<outflow>
+					susceptible to immune population flow region 2
+					</outflow>
+			</stock>
+			<aux name="infection_fraction_region_1">
+				<units>percent</units>
+				<doc></doc>
+					<eqn>
+	infected_population_region_1/total_population_region_1*100					</eqn>
+			</aux>
+			<aux name="infection_fraction_region_2">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn>
+	infected_population_region_2/total_population_region_2*100					</eqn>
+			</aux>
+			<aux name="infections_region_1">
+				<units>persons/Month</units>
+				<doc></doc>
+					<eqn>
+	susceptible_population_region_1*contact_rate_region_1*infection_rate_region_1*infection_fraction_region_1/100 + susceptible_population_region_1*interregional_contact_rate*infection_rate_region_1*infection_fraction_region_2/100					</eqn>
+			</aux>
+			<aux name="infections_region_2">
+				<units>persons/Month</units>
+				<doc></doc>
+					<eqn>
+	susceptible_population_region_2*contact_rate_region_2*infection_rate_region_2*infection_fraction_region_2 /100 + susceptible_population_region_2*interregional_contact_rate*infection_rate_region_2*infection_fraction_region_1/100					</eqn>
+			</aux>
+			<aux name="normal_immune_population_fraction_region_1">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn> WITH LOOKUP (
+	Time,
+		([(0,0)-(60,1)],(0,0.3),(6,0.7),(12,0.3),(18,0.7),(24,0.3),(30,0.7),(36,0.3),(42,0.7),(48,0.3) ))					</eqn>
+			</aux>
+			<aux name="normal_immune_population_fraction_region_2">
+				<units>Dmnl</units>
+				<doc></doc>
+					<eqn> WITH LOOKUP (
+	Time,
+		([(0,0)-(60,1)],(0,0.3),(6,0.1),(12,0.3),(18,0.1),(24,0.3),(30,0.1),(36,0.3),(42,0.1),(48,0.3) ))					</eqn>
+			</aux>
+			<aux name="normal_immune_population_region_1">
+				<units>persons</units>
+				<doc></doc>
+					<eqn>
+	normal_immune_population_fraction_region_1*total_population_region_1					</eqn>
+			</aux>
+			<aux name="normal_immune_population_region_2">
+				<units>persons</units>
+				<doc></doc>
+					<eqn>
+	normal_immune_population_fraction_region_2*total_population_region_2					</eqn>
+			</aux>
+			<aux name="recoveries_region_1">
+				<units>persons/Month</units>
+				<doc></doc>
+					<eqn>
+	infected_population_region_1/recovering_time					</eqn>
+			</aux>
+			<aux name="recoveries_region_2">
+				<units>persons/Month</units>
+				<doc></doc>
+					<eqn>
+	infected_population_region_2/recovering_time					</eqn>
+			</aux>
+			<aux name="susceptible_to_immune_population_flow_region_1">
+				<units>persons/Month</units>
+				<doc></doc>
+					<eqn>
+	IF_THEN_ELSE((normal_immune_population_region_1-immune_population_region_1)/susceptible_to_immune_population_delay_time_region_1>0, MIN((normal_immune_population_region_1-immune_population_region_1)/susceptible_to_immune_population_delay_time_region_1,susceptible_population_region_1/susceptible_to_immune_population_delay_time_region_1), MIN((normal_immune_population_region_1-immune_population_region_1)/susceptible_to_immune_population_delay_time_region_1,immune_population_region_1/susceptible_to_immune_population_delay_time_region_1))					</eqn>
+			</aux>
+			<aux name="susceptible_to_immune_population_flow_region_2">
+				<units>persons/Month</units>
+				<doc></doc>
+					<eqn>
+	IF_THEN_ELSE((normal_immune_population_region_2-immune_population_region_2)/susceptible_to_immune_population_delay_time_region_2
+	>0, MIN((normal_immune_population_region_2-immune_population_region_2)/susceptible_to_immune_population_delay_time_region_2,susceptible_population_region_2/susceptible_to_immune_population_delay_time_region_2
+	), MIN((normal_immune_population_region_2-immune_population_region_2)/susceptible_to_immune_population_delay_time_region_2,immune_population_region_2/susceptible_to_immune_population_delay_time_region_2
+	))					</eqn>
+			</aux>
+			<aux name="total_population_region_1">
+				<units>persons</units>
+				<doc></doc>
+					<eqn>
+	infected_population_region_1+recovered_population_region_1+susceptible_population_region_1+immune_population_region_1					</eqn>
+			</aux>
+			<aux name="total_population_region_2">
+				<units>persons</units>
+				<doc></doc>
+					<eqn>
+	infected_population_region_2+recovered_population_region_2+susceptible_population_region_2+immune_population_region_2					</eqn>
+			</aux>
+			<aux name="contact_rate_region_1">
+				<units>contacts/(person*Month)</units>
+				<doc></doc>
+					<eqn>
+	50					</eqn>
+			</aux>
+			<aux name="contact_rate_region_2">
+				<units>contacts/(person*Month)</units>
+				<doc></doc>
+					<eqn>
+	100					</eqn>
+			</aux>
+			<aux name="infection_rate_region_1">
+				<units>persons/contacts</units>
+				<doc></doc>
+					<eqn>
+	0.1					</eqn>
+			</aux>
+			<aux name="infection_rate_region_2">
+				<units>persons/contacts</units>
+				<doc></doc>
+					<eqn>
+	0.15					</eqn>
+			</aux>
+			<aux name="initial_value_immune_population_region_1">
+				<units>persons</units>
+				<doc></doc>
+					<eqn>
+	2.7e+08					</eqn>
+			</aux>
+			<aux name="initial_value_immune_population_region_2">
+				<units>persons</units>
+				<doc></doc>
+					<eqn>
+	1e+09					</eqn>
+			</aux>
+			<aux name="initial_value_infected_population_region_1">
+				<units>persons</units>
+				<doc></doc>
+					<eqn>
+	10					</eqn>
+			</aux>
+			<aux name="initial_value_infected_population_region_2">
+				<units>persons</units>
+				<doc></doc>
+					<eqn>
+	10					</eqn>
+			</aux>
+			<aux name="initial_value_recovered_population_region_1">
+				<units>persons</units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="initial_value_recovered_population_region_2">
+				<units>persons</units>
+				<doc></doc>
+					<eqn>
+	0					</eqn>
+			</aux>
+			<aux name="initial_value_susceptible_population_region_1">
+				<units>persons</units>
+				<doc></doc>
+					<eqn>
+	3.3e+08					</eqn>
+			</aux>
+			<aux name="initial_value_susceptible_population_region_2">
+				<units>persons</units>
+				<doc></doc>
+					<eqn>
+	2e+09					</eqn>
+			</aux>
+			<aux name="interregional_contact_rate">
+				<units>contacts/(person*Month)</units>
+				<doc></doc>
+					<eqn>
+	0.1					</eqn>
+			</aux>
+			<aux name="recovering_time">
+				<units>Month</units>
+				<doc></doc>
+					<eqn>
+	0.5					</eqn>
+			</aux>
+			<aux name="susceptible_to_immune_population_delay_time_region_1">
+				<units>Month</units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+			<aux name="susceptible_to_immune_population_delay_time_region_2">
+				<units>Month</units>
+				<doc></doc>
+					<eqn>
+	1					</eqn>
+			</aux>
+		</variables>
+	</model>
+</xmile>

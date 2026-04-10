@@ -1,0 +1,805 @@
+{UTF-8}
+People Returning=
+	IF THEN ELSE(People Receiving Items >0, HH Size*House Refurbishment, 0)
+	~	people/Day
+	~	This is based on the rate at which houses are drying out
+	|
+
+Event Displacing People=
+	IF THEN ELSE(Time > 10, Flooding*HH Size, 0)
+	~	people/Day
+	~		|
+
+Event Generator= INTEG (
+	-Event,
+		1)
+	~	Dmnl
+	~	This is whether an event occurs are not
+	|
+
+Counter Rate=
+	IF THEN ELSE(People Item Supply>0, 1, 0)
+	~	Dmnl
+	~		|
+
+Intervention=
+	IF THEN ELSE((People Receiving Items - People Needing Relief Items) > 200 , 1 , -1)
+	~	
+	~		|
+
+Funding Rate=
+	Donations * Event Occured
+	~	
+	~		|
+
+Counter= INTEG (
+	Counter Rate,
+		0)
+	~	Dmnl
+	~		|
+
+House Refurbishment=
+	DELAY FIXED( Flooded Households/Time to Dry, Time to Dry, 0)
+	~	house/Day
+	~	This is the rate at which houses recover from the flooding
+	|
+
+Flooding=
+	IF THEN ELSE(Event > 0.5, Households at Risk * Event * 0.8, 0)
+	~	house/Day
+	~	If an event occurs it causes this flow to be start.
+	|
+
+Credibility Rate=
+	IF THEN ELSE(Decision to act Counter > 0, Intervention * Event Occured , 0)
+	~	credibility
+	~	Organizational feedback would impact credibility of early warning systems, \
+		which would ultimately affect overally credibility.
+	|
+
+Decision Rate=
+	Decision to Act
+	~	
+	~		|
+
+Flooded Households= INTEG (
+	Flooding-House Refurbishment,
+		0)
+	~	house
+	~	The number of physical houses that are damaged
+	|
+
+Decision to act Counter= INTEG (
+	Decision Rate,
+		0)
+	~	
+	~		|
+
+Time to Dry=
+	165
+	~	Day
+	~	An estimated time for house to dry up and functions ordinarily.
+	|
+
+Early Warning Prepared Items=
+	IF THEN ELSE(Relief Items Available- (People Receiving Items/People per Item) > 0 :AND:\
+		 Counter < 1, Relief Items Available
+	/Time early items, 0)
+	~	tent/Day
+	~	At time zero, 'Early Warning Tents' adds X number of tents/day into the \
+		rate. It is calculated by subtracting 'early Warning Tents' from 'People \
+		in Tents'
+	|
+
+Event=
+	IF THEN ELSE(Time = 60, 1, 0)
+	~	
+	~		|
+
+Event Occured= INTEG (
+	Event,
+		0)
+	~	
+	~		|
+
+Households at Risk= INTEG (
+	-Flooding-House Refurbishment,
+		People at Risk/HH Size)
+	~	house
+	~	The number of houses being considered. Both the physical (households) and \
+		people are being considered.
+	|
+
+Stockpile Supply=
+	IF THEN ELSE( HQ Budget > 50000, HQ Budget*0.01 * Event Occured, 0)
+	~	tent/Day
+	~	If RCHQ Budget is greater than 50000, then 1% of that budget will be spent \
+		on stockpiling tents in storage. Otherwise, it's going to be naught.
+	|
+
+Usual Cost=
+	5
+	~	
+	~		|
+
+Illness=
+	People Needing Relief Items * 0.01
+	~	
+	~		|
+
+Continental Relief Item Rate=
+	Continental Relief Item Storage/Reg Transp Delay
+	~	tent/Day
+	~	The flow rate of tents from continental warehouse to regional warehouse. \
+		Delay depends on transportation mode
+	|
+
+Sick People= INTEG (
+	Illness,
+		0
+		)
+	~	
+	~		|
+
+Urgent Cost=
+	15
+	~	
+	~		|
+
+Forecast Magnitude(
+	[(0,0)-(365,1)],(0,0.8),(10,0.8),(20,0.8),(60,0.8),(61,0),(365,0))
+	~	Dmnl
+	~	A forecast variation for weather - this variable is created randomly.
+	|
+
+Interpretation=
+	Forecast Magnitude ( Time)
+	~	Dmnl
+	~	An interpretation process for forecasting and its impact on the region.
+	|
+
+Relief Item Acquisition=
+	(Early Warning Relief Items * Usual Cost ) + ( Stockpile Supply * Urgent Cost)
+	~	$
+	~	Cost of providing Tents. If relief items are purchased in advance, it \
+		costs less than if they need to be purchased after an emergency
+	|
+
+Magnitude Comparison=
+	IF THEN ELSE( Interpretation > Event Magnitude Threshold, 1, 0)
+	~	Dmnl
+	~		|
+
+People Needing Relief Items= INTEG (
+	Event Displacing People-Illness-People Item Supply,
+		0)
+	~	people
+	~	This is the number of people who need tent housing
+	|
+
+Change in probability due to unusual conditions=
+	RANDOM NORMAL( 0.8, 1 , 0.9, 0.1, 0.6) * 10 / Forecast Lead Time
+	~	Dmnl
+	~	A situation that would occur unexpectedly.
+	|
+
+Forecasted Probability=
+	Change in probability due to unusual conditions + Probability on a normal day
+	~	Dmnl
+	~	Based on observations, forecasted probability can be induced. This is the \
+		probability for  the event (or any natural disaster).
+	|
+
+Item Provision Rate=
+	IF THEN ELSE(People Needing Relief Items>10 :AND: Local Relief Items>0, Labor Capacity\
+		 / Time per Item Provision,0)
+	~	tent/Day
+	~	A inflow rate of mounted tents. That is, How many tents are being mounted \
+		based on how many people require tents, time spent on mounting tent (time \
+		per tent), and labor capacity.
+	|
+
+People Item Supply=
+	IF THEN ELSE( People Needing Relief Items > 0, (Early Warning Prepared Items + Item Provision Rate\
+		)*People per Item, 0)
+	~	people/Day
+	~	The rate at which tents can be provided per unit time. This is influence \
+		by 'early warning tents' or 'normal supply rate'
+	|
+
+Forecast Warning=
+	IF THEN ELSE(Magnitude Comparison = 1 :AND: Probability Comparison = 1, 1, 0)
+	~	
+	~		|
+
+HQ Budget= INTEG (
+	Funding Rate-Operating Expense-Relief Item Acquisition,
+		300000)
+	~	$
+	~	A large sum of money allocated for providing tent stockpiles.
+	|
+
+Decision to Act=
+	IF THEN ELSE( (Forecast Warning = 1 :AND: (People at Risk * Expected Cost Per Person\
+		/HQ Budget) < 1), 1,  0)
+	~	Dmnl
+	~	From estimated observations, 'decision to act' will kick in if forecasted \
+		magnitude and probabilities are indicating imminent disaster. This would \
+		also be influenced by credibility of organizations.
+	|
+
+Donations=
+	50*Credibility In Early Warning System
+	~	
+	~		|
+
+Expected Cost Per Person=
+	0
+	~	$ [0,20000]
+	~	depending on when the action occurs, if pre-disaster and if post-disaster
+	|
+
+Early Warning Relief Items=
+	IF THEN ELSE( Time <60 :AND: Decision to Act = 1, Item Provision, 0)
+	~	tent/Day
+	~	A rate at which tents are being mounted based on early warning system.
+	|
+
+Maintenance Cost=
+	(10*Continental Relief Item Storage+9*Local Relief Items+8*Regional Relief Item Storage\
+		+5*External Labor+2.5*Local Labor) * 0.001
+	~	
+	~		|
+
+Operating Expense=
+	Maintenance Cost
+	~	
+	~		|
+
+Labor Capacity=
+	External Labor +Local Labor
+	~	people
+	~	A number of people who will be employed in mounting tents.
+	|
+
+Local Labor=
+	10
+	~	people
+	~	Local people who will mount tents.
+	|
+
+Relief Items Available= INTEG (
+	Early Warning Relief Items+Item Provision Rate,
+		1)
+	~	tent
+	~	The number of tents that can be prepared in advance
+	|
+
+Countdown to Event=
+	IF THEN ELSE(Time < 49, 1, 0)
+	~	Day/Day
+	~	This is the rate at which the stock of datas before the event occurs
+	|
+
+Time early items=
+	1
+	~	Day [1,1]
+	~	Nominal unit of time to ensure this makes sense. X number of people in \
+		tents can be added to the rate, when the are set up in advance
+	|
+
+People per Item=
+	5
+	~	people/tent
+	~	The number of people that can be housed per tent
+	|
+
+Item Provision=
+	15
+	~	tent
+	~	A number of tents that will be mounted based on early warning. If a \
+		warning issued, then for one warning, 10 tents will be mounted.
+	|
+
+People Receiving Items= INTEG (
+	People Item Supply-People Returning,
+		0)
+	~	people
+	~	The number of people housed in tents
+	|
+
+HH Size=
+	5
+	~	people/house
+	~	A number of household's size.
+	|
+
+External Labor=
+	5
+	~	people
+	~	People from outside of the site who's going to mount tents.
+	|
+
+People at Risk= INTEG (
+	People Returning-Event Displacing People,
+		10000)
+	~	people
+	~	The number of people that area at risk. This is the product of the number \
+		of houses times the average household size
+	|
+
+Event Magnitude Threshold=
+	0.7
+	~	Dmnl [0,1]
+	~	A threshold for comparing a current forecast magnitude. This variable (or \
+		threshold) is to judge whether it is worth trigger 'decision to act.'
+	|
+
+Probability Comparison=
+	IF THEN ELSE(Forecasted Probability > Acceptable Prob Threshold, 1, 0)
+	~	Dmnl
+	~	Based on two probabilities, a comparison between acceptable threshold and \
+		forecasted probability can hint whether we should act not or later (or do \
+		nothing).
+	|
+
+Acceptable Prob Threshold=
+	0.5
+	~	Dmnl [0,1,0.1]
+	~	Something that established based on experienced people's point of views \
+		(or their expertise.)
+	|
+
+Credibility In Early Warning System= INTEG (
+	Credibility Rate,
+		0)
+	~	credibility
+	~	A credibility of early warning measured by the number of donating \
+		countries (or donors).
+	|
+
+Forecast Lead Time= INTEG (
+	-Countdown to Event,
+		60)
+	~	Day
+	~	This needs to be revised to be a step function with three values
+	|
+
+Continental Relief Item Storage= INTEG (
+	Stockpile Supply-Continental Relief Item Rate,
+		0)
+	~	tent
+	~	The stock of emergency tents stored in a warehouse. This is typically \
+		Dubai, for the region of Africa being considered
+	|
+
+Local Relief Item Rate=
+	Regional Relief Item Storage/Local Transp Delay
+	~	tent/Day
+	~	The flow rate of tents from regional tent storage to locat tents (or \
+		sites). Delay depends on transportation mode
+	|
+
+Reg Transp Delay=
+	21
+	~	Day
+	~	A time that takes tents to mover from continental tent storage to regional \
+		tent storage. Assumed 21 days.
+	|
+
+Regional Relief Item Storage= INTEG (
+	Continental Relief Item Rate-Local Relief Item Rate,
+		0)
+	~	tent
+	~	The number of tents stored in a regional warehouse
+	|
+
+Local Relief Items= INTEG (
+	Local Relief Item Rate-Item Provision Rate,
+		0)
+	~	tent
+	~	The number of tents locally available for workers to mount.
+	|
+
+Local Transp Delay=
+	7
+	~	Day
+	~	A period for moving tents from regional tent storage to local sites. \
+		Assumed 7 days.
+	|
+
+Time per Item Provision=
+	1.5
+	~	Day/tent [0,2,0.1]
+	~		|
+
+Probability on a normal day=
+	0.05
+	~	Dmnl [?,?,0.05]
+	~	A regular estimated probability (or perhaps, seasonality?)
+	|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 365
+	~	Day
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Day
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 1
+	~	Day [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 1
+	~	Day [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|11||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,50,0
+10,1,Interpretation,22,1262,51,20,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Labor Capacity,1926,801,59,20,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+11,3,1084,1886,666,7,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,4,Item Provision Rate,1886,686,69,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,5,Time per Item Provision,1804,759,63,24,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,6,Credibility In Early Warning System,924,406,52,24,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,7,48,657,401,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,8,10,6,4,0,0,22,0,0,0,-1--1--1,,1|(831,401)|
+1,9,10,7,100,0,0,22,0,0,0,-1--1--1,,1|(722,401)|
+11,10,48,784,401,6,8,34,3,0,0,3,0,0,0,0,0,0,0,0,0
+10,11,Credibility Rate,784,380,88,13,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,12,Decision to Act,818,1184,51,23,8,131,0,10,0,0,0,0,0-0-0,0-0-0,|16||255-0-0,0,0,0,0,0,0
+10,13,Continental Relief Item Storage,1266,659,59,27,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,14,Regional Relief Item Storage,1523,659,55,29,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,15,Local Relief Items,1766,665,48,23,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,16,3,15,100,0,0,22,0,0,0,-1--1--1,,1|(1846,666)|
+1,17,19,14,4,0,0,22,0,0,0,-1--1--1,,1|(1436,659)|
+1,18,19,13,100,0,0,22,0,0,0,-1--1--1,,1|(1358,659)|
+11,19,1068,1398,659,7,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,20,Continental Relief Item Rate,1398,694,61,27,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,21,23,15,4,0,0,22,0,0,0,-1--1--1,,1|(1685,662)|
+1,22,23,14,100,0,0,22,0,0,0,-1--1--1,,1|(1608,662)|
+11,23,780,1645,662,7,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,24,Local Relief Item Rate,1645,693,44,23,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,25,5,4,1,0,45,0,2,64,0,-1--1--1,|||0-0-0,1|(1826,720)|
+10,26,Reg Transp Delay,1347,764,59,15,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,27,26,20,1,0,45,0,2,64,0,-1--1--1,|||0-0-0,1|(1390,754)|
+1,28,2,4,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(1919,746)|
+10,29,Probability on a normal day,526,1227,59,27,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,30,Acceptable Prob Threshold,398,1051,63,25,8,131,0,2,0,0,0,0,0-0-0,0-0-0,|||255-0-0,0,0,0,0,0,0
+10,31,HQ Budget,999,853,55,23,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,32,Forecast Magnitude,-31,1367,73,20,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,33,Change in probability due to unusual conditions,304,1217,79,17,8,131,0,2,0,0,0,0,0-0-0,0-0-0,|||255-0-0,0,0,0,0,0,0
+12,34,48,1058,662,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,35,37,13,4,0,0,22,0,0,0,-1--1--1,,1|(1175,662)|
+1,36,37,34,100,0,0,22,0,0,0,-1--1--1,,1|(1099,662)|
+11,37,48,1137,662,7,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,38,Stockpile Supply,1137,687,45,19,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,39,31,38,1,0,43,0,2,192,0,-1--1--1,|||0-0-0,1|(1038,721)|
+10,40,Forecasted Probability,376,1122,75,19,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,41,33,40,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(337,1162)|
+1,42,29,40,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(461,1172)|
+12,43,0,966,212,19,19,4,135,0,3,-1,0,0,0,0-128-0,0-0-0,|||0-128-0,0,0,0,0,0,0
+R
+12,44,0,1227,1014,20,20,4,7,0,3,-1,0,0,0,255-0-0,0-0-0,|||255-0-0,0,0,0,0,0,0
+B
+12,45,0,1007,1135,51,11,8,7,0,3,-1,0,0,0,255-0-0,0-0-0,|||255-0-0,0,0,0,0,0,0
+Effect of Action
+12,46,0,949,261,30,1,8,135,0,3,-1,0,0,0,0-128-0,0-0-0,|||0-128-0,0,0,0,0,0,0
+Gaining Trust
+10,47,Local Transp Delay,1597,770,68,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,48,47,24,1,0,45,0,2,64,0,-1--1--1,|||0-0-0,1|(1627,744)|
+1,49,14,23,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(1585,606)|
+10,50,Forecast Lead Time,216,1336,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,51,48,426,1344,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,52,54,51,4,0,0,22,0,0,0,-1--1--1,,1|(378,1344)|
+1,53,54,50,100,0,0,22,0,0,0,-1--1--1,,1|(292,1344)|
+11,54,48,334,1344,6,8,34,3,0,0,3,0,0,0,0,0,0,0,0,0
+10,55,Countdown to Event,334,1320,43,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,56,Event Magnitude Threshold,149,1168,65,27,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,57,Magnitude Comparison,25,1087,83,19,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,58,1,57,1,0,0,0,0,64,0,-1--1--1,,1|(10,1200)|
+1,59,56,57,1,0,0,0,0,64,0,-1--1--1,,1|(82,1110)|
+10,60,Probability Comparison,216,1044,78,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,61,40,60,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(249,1043)|
+1,62,30,60,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(346,1046)|
+11,63,1132,1263,340,7,8,34,3,0,0,3,0,0,0,0,0,0,0,0,0
+10,64,Event Displacing People,1263,320,89,12,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,65,People at Risk,1142,492,55,19,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,66,63,65,100,0,0,22,0,0,0,-1--1--1,,1|(1142,340)|
+1,67,65,12,1,0,43,15,2,64,0,-1--1--1,|||0-0-0,1|(749,652)|
+1,68,69,65,4,0,0,22,0,0,0,-1--1--1,,1|(1487,493)|
+11,69,684,1786,493,8,7,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,70,People Returning,1861,493,67,19,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,71,HH Size,1127,236,37,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,72,71,64,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(1168,275)|
+10,73,HH Size,1967,460,37,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,74,73,70,1,0,0,0,0,64,0,-1--1--1,,1|(1901,461)|
+10,75,External Labor,1670,890,52,19,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,76,75,2,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(1785,866)|
+1,77,15,3,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(1818,626)|
+10,78,People Needing Relief Items,1438,338,49,25,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,79,People Receiving Items,1782,341,49,23,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,80,82,79,4,0,0,22,0,0,0,-1--1--1,,1|(1679,338)|
+1,81,82,78,100,0,0,22,0,0,0,-1--1--1,,1|(1549,338)|
+11,82,332,1618,338,7,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,83,People Item Supply,1618,364,75,17,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,84,78,83,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(1530,442)|
+10,85,Early Warning Prepared Items,1887,228,59,23,8,131,0,16,0,0,0,0,0-0-0,0-0-0,||B|0-0-0,0,0,0,0,0,0
+1,86,85,82,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(1697,263)|
+1,87,79,85,1,0,45,0,2,64,0,-1--1--1,|||0-0-0,1|(1852,287)|
+10,88,Time early items,1818,102,59,19,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,89,88,85,1,0,45,0,2,64,0,-1--1--1,|||0-0-0,1|(1834,142)|
+10,90,People per Item,1748,157,55,15,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,91,90,82,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(1613,240)|
+1,92,90,85,1,0,43,0,3,64,0,0-0-255,|||0-0-0,1|(1817,179)|
+12,93,0,1887,358,20,20,5,7,0,0,-1,0,0,0,0,0,0,0,0,0
+B
+12,94,0,1535,389,20,20,5,7,0,0,-1,0,0,0,0,0,0,0,0,0
+B
+10,95,Relief Items Available,2025,666,55,28,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,96,95,85,1,0,43,0,2,192,0,-1--1--1,|||0-0-0,1|(2062,442)|
+12,97,48,2022,886,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,98,100,95,4,0,0,22,0,0,0,-1--1--1,,1|(2022,746)|
+1,99,100,97,100,0,0,22,0,0,0,-1--1--1,,1|(2022,845)|
+11,100,48,2022,806,8,7,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,101,Early Warning Relief Items,2118,806,88,19,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,102,Time,2165,895,27,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,103,102,101,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(2150,851)|
+10,104,Time,1298,223,27,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,105,3,95,4,0,0,22,0,0,0,-1--1--1,,1|(1931,666)|
+1,106,69,79,100,0,0,22,0,0,0,-1--1--1,,1|(1786,425)|
+1,107,13,19,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(1341,598)|
+1,108,63,78,4,0,0,22,0,0,0,-1--1--1,,1|(1329,340)|
+1,109,104,64,1,0,43,0,3,192,0,128-128-128,|||0-0-0,1|(1320,262)|
+10,110,Item Provision,2164,733,56,19,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,111,110,101,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(2115,752)|
+10,112,Time,110,1382,27,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,113,112,55,1,0,0,0,3,64,0,128-128-128,|||0-0-0,1|(195,1395)|
+10,114,People Needing Relief Items,1973,585,60,23,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,115,Local Labor,1686,966,51,15,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,116,115,2,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(1839,910)|
+12,117,48,773,851,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,118,120,31,4,0,0,22,0,0,0,-1--1--1,,1|(904,851)|
+1,119,120,117,100,0,0,22,0,0,0,-1--1--1,,1|(817,851)|
+11,120,48,858,851,7,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,121,Funding Rate,858,875,60,16,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,122,Maintenance Cost,1389,863,61,20,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,123,13,122,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(1274,794)|
+1,124,14,122,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(1459,783)|
+1,125,15,122,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(1638,841)|
+1,126,75,122,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(1522,915)|
+1,127,115,122,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(1517,973)|
+1,128,122,137,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(1301,1085)|
+10,129,Donations,860,661,35,24,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,130,129,120,1,0,43,14,3,64,0,0-128-0,|||0-0-0,1|(870,826)|
+10,131,Expected Cost Per Person,759,1365,71,25,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,132,131,12,1,0,45,15,2,64,0,-1--1--1,|||0-0-0,1|(769,1252)|
+12,133,48,1002,1002,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,134,136,133,4,0,0,22,0,0,0,-1--1--1,,1|(1002,961)|
+1,135,136,31,100,0,0,22,0,0,0,-1--1--1,,1|(1002,895)|
+11,136,48,1002,922,8,7,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,137,Operating Expense,1077,922,67,19,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,138,31,12,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(824,1023)|
+10,139,Intervention,989,135,71,27,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,140,6,129,1,0,43,14,3,64,0,0-128-0,|||0-0-0,1|(826,563)|
+10,141,Forecast Warning,335,943,67,19,8,131,0,16,0,0,0,0,0-0-0,0-0-0,||B|0-0-0,0,0,0,0,0,0
+1,142,57,141,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(105,937)|
+1,143,60,141,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(275,1009)|
+1,144,141,12,1,0,43,15,2,64,0,-1--1--1,|||0-0-0,1|(561,1083)|
+10,145,Early Warning Relief Items,1194,767,63,24,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+12,146,48,1241,850,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,147,149,146,4,0,0,22,0,0,0,-1--1--1,,1|(1190,850)|
+1,148,149,31,100,0,0,22,0,0,0,-1--1--1,,1|(1095,850)|
+11,149,48,1143,850,7,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,150,Relief Item Acquisition,1143,878,56,20,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,151,38,149,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(1106,757)|
+1,152,145,149,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(1186,801)|
+12,153,0,1069,758,20,20,4,7,0,3,-1,0,0,0,255-0-0,0-0-0,|||255-0-0,0,0,0,0,0,0
+B
+1,154,3,83,1,0,0,0,0,64,0,-1--1--1,,1|(1834,528)|
+1,155,114,3,1,0,0,0,0,64,0,-1--1--1,,1|(1907,630)|
+1,156,50,33,1,0,0,0,0,64,0,-1--1--1,,1|(299,1221)|
+10,157,Usual Cost,1151,966,36,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,158,Urgent Cost,1241,965,39,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,159,157,150,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(1163,906)|
+1,160,158,150,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(1237,906)|
+1,161,32,1,0,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(0,0)|
+1,162,112,1,1,0,43,0,3,64,0,128-128-128,|||0-0-0,1|(57,1312)|
+1,163,164,78,100,0,0,22,0,0,0,-1--1--1,,1|(1439,284)|
+11,164,844,1439,248,11,8,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,165,Illness,1473,248,23,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,166,78,164,1,0,0,0,0,64,0,-1--1--1,,1|(1477,289)|
+10,167,Sick People,1443,161,53,27,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,168,164,167,4,0,0,22,0,0,0,-1--1--1,,1|(1439,214)|
+10,169,Flooding,1220,222,35,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,170,169,64,1,0,0,0,0,64,0,-1--1--1,,1|(1243,262)|
+10,171,House Refurbishment,1970,519,48,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,172,171,70,1,0,0,0,0,64,0,-1--1--1,,1|(1881,543)|
+10,173,Event Occured,763,948,53,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,174,173,121,1,0,0,0,0,64,0,-1--1--1,,1|(761,894)|
+10,175,Event Occured,1300,547,53,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,176,175,38,1,0,0,0,0,64,0,-1--1--1,,1|(1140,612)|
+10,177,Event Occured,742,270,53,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,178,177,11,1,0,0,0,0,64,0,-1--1--1,,1|(738,285)|
+1,179,12,101,1,1,0,15,2,64,0,-1--1--1,|||0-0-0,1|(1722,1192)|
+10,180,Counter,1944,129,33,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,181,180,85,1,0,0,0,0,64,0,-1--1--1,,1|(1888,189)|
+1,182,78,139,1,1,45,14,3,64,0,0-128-0,|||0-0-0,1|(1289,194)|
+1,183,79,139,1,0,43,14,3,192,0,0-128-0,|||0-0-0,1|(1400,58)|
+12,184,0,995,1174,20,20,5,4,0,3,-1,0,0,0,255-0-0,0-0-0,|||255-0-0,0,0,0,0,0,0
+B
+1,185,139,11,1,0,43,15,3,64,0,0-128-0,|||0-0-0,1|(873,205)|
+10,186,Decision to act Counter,537,271,49,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,187,186,11,1,0,0,0,0,64,0,-1--1--1,,1|(641,337)|
+1,188,79,70,1,0,0,0,0,64,0,-1--1--1,,1|(1848,424)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 2
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,5,0
+12,1,0,211,241,200,200,3,44,0,0,1,0,0,0,0,0,0,0,0,0
+Illness_Tradeoff
+10,2,Acceptable Prob Threshold,100,560,61,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+12,3,0,1031,240,200,200,3,44,0,0,1,0,0,0,0,0,0,0,0,0
+Early_Warning_Relief_Ite
+12,4,0,620,240,200,200,3,44,0,0,1,0,0,0,0,0,0,0,0,0
+Budget
+12,5,0,1028,644,200,200,3,44,0,0,1,0,0,0,0,0,0,0,0,0
+Outcome
+12,6,0,1436,239,200,200,3,44,0,0,1,0,0,0,0,0,0,0,0,0
+Decision_To_Act
+12,7,0,1433,644,200,200,3,44,0,0,1,0,0,0,0,0,0,0,0,0
+Relief_Items
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 3
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,5,0
+10,1,Households at Risk,268,449,68,27,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Flooded Households,496,322,51,27,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,3,5,2,4,0,0,22,0,0,0,-1--1--1,,1|(359,317)|
+1,4,5,1,100,0,0,22,0,0,0,-1--1--1,,1|(267,373)|
+11,5,460,267,317,7,8,34,3,0,0,3,0,0,0,0,0,0,0,0,0
+10,6,Flooding,267,294,29,11,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,7,8,1,4,0,0,22,0,0,0,-1--1--1,,1|(412,450)|
+11,8,172,496,450,7,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,9,House Refurbishment,496,473,46,19,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,10,1,6,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(192,370)|
+1,11,8,2,100,0,0,22,0,0,0,-1--1--1,,1|(496,395)|
+1,12,2,9,1,0,0,0,0,64,0,-1--1--1,,1|(552,402)|
+10,13,Event Generator,680,438,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,14,Time to Dry,408,533,39,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,15,14,9,1,0,0,0,0,64,0,-1--1--1,,1|(428,501)|
+10,16,Time,856,354,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,17,18,13,100,0,0,22,0,0,0,-1--1--1,,1|(760,437)|
+11,18,44,808,437,8,11,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,19,Event,808,458,19,11,40,3,0,0,3,0,0,0,0,0,0,0,0,0
+1,20,16,19,1,0,0,0,0,64,0,-1--1--1,,1|(812,386)|
+10,21,Event,272,218,28,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,22,21,6,1,0,0,0,0,64,0,-1--1--1,,1|(295,255)|
+10,23,Event Occured,984,437,53,27,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,24,18,23,4,0,0,22,0,0,0,-1--1--1,,1|(873,437)|
+10,25,HH Size,268,495,37,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,26,25,1,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+10,27,People at Risk,268,495,55,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,28,27,1,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+10,29,Counter,685,530,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,30,48,869,531,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,31,33,29,4,0,0,22,0,0,0,-1--1--1,,1|(760,531)|
+1,32,33,30,100,0,0,22,0,0,0,-1--1--1,,1|(834,531)|
+11,33,48,802,531,7,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,34,Counter Rate,802,550,43,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,35,People Item Supply,787,604,44,19,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,36,35,34,1,0,0,0,0,64,0,-1--1--1,,1|(801,582)|
+10,37,Decision to act Counter,905,202,53,27,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,38,48,643,204,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,39,41,37,4,0,0,22,0,0,0,-1--1--1,,1|(803,204)|
+1,40,41,38,100,0,0,22,0,0,0,-1--1--1,,1|(698,204)|
+11,41,48,749,204,6,8,34,3,0,0,3,0,0,0,0,0,0,0,0,0
+10,42,Decision Rate,749,185,44,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,43,Decision to Act,734,301,58,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,44,43,42,1,0,0,0,0,64,0,-1--1--1,,1|(710,241)|
+///---\\\
+:GRAPH Illness_Tradeoff
+:TITLE Number of Sick People
+:X-AXIS Time
+:SCALE
+:VAR Sick People
+:Y-MIN 0
+:Y-MAX 5000
+:DATASET 
+
+:GRAPH Budget
+:TITLE Budget of Organization
+:X-AXIS Time
+:SCALE
+:VAR HQ Budget
+:DATASET 
+
+:GRAPH Early_Warning_Relief_Ite
+:TITLE Early Warning Relief Items
+:X-AXIS Time
+:X-DIV 30
+:SCALE
+:VAR Early Warning Relief Items
+:Y-MIN 0
+:Y-MAX 50
+:DATASET 
+
+:GRAPH Outcome
+:TITLE Result of Intervention
+:X-AXIS Time
+:X-DIV 30
+:SCALE
+:VAR Credibility Rate
+:Y-MIN -2
+:Y-MAX 2
+:DATASET 
+
+:GRAPH Decision_To_Act
+:TITLE Decision to Act (1 = Action)
+:X-AXIS Time
+:X-DIV 6
+:SCALE
+:VAR Decision to Act
+:Y-MIN 0
+:Y-MAX 2
+:DATASET 
+
+:GRAPH Relief_Items
+:TITLE Relief Items Available
+:X-AXIS Time
+:X-DIV 6
+:SCALE
+:VAR Relief Items Available
+:DATASET 
+:L<%^E!@
+4:Time
+5:People Needing Relief Items
+9:no_warning
+19:50,0
+24:0
+25:365
+26:365
+23:0
+15:0,0,0,0,0,0
+27:2,
+34:0,
+42:0
+72:0
+73:0
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:4
+41:0
+95:0
+96:0
+97:0
+77:0
+78:0
+102:1
+93:0
+94:0
+92:0
+91:0
+90:0
+87:0
+75:
+43:
+103:8,8,8,3,8
+105:0,0,0,0,0,0,0,0,0,0
+104:Courier|12||0-0-0|0-0-0|-1--1--1|0-0-255|192-192-192|-1--1--1
