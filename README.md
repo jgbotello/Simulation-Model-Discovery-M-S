@@ -211,6 +211,7 @@ The repository already includes saved benchmark outputs. A quick snapshot from t
 
 The broad pattern in the saved outputs is that the narrative-enriched JSON-LD representation performs better than plain lexical structure alone, especially in the dense setting.
 
+
 ## Reproducibility notes
 
 - Run all commands from the repository root.
